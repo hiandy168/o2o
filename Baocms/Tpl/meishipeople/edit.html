@@ -1,0 +1,30 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+     <li class="li1">频道</li>
+        <li class="li2">美食</li>
+        <li class="li2 li3">就餐人数编辑</li>
+    </ul>
+</div>
+<form target="baocms_frm" action="<{:U('meishipeople/edit')}>" method="post">
+    <div class="mainScAdd">
+        <div class="tableBox">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="lfTdBt">显示内容：</td>
+                    <td class="rgTdBt"><input type="text" name="people" value="<{$detail.people|default=''}>" class="manageInput" /></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">排序：</td>
+                    <td class="rgTdBt"><span><{$detail.order_by}></span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="smtQr">
+        <input type="hidden" name="id" value="<{$detail['id']}>" class="smtQrIpt" />
+        <input type="submit" value="确认编辑" class="smtQrIpt" />
+        </div>
+    </div>
+</form>
+<include  file='public:footer'/>
+

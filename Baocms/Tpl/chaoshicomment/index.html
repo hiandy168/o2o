@@ -1,0 +1,124 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">社区超市</li>
+        <li class="li2 li3">评论管理</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('chaoshicomment/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                            <label>
+                                <input type="hidden" id="store_id" name="store_id" value="<{$store_id|default=''}>"/>
+                                <input type="text"   id="store_name" name="store_name" value="<{$store_name}>" class="text w200" />
+                                <a mini="select"  w="1000" h="600" href="<{:U('chaoshi/select')}>" class="sumit">选择商家</a>
+                            </label>
+                            <label>
+								<span>  审查状态：</span>
+								<select name="audit" id="audit" class="select manageSelect">
+									<option value="100">请选择...</option>
+									<option value="99" <eq name="audit_2" value="0">selected="selected"</eq> <eq name="audit" value="0">selected="selected"</eq> >审查中</option>
+									<option value="1" <eq name="audit_2" value="1">selected="selected"</eq> <eq name="audit" value="1">selected="selected"</eq> >通过审查</option>
+									<option value="2" <eq name="audit_2" value="2">selected="selected"</eq> <eq name="audit" value="2">selected="selected"</eq> >未通过</option>
+								</select>
+                                <span>  关键字(评论内容)：</span>
+								<input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" />
+								<input type="submit" class="inptButton" value="   搜索" />
+								<a href="<{:U('chaoshicomment/initialIndex')}>" mini="act" style="padding-top:5px;padding-bottom:5px;margin-top:0;" class="remberBtn">重置搜索</a>
+							</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="comment_id" /></td>
+                        <td class="w50">ID</td>
+			            <td>商品ID</td>
+			            <td>超市ID</td>
+			            <td>用户ID</td>
+			            <td>评分</td>
+			            <td>评论时间</td>
+			            <td>审核状态</td>
+			            <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_comment_id" type="checkbox" name="comment_id[]" value="<{$var.comment_id}>" /></td>
+                            <td><{$var.comment_id}></td>
+			                <td><{$var.order_id}></td>
+			                <td><{$var.store_id}></td>
+			                <td><{$var.user_id}></td>
+			                <td><{$var.score}></td>
+			                <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
+			                <td>
+								<eq name="var.audit" value="0">审核中</eq>
+								<eq name="var.audit" value="1">通过审核</eq>
+								<eq name="var.audit" value="2">未通过</eq>
+							</td>
+			                <td>
+								<{:BA('chaoshicomment/apply',array("comment_id"=>$var["comment_id"]),'通过审查','act','remberBtn')}>
+								<{:BA('chaoshicomment/unApply',array("comment_id"=>$var["comment_id"]),'未通过','act','remberBtn')}>
+							</td>
+			            </tr>
+			            <tr>
+			            	<td></td>
+			                <td>
+			                    <h1>评论内容</h1>
+			                </td>
+			                <td colspan="8" class="html_contents" style="text-align: left;">
+			                    <{$var.contents}>
+			                </td>
+			            </tr>
+			            <if condition="!empty($var['reply'])">
+			                <tr>
+			                	<td></td>
+			                    <td>
+			                        <h1>回复</h1>
+			                    </td>
+			                    <td colspan="8"  style="text-align: left;" class="html_contents">
+			                        <{$var.reply}>
+			                    </td>
+			                </tr>
+			            </if>
+						<!--comment_pic_begin-->
+			            <if condition="!empty($var['pichave'])">
+			                <tr>
+			                	<td></td>
+			                    <td>
+			                        <h1>图片</h1>
+			                    </td>
+			                    <td colspan="8"  style="text-align: left;" class="html_contents">
+			                        <foreach name="pics" item="item">
+			                            <if condition="$var['comment_id'] eq $item['comment_id']">
+			                                <img src="<{$item.pic|get_remote_file_path=###}>" width="120" height="80"/>
+			                            </if>
+			                        </foreach>
+			                    </td>
+			                </tr>
+			            </if>
+						<!--comment_pic_end-->
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <{:BA('chaoshicomment/apply','','批量通过审查','list',' remberBtn')}>
+                    <{:BA('chaoshicomment/unApply','','批量未通过审查','list','a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

@@ -1,0 +1,32 @@
+<include  file='public:header'/>
+<div class="main-jsgl main-sc">
+    <div class="tableBox">
+        <table cellspacing="0" width="100%" style=" border-collapse: collapse; margin:0; vertical-align:middle; background-color:#FFF;"  >
+            <eq name="set" value="1">
+                <tr style="height: 100px;font-size: 18px;text-align: center">
+                    <td>未发现该商品</td>
+                </tr>
+            </eq>
+            <eq name="set" value="2">
+                <tr style="height: 100px;font-size: 18px;text-align: center">
+                    <td>未知商品数据</td>
+                </tr>
+            </eq>
+            <eq name="set" value="3">
+                <tr style="height: 100px;font-size: 18px;text-align: center">
+                    <td><h3>该商品包含图片</h3></td>
+                </tr>
+                <tr style="height: 21px;font-size: 18px;text-align: center">
+                    <td>
+                        <volist name="photos" id="photo">
+                            <img src="<{$photo|get_remote_file_path=###}>" height="80px"/>&ensp;
+                        </volist>
+                    </td>
+                </tr>
+            </eq>
+        </table>
+    </div>
+</div>
+<include  file='public:footer'/>  
+
+

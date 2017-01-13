@@ -1,0 +1,111 @@
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">订餐管理</li>
+        <li class="li2">餐饮商家</li>
+        <li class="li2 li3">编辑</li>
+    </ul>
+</div>
+<div class="mainScAdd ">
+    <div class="tableBox">
+        <form target="baocms_frm" action="<{:U('meishi/exame_see',array('store_id'=>$detail['store_id']))}>" method="post">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+
+                <tr>
+                    <td class="lfTdBt">公司名称：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.store_name}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">公司电话：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.telephone}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">公司详细地址：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.address}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">联系人姓名：</td>
+                    <td class="rgTdBt"> 
+                        <{$detail.boss_name}>  
+                </td> 
+                </tr>
+                <tr>
+                    <td class="lfTdBt">联系人电话：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.boss_tel}>
+                        <input type="hidden" name="boss_tel" value="<{$detail.boss_tel}>">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">身份证号：</td>
+                    <td  class="rgTdBt">
+                       <{$detail.card}> 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">邮箱：</td>
+                    <td  class="rgTdBt">
+                       <{$detail.email}> 
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="lfTdBt">法定代表：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.corporate}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">营业执照号：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.licence}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">法定经营范围：</td>
+                    <td  class="rgTdBt">
+                         <{$detail.scope}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">营业执照电子版：</td>
+                    <td  class="rgTdBt">
+                        <img src="<{$detail.license_pic|get_remote_file_path=###}>" width="600px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">其他资料：</td>
+                    <td  class="rgTdBt">
+                        <img src="<{$detail.qitaziliao|get_remote_file_path=###}>" width="600px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">审核：</td>
+                    <td  class="rgTdBt">
+                        <input type="radio" name="status" value="1"/>通过 
+                        <input type="radio" name="status" value="3"/>不通过
+                        
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td class="lfTdBt">理由：</td>
+                    <td  class="rgTdBt">
+                        <textarea name="exame_explain" style="width: 400px;"><{$detail.exame_explain|default='恭喜你审请的美食店铺通过了。'}></textarea>
+                    </td>
+                    
+                </tr>
+                
+            </table>
+            <div class="smtQr"><input type="submit" value="审核" class="smtQrIpt" /></div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

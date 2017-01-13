@@ -1,0 +1,91 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">外卖</li>
+        <li class="li2 li3">菜品审核</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"><span>注意：</span>前台申请 后台审核！</p>
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+                <!--<{:BA('chaoshi/create','','添加商家')}>-->
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('eleproduct/apply')}>">
+                    <div class="seleK">
+                        <label>
+                            <input type="hidden" id="store_id" name="store_id" value="<{$store_id|default=''}>"/>
+                            <input type="text" id="store_name" name="store_name" value="<{$store_name}>" class="text w200" />
+                            <a mini="select" w="1100" h="700" href="<{:U('eleproduct/select')}>" class="sumit">选择店铺</a>
+                        </label>
+                        <label>
+                            <span>审查状态：</span>
+                            <select name="audit" id="audit" class="select manageSelect">
+                                <option value="2">待审查</option>
+                                <option value="3" <eq name="audit_2" value="3">selected="selected"</eq> <eq name="audit" value="3">selected="selected"</eq> >未通过</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>关键字(菜品名)：</span>
+                            <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" />
+                            <input type="submit" class="inptButton" value="  搜索" />
+                            <a href="<{:U('eleproduct/initialApply')}>" mini="act" style="padding-top:5px;padding-bottom:5px;margin-top:0;" class="remberBtn">重置搜索</a>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                        <tr>
+                            <td class="w50"><input type="checkbox" class="checkAll" rel="product_id" /></td>
+                            <td class="w50">ID</td>
+                            <td>菜品名</td>
+                            <td>店铺名</td>
+                            <td>电话</td>
+                            <td>分类</td>
+                            <td>图片</td>
+                            <td>价格</td>
+                            <td>简介</td>
+                            <td>操作</td>
+                        </tr>
+                        <foreach name="list" item="var">
+                            <tr>
+                                <td><input class="child_product_id" type="checkbox" name="product_id[]" value="<{$var.product_id}>" /></td>
+                                <td><{$var.product_id}></td>
+                                <td><{$var.product_name}></td>
+                                <td><{$var.store_name}></td>
+                                <td><{$var.phone}></td>
+                                <td><{$var.cate_name}></td>
+                                <td><img src="<{$var.photo|get_remote_file_path=###}>" class="w80" height="50px"/></td>
+                                <td><{$var.price}></td>
+                                <td>
+                                    <{$var.desc}>
+                                </td>
+                                <td>
+                                    <{:BA('eleproduct/audit', array("product_id" => $var["product_id"]),'通过审核','act','remberBtn')}>
+                                    <{:BA('eleproduct/unAudit', array("product_id" => $var["product_id"]),'未通过审核','act','remberBtn')}>
+                                    <{:BA('eleproduct/shiftdelete', array("product_id" => $var["product_id"]),'删除','act','remberBtn')}>
+                                </td>
+                            </tr>
+                        </foreach>
+                    </table>
+                <{$page}>
+            </div>
+            <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <{:BA('eleproduct/audit','','批量通过审核','list',' remberBtn')}>
+                    <{:BA('eleproduct/unAudit','','批量未通过审核','list',' remberBtn')}>
+                    <{:BA('eleproduct/shiftdelete','','批量删除','list',' a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>
+
+

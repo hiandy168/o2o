@@ -1,0 +1,74 @@
+<include  file='public:header'/>
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">美食频道</li>
+        <li class="li2 li3">商品列表</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"><span>注意：</span>如果未添加商家，那么不能发布菜单</p>
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('meishigoods/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                       <span>  区域：</span>   
+                        <select name="area_id" id="area_id" class="select manageSelect">
+                            <option value="0">请选择...</option>
+                            <foreach name="areas" item="var">
+                                <option value="<{$var.area_id}>"  <eq name="var.area_id" value="$area_id">selected="selected"</eq> ><{$var.area_name}></option>
+                            </foreach>   
+                        </select>
+                        <span>  关键字：</span>   
+                        <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" />
+                        <input type="submit" class="inptButton" value="搜索" />
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="shop_id" /></td>
+                        <td class="w50">ID</td>
+                        <td>缩略图</td>
+                        <td>标题</td>
+                        <td>分类</td>
+                        <td>价格</td>
+                        <td>审核状态</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_shop_id" type="checkbox" name="goods_id[]" value="<{$var.goods_id}>" /></td>
+                            <td><{$var.goods_id}></td>
+                            <td><img src="<{$var.photo|get_remote_file_path=###}>" width="100px"/></td>
+                            <td><{$var.goods_name}></td>
+                            <td><{$meishi_cate[$var[cate_id]]['cate_name']}></td>
+                            <td><{$var.price}></td>
+                            <td><{$exame_status[$var['status']]}></td>
+                       
+                        <td>
+                            <{:BA('meishigoods/see',array("goods_id"=>$var["goods_id"]),'查看','','remberBtn')}>
+                            <{:BA('meishigoods/delete',array("goods_id"=>$var["goods_id"]),'删除','act','remberBtn')}>
+                        </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <{:BA('meishigoods/delete','','批量删除','list','a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

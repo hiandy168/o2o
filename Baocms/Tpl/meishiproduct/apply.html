@@ -1,0 +1,119 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">美食</li>
+        <li class="li2 li3">美食审核</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"><span>注意：</span>前台申请 后台审核！</p>
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+                <!--<{:BA('chaoshi/create','','添加商家')}>-->
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('meishiproduct/apply')}>">
+                    <div class="seleK">
+                        <label>
+                            <input type="hidden" id="store_id" name="store_id" value="<{$store_id|default=''}>"/>
+                            <input type="text" id="store_name" name="store_name" value="<{$store_name}>" class="text w200" />
+                            <a mini="select" w="1100" h="700" href="<{:U('meishiproduct/select')}>" class="sumit">选择店铺</a>
+                        </label>
+                        <label>
+                            <span>审查状态：</span>
+                            <select name="audit" id="audit" class="select manageSelect">
+                                <option value="2">待审查</option>
+                                <option value="3" <eq name="audit_2" value="3">selected="selected"</eq> <eq name="audit" value="3">selected="selected"</eq> >未通过</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>商品类型：</span>
+                            <select name="product_type" id="product_type" class="select manageSelect">
+                                <option value="100">请选择</option>
+                                <option value="1" <eq name="product_type_2" value="1">selected="selected"</eq> <eq name="product_type" value="1">selected="selected"</eq> >单品</option>
+                                <option value="2" <eq name="product_type_2" value="2">selected="selected"</eq> <eq name="product_type" value="2">selected="selected"</eq> >套餐</option>
+                                <option value="3" <eq name="product_type_2" value="3">selected="selected"</eq> <eq name="product_type" value="3">selected="selected"</eq> >代金券</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>关键字：</span>
+                            <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" placeholder="请输入商品名"  />
+                            <input type="submit" class="inptButton" value="  搜索"/>
+                            <a href="<{:U('meishiproduct/initialApply')}>" mini="act" style="padding-top:5px;padding-bottom:5px;margin-top:0;" class="remberBtn">重置搜索</a>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                        <tr>
+                            <td class="w50"><input type="checkbox" class="checkAll" rel="product_id" /></td>
+                            <td class="w50">ID</td>
+                            <td>菜品名</td>
+                            <td>店铺名</td>
+                            <td>电话</td>
+                            <td>图片</td>
+                            <td>抵用价</td>
+                            <td>优惠价</td>
+                            <td>人数</td>
+                            <td>简介</td>
+                            <td>类型</td>
+                            <td>操作</td>
+                        </tr>
+                        <foreach name="list" item="var">
+                            <tr>
+                                <td><input class="child_product_id" type="checkbox" name="product_id[]" value="<{$var.product_id}>" /></td>
+                                <td><{$var.product_id}></td>
+                                <td><{$var.product_name}></td>
+                                <td><{$var.store_name}></td>
+                                <td><{$var.phone}></td>
+                                <?php $photos = explode(',', $var['photo']); ?>
+                                <td>
+                                    <eq name="var.product_type" value="3">
+                                        <img src="<{$var['logo']|get_remote_file_path=###}>" class="w80" height="50px"/>
+                                    <else/>
+                                        <a mini="select" w="700" h="360" href="<{:U('meishiproduct/pictures', array('product_id' => $var['product_id'], 'store_id' => $var['store_id']))}>"><img src="<{$photos[0]|get_remote_file_path=###}>" class="w80" height="50px"/></a>
+                                    </eq>
+                                </td>
+                                <td><{$var.price}></td>
+                                <td><{$var.privilege_price}></td>
+                                <td>
+                                    <eq name="var.product_type" value="1">1</eq>
+                                    <eq name="var.product_type" value="2"><{$var.meal_use_num }></eq>
+                                    <eq name="var.product_type" value="3"></eq>
+                                </td>
+                                <td>
+                                    <{$var.desc}>
+                                </td>
+                                <td>
+                                    <eq name="var.product_type" value="1">单品</eq>
+                                    <eq name="var.product_type" value="2">套餐</eq>
+                                    <eq name="var.product_type" value="3">优惠券</eq>
+                                </td>
+                                <td>
+                                    <{:BA('meishiproduct/audit', array("product_id" => $var["product_id"]),'通过审核','act','remberBtn')}>
+                                    <{:BA('meishiproduct/unAudit', array("product_id" => $var["product_id"]),'未通过审核','act','remberBtn')}>
+                                    <{:BA('meishiproduct/shiftdelete', array("product_id" => $var["product_id"]),'删除','act','remberBtn')}>
+                                </td>
+                            </tr>
+                        </foreach>
+                    </table>
+                <{$page}>
+            </div>
+            <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <{:BA('meishiproduct/audit','','批量通过审核','list',' remberBtn')}>
+                    <{:BA('meishiproduct/unAudit','','批量未通过审核','list',' remberBtn')}>
+                    <{:BA('meishiproduct/shiftdelete','','批量删除','list',' a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>
+
+

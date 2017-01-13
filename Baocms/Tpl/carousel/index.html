@@ -1,0 +1,93 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">APP首页管理</li>
+        <li class="li2"> APP轮播管理</li>
+      
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"></p>
+    <div class="jsglNr">
+        <div class="selectNr" style="margin-top: 0px; border-top:none;">
+            <div class="left">
+         		<{:BA('carousel/create',array('site_id'=>$site_id),'添加内容')}>
+            </div>
+            <div class="right">
+                <form class="" method="post"  action="<{:U('carousel/index')}>"> 
+
+                    <div class="seleHidden" id="seleHidden">
+                    	<span>城市：</span>
+                        <select name="city_id" id="city_id" class="select manageSelect" >
+                            <option value="0">请选择...</option>
+                            <option value="-1">通用</option>
+                            <foreach name="citys" item="city">
+                                <option value="<{$city.city_id}>" <eq name="city.city_id" value="$city_id_2">selected="selected"</eq> <eq name="city.city_id" value="$city_id">selected="selected"</eq> ><{$city.name}></option>
+                            </foreach>
+                        </select>
+                        <span>标题</span>
+                        <input type="text"  class="inptText" name="keyword" placeholder="输入标题" value="<{$keyword}>"  />
+
+                        <input type="submit" value=" 搜索"  class="inptButton" />
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                <td><input type="checkbox" class="checkAll" rel="ad_id" /></td>
+                  <td>ID</td>
+                <td>标题</td>
+                <td>类型</td>
+                <td>所属城市</td>
+                <td>链接</td>
+                <td>所属版块</td>
+                <td>排序id</td>
+                <td>开始时间</td>
+                <td>结束时间</td>
+                <td>操作</td>
+
+                    </tr>
+                    <foreach name="list" item="var">
+                <tr>
+                    <td><input class="child_ad_id" type="checkbox" name="id[]" value="<{$var.id}>" /> </td>
+                    <td><{$var.id}></td>
+                    <td><{$var['title']}></td>
+                    <td>
+                    <eq name="var.link_type" value="1">店铺</eq>
+                    <eq name="var.link_type" value="2">网址</eq>
+                    </td>
+                    <td><{$citys[$var['city_id']]['name']|default='通用'}></td>
+                    <td><{$var.link}></td>
+                    <td><{$types[$var['type']]}></td>
+                    <td><{$var.orderby}></td>
+                    <td><{$var.bg_date}></td>
+                    <td><{$var.end_date}></td>
+                    <td>
+                        <{:BA('carousel/edit',array("id"=>$var["id"]),'编辑','','remberBtn')}>
+                        <{:BA('carousel/delete',array("id"=>$var["id"]),'删除','act','remberBtn')}>
+                    </td>
+                </tr>
+            </foreach>
+                    <tr>
+                        <td colspan="20">
+
+                            <{:BA('carousel/delete','','批量删除','list',' piliangcaozuo')}>
+
+                        </td>
+                    </tr>
+                </table>
+                <{$page}>
+
+            </div>
+
+
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>  
+

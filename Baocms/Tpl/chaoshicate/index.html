@@ -1,0 +1,55 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">社区超市</li>
+        <li class="li2">商家分类</li>
+        <li class="li2 li3">分类列表</li>
+    </ul>
+</div>
+<div class="main-jsgl">
+    
+    <div class="jsglNr">
+        <div class="selectNr" style="margin: 10px 20px;">
+            <div class="left">
+                <{:BA('chaoshicate/create','','添加分类')}>
+            </div>
+            <form method="post" action="<{:U('chaoshicate/index')}>">
+                <div class="right">
+                    <input type="text" name="keyword" value="<{$keyword}>" class="inptText" /><input type="submit" value="  搜索"  class="inptButton" />
+                </div>
+            </form>
+        </div>
+        <form target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="city_id" /></td>
+                        
+                        <td>商家分类名</td>
+                        <td>分类频道地址</td>
+                        <td class="w120">操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_city_id" type="checkbox" name="chaoshi_cate_id[]" value="<{$var.chaoshi_cate_id}>"/></td>
+                            <td><{$var.cate_name}></td>
+                            <td><{$var.channel_url}></td>
+                            <td>
+                                <{:BA('chaoshicate/edit',array("chaoshi_cate_id"=>$var["chaoshi_cate_id"]),'编辑','','remberBtn')}>
+                                <{:BA('chaoshicate/delete',array("chaoshi_cate_id"=>$var["chaoshi_cate_id"]),'删除','act','remberBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="selectNr">
+                <div class="left">
+                    <{:BA('chaoshicate/delete','','批量删除','list','a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       
+

@@ -1,0 +1,57 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">APP首页管理</li>
+        <li class="li2"> APP猜你喜欢管理</li>
+      
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"></p>
+    <div class="jsglNr">
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+	                <td>所属版块</td>
+	                <td>操作</td>
+                </tr>
+<!--                 <tr> -->
+<!--                     <td>超市</td> -->
+<!--                     <td> -->
+<!--                         <{:BA('homestore/index',array("type"=>"chaoshi"),'编辑','','remberBtn')}> -->
+<!--                     </td> -->
+<!--                 </tr> -->
+<!--                 <tr> -->
+<!--                     <td>外卖</td> -->
+<!--                     <td> -->
+<!--                         <{:BA('homestore/index',array("type"=>"ele"),'编辑','','remberBtn')}> -->
+<!--                     </td> -->
+<!--                 </tr> -->
+                <tr>
+                    <td>酒店</td>
+                    <td>
+                        <{:BA('guessyoulike/city',array("type"=>"hotel"),'编辑','','remberBtn')}>
+                    </td>
+                </tr>
+                <tr>
+                    <td>美食</td>
+                    <td>
+                        <{:BA('guessyoulike/city',array("type"=>"meishi"),'编辑','','remberBtn')}>
+                    </td>
+                </tr>
+                <tr>
+                    <td>房产</td>
+                    <td>
+                        <{:BA('guessyoulike/city',array("type"=>"house"),'编辑','','remberBtn')}>
+                    </td>
+                </tr>
+                </table>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>  
+

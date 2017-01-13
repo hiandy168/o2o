@@ -1,0 +1,155 @@
+<include file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">新房审核</li>
+        <li class="li2">审核活动/开盘</li>
+    </ul>
+</div>
+<div class="mainScAdd">
+    <div class="tableBox">
+        <h1>活动</h1>
+        <div>
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"
+                   style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;">
+                <tr>
+                    <td class="lfTdBt">活动类型</td>
+                    <td class="lfTdBt">
+                        活动名称
+                    </td>
+                    <td class="lfTdBt">
+                        活动价格
+                    </td>
+                    <td class="lfTdBt">
+                        活动说明
+                    </td>
+                    <td class="lfTdBt">
+                        活动面积
+                    </td>
+                    <td class="lfTdBt">
+                        创建时间
+                    </td>
+                    <td class="lfTdBt">
+                        更新时间
+                    </td>
+                    <td class="lfTdBt">
+                        操作
+                    </td>
+                </tr>
+                <volist name="ActiveInfo" id="vo">
+                    <tr>
+                        <td class="rgTdBt">
+                            <switch name="vo.type">
+                                <case value="1">电子兑换券</case>
+                                <case value="2">认筹</case>
+                            </switch>
+                        </td>
+                        <td class="rgTdBt">
+                            <{$vo.active_name}>
+                        </td>
+                        <td class="rgTdBt">
+                            <{$vo.active_price}>
+                        </td>
+
+                        <td class="rgTdBt">
+                            <{$vo.description}>
+                        </td>
+                        <td class="rgTdBt">
+                            <{$vo.active_area}>
+                        </td>
+                        <td class="rgTdBt">
+                            <{:date('Y-m-d H:i:s',$vo['create_time'])}>
+                        </td>
+                        <td class="rgTdBt">
+                            <{:date('Y-m-d H:i:s',$vo['update_time'])}>
+                        </td>
+                        <td class="rgTdBt">
+                            <form action="" method="post">
+                                <input type="hidden" name="id" value="<{$vo['id']}>">
+                                <input type="hidden" name="type" value="active">
+                                <p>审核: <input type="radio" name="audit"  <eq name="vo.audit" value="1"> checked ="checked "</eq> value="1" />通过
+                                    <input type="radio" name="audit"  <eq name="vo.audit" value="3"> checked ="checked "</eq> value="3"/>不通过</p>
+                                理由:<textarea name="exame_explain" style="width: 400px;">
+                                <{$vo.exame_explain}></textarea>
+                                <div class="smtQr"><input type="submit" value="确认修改" class="smtQrIpt"/></div>
+                            </form>
+                        </td>
+
+                    </tr>
+                </volist>
+
+            </table>
+
+        </div>
+    </div>
+    <div class="tableBox">
+        <h1>开盘信息</h1>
+        <div>
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"
+                   style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;">
+                <tr>
+                    <td class="lfTdBt">开盘时间
+                    </td>
+                    <td class="lfTdBt">
+                        建筑类型
+                    </td>
+                    <td class="lfTdBt">
+                        参考价
+                    </td>
+                    <td class="lfTdBt">
+                        开盘幢数
+                    </td>
+                    <td class="lfTdBt">
+                        开盘楼栋
+                    </td>
+                    <td class="lfTdBt" style="width: 450px;">
+                        开盘介绍
+                    </td>
+                    <td class="lfTdBt">
+                        操作
+                    </td>
+                </tr>
+                <volist name="HouseOpenInfo" id="vo">
+                    <tr>
+                        <td class="rgTdBt">
+                            <{:date('Y-m-d H:i:s',$vo['open_time'])}>
+                        </td>
+                        <td class="rgTdBt">
+                            <{$vo.build_type}>
+                        </td>
+
+                        <td class="rgTdBt">
+                            <{$vo.reference_price}>
+                        </td>
+                        <td class="rgTdBt">
+                            <{$vo.open_nums}>
+                        </td>
+                        <td class="rgTdBt">
+                            <{$vo.open_building}>
+                        </td>
+                        <td class="rgTdBt" style="width: 450px;">
+                            <{$vo.open_info}>
+                        </td>
+
+                        <td class="rgTdBt">
+                            <form action="" method="post">
+                                <input type="hidden" name="id" value="<{$vo['id']}>">
+                                <input type="hidden" name="type" value="open_info">
+                                <p>审核: <input type="radio" name="audit"  <eq name="vo.audit" value="1"> checked ="checked "</eq> value="1" />通过
+                                    <input type="radio" name="audit"  <eq name="vo.audit" value="3"> checked ="checked "</eq> value="3"/>不通过</p>
+                                理由:<textarea name="exame_explain" style="width: 400px;">
+                                <{$vo.exame_explain}></textarea>
+                                <div class="smtQr"><input type="submit" value="确认修改" class="smtQrIpt"/></div>
+                            </form>
+                        </td>
+
+                    </tr>
+                </volist>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<include file='public:footer'/>

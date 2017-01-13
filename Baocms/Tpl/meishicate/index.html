@@ -1,0 +1,92 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">美食</li>
+        <li class="li2 li3">商家分类</li>
+    </ul>
+</div>
+<div class="main-jsgl">
+    
+    <div class="jsglNr">
+        <div class="selectNr" style="margin: 10px 20px;">
+            <div class="left">
+                <{:BA('meishicate/create','','添加分类')}>
+            </div>
+            <form method="post" action="<{:U('meishicate/index')}>">
+                <div class="right">
+                    <input type="text" name="keyword" value="<{$keyword}>" class="inptText" /><input type="submit" value="  搜索"  class="inptButton" />
+                </div>
+            </form>
+        </div>
+        <form target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="cate_id" /></td>
+                        <td>分类ID</td>
+                        <td>商家分类名</td>
+                        <td>排序</td>
+                        <td class="w260">操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_city_id" type="checkbox" name="cate_ids[]" value="<{$var.cate_id}>"/></td>
+                            <td><{$var.cate_id}></td>
+                            <td><{$var.cate_name}></td>
+                            <td>
+                                <span class="cut sign" ids="<{$var.cate_id}>" ><a href="javascript:" >-</a></span>&ensp;&ensp;<span><{$var.order_by}></span>&ensp;&ensp;<span class="add sign" ids="<{$var.cate_id}>" ><a href="javascript:">+</a></span>
+                            </td>
+                            <td>
+                                <{:BA('meishicate/edit',array("cate_id"=>$var["cate_id"]),'编辑','','remberBtn')}>
+                                <{:BA('meishicate/delete',array("cate_ids"=>$var["cate_id"]),'删除','act','remberBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="selectNr">
+                <div class="left">
+                    <{:BA('meishicate/delete','','批量删除','list','a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).on('click','.sign',function () {
+
+        if($(this).hasClass('cut')){
+            var Next = $(this).next('span');
+            var num = Next.text();
+            var _ids = $(this).attr('ids');
+            if (num > 0){
+                num = Number(num) - 1;
+                $.getJSON('<{:U("meishicate/orderByDe")}>', {cate_id:_ids}, function(_data){
+                    if(_data.error == 200){
+                        Next.text(num);
+                    }else{
+                        console.debug(_data.msg);
+                    }
+                }, 'json');
+            }
+        }
+
+        if($(this).hasClass('add')){
+            var Pre = $(this).prev('span');
+            var num_2 = Pre.text();
+            var _ids = $(this).attr('ids');
+            num_2 = Number(num_2) + 1;
+            $.getJSON('<{:U("meishicate/orderByIn")}>', {cate_id:_ids}, function(_data){
+                if(_data.error == 200){
+                    Pre.text(num_2);
+                }else{
+                    console.debug(_data.msg);
+                }
+            }, 'json');
+        }
+    })
+</script>
+<include  file='public:footer'/>
+

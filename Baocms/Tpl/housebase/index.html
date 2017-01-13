@@ -1,0 +1,100 @@
+<include  file='public:header'/>
+    <link href="__PUBLIC__/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="__PUBLIC__/Scripts/bootstrap/js/bootstrap.min.js"></script>
+<div style="overflow:hidden;padding-top:10px;padding-left:20px;">
+    <ul>
+        <li>
+            <div style="background-image:url('__PUBLIC__/Images/mainbt_03.png');width:96px;height:26px;float:left;">
+                <span style="color:white;font-size:14px;margin-left:30px;line-height:27px;">频道</span>
+            </div>
+            <div style="background-image:url('__PUBLIC__/Images/mainbt2_03.png');width:131px;height:26px;float:left;">
+                <span style="color:white;font-size:14px;margin-left:30px;line-height:27px;">房产频道</span>
+            </div>
+            <div style="background-image:url('__PUBLIC__/Images/mainbt3_03.png');width:131px;height:26px;float:left;">
+                <span style="color:white;font-size:14px;margin-left:30px;line-height:27px;">房产列表</span>
+            </div>
+        </li>
+    </ul>
+</div>
+<div style="padding-left:45px;padding-top:15px;padding-bottom:15px;">
+    <span style="color:rgb(254,17,17);font-weight:bold;font-size:13px;font-family: '微软雅黑';">注意：</span>
+    <span style="color:rgb(163,163,163);font-family: '微软雅黑';">如果未添加信息，那么不能发布房产</span>
+</div>
+<div style="border: 1px solid rgb(225,225,225);margin:0 50px 0 25px;padding-bottom:20px;">
+
+        <div style="border-bottom:1px solid rgb(225,225,225);overflow: hidden;padding:10px 20px 10px 20px;">
+
+            <div style="float:left;">
+                <a class="btn btn-primary" target="main_frm" href="<{:U('houseBase/create')}>"><span class="glyphicon glyphicon-plus"></span>添加内容</a>
+            </div>
+            <form action="<{:U('houseBase/index')}>" method="post">
+            <div style="float:right;">
+                <span style="float:left;line-height: 33px;margin-left:20px;">城市：</span>
+                <select type="text" class="form-control" style="width:135px;float:left" name="city_id" >
+                <option>请选择</option>
+                <foreach name="citys" item="vo">
+                    <option value="<{$vo.city_id}>" <if condition="$city_id eq $vo.city_id ">selected="selected"</if>><{$vo.name}></option>
+                    </foreach>
+            </select>
+                <span style="float:left;line-height: 33px;margin-left:20px;">关键字：</span><input style="width:165px;float:left" name="keyword" value="<{$keyword}>" class="form-control" type="text"/>
+                <button style="margin-left:10px;" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search"></span> 搜 索
+                </button>
+            </div>
+            </form>
+
+        </div>
+        <form target="baocms_frm" method="post">
+    <div style="padding-left:20px;padding-right: 20px;padding-top:20px;">
+    
+        <table class="table" style="vertical-align: middle;text-align:center;width:100%;border: 1px solid rgb(225,225,225)" border="1">
+            <tr>
+                <td><input type="checkbox" id="Allchecked" rel="id" /></td>
+                <td>ID</td>
+                <td>楼盘名</td>
+                <td>城市</td>
+                <td>开发商</td>
+                <td>开盘时间</td>
+                <td>参考均价</td>
+                <td>物业费</td>
+                <td>建筑面积</td>
+                <td>车位</td>
+                <td>绿化率</td>
+                <td>容积率</td>
+                <td>物业公司</td>
+                <td>产权期限</td>
+                <td>操作</td>
+            </tr>
+            <foreach name="list" item="vo">
+            <tr  id="tr_1">
+                <td><input type="checkbox" name="id[]" value="<{$vo.id}>" /></td>
+                <td><{$vo.id}></td>
+                <td><{$vo.house_name}></td>
+                <td><{$vo.city_name}></td>
+                <td><{$vo.developers}></td>
+                <td><{$vo.open_time|date="Y年m月d日",###}></td>
+                <td><{$vo.price}>元/m<SUP>2</SUP></td>
+                <td><{$vo.property_fee}>元/m<SUP>2</SUP></td>
+                <td><{$vo.build_area}>m<SUP>2</SUP></td>
+                <td><{$vo.carport}></td>
+                <td><{$vo.greening_rate}>%</td>
+                <td><{$vo.plot_ratio}>%</td>
+                <td><{$vo.property_company}></td>
+                <td><{$vo.property_deadline}>年</td>
+                <td>
+                    <{:BA('houseBase/update',array("id"=>$vo["id"]),'编辑','','remberBtn')}>
+                    <{:BA('houseBase/delete',array("id"=>$vo["id"]),'删除','act','remberBtn')}>
+                </td>
+            </tr>
+            </foreach>
+        </table>
+    </div>
+    
+    <div style="width:100%;text-align:center;padding-bottom:20px;;border-bottom:1px solid rgb(225,225,225)"><{$page}></div>
+    <div style="padding-top:20px;padding-left:20px;">        
+         <{:BA('houseBase/delete','','批量删除','list','remberBtn')}>
+    </div>
+    </form>
+</div>
+
+<include  file='public:footer'/>

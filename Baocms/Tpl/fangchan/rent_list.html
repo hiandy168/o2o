@@ -1,0 +1,105 @@
+<include file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">房产</li>
+        <li class="li2 li3">租房审核</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"><span>注意：</span>前台申请 后台审核！</p>
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+                <!--<{:BA('chaoshi/create','','添加商家')}>-->
+            </div>
+            <div class="right">
+                <form method="post" action="__ACTION__">
+                    <div class="seleK">
+                        <label>
+                            <input type="hidden" id="store_id" name="store_id" value="<{$store_id|default=''}>"/>
+                            <input type="text" id="store_name" name="store_name" value="<{$store_name}>"
+                                   class="text w200"/>
+                            <a mini="select" w="1100" h="700" href="<{:U('fangchan/select')}>" class="sumit">选择房产</a>
+                        </label>
+                        <label>
+                            <span>审查状态：</span>
+                            <select name="audit" id="audit" class="select manageSelect">
+                                <option value="0">待审查</option>
+                                <option value="3"
+                                <eq name="audit_2" value="3">selected="selected"</eq>
+                                <eq name="audit" value="3">selected="selected"</eq>
+                                >未通过</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>关键字：</span>
+                            <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText"
+                                   placeholder="请输入房产名"/>
+                            <input type="submit" class="inptButton" value="  搜索"/>
+                            <a href="<{:U('fangchan/initialApply',array('type'=>'rent_list'))}>" mini="act"
+                               style="padding-top:5px;padding-bottom:5px;margin-top:0;" class="remberBtn">重置搜索</a>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"
+                       style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;">
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="product_id"/></td>
+                        <td class="w50">ID</td>
+                        <td>房屋名称</td>
+                        <td>发布者</td>
+                        <td>图片</td>
+                        <td>状态</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_product_id" type="checkbox" name="product_id[]"
+                                       value="<{$var.product_id}>"/></td>
+                            <td><{$var.product_id}></td>
+                            <td><{$var.product_name}></td>
+                            <td><{$var.store_name}></td>
+
+                            <td><a mini="select" w="700" h="360"
+                                   href="<{:U('hotelproduct/pictures', array('product_id' => $var['product_id'], 'store_id' => $var['store_id']))}>"><img
+                                    src="<{$var['photo']|get_remote_file_path=###}>" class="w80" height="50px"/></a>
+                            </td>
+                            <td>
+                                <eq name="var.audit" value="0">待审查</eq>
+                                <eq name="var.audit" value="1">已审查</eq>
+                                <eq name="var.audit" value="3">未通过</eq>
+                            </td>
+                            <td>
+                                <a href="<{:U('Fangchan/rent_info',array('product_id' => $var['product_id']))}>"
+                                   class="remberBtn ">更多详情</a>
+                                <{:BA('fangchan/audit', array('type'=>'rent',"product_id" =>
+                                $var["product_id"]),'通过审核','act','remberBtn')}>
+                                <{:BA('fangchan/unAudit', array('type'=>'rent',"product_id" =>
+                                $var["product_id"]),'未通过审核','act','remberBtn')}>
+                                <{:BA('fangchan/info_delete', array('type'=>'rent',"product_id" =>
+                                $var["product_id"]),'删除','act','remberBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <input type="hidden" name="type" value="rent">
+            <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <{:BA('fangchan/audit','','批量通过审核','list',' remberBtn')}>
+                    <{:BA('fangchan/unAudit','','批量未通过审核','list',' remberBtn')}>
+                    <{:BA('fangchan/batch_info_delete','','批量删除','list',' a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include file='public:footer'/>
+
+

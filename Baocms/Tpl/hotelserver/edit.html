@@ -1,0 +1,27 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+     <li class="li1">频道</li>
+        <li class="li2">酒店</li>
+        <li class="li2 li3">酒店服务信息编辑</li>
+    </ul>
+</div>
+<form target="baocms_frm" action="<{:U('hotelserver/edit')}>" method="post">
+    <div class="mainScAdd">
+        <div class="tableBox">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                   <tr>
+                        <td class="lfTdBt">酒店服务信息：</td>
+                        <td class="rgTdBt"><input type="text" name="attr_name" value="<{$detail.attr_name|default=''}>" class="manageInput" />
+                        </td>
+                    </tr>
+            </table>
+        </div>
+        <div class="smtQr">
+        <input type="hidden" name="id" value="<{$detail['id']}>" class="smtQrIpt" />
+        <input type="submit" value="确认编辑" class="smtQrIpt" />
+        </div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+

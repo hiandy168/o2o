@@ -1,0 +1,120 @@
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">美食</li>
+        <li class="li2 li3">订单详情</li>
+    </ul>
+</div>
+<div class="mainScAdd ">
+    <div class="tableBox">
+        <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            <tr>
+                <td class="lfTdBt">订单号：</td>
+                <td  class="rgTdBt">
+                     <{$list.order_id}>
+                </td>
+                <td class="lfTdBt">店铺名：</td>
+                <td  class="rgTdBt">
+                    <{$list.store_name}>
+                </td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">用户名：</td>
+                <td  class="rgTdBt">
+                    <{$list.user_name}>
+                </td>
+                <td class="lfTdBt">订单状态：</td>
+                <td  class="rgTdBt">
+                    <eq name="list.status" value="0">待付款</eq>
+                    <eq name="list.status" value="1">为使用</eq>
+                    <eq name="list.status" value="2">已使用</eq>
+                    <eq name="list.status" value="3">已退款</eq>
+                    <eq name="list.status" value="4">已取消</eq>
+                </td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">联系电话：</td>
+                <td  class="rgTdBt">
+                     <label><{$list.phone}></label>
+                </td>
+                <td class="lfTdBt">团购码：</td>
+                <td  class="rgTdBt">
+                    <label><{$list.code}></label>
+                </td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">支付状态：</td>
+                <td  class="rgTdBt">
+                    <eq name="var.pay_status" value="1">已支付<else/><eq name="var.pay_status" value="2">已退款<else/>待支付</eq></eq>
+                </td>
+                <td class="lfTdBt">支付方式：</td>
+                <td  class="rgTdBt">
+                    <eq name="list.pay_type" value="2">支付宝</eq>
+                    <eq name="list.pay_type" value="3">微信</eq>
+                    <eq name="list.pay_type" value="4">余额</eq>
+                </td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">商品数量：</td>
+                <td  class="rgTdBt">
+                    <label><{$list.num}></label>
+                </td>
+                <td class="lfTdBt">消费时间：</td>
+                <td  class="rgTdBt">
+                    <label><{$list.use_time|date='Y-m-d H:i:s',###}></label>
+                </td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">券有效时间：</td>
+                <td  class="rgTdBt"><{$list.valid_start_time|date="Y-m-d H:i:s", ###}> - <{$list.valid_end_time|date="Y-m-d H:i:s", ###}></td>
+                <td class="lfTdBt">评论状态：</td>
+                <td  class="rgTdBt">
+                    <label>
+                        <eq name="list.is_comment" value="1">已评论<else/>未评论</eq>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">创建时间：</td>
+                <td  class="rgTdBt">
+                    <label><{$list.create_time|date='Y-m-d H:i:s',###}></label>
+                </td>
+                <td class="lfTdBt">创建ip：</td>
+                <td  class="rgTdBt"><{$list.create_ip}></td>
+            </tr>
+        </table>
+        <table bordercolor="#dbdbdb"cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0; vertical-align:middle; background-color:#FFF;">
+            <tr>
+                <td class="lfTdBt">总消费金额：</td>
+                <td  class="rgTdBt">
+                    <label><{$list.money}></label>
+                </td>
+            </tr>
+        </table>
+        <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0; vertical-align:middle; background-color:#FFF;" class="order_product">
+
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $.getJSON('<{:U("meishiorder/productDetail")}>', {order_id:'<{$list["order_id"]}>', create_time:'<{$list["create_time"]}>'}, function(_data){
+            if(_data.error == '200'){
+                var _html = '<tr> <td class="lfTdBt" style="text-align: center">商品ID</td> <td class="lfTdBt" style="text-align: center">商品名</td> <td class="lfTdBt" style="text-align: center">单价</td> <td class="lfTdBt" style="text-align: center">数量</td> <td class="lfTdBt" style="text-align: center">合计</td> <td class="lfTdBt" style="text-align: center">操作</td> </tr>';
+                for(var i = 0; i < (_data.info).length; ++i){
+                    var _temp = _data.info[i];
+                    var _id = _temp.product_id;
+                    _html += '<tr> <td class="rgTdBt" style="text-align: center">'+ _temp.product_id +'</td> <td class="rgTdBt" style="text-align: center">'+ _temp.product_name +'</td> <td class="rgTdBt" style="text-align: center">'+ _temp.price +'</td> <td class="rgTdBt" style="text-align: center">'+ _temp.num +'</td> <td class="rgTdBt" style="text-align: center">'+ _temp.total_price +'</td> <td class="rgTdBt" style="text-align:center"><a href="/index.php/admin/meishiproduct/detail/product_id/' + _id + '" class="remberBtn" >查看详情</a> </td> </tr>';
+                }
+                $(".order_product").html(_html);
+            }else {
+                console.debug(_data.error,':', _data.msg);
+            }
+        }, 'json');
+    });
+</script>
+
+<include  file='public:footer'/>

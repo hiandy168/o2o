@@ -1,0 +1,71 @@
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">美食管理</li>
+        <li class="li2">美食商品</li>
+        <li class="li2 li3">审核</li>
+    </ul>
+</div>
+<div class="mainScAdd ">
+    <div class="tableBox">
+        <form target="baocms_frm" action="<{:U('meishigoods/see',array('goods_id'=>$detail['goods_id']))}>" method="post">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+
+                <tr>
+                    <td class="lfTdBt">标题：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.goods_name}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">所属分类：</td>
+                    <td  class="rgTdBt">
+                        <{$meishi_cate[$detail['cate_id']]['cate_name']}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">美食缩略图：</td>
+                    <td  class="rgTdBt">
+                        <img src="<{$detail.photo|get_remote_file_path=###}>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">价格：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.price}>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">描述：</td>
+                    <td class="rgTdBt"> 
+                        <{$detail.description}>  
+                </td> 
+                </tr>
+                
+                
+                <tr>
+                    <td class="lfTdBt">审核：</td>
+                    <td  class="rgTdBt">
+                        <input type="radio" <eq name="detail['status']" value="2">checked</eq> name="status" value="2"/>通过 
+                        <input type="radio" <eq name="detail['status']" value="3">checked</eq> name="status" value="3"/>不通过
+                        
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td class="lfTdBt">理由：</td>
+                    <td  class="rgTdBt">
+                        <textarea name="exame_explain" style="width: 400px;"><{$detail.exame_explain|default='审核通过。'}></textarea>
+                    </td>
+                    
+                </tr>
+                
+            </table>
+            <div class="smtQr"><input type="submit" value="确认保存" class="smtQrIpt" /></div>
+            <input type="hidden" name="goods_id" value="<{$detail.goods_id}>" />
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

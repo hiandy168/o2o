@@ -1,0 +1,307 @@
+<include  file='public:header'/>
+<style>
+    .td_border_right{
+        border-right:1px solid #d5cecc;
+    }
+    .td_border_bottom{
+        border-bottom:1px solid #d5cecc;
+    }
+    .td_border_top{
+        border-top:1px solid #d5cecc;
+    }
+    .td_border_left{
+        border-left:1px solid #d5cecc;
+    }
+</style>
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">仲裁</li>
+        <li class="li2 li3">仲裁详情</li>
+    </ul>
+</div>
+<div class="mainScAdd ">
+    <form action="" method="post" target="baocms_frm" enctype="multipart/form-data" id="form_arbitrament" >
+    <div style="border: 1px solid rgb(225,225,225);margin:0 50px 0 25px;padding:30px;width:1150px;;">
+        <div style="width:100%;margin-bottom:30px;">
+            <table>
+                <tr style="text-align:center;">
+                    <td class="detial_td_font td_border_left td_border_top" style="width:520px;height: 45px;">商品名称</td>
+                    <td class="detial_td_font td_border_top" style="width:120px;">单价（元）</td>
+                    <td class="detial_td_font td_border_top" style="width:120px;">数量</td>
+                    <neq name="list.order_type" value="4">
+                        <td class="detial_td_font td_border_top td_border_left" style="width:110px;">优惠</td>
+                        <td class="detial_td_font td_border_top td_border_left" style="width:120px;">配送费</td>
+                    </neq>
+                    <td class="detial_td_font td_border_top td_border_left td_border_right" style="width:120px;">订单状态</td>
+                </tr>
+                <tr>
+                    <td class="td_border_left td_border_bottom" style="padding-left:35px;">
+                        <volist name="orderProducts" id="orderProduct">
+                        <p class="text-uppercase"><{$orderProduct.product_name}></p>
+                        <br />
+                        </volist>
+                    </td>
+                    <td class="td_center_border td_border_bottom" style="text-align: center;">
+                        <eq name="list.order_type" value="4">
+                            <p><{$order.pay_price}></p>
+                            <br />
+                        <else/>
+                            <volist name="orderProducts" id="orderProduct">
+                                <p><{$orderProduct.price}></p>
+                                <br />
+                            </volist>
+                        </eq>
+                    </td>
+                    <td class="td_center_border td_border_bottom" style="text-align: center;">
+                            <volist name="orderProducts" id="orderProduct">
+                                <p><{$orderProduct.num}></p>
+                                <br />
+                            </volist>
+                    </td>
+                    <neq name="list.order_type" value="4">
+                        <td class="td_center_border td_border_left td_border_bottom" valign="top" style="vertical-align: middle;text-align: center;">
+                            <eq name="order.discount_money" value="0">
+                                <eq name="order.new_money" value="0">无优惠<else/>新用户优惠<br/>-￥<{$order.new_money}></eq>
+                                <else/>
+                                <eq name="order.new_money" value="0">减满优惠<br/>-￥<{$order.discount_money}><else/>新用户优惠<br/>-￥<{$order.new_money}><br/>减满优惠<br/>-￥<{$order.discount_money}></eq>
+                            </eq>
+                        </td>
+                        <td class="td_center_border td_border_left td_border_bottom" valign="top" style="vertical-align: middle;text-align: center;">
+                            <span class="detial_td_font">
+                                <eq name="order.logistics" value="0">￥0.00<else/>￥<{$order.logistics}></eq>
+                            </span>
+                        </td>
+                    </neq>
+                    <td class="td_center_border td_border_left td_border_right td_border_bottom" valign="top" style="vertical-align: middle;text-align: center;">
+                        <eq name="order.refund_status" value="2">
+                            <span style="color:#eb0e00;font-weight:bold">同意退款</span>
+                        <else/>
+                            <span style="color:#eb0e00;font-weight:bold">拒绝退款</span>
+                        </eq>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="width:100%;overflow-y:hidden;">
+            <!--订单信息-->
+            <table style="float:left;width:700px;">
+                <tr>
+                    <td colspan="4" align="left"><span class="detial_td_font" style="font-weight: bold">订单信息</span></td>
+                </tr>
+                <tr>
+                    <td><br /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right"><span class="detial_td_font">买家昵称：</span></td>
+                    <td colspan="3" class="detial_td_font"><span class="detial_td_font"><{$list.nickname}></span></td>
+                    <eq name="list.order_type" value="4">
+                        <td style="text-align: right"><span class="detial_td_font">实际支付金额：</span></td>
+                        <td colspan="3"><span class="detial_td_font"><{$order.pay_price}></span></td>
+                    <else/>
+                        <td style="text-align: right"><span class="detial_td_font">收 货 人：</span></td>
+                        <td colspan="3"><span class="detial_td_font"><{$list.user_nickname}></span></td>
+                    </eq>
+                </tr>
+                <tr>
+                    <td><br /></td>
+                </tr>
+                <eq name="list.order_type" value="4">
+                    <tr>
+                        <td style="text-align: right"><span class="detial_td_font">已退金额：</span></td>
+                        <td colspan="3"><span class="detial_td_font"><{$refund.refunded}></span></td>
+                        <td style="text-align: right"><span class="detial_td_font">未退金额：</span></td>
+                        <td colspan="3"><span class="detial_td_font"><{$refund.unRefunded}></span></td>
+                    </tr>
+                    <tr>
+                        <td><br /></td>
+                    </tr>
+                </eq>
+                <tr>
+                    <td style="text-align: right"><span class="detial_td_font">订单编号：</span></td>
+                    <td colspan="3"><span class="detial_td_font"><{$order.order_id}></span></td>
+                    <td style="text-align: right"><span class="detial_td_font">联系方式：</span></td>
+                    <td colspan="3"><span class="detial_td_font"><{$order.phone}></span></td>
+                </tr>
+                <tr>
+                    <td><br /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right"><span class="detial_td_font">下单时间：</span></td>
+                    <td colspan="3"><span class="detial_td_font"><{$order.create_time|date="Y-m-d H:i:s", ###}></span></td>
+                    <td style="text-align: right"><span class="detial_td_font">支付方式：</span></td>
+                    <td colspan="3"><span class="detial_td_font">
+                        <eq name="order.pay_type" value="1">货到付款</eq>
+                        <eq name="order.pay_type" value="2">支付宝支付</eq>
+                        <eq name="order.pay_type" value="3">微信支付</eq>
+                        <eq name="order.pay_type" value="4">余额支付</eq>
+                    </span></td>
+                </tr>
+                <tr>
+                    <td><br /></td>
+                </tr>
+                <neq name="list.order_type" value="4">
+                    <tr>
+                        <td style="text-align: right"><span class="detial_td_font">送达时间：</span></td>
+                        <td colspan="3"><span class="detial_td_font"><{$order.send_time|date="Y-m-d H:i:s", ###}></span></td>
+                        <td style="text-align: right"><span class="detial_td_font">实际支付金额：</span></td>
+                        <td colspan="3"><span class="detial_td_font"><{$order.pay_price}></span></td>
+                    </tr>
+                    <tr>
+                        <td><br /></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right"><span class="detial_td_font">收货地址：</span></td>
+                        <td colspan="3"><span class="detial_td_font"><{$order.receipt_addr}></span></td>
+                    </tr>
+                    <tr>
+                        <td><br /></td>
+                    </tr>
+                </neq>
+                <tr>
+                    <td style="text-align: right"><span class="detial_td_font">店铺名称：</span></td>
+                    <td colspan="3"><span class="detial_td_font"><{$storeInfo.store_name}></span></td>
+                    <td style="text-align: right"><span class="detial_td_font">联系电话：</span></td>
+                    <td colspan="3"><span class="detial_td_font"><{$storeInfo.phone}></span></td>
+                </tr>
+            </table>
+        </div>
+        <div style="width:100%;margin-top:20px;">
+            <div class="content-left" style="float:left;border: 1px solid rgb(225,225,225);width:500px;overflow-y: hidden;padding:5px 22px;" id="customs">
+                <h2 style="text-align:center;color:#545454">买家</h2>
+                <table style="margin-top:40px;">
+                    <tr>
+                        <td valign="top" style="font-family:'宋体';font-size:14px;">申请说明：</td>
+                        <td>
+                            <div style="border: 1px solid rgb(225,225,225);width:380px;height:125px;padding:5px;">
+                                <{$list.user_explain}>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr><td><br /></td></tr>
+                    <tr>
+                        <td valign="top" style="font-family:'宋体';font-size:14px;">申请凭证：</td>
+                        <td style="height:100px;">
+                            <eq name="userPicNum" value="0">
+                                买家未上传图片
+                                <else/>
+                                <volist name="arbiPic" id="arbiP">
+                                    <eq name="arbiP.type" value="2">
+                                        <img src="<{$arbiP.pic_id|get_remote_file_path=###}>" width="100" height="100" style="float:left;margin-right:40px;" >
+                                    </eq>
+                                </volist>
+                            </eq>
+                        </td>
+                    </tr>
+                    <eq name="list.status" value="1">
+                        <tr>
+                            <td colspan="2" style="padding-top:20px;padding-bottom:30px;padding-left:355px;">
+                                <label class="radio-box"><span style="font-size:18px;font-weight:400;font-family:'宋体';display:block;padding-top: 7px;float:left;margin-right:20px;">同意买家</span><input type="radio" value="0" style="display:none;" name="agree" /><img src="__PUBLIC__/images/radio-check-box.png" ></label>
+                            </td>
+                        </tr>
+                    </eq>
+                </table>
+            </div>
+            <div class="content-right" style="float:right;border: 1px solid rgb(225,225,225);width:500px;overflow-y: hidden;padding:5px 22px;" id="shop">
+                <h2 style="text-align:center;color:#545454">商家</h2>
+                <table style="margin-top:40px;">
+                    <eq name="order.store_arbitrament_status" value="1">
+                    <tr>
+                        <td valign="top" style="font-family:'宋体';font-size:14px;">申请说明：</td>
+                        <td>
+                            <div style="border: 1px solid rgb(225,225,225);width:380px;height:125px;padding:5px;">
+                                <{$list.store_explain}>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr><td><br /></td></tr>
+                    <tr>
+                        <td valign="top" style="font-family:'宋体';font-size:14px;">申请凭证：</td>
+                        <td style="height:100px;">
+                            <eq name="storePicNum" value="0">
+                                商家未上传图片
+                                <else/>
+                                <volist name="arbiPic" id="arbiP">
+                                    <eq name="arbiP.type" value="1">
+                                        <img src="<{$arbiP.pic_id|get_remote_file_path=###}>" width="100" height="100" style="float:left;margin-right:40px;" >
+                                    </eq>
+                                </volist>
+                            </eq>
+                        </td>
+                    </tr>
+                        <else/>
+                            <tr>
+                                <td style="height:100px;">
+                                    <div style="color:red;width:380px;height:125px;padding:5px;font-size:14px;">
+                                        商家未提供任何资料
+                                    </div>
+                                </td>
+                            </tr>
+                        </eq>
+                    <eq name="list.status" value="1">
+                        <tr>
+                            <td colspan="2" style="padding-top:20px;padding-bottom:30px;padding-left:355px;">
+                                <label class="radio-box"><span style="font-size:18px;font-weight:400;font-family:'宋体';display:block;padding-top: 7px;float:left;margin-right:20px;">同意商家</span><input type="radio" value="1" style="display:none;" name="agree" /><img src="__PUBLIC__/images/radio-check-box.png" ></label>
+                            </td>
+                        </tr>
+                    </eq>
+                </table>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+
+        <div style="margin-top:30px;">
+            <div style="width:100%">
+                <span style="color:red;font-size:22px;position: absolute;margin-top:-2px;">*</span><span style="font-family:'宋体';font-size:14px;margin-left:15px;">退款金额：</span>
+            </div>
+            <input name="refund_money" value="<{$refund.unRefunded}>">
+            <div style="width:100%">
+                <span style="color:red;font-size:22px;position: absolute;margin-top:-2px;">*</span><span style="font-family:'宋体';font-size:14px;margin-left:15px;">审核说明：</span>
+            </div>
+            <eq name="list.status" value="1">
+                <textarea style="width:100%;height:135px;resize: none;" name="arbitrament_rst"></textarea>
+                <input type="hidden" name="arbitrament_id" value="<{$list.id}>">
+                <input type="submit" value="确认审核" class="smtQrIpt">
+            <else/>
+                <span style="font-size: 14px;text-indent: 2em;"><{$list.arbitrament}></span>
+                <div style="width:100%;">
+                    <br/><span style="color:red;font-size:22px;position: absolute;">*</span><span style="font-family:'宋体';font-size:14px;margin-left:15px;">裁定结果：</span>
+                </div>
+                <span style="font-size: 14px;color:red;">
+                    <eq name="list.arbitrament_status" value="2">商家合理<else/>买家合理</eq>
+                </span>
+            </eq>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    </form>
+    <script src="__PUBLIC__/js/layer/layer.js"></script>
+    <script>
+        var arbitrate_check = '__PUBLIC__/images/radio-check.png';
+        var arbitrate_box = '__PUBLIC__/images/radio-check-box.png';
+
+        $('.radio-box').click(function(){
+            $('.radio-box').each(function(){
+                if($(this).find('input').prop('checked') == true){
+                    $(this).find('img').attr('src',arbitrate_check);
+                }
+                else{
+                    $(this).find('img').attr('src',arbitrate_box);
+                }
+            })
+        });
+
+        $(function(){
+            var cus_height = $('#customs').height();
+            var shop_height = $('#shop').height();
+            if (cus_height >= shop_height){
+                $('#shop').css('height',cus_height);
+            }
+            else{
+                $('#customs').css('height',shop_height);
+            }
+        });
+
+    </script>
+</div>
+<include  file='public:footer'/>       

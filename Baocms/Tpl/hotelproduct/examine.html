@@ -1,0 +1,243 @@
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">酒店管理</li>
+        <li class="li2">酒店房间</li>
+        <li class="li2 li3">审核</li>
+    </ul>
+</div>
+<div class="mainScAdd ">
+    <div class="tableBox">
+        <form target="baocms_frm" action="<{:U('hotelroom/check')}>" method="post">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+
+                <tr>
+                    <td class="lfTdBt">酒店名：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.store_name}>
+                    </td>
+                    <td class="lfTdBt">房间名：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.room_name}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">房间略图：</td>
+                    <td  class="rgTdBt" colspan="3">
+                        <img src="<{$detail.photo|get_remote_file_path=###}>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">房间类型：</td>
+                    <td  class="rgTdBt">
+                        <{$roomCate[$detail[room_cate]]}>
+                        
+                    </td>
+       
+                    <td class="lfTdBt">房间总数：</td>
+                    <td class="rgTdBt"> 
+                        <{$detail.room_count}>  
+                </td>
+                </tr>
+                
+                <tr>
+                    <td class="lfTdBt">原价：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.price}>  
+                        
+                    </td>
+       
+                    <td class="lfTdBt">优惠价：</td>
+                    <td class="rgTdBt"> 
+                        <{$detail.coupon_price}>  
+               		 </td>
+                </tr>
+                
+                <tr>
+                    <td class="lfTdBt">库存数量：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.stock}>  
+                        
+                    </td>
+       
+                    <td class="lfTdBt">销量：</td>
+                    <td class="rgTdBt"> 
+                        <{$detail.reserve_num}>  
+               		 </td>
+                </tr>
+                
+                <tr>
+                    <td class="lfTdBt">床类型：</td>
+                    <td  class="rgTdBt">
+                         <{$roomType[$detail[type]]}> 
+                        
+                    </td>
+       
+                    <td class="lfTdBt">平均评价星数：</td>
+                    <td class="rgTdBt"> 
+                        <{$detail.comment_star}>  
+               		 </td>
+                </tr>
+               
+               <tr>
+                    <td class="lfTdBt">随时退服务：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.fuwu_a" value="1">是<else/>否</eq>
+                        
+                    </td>
+       
+                    <td class="lfTdBt">到期时间：</td>
+                    <td class="rgTdBt"> 
+                        <{$detail.end_time|date="Y-m-d",###}>  
+               		 </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">是否新单：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.is_new" value="1">是<else/>否</eq>
+                        
+                    </td>
+       
+                    <td class="lfTdBt">热门 ：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.is_tags" value="1">是<else/>否</eq>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">精选：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.is_selection" value="1">是<else/>否</eq>
+                        
+                    </td>
+       
+                    <td class="lfTdBt">免预约：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.is_make" value="1">是<else/>否</eq>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">提供过期退服务：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.fuwu_b" value="1">是<else/>否</eq>
+                        
+                    </td>
+       
+                    <td class="lfTdBt">提供真实评价：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.fuwu_c" value="1">是<else/>否</eq>
+                        
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="lfTdBt">提供过期退服务：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.fuwu_b" value="1">是<else/>否</eq>
+                        
+                    </td>
+       
+                    <td class="lfTdBt">提供真实评价：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.fuwu_c" value="1">是<else/>否</eq>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">房间人数：</td>
+                    <td  class="rgTdBt">
+                         <{$detail.room_people}>  
+                        
+                    </td>
+       
+                    <td class="lfTdBt">创建时间：</td>
+                    <td class="rgTdBt"> 
+                        <{$detail.create_time|date="Y-m-d",###}>  
+               		 </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">wifi：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.is_wifi" value="1">是<else/>否</eq>
+                        
+                    </td>
+       
+                    <td class="lfTdBt">窗户：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.window" value="1">是<else/>否</eq>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">房间卫浴：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.bathroom" value="1">共用<else/>独立</eq>
+                        
+                    </td>
+       
+                    <td class="lfTdBt">上架：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.is_out" value="1">是<else/>否</eq>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">审核状态：</td>
+                    <td  class="rgTdBt">
+                        <{$audit[$detail[audit]]}>
+                        
+                    </td>
+       
+                    <td class="lfTdBt">浏览总数：</td>
+                    <td class="rgTdBt"> 
+                        <{$detail.browse_nums}>  
+                </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">描述：</td>
+                    <td  class="rgTdBt" colspan="3">
+                        <{$detail.content_room|htmlspecialchars_decode=###}>  
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">详情：</td>
+                    <td  class="rgTdBt" colspan="3">
+                        <{$detail.detail}>  
+                    </td>
+                </tr>
+                <if condition="$detail[audit] neq 1 ">
+                <tr>
+                    <td class="lfTdBt">审核备注：</td>
+                    <td  class="rgTdBt" colspan="3">
+                        <{$detail.examine_mark}>  
+                    </td>
+                </tr>
+                </if>
+                <if condition="$detail[audit] eq 1 ">
+                 <tr>
+                    <td class="lfTdBt">审核：</td>
+                    <td  class="rgTdBt">
+                        <input type="radio" checked name="audit" value="2"/>通过 
+                        <input type="radio" name="audit" value="3"/>不通过
+                        
+                    </td>
+                    
+                </tr>
+ 				<tr>
+                    <td class="lfTdBt">审核备注：</td>
+                    <td  class="rgTdBt">
+                        <textarea name="examine_mark" style="width: 400px;"></textarea>
+                    </td>
+                    
+                </tr>
+                </if>
+            </table>
+            <if condition="$detail[audit] eq 1 ">
+            <div class="smtQr"><input type="submit" value="确认保存" class="smtQrIpt" /></div>
+            <input type="hidden" name="id" value="<{$detail.room_id}>" />
+            </if>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

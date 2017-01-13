@@ -1,0 +1,88 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">酒店管理</li>
+        <li class="li2">房间管理</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('hotelroom/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                            <label>
+                                <input type="hidden" id="hotel_id" name="hotel_id" value="<{$hotel_id|default=''}>"/>
+                                <input type="text"   id="store_name" name="store_name" value="<{$store_name}>" class="text w200" />
+                                <a mini="select"  w="1000" h="600" href="<{:U('jiudian/select')}>" class="sumit">选择酒店</a>
+                            </label>
+                            <label>
+                                <span>  关键字：</span>   <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" /><input type="submit" class="inptButton" value="   搜索" /></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="room_id" /></td>
+                        <td class="w50">ID</td>
+                        <td>房间名</td>
+                        <td>酒店名</td>
+                        <td>缩略图</td>
+                        <td>原价格</td>
+                        <td>优惠价</td>
+                        <td>是否新品</td>
+                        <td>是否热门</td>                 
+                        <td>卖出数</td>
+                        <td>是否wifi</td>
+                        <td>免费早餐</td>
+                        <td>审查状态</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_product_id" type="checkbox" name="room_id[]" value="<{$var.room_id}>" /></td>
+                            <td><{$var.room_id}></td>
+                            <td><{$var.room_name}></td>
+                            <td><{$hotels[$var['hotel_id']]['store_name']}></td>
+                            <td><img src="<{$var.photo|get_remote_file_path=###}>" class="w80" /></td>
+                            <td><{$var['price']}></td>
+                            <td><{$var.coupon_price}></td>
+                            <td><eq name="var.is_new" value="1">新品<else/>无</eq></td>
+                        <td>
+                        <eq name="var.is_tags" value="1">热门<else/>无</eq>
+                        </td>
+                  
+                        <td><{$var.reserve_num}></td>
+                        <td><eq name="var.is_wifi" value="1">有<else/>无</eq></td>
+                        <td><eq name="var.facility_b" value="1">有<else/>无</eq></td>
+                        <td><{$var.audit}></td>
+                        <td>
+                            <!-- <{:BA('hotelroom/examine',array("room_id"=>$var["room_id"]),'查看','select','remberBtn', '1000', '600')}> -->
+                            <{:BA('hotelroom/examine',array("room_id"=>$var["room_id"]),'查看','','remberBtn')}>
+                            <{:BA('hotelroom/delete',array("room_id"=>$var["room_id"]),'删除','act','remberBtn')}>
+                            <!-- <eq name="var.audit" value="1"> <{:BA('hotelroom/audit',array("room_id"=>$var["room_id"]),'审核','act','remberBtn')}> </eq> -->
+                        </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <{:BA('hotelroom/delete','','批量删除','list','a2')}>
+                    
+                    <!-- <{:BA('hotelroom/audit','','批量审核','list','a1')}> -->
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

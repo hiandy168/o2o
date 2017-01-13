@@ -1,0 +1,122 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">商家</li>
+        <li class="li2">商家提现</li>
+        <li class="li2 li3">提现管理</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <div class="jsglNr">
+        <div class="selectNr" style="margin-top: 0px; border-top:none;">
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('shopcash/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <span>  提现状态：</span>
+                        <select name="status" id="status" class="select manageSelect" style="width: 100px">
+                            <option value="-1" <eq name="status" value="-1">selected="selected"</eq> >请选择</option>
+                            <option value="0" <eq name="status" value="0">selected="selected"</eq> >待提现</option>
+                            <option value="1" <eq name="status" value="1">selected="selected"</eq> >已提现</option>
+                            <option value="2" <eq name="status" value="2">selected="selected"</eq> >提现失败</option>
+                        </select>
+                        <label>
+                            <span>账户名</span>
+                            <input type="text" name="account" value="<{$account}>" class="inptText" />
+                            <input type="submit" value="   搜索"  class="inptButton" />
+                        </label>
+                    </div> 
+                </form>
+            </div>
+        </div>
+        <form><div></form>
+        <div class="clear"></div>
+    </div>
+    <form target="baocms_frm" method="post">
+        <div class="tableBox">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="cash_id" /></td>
+                    <td class="w50">ID</td>
+                    <td>账户信息</td>
+                    <td>提现金额</td>
+                    <td>提现日期</td>
+                    <td>失败原因</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+                <foreach name="cash" item="var">
+                    <tr>
+                        <td><input class="child_cash_id" type="checkbox" name="cash_id[]" value="<{$var.cash_id}>" <?php if ($var['status'] != 0){echo 'disabled="disabled"';}?> /></td>
+                        <td><{$var.cash_id}></td>
+                        <td>
+                            <p>户名：<{$var.bank_realname}>&ensp;&ensp;&ensp;预留电话：<{$var.bank_telephone}></p>
+                            <p>银行：<{$var.bank_name}>&ensp;&ensp;&ensp;支行：<{$var.bank_branch}></p>
+                            <p>卡号：<{$var.bank_num}></p>
+                        </td>
+                        <td><{$var['money']}> 元</td>
+                        <td><{$var['addtime']|date='Y-m-d', ###}></td>
+                        <td><{$var['reason']}></td>
+                        <td>
+                        <if condition="$var.status eq 0">
+                            未审
+                            <elseif condition="$var.status eq 1" />
+                            <font color="green">通过</font>
+                            <elseif condition="$var.status eq 2" />
+                            <font color="red">失败</font>
+                            <else />
+                            <font color="red">未知</font>
+                        </if>
+                    </td>
+                    <td>
+                    <if condition="$var.status eq 0">
+                        <{:BA('shopcash/audit',array("cash_id"=>$var["cash_id"]),'通过','act','remberBtn')}>
+                        <a class="remberBtn refuse"  href="javascript:void(0);" rel="<{$var.cash_id}>">失败</a>
+                        <else />
+                        --
+                    </if>
+                    </td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <script src="__PUBLIC__/js/layer/layer.js?v=20150718"></script>
+        <script>
+            $(document).ready(function () {
+                layer.config({
+                    extend: 'extend/layer.ext.js'
+                });
+                $(".refuse").click(function () {
+                    var cash_id = $(this).attr('rel');
+                    var url = "<{:U('Shopcash/refuse')}>";
+                    layer.prompt({formType: 2, value: '', title: '请输入提现失败理由，并确认'}, function (value) {
+                        //alert(value); //得到value
+                        if (value != "" && value != null) {
+                            $.post(url, {cash_id: cash_id,value:value}, function (data) {
+                                if(data.status == 'success'){
+                                    layer.msg(data.msg, {icon: 1});
+                                    setTimeout(function(){
+                                        window.location.reload(true);
+                                    },1000)
+                                }else{
+                                    layer.msg(data.msg, {icon: 2});
+                                }
+                            }, 'json')
+                        } else {
+                            layer.msg('请填写提现失败理由', {icon: 2});
+                        }       
+                    });
+                })
+            })
+        </script>
+        <div class="selectNr" style="margin-bottom: 0; border-bottom: none;">
+            <div class="left">
+                <{:BA('shopcash/audit',array("status" => 1),'批量通过','list',' remberBtn')}>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+

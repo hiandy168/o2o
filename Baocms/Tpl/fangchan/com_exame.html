@@ -1,0 +1,99 @@
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">房产</li>
+        <li class="li2">商家管理</li>
+        <li class="li2 li3">查看\审核</li>
+    </ul>
+</div>
+<div class="mainScAdd ">
+    <div class="tableBox">
+        <form target="baocms_frm" action="" method="post">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+
+                <tr>
+                    <td class="lfTdBt">公司名称：</td>
+                    <td  class="rgTdBt">
+                        <label>
+                         <{$detail.com_name}>
+                         </label>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="lfTdBt">公司详细地址:</td>
+                    <td  class="rgTdBt">
+                         <label>
+                         <{$detail.com_address}> 
+                         </label>
+                        
+                    </td>
+                </tr>
+             
+                <tr>
+                    <td class="lfTdBt">营业执照图片:</td>
+                    <td  class="rgTdBt">
+                        <img src="<{$detail.business_license|get_remote_file_path=###}>" onclick="viewImg(this.src)" style="cursor: pointer;" />
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">其它认证图片：</td>
+                    <td  class="rgTdBt">
+                    <volist name="detail.other_pic" id="vo">
+                        <img src="<{$vo|get_remote_file_path=###}>" onclick="viewImg(this.src)" style="cursor: pointer;" />
+                    </volist>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="lfTdBt">状态审核：</td>
+                    <td  class="rgTdBt">
+                        <label> <input type="radio" name="data[audit]" value="0" <eq name="house_info.audit" value="0">checked="checked"</eq>  />审核中 </label>
+                        <label> <input type="radio" name="data[audit]" value="1"  <eq name="house_info.audit" value="1">checked="checked"</eq> /> 通过</label>
+                        <label> <input type="radio" name="data[audit]" value="2"  <eq name="house_info.audit" value="2">checked="checked"</eq> /> 拒绝</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">审核说明：</td>
+                    <td  class="rgTdBt">
+                        <textarea style="width:300px;height:150px" name="data[exame_explain]"><{$house_info.exame_explain}></textarea>
+                       
+                    </td>
+                </tr>
+            </table>
+            <div class="smtQr"><input type="submit" value="审核" class="smtQrIpt" /><input type="hidden" name="data[store_id]" value="<{$house_info.store_id}>" /></div>
+        </form>
+    </div>
+</div>
+<div id="viewPicture" style="display: none">
+    <img id="newImg" />
+</div>
+<script>
+    function viewImg(src) {
+        var img = new Image();
+        img.src = src;
+        var percent = img.height / img.width;
+        var new_width = 1000;
+        var new_height = new_width * percent;
+        if(new_height > 1000){
+            new_height = 1000;
+        }
+        $('#newImg').attr('src', src);
+        $('#newImg').attr('width', new_width);
+        $('#newImg').attr('height', new_height);
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 1,
+            area: [new_width + 'px'],
+            skin: 'layui-layer-nobg', //没有背景色
+            shadeClose: true,
+            scrollbar: false,
+            content: $('#viewPicture')
+        });
+    }
+</script>
+<include  file='public:footer'/>       

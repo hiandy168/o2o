@@ -1,0 +1,67 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">商家</li>
+        <li class="li2">商家管理</li>
+        <li class="li2 li3">商家审核列表</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"><span>注意：</span>前台申请 后台审核！</p>
+    <div class="jsglNr">
+        <div class="selectNr" style="margin-top: 0px; border-top:none;">
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('shop/apply')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <span>关键字(电话或商户名称)</span>
+                        <input type="text" name="keyword" value="<{$keyword}>" class="inptText" /><input type="submit" value="   搜索"  class="inptButton" />
+                    </div> 
+                </form>
+                
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+    <div class="selectNr selectNr2">
+           <div class="clear"></div>
+    </div>
+    <form  target="baocms_frm" method="post">
+        <div class="tableBox">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="auth_id" /></td>
+                    <td class="w50">ID</td>
+                    <td>认证类型</td>
+                    <td>联系电话</td>
+                    <td>详细地址</td>
+                    <td>审核状态</td>
+                    <td>操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_shop_id" type="checkbox" name="auth_id[]" value="<{$var.auth_id}>" /></td>
+                        <td><{$var.auth_id}></td>
+                        
+                        <td><{$type_list[$var[auth_type]]}></td>
+                        
+                        <td><{$var.link_mobile}></td>
+                        <td><{$var.address_detail}></td>
+                        <td><{$auth_status_list[$var[auth_status]]}></td>
+                        
+                        <td>
+                            <{:BA('shopauth/see',array("auth_id"=>$var["auth_id"]),'查看','','remberBtn')}>
+                            <{:BA('shopauth/delete',array("auth_id"=>$var["auth_id"]),'删除','act','remberBtn')}>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+       
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+

@@ -1,0 +1,91 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">仲裁</li>
+        <li class="li2 li3">仲裁列表</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('arbitrament/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                            <label>
+                                <span>订单类型：</span>
+                                <select name="order_type" id="order_type" class="select manageSelect">
+                                    <option value="100">请选择...</option>
+                                    <option value="1" <eq name="order_type_2" value="1">selected="selected"</eq> <eq name="order_type" value="1">selected="selected"</eq> >社区超市</option>
+                                    <option value="2" <eq name="order_type_2" value="2">selected="selected"</eq> <eq name="order_type" value="2">selected="selected"</eq> >外卖</option>
+                                    <option value="3" <eq name="order_type_2" value="3">selected="selected"</eq> <eq name="order_type" value="3">selected="selected"</eq> >美食</option>
+                                    <option value="4" <eq name="order_type_2" value="4">selected="selected"</eq> <eq name="order_type" value="4">selected="selected"</eq> >酒店</option>
+                                    <option value="5" <eq name="order_type_2" value="5">selected="selected"</eq> <eq name="order_type" value="5">selected="selected"</eq> >房产</option>
+                                </select>
+                                <span>处理状态：</span>
+                                <select name="status" id="status" class="select manageSelect">
+                                    <option value="100">请选择...</option>
+                                    <option value="1" <eq name="status_2" value="1">selected="selected"</eq> <eq name="status" value="1">selected="selected"</eq> >未处理</option>
+                                    <option value="2" <eq name="status_2" value="2">selected="selected"</eq> <eq name="status" value="2">selected="selected"</eq> >已处理</option>
+                                </select>
+                                <span>关键字(订单编号)：</span><input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" /><input type="submit" class="inptButton" value="   搜索" />
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50">ID</td>
+                        <td>订单类型</td>
+                        <td>订单编号</td>
+                        <td>用户昵称</td>
+                        <td>收 货 人</td>
+                        <td>商铺名称</td>
+                        <td>申请时间</td>
+                        <td>处理状态</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.id}></td>
+                            <td>
+                                <eq name="var.order_type" value="1">社区超市</eq>
+                                <eq name="var.order_type" value="2">外卖</eq>
+                                <eq name="var.order_type" value="3">美食</eq>
+                                <eq name="var.order_type" value="4">酒店</eq>
+                                <eq name="var.order_type" value="5">房产</eq>
+                            </td>
+                            <td><{$var.order_id}></td>
+                            <td><{$var.nickname}></td>
+                            <td><{$var.consignee}></td>
+                            <td><{$var.store_name}></td>
+                            <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
+                            <td>
+                                <eq name="var.status" value="1">未处理<else/>已处理</eq></eq>
+                            </td>
+                            <td>
+                                <{:BA('arbitrament/detail',array("arbitrament_id"=>$var["id"]),'查看详情','','remberBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $('.remberBtn').click(function () {
+        location.href =$(this).attr('href');
+    });
+</script>
+
+<include  file='public:footer'/>       

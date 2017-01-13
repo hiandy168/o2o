@@ -1,0 +1,179 @@
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">社区超市</li>
+        <li class="li2 li3">商家详情</li>
+    </ul>
+</div>
+<div class="mainScAdd ">
+    <div class="tableBox">
+        <!--<form target="baocms_frm" action="<{:U('chaoshi/edit',array('store_id'=>$detail['store_id']))}>" method="post">-->
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="lfTdBt">是否打洋：</td>
+                    <td  class="rgTdBt">
+                        <label><eq name="detail.is_open" value="0">打洋了<else />营业中</eq></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">是否支持在线付款：</td>
+                    <td  class="rgTdBt"><label><eq name="detail.is_pay" value="1">支持<else />不支持</eq></label></td>
+                </tr>
+             
+                <tr>
+                    <td class="lfTdBt">是否返利：</td>
+                    <td  class="rgTdBt"><label> <eq name="detail.is_fan" value="1">支持<else />不支持</eq></label></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">最高返利金额：</td><td  class="rgTdBt"><{$detail['fan_money']}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">新客户下单立减：</td>
+                    <td  class="rgTdBt"><label> <eq name="detail.is_new" value="1">支持<else />不支持</eq></label></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">满多少钱：</td>
+                    <td  class="rgTdBt"><{$detail['full_money']}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">减多少钱：</td>
+                    <td  class="rgTdBt"><{$detail['new_money']}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">配送费：</td>
+                    <td  class="rgTdBt"><{$detail['logistics']}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">起送价：</td>
+                    <td  class="rgTdBt"><{$detail['since_money']}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">卖出数：</td>
+                    <td><{$detail.sold_num|default=''}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">月卖出数：</td>
+                    <td  class="rgTdBt"><{$detail.month_num|default=''}></td>
+                </tr>
+
+                <eq name="detail.level" value="1">
+                    <tr>
+                        <td class="lfTdBt">身份证1：</td>
+                        <td  class="rgTdBt">
+                            <js file='__PUBLIC__/js/fancyzoom/zoom.js'/>
+                            <link rel="stylesheet" href="__PUBLIC__/js/fancyzoom/zoom.css">
+                            <a href="#identity">
+                                <img height="216"  src="<{$detail.id_face|get_remote_file_path=###}>" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lfTdBt">身份证2：</td>
+                        <td  class="rgTdBt">
+                            <js file='__PUBLIC__/js/fancyzoom/zoom.js'/>
+                            <link rel="stylesheet" href="__PUBLIC__/js/fancyzoom/zoom.css">
+                            <a href="#license">
+                                <img height="216"  src="<{$detail.id_back|get_remote_file_path=###}>" />
+                            </a>
+                        </td>
+                    </tr>
+                    <div id="identity" style="display:none;"><img src="<{$detail.id_face|get_remote_file_path=###}>" /></div>
+                    <div id="license" style="display:none;"><img src="<{$detail.id_back|get_remote_file_path=###}>" /></div>
+                </eq>
+
+                <eq name="detail.level" value="2">
+                    <tr>
+                        <td class="lfTdBt">营业执照：</td>
+                        <td  class="rgTdBt">
+                            <js file='__PUBLIC__/js/fancyzoom/zoom.js'/>
+                            <link rel="stylesheet" href="__PUBLIC__/js/fancyzoom/zoom.css">
+                            <a href="#identity2">
+                                <img height="216"  src="<{$detail.business_license|get_remote_file_path=###}>" />
+                            </a>
+                        </td>
+                    </tr>
+                    <div id="identity2" style="display:none;"><img src="<{$detail.business_license|get_remote_file_path=###}>" /></div>
+                    <neq name="detail.other_pic" value="0">
+                        <tr>
+                            <td class="lfTdBt">其它图片：</td>
+                            <td  class="rgTdBt">
+                                <js file='__PUBLIC__/js/fancyzoom/zoom.js'/>
+                                <link rel="stylesheet" href="__PUBLIC__/js/fancyzoom/zoom.css">
+                                <volist name="pics" id="pic">
+                                    <a href="#license_<{$key}>">
+                                        <img height="216"  src="<{$pic|get_remote_file_path=###}>" />
+                                    </a>
+                                </volist>
+                            </td>
+                        </tr>
+                        <volist name="pics" id="pic">
+                            <div id="license_<{$key}>" style="display:none;"><img src="<{$pic|get_remote_file_path=###}>" /></div>
+                        </volist>
+                    </neq>
+                </eq>
+
+                <script type="text/javascript">
+					$(document).ready(function() {
+						$('td.rgTdBt a').fancyZoom({scaleImg: true, closeOnClick: false,width:800, height:600});
+					});
+				</script>
+                <tr>
+                    <td class="lfTdBt">说明：</td>
+                    <td  class="rgTdBt"><{$detail.intro|default=''|htmlspecialchars_decode=###}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">排序：</td>
+                    <td  class="rgTdBt"><{$detail.orderby|default='100'}></td>
+                </tr>
+
+                <tr>
+                    <td class="lfTdBt">配送：</td>
+                    <td  class="rgTdBt"><{$detail.distribution|default='100'}> 分钟送达</td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">电话：</td>
+                    <td class="rgTdBt"><{$detail.phone|default=''}><input type="hidden" name="data[phone]" value="<{$detail.phone|default=''}>" /></td>
+                </tr>
+				<tr>
+                    <td class="lfTdBt">地址：</td>
+                    <td class="rgTdBt"><{$detail.address|default=''}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">配送距离：</td>
+                    <td class="rgTdBt"><{$detail.distance}>米
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">结算费率：</td>
+                    <td class="rgTdBt"><{$detail.rate|default='6'}>
+                        <code>千分之，比如是千分之60 就填60</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">状态审核：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.audit" value="0">审核中</eq>
+                        <eq name="detail.audit" value="1">通过</eq>
+                        <eq name="detail.audit" value="2">拒绝</eq>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">审核说明：</td>
+                    <td  class="rgTdBt">
+                        <textarea  readonly="readonly" style="width:300px;height:150px" name="data[exame_explain]"><{$detail.exame_explain}></textarea>
+                    </td>
+                </tr>
+            </table>
+            <div class="smtQr"><input type="button" value="返回" class="smtQrIpt" /></div>
+        <!--</form>-->
+    </div>
+</div>
+<include  file='public:footer'/>
+
+<script>
+ $('.smtQrIpt').click(
+  function(){   location.href = "<{:U('admin/chaoshi/index')}>";}
+ )
+</script>

@@ -1,0 +1,94 @@
+<include  file='public:header'/>
+<style>
+    .sign{cursor:pointer;font-weight:bold;}
+</style>
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">酒店</li>
+        <li class="li2 li3">价格区间</li>
+    </ul>
+</div>
+<div class="main-jsgl">
+    
+    <div class="jsglNr">
+        <div class="selectNr" style="margin: 10px 20px;">
+            <div class="left">
+                <{:BA('hotelprice/create','','添加价格区间')}>
+            </div>
+        </div>
+        <form target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0; vertical-align:middle; background-color:#FFF;" >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="price_id" /></td>
+                        <td>分类ID</td>
+                        <td>低价</td>
+                        <td>高价</td>
+                        <td>显示内容</td>
+                        <td>排序</td>
+                        <td class="w260">操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_city_id" type="checkbox" name="price_ids[]" value="<{$var.price_id}>"/></td>
+                            <td><{$var.price_id}></td>
+                            <td><{$var.min_price}></td>
+                            <td><{$var.max_price}></td>
+                            <td><{$var.price_word}></td>
+                            <td>
+                                <span class="cut sign" ids="<{$var.price_id}>" ><a href="javascript:" >-</a></span>&ensp;&ensp;<span><{$var.order_by}></span>&ensp;&ensp;<span class="add sign" ids="<{$var.price_id}>" ><a href="javascript:">+</a></span>
+                            </td>
+                            <td>
+                                <{:BA('hotelprice/edit',array("price_id"=>$var["price_id"]),'编辑','','remberBtn')}>
+                                <{:BA('hotelprice/delete',array("price_ids"=>$var["price_id"]),'删除','act','remberBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="selectNr">
+                <div class="left">
+                    <{:BA('hotelprice/delete','','批量删除','list','a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).on('click','.sign',function () {
+
+        if($(this).hasClass('cut')){
+            var Next = $(this).next('span');
+            var num = Next.text();
+            var _ids = $(this).attr('ids');
+            if (num > 0){
+                num = Number(num) - 1;
+                $.getJSON('<{:U("hotelprice/orderByDe")}>', {price_id:_ids}, function(_data){
+                    if(_data.error == 200){
+                        Next.text(num);
+                    }else{
+                        console.debug(_data.msg);
+                    }
+                }, 'json');
+            }
+        }
+
+        if($(this).hasClass('add')){
+            var Pre = $(this).prev('span');
+            var num_2 = Pre.text();
+            var _ids = $(this).attr('ids');
+            num_2 = Number(num_2) + 1;
+            $.getJSON('<{:U("hotelprice/orderByIn")}>', {price_id:_ids}, function(_data){
+                if(_data.error == 200){
+                    Pre.text(num_2);
+                }else{
+                    console.debug(_data.msg);
+                }
+            }, 'json');
+        }
+    })
+</script>
+<include  file='public:footer'/>
+

@@ -1,0 +1,78 @@
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">外卖</li>
+        <li class="li2 li3">菜品详情</li>
+    </ul>
+</div>
+<div class="mainScAdd ">
+    <div class="tableBox">
+        <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            <tr>
+                <td class="lfTdBt">商品ID：</td>
+                <td class="rgTdBt"><{$detail.product_id}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">商品编号：</td>
+                <td class="rgTdBt"><{$detail.product_num}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">商品名：</td>
+                <td class="rgTdBt"><{$detail.product_name}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">店铺名：</td>
+                <td class="rgTdBt"><{$ele.store_name}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">库存：</td>
+                <td class="rgTdBt"><{$detail.inventory}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">分类：</td>
+                <td class="rgTdBt">
+                    <foreach name="eleproductcates" item="eleproductcate">
+                        <eq name="eleproductcate.cate_id" value="$detail.cate_id"><{$eleproductcate.cate_name}></eq>
+                    </foreach>
+                </td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">缩略图：</td>
+                <td class="rgTdBt"><img id="photo_img" width="80" height="80"  src="<{$detail.photo|get_remote_file_path=###}>" /></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">价格：</td>
+                <td class="rgTdBt"><{$detail.price}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">总销售量：</td>
+                <td class="rgTdBt"><{$detail.sold_num}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">月销售量：</td>
+                <td class="rgTdBt"><{$detail.month_num}></td>
+            </tr>
+            <neq name="detail.product_time" value="0">
+                <tr>
+                    <td class="lfTdBt">上架时间：</td>
+                    <td class="rgTdBt"><{$detail.product_time|date="Y-m-d H:i:s",###}></td>
+                </tr>
+            </neq>
+            <tr>
+                <td class="lfTdBt">更新时间：</td>
+                <td class="rgTdBt"><{$detail.update_time|date="Y-m-d H:i:s",###}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">创建时间：</td>
+                <td class="rgTdBt"><{$detail.create_time|date="Y-m-d H:i:s",###}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">创建IP：</td>
+                <td class="rgTdBt"><{$detail.create_ip}></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<include  file='public:footer'/>       

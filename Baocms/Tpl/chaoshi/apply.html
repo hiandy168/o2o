@@ -1,0 +1,108 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">社区超市</li>
+        <li class="li2 li3">商家审核</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"><span>注意：</span>前台申请 后台审核！</p>
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+                <!--<{:BA('chaoshi/create','','添加商家')}>-->
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('chaoshi/apply')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <span>店铺类型：</span>
+                        <select name="level" id="level" class="select manageSelect" style="width: 100px">
+                            <option value="2" <eq name="level" value="2">selected="selected"</eq> >企业店铺</option>
+                            <option value="1" <eq name="level_2" value="1">selected="selected"</eq> <eq name="level" value="1">selected="selected"</eq> >个人店铺</option>
+                        </select>
+                        <span>审查状态：</span>
+                        <select name="audit" id="audit" class="select manageSelect" style="width: 100px">
+                            <option value="1">待审查</option>
+                            <option value="2" <eq name="audit_2" value="2">selected="selected"</eq> <eq name="audit" value="2">selected="selected"</eq> >未通过</option>
+                        </select>
+                        <span>市级：</span>
+                        <select name="city_id" id="city_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="cities" item="city">
+                                <option value="<{$city.city_id}>" <eq name="city.city_id" value="$city_id_2">selected="selected"</eq> <eq name="city.city_id" value="$city_id">selected="selected"</eq> ><{$city.name}></option>
+                            </foreach>
+                        </select>
+                        <span>区县：</span>
+                        <select name="area_id" id="area_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="areas" item="area">
+                                <option value="<{$area.area_id}>" <eq name="area.area_id" value="$area_id_2">selected="selected"</eq> <eq name="area.area_id" value="$area_id">selected="selected"</eq> ><{$area.area_name}></option>
+                            </foreach>
+                        </select>
+                        <span>商圈：</span>
+                        <select name="business_id" id="business_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="businesses" item="business">
+                                <option value="<{$business.business_id}>" <eq name="business.business_id" value="$business_id_2">selected="selected"</eq> <eq name="business.business_id" value="$business_id">selected="selected"</eq> ><{$business.business_name}></option>
+                            </foreach>
+                        </select>
+                        <span>关键字(店铺名称)：</span>
+                        <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" style="width: 120px" />
+                        <input type="submit" class="inptButton" value="  搜索" />
+                        <a href="<{:U('chaoshi/initialApply')}>" mini="act" style="padding-top:5px;padding-bottom:5px;margin-top:0;" class="remberBtn">重置搜索</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                        <tr>
+                            <td class="w50"><input type="checkbox" class="checkAll" rel="store_id" /></td>
+                            <td class="w50">ID</td>
+                            <td>超市名称</td>
+                            <td>店铺LOGO</td>
+                            <td>所属市区</td>
+                            <td>联系人姓名</td>
+                            <td>联系人电话</td>
+                            <td>详细地址</td>
+                            <td>审查状态</td>
+                            <td>操作</td>
+                        </tr>
+                        <foreach name="list" item="var">
+                            <tr>
+                                <td><input class="child_store_id" type="checkbox" name="store_id[]" value="<{$var.store_id}>" /></td>
+                                <td><{$var.store_id}></td>
+                                <td><{$var.store_name}></td>
+                                <td><img src="<{$var.logo|get_remote_file_path=###}>" height="50px"/></td>
+                                <td><{$var['city_name']}>&ensp;<{$var['area_name']}></td>
+                                <td><{$var['nickname']}></td>
+                                <td><{$var['mobile']}></td>
+                                <td><{$var.address}></td>
+                                <td>
+                                    <eq name="var.audit" value="0">待审查</eq>
+                                    <eq name="var.audit" value="2">未通过</eq>
+                                </td>
+                            <td>
+                                <{:BA('chaoshi/exame',array("store_id"=>$var["store_id"]),'查看审核','','remberBtn')}>
+                                <{:BA('chaoshi/shiftdelete',array("store_id"=>$var["store_id"]),'删除','act','remberBtn')}>
+                            </td>
+                            </tr>
+                        </foreach>
+                    </table>
+                <{$page}>
+            </div>
+            <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <!--<{:BA('chaoshi/audit','','批量审核','list',' remberBtn')}>-->
+                    <{:BA('chaoshi/shiftdelete','','批量删除','list',' a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>  
+
+

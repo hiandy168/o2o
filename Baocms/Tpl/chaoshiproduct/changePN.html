@@ -1,0 +1,22 @@
+<include  file='public:header'/>
+<form  target="_self" method="post" action="<{:U('chaoshiproduct/changePN')}>">
+    <table cellspacing="0" width="200" style=" border-collapse: collapse;background-color:#FFF;" >
+        <tr>
+            <td width="120">商品名称：</td>
+            <td><{$list.product_name}></td>
+        </tr>
+        <tr>
+            <td width="24">商品价格：</td>
+            <td ><input type="text" name="price" value="<{$list.price}>" /></td>
+        </tr>
+        <tr>
+            <td>商品库存：</td>
+            <td><input type="text" name="product_num" value="<{$list.product_num}>" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit"></td>
+        </tr>
+        <input type="hidden" name="product_id" value="<{$list.product_id}>">
+    </table>
+</form>
+<include  file='public:footer'/>

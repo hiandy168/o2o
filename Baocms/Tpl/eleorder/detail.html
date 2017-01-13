@@ -1,0 +1,162 @@
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">外卖</li>
+        <li class="li2 li3">订单详情</li>
+    </ul>
+</div>
+<div class="mainScAdd ">
+    <div class="tableBox">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="lfTdBt">订单号：</td>
+                    <td  class="rgTdBt">
+                         <{$list.order_id}>
+                    </td>
+                    <td class="lfTdBt">用户名：</td>
+                    <td  class="rgTdBt">
+                        <{$list.user_id}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">店铺名：</td>
+                    <td  class="rgTdBt">
+                        <{$list.store_id}>
+                    </td>
+                    <td class="lfTdBt">订单状态：</td>
+                    <td  class="rgTdBt">
+                        <eq name="list.status" value="0">待付款</eq>
+                        <eq name="list.status" value="1">新订单</eq>
+                        <eq name="list.status" value="2">待发货</eq>
+                        <eq name="list.status" value="3">已发货</eq>
+                        <eq name="list.status" value="4">已取消</eq>
+                        <eq name="list.status" value="5">
+                            <eq name="list.arbitrament_status" value="0">已退款</eq>
+                            <eq name="list.arbitrament_status" value="1">仲裁中</eq>
+                            <eq name="list.arbitrament_status" value="2">已退款</eq>
+                        </eq>
+                        <eq name="list.status" value="6">已完成</eq>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">收货人姓名：</td>
+                    <td  class="rgTdBt">
+                         <label><{$list.name}></label>
+                    </td>
+                    <td class="lfTdBt">收货人电话：</td>
+                    <td  class="rgTdBt">
+                        <label><{$list.phone}></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">订单总金额：</td>
+                    <td  class="rgTdBt">
+                        <{$list.total_price}>
+                    </td>
+                    <td class="lfTdBt">订单实支付金额：</td>
+                    <td  class="rgTdBt">
+                        <label><{$list.pay_price}></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">新用户优惠：</td>
+                    <td  class="rgTdBt">
+                        <label><{$list.new_money}></label>
+                    </td>
+                    <td class="lfTdBt">满减优惠：</td>
+                    <td  class="rgTdBt">
+                        <label><{$list.discount_money}></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">物流费：</td>
+                    <td  class="rgTdBt">
+                        <label><{$list.logistics}></label>
+                    </td>
+                    <td class="lfTdBt">结算金额：</td>
+                    <td  class="rgTdBt"><{$list.settlement_price}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">订单商品数：</td>
+                    <td  class="rgTdBt"><{$list.num}></td>
+                    <td class="lfTdBt">发货时间：</td>
+                    <td  class="rgTdBt"><{$list.audit_time|date="Y-m-d H:i:s", ###}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">收货时间：</td>
+                    <td  class="rgTdBt"><{$list.finish_time|date="Y-m-d H:i:s", ###}></td>
+                    <td class="lfTdBt">送达时间：</td>
+                    <td  class="rgTdBt"><{$list.send_time|date="Y-m-d H:i:s", ###}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">支付状态：</td>
+                    <td class="rgTdBt">
+                        <eq name="list.pay_status" value="0">待支付<else/>
+                            <eq name="list.pay_status" value="1">已支付<else/>已退款</eq>
+                        </eq>
+                    </td>
+                    <td class="lfTdBt">支付方式：</td>
+                    <td class="rgTdBt">
+                        <eq name="list.pay_status" value="0">未选择</eq>
+                        <eq name="list.pay_status" value="1">货到付款</eq>
+                        <eq name="list.pay_status" value="2">支付宝</eq>
+                        <eq name="list.pay_status" value="3">微信支付</eq>
+                        <eq name="list.pay_status" value="4">余额支付</eq>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">退款申请：</td>
+                    <td class="rgTdBt">
+                        <eq name="list.refund_status" value="0">未申请</eq>
+                        <eq name="list.refund_status" value="1">已申请</eq>
+                        <eq name="list.refund_status" value="2">通过</eq>
+                        <eq name="list.refund_status" value="3">未通过</eq>
+                    </td>
+                    <td class="lfTdBt">是否评论：</td>
+                    <td class="rgTdBt">
+                        <eq name="list.is_comment" value="0">未评论<else/>已评论</eq>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">创建时间：</td>
+                    <td  class="rgTdBt">
+                        <{$list.create_time|date="Y-m-d H:i:s", ###}>
+                    </td>
+                    <td class="lfTdBt">创建IP：</td>
+                    <td class="rgTdBt">
+                        <{$list.create_ip}>
+                    </td>
+                </tr>
+            </table>
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="lfTdBt">配送地址：</td>
+                    <td  class="rgTdBt"><{$list.receipt_addr}></td>
+                </tr>
+            </table>
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0; vertical-align:middle; background-color:#FFF;" class="order_product">
+            </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $.getJSON('<{:U("eleorder/productDetail")}>', {order_id:'<{$list["order_id"]}>', create_time:'<{$list["create_time"]}>'}, function(_data){
+            if(_data.error == '200'){
+                var _html = '<tr> <td class="lfTdBt" style="text-align: center">商品ID</td> <td class="lfTdBt" style="text-align: center">商品名</td> <td class="lfTdBt" style="text-align: center">单价</td> <td class="lfTdBt" style="text-align: center">数量</td> <td class="lfTdBt" style="text-align: center">合计</td> <td class="lfTdBt" style="text-align: center">操作</td> </tr>';
+                for(var i = 0; i < (_data.info).length; ++i){
+                    var _temp = _data.info[i];
+                    var _id = _temp.product_id;
+                    _html += '<tr> <td class="rgTdBt" style="text-align: center">'+ _temp.product_id +'</td> <td class="rgTdBt" style="text-align: center">'+ _temp.product_name +'</td> <td class="rgTdBt" style="text-align: center">'+ _temp.price +'</td> <td class="rgTdBt" style="text-align: center">'+ _temp.num +'</td> <td class="rgTdBt" style="text-align: center">'+ _temp.total_price +'</td> <td class="rgTdBt" style="text-align:center"><a href="/index.php/admin/eleproduct/detail/product_id/' + _id + '" class="remberBtn" >查看详情</a> </td> </tr>';
+                }
+                $(".order_product").html(_html);
+            }else {
+                console.debug(_data.error,':', _data.msg);
+            }
+        }, 'json');
+    });
+</script>
+
+<include  file='public:footer'/>

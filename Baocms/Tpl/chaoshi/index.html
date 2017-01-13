@@ -1,0 +1,188 @@
+<include  file='public:header'/>
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">社区超市</li>
+        <li class="li2 li3">商家列表</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"><span>注意：</span>如果未添加商家，那么不能发布超市商品</p>
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <!--<div class="left">-->
+                <!--<{:BA('chaoshi/create','','添加商家')}>-->
+            <!--</div>-->
+            <div class="right">
+                <form method="post" action="<{:U('chaoshi/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <span>  店铺类型：</span>
+                        <select name="level" id="level" class="select manageSelect" style="width: 100px">
+                            <option value="2" <eq name="level" value="2">selected="selected"</eq> >企业店铺</option>
+                            <option value="1" <eq name="level" value="1">selected="selected"</eq> >个人店铺</option>
+                        </select>
+                        <span>市级：</span>
+                        <select name="city_id" id="city_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="cities" item="city">
+                                <option value="<{$city.city_id}>" <eq name="city.city_id" value="$city_id_2">selected="selected"</eq> <eq name="city.city_id" value="$city_id">selected="selected"</eq> ><{$city.name}></option>
+                            </foreach>
+                        </select>
+                        <span>区县：</span>
+                        <select name="area_id" id="area_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="areas" item="area">
+                                <option value="<{$area.area_id}>" <eq name="area.area_id" value="$area_id_2">selected="selected"</eq> <eq name="area.area_id" value="$area_id">selected="selected"</eq> ><{$area.area_name}></option>
+                            </foreach>
+                        </select>
+                        <span>商圈：</span>
+                        <select name="business_id" id="business_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="businesses" item="business">
+                                <option value="<{$business.business_id}>" <eq name="business.business_id" value="$business_id_2">selected="selected"</eq> <eq name="business.business_id" value="$business_id">selected="selected"</eq> ><{$business.business_name}></option>
+                            </foreach>
+                        </select>
+                        <span>  关键字(商家名称)：</span>
+                        <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" />
+                        <input type="submit" class="inptButton" value="  搜索" />
+                        <a href="<{:U('chaoshi/initialIndex')}>" mini="act" style="padding-top:5px;padding-bottom:5px;margin-top:0;" class="remberBtn">重置搜索</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="store_id" /></td>
+                        <td class="w50">ID</td>
+                        <td>店铺名称</td>
+                        <td>所属市区</td>
+                        <td>营业状态</td>
+                        <td>是否推荐</td>
+                        <td>店铺电话</td>
+                        <td>店铺logo</td>
+                        <td>总销售量</td>
+                        <td>月销售量</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_store_id" type="checkbox" name="store_id[]" value="<{$var.store_id}>" /></td>
+                            <td><{$var.store_id}></td>
+                            <td><{$var.store_name}></td>
+                            <td><{$var.city_name}>&ensp;<{$var.area_name}></td>
+                        <td>
+                            <eq name="var.is_open" value="1">营业中<else/>未营业</eq>
+                        </td>
+                        <td>
+                            <eq name="var.is_tuijian" value="1">是<else/>否</eq>
+                        </td>
+                        <td><{$var.phone}></td>
+                        <td><img height="50" src="<{$var.logo|get_remote_file_path=###}>"></td>
+                        <td><{$var.sold_num}></td>
+                        <td><{$var.month_num}></td>
+                        <td>
+                            <{:BA('chaoshi/detail',array("store_id"=>$var["store_id"], "level"=>$var["level"]),'查看','','remberBtn')}>
+                            <{:BA('chaoshi/delete',array("store_id"=>$var["store_id"]),'删除','act','remberBtn')}>
+                            <eq name="var.is_tuijian" value="0">
+                                <{:BA('chaoshi/tuijian',array("store_id"=>$var["store_id"],'type'=>'tuijian'),'设为推荐','act','remberBtn')}>
+                            </eq>
+                            <eq name="var.is_tuijian" value="1">
+                                <{:BA('chaoshi/canceltuijian',array("store_id"=>$var["store_id"],'type'=>'cancel'),'取消推荐','act','remberBtn')}>
+                            </eq>
+                            <eq name="var.status" value="0">
+                                <{:BA('chaoshi/reorganize',array("store_id"=>$var["store_id"]),'设为整顿','act','remberBtn')}>
+                            </eq>
+                            <eq name="var.status" value="1">
+                                <{:BA('chaoshi/cancelReorganize',array("store_id"=>$var["store_id"]),'取消整顿','act','remberBtn')}>
+                            </eq>
+                        </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <{:BA('chaoshi/delete','','批量删除','list','a2')}>
+                    <{:BA('chaoshi/tuijian','','批量推荐','list','remberBtn')}>
+                    <{:BA('chaoshi/canceltuijian','','批量取消推荐','list','remberBtn')}>
+                    <{:BA('chaoshi/reorganize','','批量整顿','list','remberBtn')}>
+                    <{:BA('chaoshi/cancelReorganize','','批量取消整顿','list','remberBtn')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="application/javascript">
+    $(function(){
+        // 省市
+        $("#city_id").change(function(){
+            if(this.value == '0'){
+                $("#area_id").html('<option value="0">请选择...</option>');
+                $("#business_id").html('<option value="0">请选择...</option>');
+            }else{
+                var _area_id = this.value;
+                $.getJSON('<{:U("admin/ele/cities")}>', {city_id:this.value}, function(_data){
+                    if(_data.error == 404){
+                        alert('未找到城市');
+                        $("#area_id").html('<option value="0">请选择...</option>');
+                        $("#business_id").html('<option value="0">请选择...</option>');
+                    }else if(_data.error == 400){
+                        alert('该城市暂无区县信息');
+                        $("#area_id").html('<option value="0">请选择...</option>');
+                        $("#business_id").html('<option value="0">请选择...</option>');
+                    }else{
+                        $str_area = '<option value="0">请选择...</option>';
+                        var _length = (_data.data).length;
+                        for(var i = 0; i < _length; ++i){
+                            var _tempData = _data.data[i];
+                            if((_data.data).city_id == _area_id){
+                                $str_area += '<option value="'+_tempData.area_id+'" selected="selected">'+ _tempData.area_name +'</option>';
+                            }else{
+                                $str_area += '<option value="'+_tempData.area_id+'">'+ _tempData.area_name +'</option>';
+                            }
+                        }
+                        $("#area_id").html($str_area);
+                    }
+                }, 'json');
+            }
+        });
+
+        // 区县
+        $("#area_id").change(function(){
+            if(this.value == '0'){
+                $("#business_id").html('<option value="0">请选择...</option>');
+            }else{
+                var _area_id = this.value;
+                $.getJSON('<{:U("admin/ele/areas")}>', {area_id:this.value}, function(_data){
+                    if(_data.error == 404){
+                        alert('未找到区县');
+                        $("#business_id").html('<option value="0">请选择...</option>');
+                    }else if(_data.error == 400){
+                        alert('该区县暂无商圈信息');
+                        $("#business_id").html('<option value="0">请选择...</option>');
+                    }else{
+                        $str_business = '<option value="0">请选择...</option>';
+                        var _length = (_data.data).length;
+                        for(var i = 0; i < _length; ++i){
+                            var _tempData = _data.data[i];
+                            if((_data.data).city_id == _area_id){
+                                $str_business += '<option value="'+_tempData.business_id+'" selected="selected">'+ _tempData.business_name +'</option>';
+                            }else{
+                                $str_business += '<option value="'+_tempData.business_id+'">'+ _tempData.business_name +'</option>';
+                            }
+                        }
+                        $("#business_id").html($str_business);
+                    }
+                }, 'json');
+            }
+        });
+    });
+</script>
+
+<include  file='public:footer'/>       

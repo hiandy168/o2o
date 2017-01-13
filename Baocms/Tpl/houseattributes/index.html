@@ -1,0 +1,60 @@
+<include  file='public:header'/>
+    <link href="__PUBLIC__/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="__PUBLIC__/Scripts/bootstrap/js/bootstrap.min.js"></script>
+<div style="overflow:hidden;padding-top:10px;padding-left:20px;">
+    <ul>
+        <li>
+            <div style="background-image:url('__PUBLIC__/images/mainbt_03.png');width:96px;height:26px;float:left;">
+                <span style="color:white;font-size:14px;margin-left:30px;line-height:27px;">频道</span>
+            </div>
+            <div style="background-image:url('__PUBLIC__/images/mainbt2_03.png');width:131px;height:26px;float:left;">
+                <span style="color:white;font-size:14px;margin-left:30px;line-height:27px;">房产频道</span>
+            </div>
+            <div style="background-image:url('__PUBLIC__/images/mainbt3_03.png');width:131px;height:26px;float:left;">
+                <span style="color:white;font-size:14px;margin-left:30px;line-height:27px;"><{$attr}>列表</span>
+            </div>
+        </li>
+    </ul>
+</div>
+<div style="padding-left:45px;padding-top:15px;padding-bottom:15px;">
+    <span style="color:rgb(254,17,17);font-weight:bold;font-size:13px;font-family: '微软雅黑';">注意：</span>
+    <span style="color:rgb(163,163,163);font-family: '微软雅黑';">如果未添加信息，那么不能发布房产</span>
+</div>
+<div style="border: 1px solid rgb(225,225,225);margin:0 50px 0 25px;padding-bottom:20px;">
+
+        <div style="border-bottom:1px solid rgb(225,225,225);overflow: hidden;padding:10px 20px 10px 20px;">
+
+            <div style="float:left;">
+                <a class="btn btn-primary" target="main_frm" href="<{:U('houseAttributes/create?type='.$type)}>"><span class="glyphicon glyphicon-plus"></span>添加内容</a>
+            </div>
+        </div>
+        <form target="baocms_frm" method="post">
+    <div style="padding-left:20px;padding-right: 20px;padding-top:20px;">
+        <table class="table" style="vertical-align: middle;text-align:center;width:100%;border: 1px solid rgb(225,225,225)" border="1">
+            <tr>
+                <td class="pd_top" width="50" height="50"><input type="checkbox" id="Allchecked" /></td>
+                <td class="pd_top" width="215">ID</td>
+                <td class="pd_top" width="720"><{$attr}></td>
+                <td>操作</td>
+            </tr>
+            <foreach name="list" item="vo" >
+            <tr  id="tr_1">
+                <td class="pd_top"><input type="checkbox" name="id[]" value="<{$vo.id}>" /></td>
+                <td class="pd_top"><{$vo.id}></td>
+                <td class="pd_top"><{$vo.value}></td>
+                <td>
+                    <{:BA('houseAttributes/update',array("id"=>$vo["id"]),'编辑','','remberBtn')}>
+                    <{:BA('houseAttributes/delete',array("id"=>$vo["id"], "type"=>$type),'删除','act','remberBtn')}>
+                </td>
+            </tr>
+           </foreach>
+        </table>
+    </div>
+    <div style="width:100%;text-align:center;padding-bottom:20px;;border-bottom:1px solid rgb(225,225,225)"><span id="count"></span> 条记录 1/1页</div>
+    <div style="padding-top:20px;padding-left:20px;">
+        <{:BA('houseAttributes/delete',array("type"=>$type),'批量删除','list','remberBtn')}>
+    </div>
+    </form>
+</div>
+
+<include  file='public:footer'/>

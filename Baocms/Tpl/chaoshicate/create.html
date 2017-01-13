@@ -1,0 +1,77 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+         <li class="li1">社区超市</li>
+        <li class="li2">商家分类</li>
+        <li class="li2 li3">新增</li>
+    </ul>
+</div>
+<form id="formverify"   action="<{:U('chaoshicate/create')}>" method="post">
+    <div class="mainScAdd">
+        <div class="tableBox">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                
+                <tr>
+                    <td class="lfTdBt">分类名称：</td>
+                    <td class="rgTdBt">
+                    <input type="text" datatype="*"  nullmsg="分类名不能为空" name="cate_name" value="" class="manageInput" />&nbsp;
+                    <strong class="Validform_checktip Validform_wrong"></strong>
+
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="lfTdBt">分类频道地址：</td>
+                    <td class="rgTdBt"><input type="text" name="channel_url" value="" class="manageInput" />
+                        <code>U方法参数，或完整http://地址</code>
+                    </td>
+                </tr>
+                  
+                
+                 
+            </table>
+        </div>
+        <div class="smtQr"><input type="button" value="确认添加" class="smtQrIpt" />&nbsp;<input type="reset" value="续继增加" class="smtcontinue" /></div>
+    </div>
+</form>
+<style type="text/css">
+    
+.smtcontinue {
+    background-color: #0099cc;
+    background-image: none;
+    border-style: none;
+    border-width: 0;
+    color: #fff;
+    cursor: pointer;
+    font-family: "微软雅黑" !important;
+    font-size: 16px !important;
+    line-height: 50px;
+    width: 120px;
+}
+</style>
+<script type="text/javascript" src="__TMPL__statics/js/validform5.3.2.js"></script>
+<script type="text/javascript" src="__TMPL__statics/js/layer/layer.js"></script>
+<script type="text/javascript">
+    $("#formverify").Validform({'tiptype':4,'ajaxPost':true,'callback':function(data){
+        if(data.status == "yes"){
+            layer.msg(data.info);
+            $(".smtQrIpt").attr("disabled", true);
+            $(".smtQrIpt").css("background-color","#cccccc");
+
+        }else{
+            layer.msg("增加失败。");
+        }
+        
+    }});
+    $(".smtQrIpt").click(function(){
+        
+        $("#formverify").submit();
+        
+    })
+    $(".smtcontinue").click(function(){
+        
+         $(".smtQrIpt").attr("disabled", false);
+         $(".smtQrIpt").css("background-color","#0099cc");
+    });
+
+</script>
+      

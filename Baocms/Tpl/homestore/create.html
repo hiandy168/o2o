@@ -1,0 +1,106 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">APP首页管理</li>
+        <li class="li2">APP首页推荐商家</li>
+        <li class="li2 li3">编辑</li>
+    </ul>
+</div>
+<form  target="baocms_frm" action="<{:U('homestore/create')}>" method="post">
+    <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+        <tr>
+            <td class="lfTdBt">所属版块：</td>
+            <td class="rgTdBt">
+                <{$types[$type]}>
+            </td>
+        </tr>
+       <if condition="$type eq 'house'">
+           <tr>
+               <td class="lfTdBt">房产所属内型：</td>
+               <td class="rgTdBt">
+                   <select name="house_type">
+                       <option value="1">新房</option>
+                       <option value="2">二手房</option>
+                       <option value="3">租房</option>
+                   </select>
+               </td>
+           </tr>
+       </if>
+        <if>
+            <if condition="$type eq 'house'"> <td class="lfTdBt">楼盘名称：</td><else/> <td class="lfTdBt">商家名称：</td></if>
+            <td class="rgTdBt"><input type="text" name="store_name" value="" class="manageInput" />
+            </td>
+        </tr><tr>
+            <if condition="$type eq 'house'"><td class="lfTdBt">关联楼盘ID：</td><else/><td class="lfTdBt">关联商家ID：</td></if>
+            <td class="rgTdBt"><input type="hidden" id="asdf" value="1" >
+            <input type="text" readonly="readonly" id="shop_id" name="store_id" value="" class="manageInput" style="display:inline;" />     
+            <eq name="type" value="meishi"><{:BA('homestore/meishi_store_select',array('city_id'=>$city_id),'选择商家','select','remberBtn',1000,800)}></eq>                      
+            <eq name="type" value="hotel"><{:BA('homestore/hotel_store_select',array('city_id'=>$city_id),'选择商家','select','remberBtn',1000,800)}></eq>                      
+            <eq name="type" value="house"><{:BA('homestore/house_store_select',array('city_id'=>$city_id,'house_type' => 1),'选择楼盘','select','remberBtn qwer',1000,800)}></eq>
+            </td>
+        </tr><tr>
+            <td class="lfTdBt">
+        <js file='__PUBLIC__/js/uploadify/jquery.uploadify.min.js'/>
+        <link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+        商家图片：
+        </td>
+        <td>
+            <div style="width: 300px;height: 100px; float: left;">
+                <input type="hidden" name="logo" value="<{$detail.logo}>" id="data_photo" />
+                <input id="photo_file" name="photo_file" type="file" multiple="true" value="" />
+            </div>
+            <div style="width: 320px;height: 100px; float: left;">
+                <img id="photo_img" width="80" height="80"  src="<{$detail.logo|get_remote_file_path=###}>" />
+   					<eq name="type" value="house">
+   					尺寸：第一张236*360，其它236*180
+   					</eq>
+   					<eq name="type" value="meishi">
+   					尺寸：第一张236*360，其它236*180
+   					</eq>
+   					<eq name="type" value="hotel">
+   					尺寸：236*354
+   					</eq>
+            </div>
+            <script>
+                $("#photo_file").uploadify({
+                    'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                    'uploader': '__PICUPLOADURL__',
+                    'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                    'buttonText': '上传广告图片',
+                    'fileTypeExts': '*.gif;*.jpg;*.png',
+                    'queueSizeLimit': 1,
+                    'onUploadSuccess': function (file, data, response) {
+                        data = eval("("+data+")");                       
+                        if(data.status){
+                            $("#data_photo").val(data.data.Filedata.id);
+                            $("#photo_img").attr('src', "__PICURL__" + data.data.Filedata.path).show();
+                        }else{
+                            layer.msg(data.info);
+                        }
+                    }
+                });
+                var asdfqwer = '1.html';
+                $('[name="house_type"]').change(function(){
+                    var str = $('.qwer').attr('href');
+                    str = str.replace(asdfqwer,$(this).val() + '.html');
+                    asdfqwer = $(this).val() + '.html';
+                    $('.qwer').attr('href',str);
+                })
+
+            </script>
+        	</td>
+    	</tr><tr>
+            <td class="lfTdBt">排序ID：</td>
+            <td class="rgTdBt"><input type="text" name="orderby" value="<{$detail.orderby|default=1}>" style="display:inline;" class="manageInput" />从小到大排序
+            </td>
+        </tr>
+</table>
+<div style="margin-left:140px;margin-top:20px">
+    <input type="submit" value="提交" class="smtQrIpt" />
+</div>
+<input type="hidden" name="city_id" value="<{$city_id}>" />
+<input type="hidden" name="type" value="<{$type}>" />
+</form>
+
+
+<include  file='public:footer'/>       

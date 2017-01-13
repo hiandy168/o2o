@@ -1,0 +1,89 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">仲裁</li>
+        <li class="li2 li3">退款列表</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('arbitrament/refund')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                            <label>
+                                <span>订单类型：</span>
+                                <select name="order_type" id="order_type" class="select manageSelect">
+                                    <option value="1" <eq name="order_type" value="1">selected="selected"</eq> >社区超市</option>
+                                    <option value="2" <eq name="order_type" value="2">selected="selected"</eq> >外卖</option>
+                                    <option value="3" <eq name="order_type" value="3">selected="selected"</eq> >美食</option>
+                                    <option value="4" <eq name="order_type" value="4">selected="selected"</eq> >酒店</option>
+                                    <option value="5" <eq name="order_type" value="5">selected="selected"</eq> >房产</option>
+                                </select>
+                                <span>退款状态：</span>
+                                <select name="refund" id="refund" class="select manageSelect">
+                                    <option value="100">请选择...</option>
+                                    <option value="1" <eq name="refund" value="1">selected="selected"</eq> >未退款</option>
+                                    <option value="2" <eq name="refund" value="2">selected="selected"</eq> >已退款</option>
+                                    <option value="3" <eq name="refund" value="3">selected="selected"</eq> >正常订单流程</option>
+                                </select>
+                                <span>关键字(订单号)：</span><input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" /><input type="submit" class="inptButton" value="   搜索" />
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50">ID</td>
+                        <td>订单号</td>
+                        <td>用户昵称</td>
+                        <td>收 货 人</td>
+                        <td>联系电话</td>
+                        <td>商铺名称</td>
+                        <td>联系电话</td>
+                        <td>仲裁结果</td>
+                        <td>结果说明</td>
+                        <td>退款状态</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.id}></td>
+                            <td><{$var.order_id}></td>
+                            <td><{$var.nickname}></td>
+                            <td><{$var.user_nickname}></td>
+                            <td><{$var.consignee_phone}></td>
+                            <td><{$var.store_name}></td>
+                            <td><{$var.store_phone}></td>
+                            <td>
+                                <eq name="var.arbitrament_status" value="1">买家合理</eq>
+                                <eq name="var.arbitrament_status" value="2">商家合理</eq>
+                            </td>
+                            <td><{$var.arbitrament}></td>
+                            <td>
+                                <eq name="var.refund" value="1">未退款</eq>
+                                <eq name="var.refund" value="2">已退款</eq>
+                                <eq name="var.refund" value="3">正常订单流程</eq>
+                            </td>
+                            <td>
+                                <{:BA('arbitrament/refundUser',array("arbitrament_id"=>$var["id"]),'退款','act','remberBtn')}>
+                                <{:BA('arbitrament/recoverOrder',array("arbitrament_id"=>$var["id"]),'正常订单流程','act','remberBtn')}>
+                                <{:BA('arbitrament/detail',array("arbitrament_id"=>$var["id"]),'查看详情','','remberBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

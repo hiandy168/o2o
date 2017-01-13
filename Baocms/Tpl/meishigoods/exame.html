@@ -1,0 +1,83 @@
+<include  file='public:header'/>
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">美食频道</li>
+        <li class="li2 li3">商家列表</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"><span>注意：</span>如果未添加商家，那么不能发布菜单</p>
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+                
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('ele/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                       <span>  区域：</span>   
+                        <select name="area_id" id="area_id" class="select manageSelect">
+                            <option value="0">请选择...</option>
+                            <foreach name="areas" item="var">
+                                <option value="<{$var.area_id}>"  <eq name="var.area_id" value="$area_id">selected="selected"</eq> ><{$var.area_name}></option>
+                            </foreach>   
+                        </select>
+                        <span>  关键字：</span>   
+                        <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" />
+                        <input type="submit" class="inptButton" value="  搜索" />
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="shop_id" /></td>
+                        <td class="w50">ID</td>
+                        <td>公司名称</td>
+                        <td>电话</td>
+                        <td>详细地址</td>
+                        <td>联系人姓名</td>
+                        <td>联系人电话</td>
+                        <td>营业执照电子版</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_shop_id" type="checkbox" name="store_id[]" value="<{$var.store_id}>" /></td>
+                            <td><{$var.store_id}></td>
+                            <td><{$var.store_name}></td>
+                            <td><{$var.telephone}></td>
+                            <td><{$var.address}></td>
+                        <td><{$var.boss_name}></td>
+                        <td><{$var['boss_tel']}></td>
+                        <td><img src="<{$var.zhizhao|get_remote_file_path=###}>" width="100px"/></td>
+                        <td>
+                            <{:BA('meishi/exame_see',array("store_id"=>$var["store_id"]),'审查','','remberBtn')}>
+                            <{:BA('meishi/delete',array("store_id"=>$var["store_id"]),'删除','act','remberBtn')}>
+                            <eq name="var.is_open" value="0">
+                            <{:BA('meishi/opened',array("store_id"=>$var["store_id"],'type'=>'open'),'开始接客','act','remberBtn')}>
+                        <else/>
+                        <{:BA('meishi/opened',array("store_id"=>$var["store_id"],'type'=>'closed'),'打烊','act','remberBtn')}>
+                        </eq>
+                        <a target="_blank" class="remberBtn" href="<{:U('shop/login',array('shop_id'=>$var['shop_id']))}>">管理商家</a>
+                        </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <{:BA('ele/delete','','批量删除','list','a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

@@ -1,0 +1,146 @@
+<include  file='public:header'/>
+<div class="main-jsgl main-sc">
+    <div class="jsglNr">
+        <div class="selectNr" style="margin-top: 0px; border-top:none;">
+            <div class="right">    
+                <form class="search_form" method="post" action="<{:U('chaoshiproduct/select')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <span>市级：</span>
+                        <select name="city_id" id="city_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="cities" item="city">
+                                <option value="<{$city.city_id}>" <eq name="city.city_id" value="$city_id">selected="selected"</eq> ><{$city.name}></option>
+                            </foreach>
+                        </select>
+                        <span>区县：</span>
+                        <select name="area_id" id="area_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="areas" item="area">
+                                <option value="<{$area.area_id}>" <eq name="area.area_id" value="$area_id">selected="selected"</eq> ><{$area.area_name}></option>
+                            </foreach>
+                        </select>
+                        <span>商圈：</span>
+                        <select name="business_id" id="business_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="businesses" item="business">
+                                <option value="<{$business.business_id}>" <eq name="business.business_id" value="$business_id">selected="selected"</eq> ><{$business.business_name}></option>
+                            </foreach>
+                        </select>
+                        <span>关键字(店铺及电话)</span>
+                        <input type="text" name="keyword" value="<{$keyword}>" class="inptText" /><input type="submit" value="   搜索" class="inptButton"  style="width: 120px"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="selectNr selectNr2">
+    </div>
+    <form  target="baocms_frm" method="post">
+        <div class="tableBox">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50">ID</td>
+                    <td>市级</td>
+                    <td>所在区域商圈</td>
+                    <td>店铺名称</td>
+                    <td>联系电话</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input  rel="<{$var.store_name}>"  type="radio" name="store_id" value="<{$var.store_id}>" /> <{$var.store_id}></td>
+                        <td><{$var.city_name}></td>
+                        <td><{$var.area_name}>&ensp;<{$var.business_name}></td>
+                        <td><{$var.store_name}></td>
+                        <td><{$var.phone}></td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
+            <div class="left">
+                <input style="border:1px solid #dbdbdb; width: 100px; height: 38px; line-height: 38px; text-align: center;" type="button" id="select_btn" class="remberBtn" value="确定选择" />
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+<script>
+    $(document).ready(function (e) {
+        // 回显商铺
+        $("#select_btn").click(function () {
+            $("input[name='store_id']").each(function (a) {
+                if ($(this).prop("checked") == true) {
+                    parent.selectCallBack('store_id', 'store_name', $(this).val(), $(this).attr('rel'));
+                }
+            });
+        });
+
+        // 省市
+        $("#city_id").change(function(){
+            if(this.value == '0'){
+                $("#area_id").html('<option value="0">请选择...</option>');
+                $("#business_id").html('<option value="0">请选择...</option>');
+            }else{
+                var _area_id = this.value;
+                $.getJSON('<{:U("admin/ele/cities")}>', {city_id:this.value}, function(_data){
+                    if(_data.error == 404){
+                        alert('未找到城市');
+                        $("#area_id").html('<option value="0">请选择...</option>');
+                        $("#business_id").html('<option value="0">请选择...</option>');
+                    }else if(_data.error == 400){
+                        alert('该城市暂无区县信息');
+                        $("#area_id").html('<option value="0">请选择...</option>');
+                        $("#business_id").html('<option value="0">请选择...</option>');
+                    }else{
+                        $str_area = '<option value="0">请选择...</option>';
+                        var _length = (_data.data).length;
+                        for(var i = 0; i < _length; ++i){
+                            var _tempData = _data.data[i];
+                            if((_data.data).city_id == _area_id){
+                                $str_area += '<option value="'+_tempData.area_id+'" selected="selected">'+ _tempData.area_name +'</option>';
+                            }else{
+                                $str_area += '<option value="'+_tempData.area_id+'">'+ _tempData.area_name +'</option>';
+                            }
+                        }
+                        $("#area_id").html($str_area);
+                    }
+                }, 'json');
+            }
+        });
+
+        // 区县
+        $("#area_id").change(function(){
+            if(this.value == '0'){
+                $("#business_id").html('<option value="0">请选择...</option>');
+            }else{
+                var _area_id = this.value;
+                $.getJSON('<{:U("admin/ele/areas")}>', {area_id:this.value}, function(_data){
+                    if(_data.error == 404){
+                        alert('未找到区县');
+                        $("#business_id").html('<option value="0">请选择...</option>');
+                    }else if(_data.error == 400){
+                        alert('该区县暂无商圈信息');
+                        $("#business_id").html('<option value="0">请选择...</option>');
+                    }else{
+                        $str_business = '<option value="0">请选择...</option>';
+                        var _length = (_data.data).length;
+                        for(var i = 0; i < _length; ++i){
+                            var _tempData = _data.data[i];
+                            if((_data.data).city_id == _area_id){
+                                $str_business += '<option value="'+_tempData.business_id+'" selected="selected">'+ _tempData.business_name +'</option>';
+                            }else{
+                                $str_business += '<option value="'+_tempData.business_id+'">'+ _tempData.business_name +'</option>';
+                            }
+                        }
+                        $("#business_id").html($str_business);
+                    }
+                }, 'json');
+            }
+        });
+        
+    });
+</script>
+<include  file='public:footer'/>  
+
+

@@ -1,0 +1,47 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">APP首页管理</li>
+        <li class="li2"> APP轮播管理</li>
+      
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"></p>
+    <div class="jsglNr">
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+	                <td>所属城市</td>
+	                <td>操作</td>
+                </tr>
+<!--                 <tr> -->
+<!--                     <td>超市</td> -->
+<!--                     <td> -->
+<!--                         <{:BA('homestore/index',array("type"=>"chaoshi"),'编辑','','remberBtn')}> -->
+<!--                     </td> -->
+<!--                 </tr> -->
+<!--                 <tr> -->
+<!--                     <td>外卖</td> -->
+<!--                     <td> -->
+<!--                         <{:BA('homestore/index',array("type"=>"ele"),'编辑','','remberBtn')}> -->
+<!--                     </td> -->
+<!--                 </tr> -->
+				<foreach name="citys" item="city">
+                <tr>
+                    <td><{$city.name}></td>
+                    <td>
+                        <{:BA('guessyoulike/index',array("type"=>$type,'city_id'=>$city['city_id']),'编辑','','remberBtn')}>
+                    </td>
+                </tr>
+				</foreach>
+                </table>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>  
+

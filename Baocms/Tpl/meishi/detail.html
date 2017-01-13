@@ -1,0 +1,207 @@
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">美食</li>
+        <li class="li2 li3">商家详情</li>
+    </ul>
+</div>
+<div class="mainScAdd ">
+    <div class="tableBox">
+        <!--<form target="baocms_frm" action="<{:U('chaoshi/edit',array('store_id'=>$detail['store_id']))}>" method="post">-->
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="lfTdBt">店铺ID：</td>
+                    <td  class="rgTdBt"><{$detail.store_id}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">店铺名：</td>
+                    <td  class="rgTdBt"><{$detail.store_name}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">店铺logo：</td>
+                    <td  class="rgTdBt"><img height="50" src="<{$detail.logo|get_remote_file_path=###}>"></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">店铺级别：</td>
+                    <td class="rgTdBt">
+                        <label>
+                            <eq name="detail.level" value="1">个人店铺<else/><eq name="detail.level" value="2">企业店铺<else/>普通店铺</eq></eq>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">店铺余额：</td>
+                    <td class="rgTdBt"><{$detail.money}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">店铺星级：</td>
+                    <td class="rgTdBt"><{$detail.star_num|default='0'}>星</td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">浏览量：</td>
+                    <td class="rgTdBt"><{$detail.browser_num}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">经营范围：</td>
+                    <td class="rgTdBt"><{$detail.scope}>星</td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">是否营业：</td>
+                    <td class="rgTdBt">
+                        <label><eq name="detail.is_open" value="0">未营业<else />营业中</eq></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">营业时间：</td>
+                    <td  class="rgTdBt">
+                        <{$detail.start_time}> - <{$detail.end_time}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">在线付款：</td>
+                    <td class="rgTdBt"><label><eq name="detail.is_pay" value="1">支持<else />不支持</eq></label></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">返利：</td>
+                    <td class="rgTdBt"><label> <eq name="detail.is_fan" value="1">支持<else />不支持</eq></label></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">最高返利：</td><td  class="rgTdBt"><{$detail['fan_money']}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">新客户下单优惠：</td>
+                    <td class="rgTdBt"><label> <eq name="detail.is_new" value="1">支持<else />不支持</eq></label></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">卖出数：</td>
+                    <td class="rgTdBt"><{$detail.sold_num|default='0'}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">月卖出数：</td>
+                    <td class="rgTdBt"><{$detail.month_num|default='0'}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">店铺描述：</td>
+                    <td class="rgTdBt">
+                        <textarea readonly="readonly" style="width:300px;height:100px" name="data[intro]"><{$detail.intro|default=''|htmlspecialchars_decode=###}></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">店铺公告：</td>
+                    <td class="rgTdBt">
+                        <textarea readonly="readonly" style="width:300px;height:100px" name="data[bulletin]"><{$detail.bulletin|default=''|htmlspecialchars_decode=###}></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">轮播图：</td>
+                    <td class="rgTdBt">
+                        <volist name="shufflings" id="shuffling">
+                            <img height="60" src="<{$shuffling|get_remote_file_path=###}>" />&ensp;
+                        </volist>
+                    </td>
+                </tr>
+                <eq name="detail.level" value="1">
+                    <tr>
+                        <td class="lfTdBt">身份证1：</td>
+                        <td class="rgTdBt">
+                            <js file='__PUBLIC__/js/fancyzoom/zoom.js'/>
+                            <link rel="stylesheet" href="__PUBLIC__/js/fancyzoom/zoom.css">
+                            <a href="#identity">
+                                <img height="216"  src="<{$detail.id_face|get_remote_file_path=###}>" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lfTdBt">身份证2：</td>
+                        <td class="rgTdBt">
+                            <js file='__PUBLIC__/js/fancyzoom/zoom.js'/>
+                            <link rel="stylesheet" href="__PUBLIC__/js/fancyzoom/zoom.css">
+                            <a href="#license">
+                                <img height="216"  src="<{$detail.id_back|get_remote_file_path=###}>" />
+                            </a>
+                        </td>
+                    </tr>
+                    <div id="identity" style="display:none;"><img src="<{$detail.id_face|get_remote_file_path=###}>" /></div>
+                    <div id="license" style="display:none;"><img src="<{$detail.id_back|get_remote_file_path=###}>" /></div>
+                </eq>
+
+                <eq name="detail.level" value="2">
+                    <tr>
+                        <td class="lfTdBt">营业执照：</td>
+                        <td class="rgTdBt">
+                            <js file='__PUBLIC__/js/fancyzoom/zoom.js'/>
+                            <link rel="stylesheet" href="__PUBLIC__/js/fancyzoom/zoom.css">
+                            <a href="#identity2">
+                                <img height="216"  src="<{$detail.business_license|get_remote_file_path=###}>" />
+                            </a>
+                        </td>
+                    </tr>
+                    <div id="identity2" style="display:none;"><img src="<{$detail.business_license|get_remote_file_path=###}>" /></div>
+                    <neq name="detail.other_pic" value="0">
+                        <tr>
+                            <td class="lfTdBt">其它图片：</td>
+                            <td  class="rgTdBt">
+                                <js file='__PUBLIC__/js/fancyzoom/zoom.js'/>
+                                <link rel="stylesheet" href="__PUBLIC__/js/fancyzoom/zoom.css">
+                                <volist name="pics" id="pic">
+                                    <a href="#license_<{$key}>">
+                                        <img height="216"  src="<{$pic|get_remote_file_path=###}>" />
+                                    </a>
+                                </volist>
+                            </td>
+                        </tr>
+                        <volist name="pics" id="pic">
+                            <div id="license_<{$key}>" style="display:none;"><img src="<{$pic|get_remote_file_path=###}>" /></div>
+                        </volist>
+                    </neq>
+                </eq>
+
+                <script type="text/javascript">
+					$(document).ready(function() {
+						$('td.rgTdBt a').fancyZoom({scaleImg: true, closeOnClick: false,width:800, height:600});
+					});
+				</script>
+                <tr>
+                    <td class="lfTdBt">电话：</td>
+                    <td class="rgTdBt"><{$detail.phone|default=''}><input type="hidden" name="data[phone]" value="<{$detail.phone|default=''}>" /></td>
+                </tr>
+				<tr>
+                    <td class="lfTdBt">地址：</td>
+                    <td class="rgTdBt"><{$detail.address|default=''}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">审核说明：</td>
+                    <td  class="rgTdBt">
+                        <textarea  readonly="readonly" style="width:300px;height:100px" name="data[exame_explain]"><{$detail.exame_explain|default=''|htmlspecialchars_decode=###}></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">店铺经营有效期：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.valid_time" value="0">永久有效<else /><{$detail.valid_time|date='Y-m-d',###}></eq>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">上次更新时间：</td>
+                    <td  class="rgTdBt"><{$detail.update_time|date='Y-m-d',###}></td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">店铺状态：</td>
+                    <td  class="rgTdBt">
+                        <eq name="detail.status" value="1">整改中<else />正常</eq>
+                    </td>
+                </tr>
+            </table>
+            <div class="smtQr"><input type="button" value="返回" class="smtQrIpt" /></div>
+        <!--</form>-->
+    </div>
+</div>
+<include  file='public:footer'/>
+
+<script>
+ $('.smtQrIpt').click(
+  function(){   location.href = "<{:U('admin/meishi/index')}>";}
+ )
+</script>
