@@ -344,4 +344,8 @@ class MoneyAction extends CommonAction
         $this->display();
     }
 
+    public function bind(){
+        $this->display();
+    }
+
 }

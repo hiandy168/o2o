@@ -1,0 +1,99 @@
+<include  file='public:header'/>
+<script src="__PUBLIC__/js/my97/WdatePicker.js"></script>
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">结算</a> > <a href="">提现申请</a> > <a>提现</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli"><a href="<{:U('money/tixianlog')}>">提现日志</a></li>
+            <li class="tuanfabu_tabli"><a href="<{:U('money/tixian')}>">提现</a></li>
+            <li class="tuanfabu_tabli on"><a href="<{:U('money/bind')}>">银行卡</a></li>
+        </ul>
+    </div>
+    <div class="tabnr_change  show">
+		<form method="post" class="password"  action=""  target="baocms_frm">
+    	<table class="tuanfabu_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td><p class="tuanfabu_t">开户银行：</p></td>
+                <td><div class="tuanfabu_nr">
+                <input type="text"    name="bank_name" value="<{$info.bank_name}>"  class="tuanfabu_int tuanfabu_intw2" />
+                </div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t">开户账号：</p></td>
+                <td><div class="tuanfabu_nr">
+                <input type="text"    name="bank_num" value="<{$info.bank_num}>" class="tuanfabu_int tuanfabu_intw2" />
+                </div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t">具体支行：</p></td>
+                <td><div class="tuanfabu_nr">
+                <input type="text"  name="bank_branch" value="<{$info.bank_branch}>" class="tuanfabu_int tuanfabu_intw2" /><code style="margin-left:13px;">没有可不填</code>
+                </div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t">开户名：</p></td>
+                <td><div class="tuanfabu_nr">
+                <input type="text"   name="bank_realname" value="<{$info.bank_realname}>" class="tuanfabu_int tuanfabu_intw2" />
+                </div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t">验证码：</p></td>
+                <td><div class="tuanfabu_nr">
+                    <input type="text"   name="bank_realname" value="<{$info.bank_realname}>" class="tuanfabu_int tuanfabu_intw2" />
+                    <input type="button" id="huoqu_yzm"  style="width:110px;height:30px;margin-left:10px;" value="获取验证码" />
+                </div></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_font">
+                    <div style="visibility: hidden;padding-left:10px;" id="msg">
+                        校验码已发出，请注意查收，如果没有收到，你可以在
+                        <span id="time" style="color:rgb(206,16,12);font-weight:bold;"></span>秒后要求系统重新发送
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><br /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_font" style="padding-left:10px;">
+                    <input type="submit" class="radius3 sjgl_an tuan_topbt" value="确认绑定" />
+                </td>
+            </tr>
+               
+            
+            
+        </table>
+        </form>
+    </div> 
+</div>
+<script>
+    function Daojishi(){
+        var time = Number($("#time").text());
+        var nowTime = time - 1;
+        if (time == 0){
+            $("#huoqu_yzm").removeAttr('disabled','disabled');
+            $("#msg").css('visibility','hidden');
+        }
+        else{
+            $("#time").text(nowTime);
+            setTimeout('Daojishi()',1000);
+        }
+    }
+    $("#huoqu_yzm").click(function(){
+        $("#huoqu_yzm").attr('disabled','disabled');
+        $("#msg").css('visibility','visible');
+        $("#time").text("120");
+        Daojishi();
+
+    });
+</script>
+</div>
+
+<include  file='public:footer'/>

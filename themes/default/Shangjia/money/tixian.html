@@ -1,5 +1,216 @@
 <include  file='public:header'/>
 <script src="__PUBLIC__/js/my97/WdatePicker.js"></script>
+<style>
+    input.sixDigitPassword {
+        position: absolute;
+        color: #fff;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+        font-size: 1px;
+        left: 0;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+        -webkit-user-select: initial; /* 取消禁用选择页面元素 */
+        outline: 'none';
+        margin-left: '-9999px';
+    }
+
+    div.sixDigitPassword {
+        cursor: text;
+        background: #fff;
+        outline: none;
+        position: relative;
+        padding: 8px 0;
+        height: 14px;
+        border: 1px solid #cccccc;
+        border-radius: 2px;
+    }
+
+    div.sixDigitPassword i {
+        float: left;
+        display: block;
+        padding: 4px 0;
+        height: 7px;
+        border-left: 1px solid #cccccc;
+    }
+
+    div.sixDigitPassword i.active {
+        background-image: url("__TMPL__statics/images/input_img.gif");
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    div.sixDigitPassword b {
+        display: block;
+        margin: 0 auto;
+        width: 7px;
+        height: 7px;
+        overflow: hidden;
+        visibility: hidden;
+        background-image: url("__TMPL__statics/images/pw_img.png");
+    }
+
+    div.sixDigitPassword span {
+        position: absolute;
+        display: block;
+        left: 0px;
+        top: -1px;
+        height: 30px;
+        border: 1px solid rgba(82, 168, 236, .8);
+        border: 1px solid #00ffff \9;
+        border-radius: 2px;
+        visibility: hidden;
+        -webkit-box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.75), 0 0 8px rgba(82, 168, 236, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+    }
+</style>
+<script>
+    $(function () {
+        $('.sixDigitPassword').click(function () {
+            var inputContent = $(this).prev('input');
+            self = $(this);
+            self.find('span').css('visibility', 'visible');
+            oldLength = self.prev('input').val().length;
+            inputContent.focus();
+            var ll = self.find('span').css('left');
+            var realNum = parseInt(ll);
+            realNum = realNum / 30;
+            if (inputContent.val().length < 6) {
+                $(this).find('i').eq(realNum).addClass('active');
+            }
+        });
+        $('.hiddenVal').blur(function () {
+            $('.sixDigitPassword i.active').removeClass('active');
+            $('.sixDigitPassword span').css('visibility', 'hidden');
+        });
+        $('.hiddenVal').bind('input', function () {
+            var inputContent = self.prev('input');
+            $('#realPin').val($(this).val());
+            var pwLength = inputContent.val().length;
+            if (oldLength + 1 == pwLength) {
+                oldLength = pwLength;
+                var ll = self.find('span').css('left');
+                var realNum = parseInt(ll);
+                self.find('i').eq(realNum / 30).removeClass('active').find('b').css('visibility', 'visible');
+                self.find('span').css('left', realNum + 30 + 'px');
+                self.find('i').eq(realNum / 30 + 1).addClass('active');
+            }
+            if (oldLength == pwLength + 1) {
+                oldLength = pwLength;
+                var $ll = self.find('span').css('left');
+                var $realNum = parseInt($ll);
+                if (oldLength != 5) {
+                    self.find('span').css('left', $realNum - 30 + 'px');
+                    self.find('i').eq($realNum / 30).removeClass('active');
+                    self.find('i').eq(($realNum - 30) / 30).addClass('active').find('b').css('visibility', 'hidden');
+                }
+                else {
+                    self.find('i').eq(5).addClass('active').find('b').css('visibility', 'hidden');
+                }
+            }
+            if (pwLength >= 6) {
+                self.find('span').css('left', '150px');
+            }
+        });
+    });
+    window.payCodeStatus = false;
+    window.session_id = '<php>echo session_id()</php>';
+    function huoqu_yzm() {
+        var input = $('#realPin').val();
+        callPayCode(input);
+    }
+
+    function callPayCode(code) {
+        $.ajax({
+            type: "get",
+            url: '<{:C("HTTP_METHOD")}><{:C("BASE_SITE")}>/index.php/Payment/index/payCode?callback=?',
+            //url: '<{:C("HTTP_METHOD")}><{:C("BASE_SITE")}>/index.php?callback=?',
+            dataType: "jsonp",
+            async: false,
+            jsonp: "callback",
+            data: {code: code,session:window.session_id},
+            success: function (data) {
+                if (data['status'] == 1) {
+                    callTimer();
+                    $.getJSON('<{:C("HTTP_METHOD")}><{:C("BASE_SITE")}>/index.php/Payment/index/send?callback=?',{session:window.session_id});
+                    layer.open({
+                        type: 1, //page层
+                        area: ['400px', '240px'],
+                        title: '<b>请输入验证码</b>',
+                        shade: 0.2, //遮罩透明度
+                        moveType: 1, //拖拽风格，0是默认，1是传统拖动
+                        shift: 0, //0-6的动画形式，-1不开启
+                        content: $('#layer_yzm'),
+                        cancel: function () {
+                            $('.yzmValue').val("");
+                            $('.errormsg').css('visibility', 'hidden');
+                        }
+
+                    });
+                    $('.yzmValue').focus();
+                    var str = '<div class="cover" style="width:125px;height:45px;position: absolute;margin-left:991px;margin-top:-2px;cursor: pointer;" onmouseover="openLayer(this)"></div>';
+                    $(str).prependTo('div .payButton');
+                } else {
+                    layer.msg("支付密码错误！")
+                }
+            }
+            /* success:function(result) {
+             for(var i in result) {
+             alert(i+":"+result[i]);//循环输出a:1,b:2,etc.
+             }
+             },*/
+        });
+    }
+    /* 支付逻辑结束 */
+
+    function check_yzm() {
+        var smsCode = $('.yzmValue').val();
+        window.returnStatus =false;
+        $.ajax({
+            type: "get",
+            url: '<{:C("HTTP_METHOD")}><{:C("BASE_SITE")}>/index.php/Payment/index/checkSms?callback=?',
+            dataType: "jsonp",
+            async: false,
+            jsonp: "callback",
+            data: {code: smsCode,session:window.session_id},
+            success: function (data) {
+                if (data['status'] == 1) {
+                    window.returnStatus =true;
+                    $("#verify").val(smsCode);
+                    $('#pay_form').submit();
+                } else {
+                    $('.errormsg').css('visibility','visible');
+                    window.returnStatus = false;
+//                         console.log(2);
+                }
+//                     console.log(data);
+            }
+        });
+        return window.returnStatus;
+    }
+
+    function openLayer(self){
+        if($(self).next('input').val() == '获取手机验证码'){
+            return false;
+        }
+        layer.open({
+            type: 1, //page层
+            area: ['400px', '250px'],
+            title: '<b>请输入验证码</b>',
+            shade: 0.2, //遮罩透明度
+            moveType: 1, //拖拽风格，0是默认，1是传统拖动
+            shift: 0, //0-6的动画形式，-1不开启
+            content: $('#layer_yzm'),
+            cancel: function () {
+                $('.yzmValue').val("");
+                $('.errormsg').css('visibility', 'hidden');
+            }
+
+        });
+        $('.yzmValue').focus();
+    }
+</script>
 <div class="sjgl_lead">
     <ul>
         <li><a href="#">结算</a> > <a href="">提现申请</a> > <a>提现</a></li>
@@ -11,6 +222,7 @@
         <ul>
             <li class="tuanfabu_tabli"><a href="<{:U('money/tixianlog')}>">提现日志</a></li>
             <li class="tuanfabu_tabli on"><a href="<{:U('money/tixian')}>">提现</a></li>
+            <li class="tuanfabu_tabli"><a href="<{:U('money/bind')}>">银行卡</a></li>
         </ul>
     </div>
     <div class="tabnr_change  show">
@@ -22,34 +234,60 @@
                 </div></td>
             </tr>
             <tr>
-                <td><p class="tuanfabu_t">提现金额：</p></td>
+                <td><p class="tuanfabu_t">提现银行：</p></td>
                 <td><div class="tuanfabu_nr">
-                <input type="text"   style="width:100px; background-color:#eee;" name="money" class="tuanfabu_int tuanfabu_intw2" /><code>最小提现金额1元！<code/>
+                中国农业银行
                 </div></td>
             </tr>
-            
-                 <tr>
-                <td><p class="tuanfabu_t">开户银行：</p></td>
+            <tr>
+                <td><p class="tuanfabu_t">提现账号：</p></td>
                 <td><div class="tuanfabu_nr">
-                <input type="text"    name="bank_name" value="<{$info.bank_name}>"  class="tuanfabu_int tuanfabu_intw2" /><code><code/>
+                123456789
                 </div></td>
             </tr>
-                 <tr>
-                <td><p class="tuanfabu_t">开户账号：</p></td>
-                <td><div class="tuanfabu_nr">
-                <input type="text"    name="bank_num" value="<{$info.bank_num}>" class="tuanfabu_int tuanfabu_intw2" /><code><code/>
-                </div></td>
-            </tr>
-                 <tr>
-                <td><p class="tuanfabu_t">具体支行：</p></td>
-                <td><div class="tuanfabu_nr">
-                <input type="text"  name="bank_branch" value="<{$info.bank_branch}>" class="tuanfabu_int tuanfabu_intw2" /><code>没有可不填<code/>
-                </div></td>
-            </tr>
-                 <tr>
+            <tr>
                 <td><p class="tuanfabu_t">开户名：</p></td>
                 <td><div class="tuanfabu_nr">
-                <input type="text"   name="bank_realname" value="<{$info.bank_realname}>" class="tuanfabu_int tuanfabu_intw2" /><code><code/>
+                张经理
+                </div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t">提现金额：</p></td>
+                <td><div class="tuanfabu_nr">
+                    <input type="text"   style="width:100px; background-color:#eee;" name="money" class="tuanfabu_int tuanfabu_intw2" /><code>最小提现金额1元！</code>
+                </div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t">支付密码：</p></td>
+                <td><div class="tuanfabu_nr">
+                    <div style="float:left;">
+                        <div style="padding-top:10px;">
+                            <input type="password" style="display:none" name="pin" id="realPin"/>
+                            <input type="text" oncontextmenu="return false" onpaste="return false"
+                                   oncopy="return false" oncut="return false" autocomplete="off" value=""
+                                   maxlength="6" minlength="6" style="position: absolute;"
+                                   class="hiddenVal sixDigitPassword" id="hiddenValue"/>
+                            <div class="sixDigitPassword" tabindex="0" style="width: 180px;">
+                                <i class="" style="width: 29px; border-color: transparent;">
+                                    <b style="visibility: hidden;"></b>
+                                </i>
+                                <i style="width: 29px;" class="">
+                                    <b style="visibility: hidden;"></b>
+                                </i>
+                                <i style="width: 29px;" class="">
+                                    <b style="visibility: hidden;"></b></i>
+                                <i style="width: 29px;" class="">
+                                    <b style="visibility: hidden;"></b></i>
+                                <i style="width: 29px;" class="">
+                                    <b style="visibility: hidden;"></b>
+                                </i>
+                                <i style="width: 29px;" class="">
+                                    <b style="visibility: hidden;"></b>
+                                </i>
+                                <span style="width: 29px; visibility: hidden; left: 0px;"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div></td>
             </tr>
                
@@ -62,7 +300,7 @@
         </form>
     </div> 
 </div>
-    
+
 </div>
 
 <include  file='public:footer'/>
