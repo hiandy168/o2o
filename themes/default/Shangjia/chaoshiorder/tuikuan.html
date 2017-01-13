@@ -1,0 +1,125 @@
+<include file="public:header" />
+	<link href="__PUBLIC__/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>	   
+	<script src="__PUBLIC__/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/js/jquery-validation/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+    <script src="__PUBLIC__/js/jquery-validation/messages_zh.min.js"></script>
+     <link href="__TMPL__/statics/css/chaoshi/shequchaoshi.css" rel="stylesheet" type="text/css"/>
+    <script src="__TMPL__/statics/js/chaoshi/validate.js"></script>
+    <script src="__TMPL__/statics/js/chaoshi/myLayer.js"></script>
+    <form action="<{:U('chaoshiorder/tuikuan',array('order_id'=>$detail['order_id']))}>" method="post" id="form">
+        <div id="tuikuan" >
+            <div style="padding:20px;">
+                <table>
+                    <tr>
+                        <td class="td_right" style="width:120px;"><span
+                                style="font-family:'宋体';font-size:15px;font-weight: bold;color:rgb(113,111,111);">请求退款处理：</span>
+                        </td>
+                        <td colspan="3">
+                            <div style="height:36px;background-image:url('../../images/daojishi.png');background-repeat: no-repeat;">
+                                <div style="padding-top:10px;padding-left:40px"><span class="tk_font">倒计时：</span>
+                                    <span class="tk_num" id="days" ><{$mod.d}></span><span class="tk_font">天</span>
+                                    <span class="tk_num" id="hours" ><{$mod.h}></span><span class="tk_font">小时</span>
+                                    <span class="tk_num"  id="minutes"  ><{$mod.m}></span><span class="tk_font">分</span>
+                                    <span class="tk_num"  id="seconds"   ><{$mod.s}></span><span class="tk_font">秒</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_right font_tk">买家：</td>
+                        <td class="font_tk" colspan="3"><{$mod.username.nickname}></td>
+                    </tr>
+                    <tr>
+                        <td class="td_right font_tk">订单编号：</td>
+                        <td><span class="font_bh"><{$mod.order_id}></span></td>
+                        <td class="td_right font_tk">退款编号：</td>
+                        <td><span class="font_bh"><{$mod.log_id}></span></td>
+                    </tr>
+                    <tr>
+                        <td class="td_right font_tk">退款金额：</td>
+                        <td colspan="3"><span style="color:red;font-size:20px;font-weight:bold">￥</span><span
+                                style="color:red;font-size:20px;font-weight:bold;font-family:'Arial Regular';"><{$mod.money}></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_right font_tk" valign="top">退款原因：</td>
+                        <td colspan="3"><textarea style="width:300px;height: 100px;resize: none;" disabled="disabled"><{$mod.remark}></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3" style="width:380px;">
+                            <ul>
+                                <li class="font_tk disc">如果未发货，请点击同意退款给买家。</li>
+                                <li class="font_tk disc">如果实际已发货，请主动与买家联系。</li>
+                                <li class="font_tk disc">如果您逾期未响应，视作同意买家申请，系统将自动退款给买家。</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" align="center" valign="middle" style="padding-top:50px">
+                            <input type="hidden"   name="order_id"   value="<{$mod.order_id}>"     >
+                            <button class="btn_dingdan" onclick="agree_tk(0)" style="width:120px;">同意退款申请</button>
+                            <input type="submit" class="btn_dingdan"  id="jujue" value="拒绝退款申请" style="width:120px;">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+<script>
+    $(function(){
+        countDown();
+    });
+    function countDown(){
+        var seconds = Number($('#seconds').text());
+        var hours = Number($('#hours').text());
+        var minutes = Number($('#minutes').text());
+        var days = Number($('#days').text());
+        if (seconds > 0){
+            seconds--;
+            $('#seconds').text(seconds);
+        }
+        else{
+            $('#seconds').text('59');
+            seconds = 59;
+            if(minutes > 0){
+                minutes--;
+                $('#minutes').text(minutes);
+            }
+            else{
+                $('#minutes').text('59');
+                minutes = 59;
+                if(hours > 0){
+                    hours--;
+                    $('#hours').text(hours);
+                }
+                else{
+                    $('#hours').text('23');
+                    hours = 23;
+                    if(days > 0){
+                        days--;
+                        $('#days').text(days);
+                    }
+                    else{
+                        $('#days').text('0');
+                    }
+                }
+            }
+        }
+        if (seconds == 0 && minutes == 0 && hours == 0){
+            return true;
+        }
+        setTimeout('countDown()',1000);
+    }
+</script>
+<script>
+ $('#jujue').click(function(){
+	  $('#form').attr("action","<{:U('chaoshiorder/jujue')}>");
+	  $('#form').submit();
+ 	}
+ )
+</script>

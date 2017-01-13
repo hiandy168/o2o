@@ -1,0 +1,100 @@
+<include file="public:header" />
+<link href="__PUBLIC__/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="__PUBLIC__/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/messages_zh.min.js"></script>
+
+<link href="__TMPL__/statics/css/chaoshi/shequchaoshi.css" rel="stylesheet" type="text/css"/>
+<script src="__TMPL__/statics/js/chaoshi/validate.js"></script>
+<script src="__TMPL__/statics/js/chaoshi/myLayer.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js"></script>
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">系统设置</a> > <a href="">店铺管理</a> > <a>店铺信息</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">店铺管理</div>
+        </div>
+    </div>
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli tabli_change"><a href="<{:U('chaoshi/edit')}>">店铺设置</a></li>
+            <li class="tuanfabu_tabli tabli_change on"><a href="<{:U('chaoshi/xinxi')}>">认证信息</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a  href="<{:U('chaoshi/open')}>">营业状态</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a  href="<{:U('chaoshi/xuqian')}>">申请续签</a></li>
+
+        </ul>
+    </div>
+    <div class="tabnr_change  show">
+        <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+
+                <tr>
+                    <td class="lfTdBt">真实姓名：</td>
+                    <td  class="rgTdBt">
+                        <label>
+                         <{$detail.realname}> 
+                         </label>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="lfTdBt">身份证号码:</td>
+                    <td  class="rgTdBt">
+                         <label>
+                         <{$detail.identity}> 
+                         </label>
+                        
+                    </td>
+                </tr>
+             
+                <tr>
+                    <td class="lfTdBt">手持身份证照片:</td>
+                    <td  class="rgTdBt">
+                        <img src="<{$detail.id_face|get_remote_file_path=###}>" height="150px"/>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">身份证背面：</td>
+                    <td  class="rgTdBt">
+                        <img src="<{$detail.id_back|get_remote_file_path=###}>" height="150px"/>
+                    </td>
+                </tr>
+                
+
+                <tr>
+                    <td class="lfTdBt">状态审核：</td>
+                    <td  class="rgTdBt">
+                       <{$exame_status[$audit]}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">审核说明：</td>
+                    <td  class="rgTdBt">
+                        <{$exame_explain}>
+                    </td>
+                </tr>
+                <if condition="$audit neq 1">
+                    <tr>
+                        <td class="lfTdBt">操作：</td>
+                        <td  class="rgTdBt">
+                           <a target="_blank" href="<{:U('pchome/openshop/step1',array('st_id'=>$chaoshi['store_id'],'sc_id'=>1))}>" class="smtQrIpt" />修改认证信息</a>
+                           
+                        </td>
+                    </tr>
+                </if>
+            </table>
+
+            
+    </div>
+
+</div>
+
+
+</body>
+</html>

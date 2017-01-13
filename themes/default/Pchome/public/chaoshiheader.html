@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>好吉来超市店铺</title>
+  <!-- Bootstrap -->
+  <link href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="__TMPL__statics/css/chaoshi/shopstyle.css">
+  <link rel="stylesheet" type="text/css" href="__TMPL__statics/css/chaoshi/shoplist.css">
+  <link rel="stylesheet" type="text/css" href="__TMPL__statics/css/chaoshi/salelist.css">
+  <link rel="stylesheet" type="text/css" href="__TMPL__statics/css/chaoshi/store.css">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <script src="__TMPL__statics/js/jquery.js"></script>
+  <script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+  <script src="__TMPL__statics/js/js.js?v=20150718"></script>
+</head>
+<body>
+  <!-- 顶部左边 -->
+  <nav class="navbar navbar-default nav-fixed-top nav-top">
+    <div class="container nav-main">
+      <div class="navbar-header">
+        <a class="navbar-brand starlogo" href="javascript:void(0)">
+          <img src="__TMPL__statics/css/chaoshi/images/shopstar.jpg" alt="收藏好吉来" class="shopstar">
+          <span>收藏好吉来</span>
+        </a>
+      </div>
+      <!-- 顶部左边结束 -->
+
+      <!-- 顶部中间 -->
+      <div>
+        <ul class="nav navbar-nav navbar-right nav-right">
+        <if condition="empty($MEMBER)">
+          <li>
+            <a href="<{:U('pchome/passport/login')}>" class="color">[登录]</a>
+          </li>
+          <li>
+            <a href="<{:U('passport/register')}>" class="color">[免费注册]</a>
+          </li>              
+          <else/>
+          <li>
+          	<a>欢迎 <{$MEMBER.nickname}> 来到<{$CONFIG.site.sitename}></a>
+          </li>
+          <li>
+       		<a href="<{:U('pchome/passport/logout')}>" >退出登录</a>
+          </li>
+          </if>
+          <li>
+            <a href="<{:U('pchome/index/index')}>" class="color">好吉来首页</a>
+          </li>
+          <li>
+            <a href="<{:U('member/index/index')}>">
+              <span>我的好吉来</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="<{:U('shangjia/index/index')}>">
+              <span>卖家中心</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li>
+<!--           <li>
+            <a href="">
+              <span>收藏夹</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li> -->
+        </ul>
+      </div>
+
+      <!-- 顶部左边 -->
+<!--       <div>
+        <ul  class="nav navbar-nav navbar-right nav-right">
+          <li>
+            <a href="#">
+              <img src="__TMPL__statics/css/chaoshi/images/shouji.gif">
+              <span class="shouji">手机好吉来</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="kefu">客户服务</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="#">联系我们</a>
+          </li>
+        </ul>
+      </div> -->
+      <!-- 顶部右边结束 --> </div>
+  </nav>
+  <!-- 顶部完成 ！-->
+
+  <!-- LOGO部分 -->
+  <div class="container">
+    <div class="row meau">
+      <div class="col-md-3 meau-left">
+        <a href="<{:U('pchome/index/index')}>" class="pull-left">
+          <img src="__ROOT__/attachs/<{$CONFIG.site.logo}>"></a>
+        <h4 class="meau-h4"><{$city_name}></h4>
+        <a href="<{:U('pchome/city/index')}>"><button class="meau-btn">切换城市</button></a>
+      </div>
+
+      <div class="col-md-5 meau-mid">
+        <div class="input-group">
+          <form>
+            <input type="text" class="form-control meau-mid-text" >
+            <span class="input-group-addon  meau-search">搜索</span>
+          </form>
+        </div>
+      </div>
+<!--       <div class="col-md-3 meau-right pull-right">
+        <p>
+          购物车去结算
+          <span>(0)</span>
+          <img src="__TMPL__statics/css/chaoshi/images/list2.gif"></p>
+      </div> -->
+    </div>
+  </div>

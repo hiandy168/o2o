@@ -1,0 +1,80 @@
+<include  file='public:header'/>   
+<header class="top-fixed bg-yellow bg-inverse">
+	<div class="top-back">
+		<a class="top-addr" href="<{:U('tuan/index')}>"><i class="icon-angle-left"></i></a>
+	</div>
+		<div class="top-title">
+			订单详情
+		</div>
+	<div class="top-signed">
+		<a href="<{:U('mobile/message/index')}>"><i class="icon-envelope"></i></a>
+	</div>
+</header>
+
+<div class="panel-list">
+	<ul>
+		<li>
+			<a href="javascript:;">
+				订单编号
+				<em><{$detail.order_id}></em>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:;">
+				订单金额
+				<em class="text-dot">¥ <{$detail['need_pay']}> 元</em>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:;">
+				下单时间
+				<em><{$detail.create_time|date='Y-m-d H:i',###}></em>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="blank-10 bg"></div>
+<div class="panel-list">
+	<ul>
+		<li>
+			<a href="javascript:;">
+				团购名称
+				<em><{$tuans['title']}></em>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:;">
+				团购单价
+				<em>&yen; <{$tuans['tuan_price']}> 元</em>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:;">
+				团购数量
+				<em><{$detail.num}></em>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:;">
+				团购总价
+				<em>&yen; <{$detail['total_price']}> 元</em>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:;">
+				积分抵现
+				<em>&yen; <{$detail['use_integral']}> 元</em>
+			</a>
+		</li>
+	</ul>
+</div>
+
+
+<div class="blank-30"></div>
+	<div class="container text-center">
+		<eq name="detail.status" value="0"><a class="button button-block button-big bg-dot" href="<{:U('mobile/tuan/pay',array('order_id'=>$detail['order_id']))}>">去付款</a>
+		<else /><eq name="detail.status" value="-1"> 到店付 <else /> <a class="button text-green" href="javascript:void(0)">已完成</a> <if condition="$detail['dianping_id'] eq 0"> <a class="button bg-yellow" href="<{:U('dianping/tuandianping',array('order_id'=>$detail['order_id']))}>">点评</a> <else/> <a class="button text-green" href="javascript:void(0)">已评价</a> </if></eq></eq>
+	</div>
+<div class="blank-20"></div>
+
+<include  file='public:footer'/>   

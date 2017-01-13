@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+	<script>
+		$.getJSON("http://o2o.haojilai.cn/index.php/pchome/area/get_area.html?callback=?",{'city_id':1},function(data){
+			console.log(data);
+		},"JSON");
+	</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<include file="public:header"/>
+<header class="top-fixed bg-yellow bg-inverse">
+	<div class="top-back">
+		<a class="top-addr" href="<{:U('hdmobile/index')}>"><i class="icon-angle-left"></i></a>
+	</div>
+	<div class="top-title">
+		报名情况
+	</div>
+	<div class="top-signed">
+		<a href="<{:U('hdmobile/post')}>"><i class="icon-plus-square"></i> 发布</a>
+	</div>
+</header>
+
+<div class="list-media-x" id="list-media">
+	<ul></ul>
+</div>	
+
+<script>
+	$(document).ready(function () {
+		loaddata('<{$nextpage}>', $("#list-media ul"), true);
+	});
+</script>  
+<include  file='public:footer'/>

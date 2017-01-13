@@ -1,0 +1,1045 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>好吉来</title>
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/base.css">
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/header.css">
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/templateBase.css">
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/footer.css">
+        <link rel="stylesheet" type="text/css" href="__STATIC__/css/shop_renovation.css" />
+		<script type="text/javascript" src="__STATIC__/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/js/superslide.2.1.js"></script>
+		<script type="text/javascript" src="__STATIC__/js/layer/layer-v2.0.js"></script>
+		<script type="text/javascript" src="__STATIC__/js/selectStyle.js"></script>
+		<script type="text/javascript" src="__STATIC__/js/hoverintent.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/js/global.js"></script>
+		<script type="text/javascript" src="http://o2o.haojilai.cn/public/js/Validform_v5.3.2_min.js"></script>
+		
+		<script type="text/javascript">
+			$(function() {
+				$(".promotion-head li").on("click", function() {
+					var $promotionItem = $(".promotion-content-list");
+					$(this).addClass("current").siblings("li").removeClass("current");
+					$promotionItem.eq($(this).index()).siblings(".promotion-content-list").removeClass("animated zoomIn").hide();
+					$promotionItem.eq($(this).index()).addClass("animated zoomIn").show();
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/shopTemplate_th.css">
+		<!--需要引入部分开始-->
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/jquery.minicolors.css">
+		<div class="tmp-decoration-head">
+			<div class="decoration-head-top">
+				<div class="cont-box">
+					<div class="fl decoration-left">
+						<a href="#">页面装修</a>
+						<a href="#">模版管理</a>
+						<a href="#">新手引导</a>
+					</div>
+					<div class="fr decoration-right">
+						<a href="#">城外梭梭板</a>
+						<a href="#">[退出]</a>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="decoration-head-ctrl">
+				<div class="cont-box">
+					<div class="fl decoration-left">
+						<a href="javascript:;" class="ctr-Btn btn-color-tmpedit">页面编辑</a>
+						<a href="javascript:;" class="ctr-Btn btn-color-default tmpHeadEdit">页头</a>
+						<a href="javascript:;" class="ctr-Btn btn-color-default tmpBodyEdit">页面</a>
+						<a href="javascript:;" class="ctr-Btn btn-color-default banner">banner</a>
+					</div>
+	               <div class="fr decoration-right">
+						<a target="_blank" href="<{:U('pchome/shop/detail',array('shop_id'=>$shop_id))}>" class="ctr-Btn btn-color-default">预览</a>
+						<!--a href="<{:U('shangjia/index/index')}>" class="ctr-Btn btn-color-submit">返回商家中心</a-->
+					</div> 
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<!--需要引入部分结束-->
+		<!--wrapbox-->
+		<{$content}>	
+		<!--End wrapbox-->
+	<!--需要引入部分开始-->
+	<link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+	<script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/js/template.js"></script>
+	<script type="text/javascript" src="__STATIC__/js/tmpDecoration.js"></script>
+	<script type="text/javascript" src="__STATIC__/js/jquery.minicolors.min.js"></script>
+	<script id="shopSigns" type="text/html">
+		<div class="tmp-edit-layer">
+			<!--店招设置-->
+			<table class="tmphead-edit-table">
+				<tr>
+					<th>店铺名称：</th>
+					<td>{{shoptitle}}</td>
+				</tr>
+				<tr>
+					<th rowspan="2">背景图：</th>
+					<td>
+						<button type="button" class="updateBtn tmphead-edit-update">选择文件</button>&nbsp;&nbsp;<a href="javascript:;" onclick="$('.tmphead-bgpic').attr('src','{{src}}')">使用默认图片</a></td>
+				</tr>
+				<tr>
+					<td>
+						<div><img class="tmphead-bgpic" src="{{src}}"></div>
+						<p class="edit-prompt">宽度为1200像素，高度为115像素，否则导航显示可能异常</p>
+					</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td>
+						<button type="button" class="radius_3 tmphead-btn-save">保存</button>
+						<button type="button" class="radius_3 tmphead-btn-close">取消</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</script>
+	<script id="tmpNav" type="text/html">
+		<form action="<{:U('Primp/tmpEdit')}>" method="post">
+		<div class="tmp-edit-layer">
+			<!--导航设置-->
+			<table class="tmphead-edit-table">
+				<tr>
+					<th>导航背景颜色：</th>
+					<td>
+						<input type="text" name="data[nav_bgground_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.nav_bgground_color}>">
+					</td>
+				</tr>
+				<tr>
+					<th>导航文字颜色：</th>
+					<td>
+						<input type="text" name="data[nav_text_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.nav_text_color}>">
+					</td>
+				</tr>
+                
+				<tr>
+					<th>&nbsp;</th>
+					<td>
+						<input type="submit" class="radius_3 tmphead-btn-save" value="保存" />
+						<button type="button" class="radius_3 tmphead-btn-close">取消</button>
+					</td>
+				</tr>
+			</table>
+		 </div>
+		 </form>
+         	
+	</script>
+		<script id="tmpBanner" type="text/html">
+		<form action="<{:U('Primp/bannerEdit')}>" method="post">
+		<div class="tmp-edit-layer">
+			<!--banner幻灯片设置-->
+			<div style="padding:0 10%;margin: 0 auto; border-bottom:1px solid #d9d9d9 ;">
+				<table class="tmphead-edit-banner">
+					<thead>
+						<tr>
+							<th style="width: 40%;">图片地址：</th>
+							<th style="width: 40%;">链接地址：</th>
+							<!--<th style="width: 18%;">操作：</th>-->
+						</tr>
+					</thead>
+					<tbody>
+						
+						<tr>
+							<td>
+								<input id="data_photo" name="photo_file1" type="text" class="tmphead-edit-imgAddreeTx" value="<{$banners.0.photo}>" placeholder="http://">
+								<input id="photo_file" type="file" multiple="true" value="" class="tmp-btn-update" /><span>注：图片大小为1920*500</span>
+							</td>
+							<td>
+								<input name="link1" type="text" class="tmphead-edit-imgAddreeTx" value="<{$banners.0.link}>" placeholder="http://">
+							</td>
+						<!-- 							<td>
+								<a href="javascript:;" class="tmp-ctrl-icons tmp-up" title="向上移"></a>
+								<a href="javascript:;" class="tmp-ctrl-icons tmp-down" title="向下移"></a>
+								<a href="javascript:;" class="tmp-ctrl-icons tmp-del" title="删除"></a>
+							</td> -->
+						</tr>
+						<tr>
+							<td>
+								<input id="data_photo1" name="photo_file2" type="text" class="tmphead-edit-imgAddreeTx" value="<{$banners.1.photo}>" placeholder="http://">
+								<input id="photo_file1" type="file" multiple="true" value="" class="tmp-btn-update" /><span>注：图片大小为1920*500</span>
+							</td>
+							<td>
+								<input name="link2" type="text" class="tmphead-edit-imgAddreeTx" value="<{$banners.1.link}>" placeholder="http://">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input id="data_photo2" name="photo_file3" type="text" class="tmphead-edit-imgAddreeTx" value="<{$banners.2.photo}>" placeholder="http://">
+								<input id="photo_file2" type="file" multiple="true" value="" class="tmp-btn-update" /><span>注：图片大小为1920*500</span>
+							</td>
+							<td>
+								<input name="link3" type="text" class="tmphead-edit-imgAddreeTx" value="<{$banners.2.link}>" placeholder="http://">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div style="padding: 10px; text-align: right;">
+				<!-- <a href="javascript:;" class="radius_3 tmphead-btn-add">添加</a> -->
+			</div>
+			<table class="tmphead-edit-table">
+				<!-- <tr>
+					<th>幻灯片高度：</th>
+					<td>
+						<input type="text" name="data[height]" class="tmphead-edit-tx" value="{{banHeight}}"> px</td>
+					<th>宽度设置：</th>
+					<td colspan="3">
+						<select name="data[width]" class="tmpset-width" data-setcont="{{banWidth}}">
+							<option value="tmp-banner-wide">宽屏</option>
+							<option value="tmp-banner-min">窄屏</option>
+						</select>&nbsp;
+						<label class="edit-prompt">宽屏为1920px，窄屏为1200px。</label>
+					</td>
+				</tr> -->
+				<tr>
+					<th>切换效果：</th>
+					<td>
+						<select name="data[effect]" class="tmpset-effect" data-setcont="{{banEffect}}">
+							<option value="fade">渐显</option>
+							<option value="top">上滚动</option>
+							<option value="left">左滚动</option>
+							<option value="topLoop">上循环滚动</option>
+							<option value="leftLoop">左循环滚动</option>
+							<option value="fold">淡入淡出</option>
+						</select>
+					</td>
+					<!-- <th>缓动效果：</th>
+					<td>
+						<select name="data[easing]" class="tmpset-easing" data-setcont="{{banEasing}}">
+							<option value="swing">swing</option>
+							<option value="easeOutCirc">easeOutCirc</option>
+							<option value="easeInQuint">easeInQuint</option>
+							<option value="easeInBack">easeInBack</option>
+							<option value="easeOutBounce">easeOutBounce</option>
+							<option value="easeOutElastic">easeOutElastic</option>
+						</select>
+					</td>
+					<th>触发方式：</th>
+					<td>
+						<select name="data[trigger]" class="tmpset-trigger" data-setcont="{{banTrigger}}">
+							<option value="mouseover">鼠标穿过焦点</option>
+							<option value="click">鼠标点击</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>效果速度：</th>
+					<td>
+						<select name="data[delaytime]" class="tmpset-delayTime" data-setcont="{{banDelayTime}}">
+							<option value="500">500</option>
+							<option value="700">700</option>
+							<option value="1000">1000</option>
+							<option value="0">0</option>
+						</select>
+					</td> -->
+					<th>自动播放：</th>
+					<td>
+						<select name="data[autoplay]" class="tmpset-autoPlay" data-setcont="{{banAutoPlay}}">
+							<option value="false">否</option>
+							<option value="true">是</option>
+						</select>
+					</td>
+					<!-- <th>自动运行间隔时间：</th>
+					<td>
+						<select name="data[intertime]" class="tmpset-interTime" data-setcont="{{banInterTime}}">
+							<option>默认2.5秒</option>
+							<option value="1000">1秒</option>
+							<option value="2000">2秒</option>
+							<option value="3000">3秒</option>
+							<option value="4000">4秒</option>
+							<option value="5000">5秒</option>
+							<option value="8000">8秒</option>
+						</select>
+					</td> -->
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td colspan="5">
+						<input type="submit" class="radius_3 tmphead-btn-save" value="保存" />
+						<button type="button" class="radius_3 tmphead-btn-close">取消</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</script>
+	<script id="tmpRanking" type="text/html">
+		<form action="<{:U('Primp/tmpEdit')}>" method="post">
+		<div class="tmp-edit-layer">
+			<!--客服中心设置-->
+			<table class="tmphead-edit-table">
+				<tr>
+					<th>背景颜色：</th>
+					<td>
+						<input type="text" name="data[ranking_bgground_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.ranking_bgground_color}>">
+					</td>
+				</tr>
+				<tr>
+					<th>文字颜色：</th>
+					<td>
+						<input type="text" name="data[ranking_text_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.ranking_text_color}>">
+					</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td>
+						<input type="submit" class="radius_3 tmphead-btn-save" value="保存" />
+						<button type="button" class="radius_3 tmphead-btn-close">取消</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</script>
+	<script id="tmpSearch" type="text/html">
+		<form action="<{:U('Primp/tmpEdit')}>" method="post">
+		<div class="tmp-edit-layer">
+			<!--搜索设置-->
+			<table class="tmphead-edit-table">
+				<tr>
+					<th>背景颜色：</th>
+					<td>
+						<input type="text" name="data[search_bgground_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.search_bgground_color}>">
+					</td>
+				</tr>
+				<tr>
+					<th>文字颜色：</th>
+					<td>
+						<input type="text" name="data[search_text_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.search_text_color}>">
+					</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td>
+						<input type="submit" class="radius_3 tmphead-btn-save" value="保存" />
+						<button type="button" class="radius_3 tmphead-btn-close">取消</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</script>
+	<script id="tmpService" type="text/html">
+		<form action="<{:U('Primp/tmpEdit')}>" method="post">
+		<div class="tmp-edit-layer">
+			<!--客服中心设置-->
+			<table class="tmphead-edit-table">
+				<tr>
+					<th>背景颜色：</th>
+					<td>
+						<input type="text" name="data[service_bgground_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.service_bgground_color}>">
+					</td>
+				</tr>
+				<tr>
+					<th>文字颜色：</th>
+					<td>
+						<input type="text" name="data[service_text_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.service_text_color}>">
+					</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td>
+						<input type="submit" class="radius_3 tmphead-btn-save" value="保存" />
+						<button type="button" class="radius_3 tmphead-btn-close">取消</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</script>
+	
+	<script id="tmpMenu" type="text/html">
+		<form action="<{:U('Primp/tmpEdit')}>" method="post">
+		<div class="tmp-edit-layer">
+			<!--菜单设置-->
+			<table class="tmphead-edit-table">
+				<tr>
+					<th>背景颜色：</th>
+					<td>
+						<input type="text" name="data[menu_bgground_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.menu_bgground_color}>">
+					</td>
+				</tr>
+				<tr>
+					<th>文字颜色：</th>
+					<td>
+						<input type="text" name="data[menu_text_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.menu_text_color}>">
+					</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td>
+						<input type="submit" class="radius_3 tmphead-btn-save" value="保存" />
+						<button type="button" class="radius_3 tmphead-btn-close">取消</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</script>
+	<script id="tmpTuan" type="text/html">
+		<form action="<{:U('Primp/tmpEdit')}>" method="post">
+		<div class="tmp-edit-layer">
+			<!--模块设置-->
+			<table class="tmphead-edit-table">
+				<tr>
+					<th>标题：</th>
+					<td colspan="3">
+						<input type="text" name="data[tuan_data_title]" class="module-title-tx" value="<{$primp.tuan_data_title}>" />
+						<label><input type="checkbox" class="item-check" {{if moduleBool}}checked="checked" {{/if}} value="0">隐藏</label>
+					</td>
+				</tr>
+				<tr>
+					<th>标题背景：</th>
+					<td style="width: 25%;">
+						<input type="text" name="data[tuan_bgground_color]" class="form-control color-control" data-control="hue" value="<{$primp.tuan_bgground_color}>">
+					</td>
+					<th>标题文字：</th>
+					<td>
+						<input type="text" name="data[tuan_text_color]" class="form-control color-control" data-control="hue" value="<{$primp.tuan_text_color}>">
+					</td>
+				</tr>
+				<tr>
+					 <td colspan="4">
+						<div class="auto-box">
+							<div class="module-type-head">
+								<ul>
+									<li  data-index="1" class="current"><a href="javascript:;">推荐商品</a></li>
+									
+								</ul>
+								<div class="clear"></div>
+							</div>
+							<div class="auto-box">
+								<div class="module-classification" tab-index="1">
+									<ul class="recommoned_1">
+                                        <volist name="primp_data['recommend1_list']" id="vo">
+    										<li>
+                                                <div>
+                                                   <span class="windowtitle_close">X</span>
+                                                    <img src="<{:__HOST__}>/attachs/<{$vo.photo}>" />
+                                                    <div>
+                                                        <p><{$vo.title}></p>
+                                                        <p>分类：<{:D('Goodscate')->where(array('cate_id'=>$vo[cate_id]))->getField('cate_name')}>&nbsp;价格：<{$vo.price}></p>
+                                                        <input type="hidden" name="recommened1[]" value="<{$vo.goods_id}>"/>
+                                                    </div>
+                                                </div>
+    										</li>
+                                        </volist>
+									</ul>
+                                    <div><input type="button" class="J_goods" data_type="recomment1" value="增加商品" /></div>
+								</div>
+							
+							</div>
+						</div>
+					</td>
+				</tr> 
+				<tr>
+					<th>&nbsp;</th>
+					<td>
+						<input type="submit" class="radius_3 tmphead-btn-save" value="保存" />
+						<button type="button" class="radius_3 tmphead-btn-close">取消</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</script>
+	<script id="tmpGood" type="text/html">
+		<form action="<{:U('Primp/tmpEdit')}>" method="post">
+		<div class="tmp-edit-layer">
+			<!--模块设置-->
+			<table class="tmphead-edit-table">
+				<tr>
+					<th>标题：</th>
+					<td colspan="3">
+						<input type="text" name="data[good_data_title]" class="module-title-tx" value="<{$primp_data.good_data_title}>" />
+						<label><input type="checkbox" class="item-check" {{if moduleBool}}checked="checked" {{/if}} value="0">隐藏</label>
+					</td>
+				</tr>
+				<tr>
+					<th>标题背景：</th>
+					<td style="width: 25%;">
+						<input type="text" name="data[good_bgground_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.good_bgground_color}>">
+					</td>
+					<th>标题文字：</th>
+					<td>
+						<input type="text" name="data[good_text_color]" class="form-control color-control" data-control="hue" value="<{$primp_data.good_text_color}>">
+					</td>
+				</tr>
+			<tr>
+					 <td colspan="4">
+						<div class="auto-box">
+							<div class="module-type-head">
+								<ul>
+									<li  data-index="1" class="current"><a href="javascript:;">推荐商品</a></li>
+									
+								</ul>
+								<div class="clear"></div>
+							</div>
+							<div class="auto-box">
+								<div class="module-classification" tab-index="1">
+									<ul class="recommoned_2">
+                                        <volist name="primp_data['recommend2_list']" id="vo">
+    										<li>
+                                                <div>
+                                                   <span class="windowtitle_close">X</span>
+                                                    <img src="<{:__HOST__}>/attachs/<{$vo.photo}>" />
+                                                    <div>
+                                                        <p><{$vo.title}></p>
+                                                        <p>分类：<{:D('Goodscate')->where(array('cate_id'=>$vo[cate_id]))->getField('cate_name')}>&nbsp;价格：<{$vo.price}></p>
+                                                        <input type="hidden" name="recommened2[]" value="<{$vo.goods_id}>"/>
+                                                    </div>
+                                                </div>
+    										</li>
+                                        </volist>
+									</ul>
+                                    <div><input type="button" data_type="recomment2" class="J_goods" value="增加商品" /></div>
+								</div>
+							
+							</div>
+						</div>
+					</td>
+				</tr> 
+				<tr>
+					<th>&nbsp;</th>
+					<td>
+						<input type="submit" class="radius_3 tmphead-btn-save" value="保存" />
+						<button type="button" class="radius_3 tmphead-btn-close">取消</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</script>
+	<script id="tmpHead" type="text/html">
+		<form action="<{:U('Primp/tmpEdit')}>" method="post">
+		<div class="tmp-edit-layer">
+			<!--页头设置-->
+			<table class="tmphead-edit-table">
+				<tr>
+					<th>背景颜色：</th>
+					<td>
+						<input type="text" name="data[head_bgground_color]"  class="form-control color-control" data-control="hue" value="<{$primp_data.head_bgground_color}>">
+					</td>
+				</tr>
+				<tr>
+					<th rowspan="2">背景图：</th>
+					<td>
+                        <input type="hidden" name="data[head_bgground_pic]" value="<{$primp_data.head_bgground_pic}>" id="data_photo" />
+                        <input id="photo_file" name="photo_file" type="file" multiple="true" value="" class="updateBtn tmphead-edit-update" />
+						<label><input type="checkbox" name="data[head_pic_hide]" class="item-check" <if condition="$primp_data.head_pic_hide eq 1">checked="checked"</if> value="1">隐藏</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div><img id="photo_img" src="__ROOT__/attachs/<{$primp_data.head_bgground_pic|default='default.jpg'}>"></div>
+						<p class="edit-prompt">最大宽度为1920像素，高度为150像素，否则导航显示可能异常</p>
+					</td>
+				</tr>
+				<tr>
+					<th>背景显示：</th>
+					<td>
+						<select name="data[head_bgground_repeat]" class="tmpset-style" data-setcont="{{banInterStyle}}">
+							<option value="no-repeat">不重复</option>
+							<option value="repeat-x">横向重复</option>
+							<option value="repeat-y">纵向重复</option>
+							<option value="repeat">全部重复</option>
+							<option value="no-repeat;background-size:100% 100%;">全屏</option>
+							<option value="no-repeat fixed;background-size:100% 100%;">全屏固定</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>背景对齐：</th>
+					<td>
+						<select name="data[head_bgground_align]" class="tmpset-align" data-setcont="{{banInterAlign}}">
+							<option value="left">左对齐</option>
+							<option value="center">居中对齐</option>
+							<option value="right">右对齐</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>垂直对齐：</th>
+					<td>
+						<select name="data[head_bgground_vertical]" class="tmpset-vertical" data-setcont="{{banInterVertical}}">
+							<option value="top">顶部对齐</option>
+							<option value="center">居中对齐</option>
+							<option value="bottom">底部对齐</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td>
+						<input type="submit" class="radius_3 tmphead-btn-save" value="保存" />
+						<button type="button" class="radius_3 tmphead-btn-close">取消</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</script>
+	
+	<script id="tmpBody" type="text/html">
+		<form action="<{:U('Primp/tmpEdit')}>" method="post">
+		<div class="tmp-edit-layer">
+			<!--页面设置-->
+			<table class="tmphead-edit-table">
+				<tr>
+					<th>背景颜色：</th>
+					<td>
+						<input type="text" name="data[body_bgground_color]"  class="form-control color-control" data-control="hue" value="<{$primp_data.body_bgground_color}>">
+					</td>
+				</tr>
+				<tr>
+					<th rowspan="2">背景图：</th>
+					<td>
+                        <input type="hidden" name="data[body_bgground_pic]" value="<{$primp_data.body_bgground_pic}>" id="data_photo" />
+                        <input id="photo_file" name="photo_file" type="file" multiple="true" value="" class="updateBtn tmphead-edit-update" />
+						<label><input type="checkbox" name="data[body_pic_hide]" class="item-check" <if condition="$primp_data.body_pic_hide eq 1">checked="checked"</if> value="1">隐藏</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div><img width="880px" id="photo_img" src="__ROOT__/attachs/<{$primp_data.body_bgground_pic|default='default.jpg'}>"></div>
+						<p class="edit-prompt">最大宽度为1920像素，高度为150像素，否则导航显示可能异常</p>
+					</td>
+				</tr>
+				<tr>
+					<th>背景显示：</th>
+					<td>
+						<select name="data[body_bgground_repeat]" class="tmpset-style" data-setcont="{{banInterStyle}}">
+							<option value="no-repeat">不重复</option>
+							<option value="repeat-x">横向重复</option>
+							<option value="repeat-y">纵向重复</option>
+							<option value="repeat">全部重复</option>
+							<option value="no-repeat;background-size:100% 100%;">全屏</option>
+							<option value="no-repeat fixed;background-size:100% 100%;">全屏固定</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>背景对齐：</th>
+					<td>
+						<select name="data[body_bgground_align]" class="tmpset-align" data-setcont="{{banInterAlign}}">
+							<option value="left">左对齐</option>
+							<option value="center">居中对齐</option>
+							<option value="right">右对齐</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>垂直对齐：</th>
+					<td>
+						<select name="data[body_bgground_vertical]" class="tmpset-vertical" data-setcont="{{banInterVertical}}">
+							<option value="top">顶部对齐</option>
+							<option value="center">居中对齐</option>
+							<option value="bottom">底部对齐</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td>
+						<input type="submit" class="radius_3 tmphead-btn-save" value="保存" />
+						<button type="button" class="radius_3 tmphead-btn-close">取消</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</script>
+
+	
+	<script id="tmpAddBanner" type="text/html">
+		<!--添加banner图片模版-->
+		<tr>
+			<td>
+				<input id="data_photo1" type="text" class="tmphead-edit-imgAddreeTx" value="" placeholder="http://">
+				
+			</td>
+			<td>
+				<input type="text" class="tmphead-edit-imgAddreeTx" value="" placeholder="http://">
+			</td>
+			<td>
+				<a href="javascript:;" class="tmp-ctrl-icons tmp-up" title="向上移"></a>
+				<a href="javascript:;" class="tmp-ctrl-icons tmp-down" title="向下移"></a>
+				<a href="javascript:;" class="tmp-ctrl-icons tmp-del" title="删除"></a>
+			</td>
+		</tr>
+	</script>
+
+	<script type="text/javascript">
+		function openTmpEdit(titleStr, areaArr, contentHtml) {
+			layer.open({
+				type: 1,
+				title: titleStr,
+				skin: 'layui-layer-rim',
+				area: areaArr,
+				content: contentHtml
+			});
+			$(".module-type-head li a").on("click", function() {
+				var tabIndex = $(this).parent().attr("data-index");
+				$(this).parent().addClass("current").siblings("li").removeClass("current");
+				$(".module-classification").hide();
+				$(".module-classification[tab-index='" + tabIndex + "']").show();
+				$(".module-classification[tab-index='" + tabIndex + "']").siblings(".module-classification").find("input[type='checkbox']").prop("checked", false);
+			});
+			/*banner的select初始化*/
+			selectInitFn(".tmpset-width");
+			selectInitFn(".tmpset-effect");
+			selectInitFn(".tmpset-easing");
+			selectInitFn(".tmpset-trigger");
+			selectInitFn(".tmpset-delayTime");
+			selectInitFn(".tmpset-autoPlay");
+			selectInitFn(".tmpset-interTime");		
+			/*背景对齐的select初始化*/
+			selectInitFn(".tmpset-style");	
+			selectInitFn(".tmpset-align");	
+			selectInitFn(".tmpset-vertical");	
+			
+		}
+
+		function minicolorsFun() {
+			$('.color-control').each(function() {
+				$(this).minicolors({
+					control: $(this).attr('data-control') || 'hue',
+					defaultValue: $(this).attr('data-defaultValue') || '',
+					inline: $(this).attr('data-inline') === 'true',
+					letterCase: $(this).attr('data-letterCase') || 'lowercase',
+					opacity: $(this).attr('data-opacity'),
+					position: $(this).attr('data-position') || 'bottom left',
+					change: function(hex, opacity) {
+						if (!hex) return;
+						if (opacity) hex += ', ' + opacity;
+						try {
+							$(this).attr('value',hex);
+						} catch (e) {}
+					}
+				});
+			});
+		}
+		$(document).on("click", ".layout-curr .layout-edit", function() {
+			var i = parseInt($(this).attr("data-uid")),
+				data = {};
+			switch (i) {
+				case 1:
+					data = {
+						'uidstr': 'shopSigns',
+						'title': '店招设置',
+						'areaArry': ['980px', '400px'],
+						'shoptitle': 'QDA女装旗舰店',
+						'src': '__STATIC__/template/images/shop-3dianzhao.jpg' //背景图片
+					}
+					break;
+				case 2:
+					data = {
+						'uidstr': 'tmpNav',
+						'title': '导航设置',
+						'areaArry': ['500px', '300px'],
+						'navBgcolor': '#5f6e73', //背景颜色
+						'navColor': '#fff' //文字颜色
+					};
+					break;
+				case 3:
+					data = {
+						'uidstr': 'tmpBanner',
+						'title': 'banner幻灯片设置',
+						'areaArry': ['980px', '450px'],
+						'uidBanner': [],
+						'banHeight': 500, //自动运行间隔时间
+						'banWidth': "tmp-banner-wide", //宽度设置'tmp-banner-wide'or'tmp-banner-min'
+						'banEffect': '<{$option.effect}>', //切换效果
+						'banEasing': 'swing', //缓动效果
+						'banTrigger': 'mouseover', //触发方式
+						'banDelayTime': 700, //效果速度
+						'banAutoPlay': '<{$option.autoplay}>', //自动播放
+						'banInterTime': '' //自动运行间隔时间,为空时为默认
+					};
+					break;
+				case 4:
+					data = {
+						'uidstr': 'tmpSearch',
+						'title': '本店搜索设置',
+						'areaArry': ['500px', '300px'],
+						'moduleBgcolor': '', //背景颜色
+						'moduleColor': '' //文字颜色
+					};
+					break;
+				case 5:
+					data = {
+						'uidstr': 'tmpMenu',
+						'title': '宝贝个性化设置',
+						'areaArry': ['500px', '300px'],
+						'moduleBgcolor': '', //背景颜色
+						'moduleColor': '' //文字颜色
+					};
+					break;
+				case 6:
+					data = {
+						'uidstr': 'tmpTuan',
+						'title': '模块数据设置',
+						'areaArry': ['980px', '600px'],
+						'moduleTitle': '', //标题
+						'moduleBool': false, //是否显示
+						'moduleBgcolor': '', //背景颜色
+						'moduleColor': '', //文字颜色
+						'moduleBgcolor': 'http://xxxx1.jpg', //广告图片地址
+						'moduleColor': 'http://xxxx1.html', //广告链接
+						'typeId': [1, 2, 3], //宝贝分类id
+						'uId': [] //掌柜推荐id
+					};
+					break;
+				case 7:
+					data = {
+						'uidstr': 'tmpGood',
+						'title': '模块数据设置',
+						'areaArry': ['980px', '600px'],
+						'moduleTitle': '', //标题
+						'moduleBool': true, //是否显示
+						'moduleBgcolor': '', //背景颜色
+						'moduleColor': '', //文字颜色
+						'moduleBgcolor': 'http://xxxx.jpg', //广告图片地址
+						'moduleColor': 'http://xxxx.html', //广告链接
+						'typeId': [1, 2, 3], //宝贝分类id
+						'uId': [] //掌柜推荐id
+					};
+					break;
+				case 8:
+					data = {
+						'uidstr': 'tmpSection',
+						'title': '模块数据设置',
+						'areaArry': ['980px', '450px'],
+						'moduleTitle': '精品推荐', //标题
+						'moduleBool': false, //是否显示
+						'moduleBgcolor': '', //背景颜色
+						'moduleColor': '', //文字颜色
+						'moduleBgcolor': 'http://xxxx.jpg', //广告图片地址
+						'moduleColor': 'http://xxxx.html', //广告链接
+						'typeId': [1, 2, 3], //宝贝分类id
+						'uId': [] //掌柜推荐id
+					};
+					break;
+				case 9:
+					data = {
+						'uidstr': 'tmpService',
+						'title': '客服中心设置',
+						'areaArry': ['500px', '300px'],
+						'moduleBgcolor': '', //背景颜色
+						'moduleColor': '' //文字颜色
+					};
+					break;
+				case 10:
+					data = {
+						'uidstr': 'tmpRanking',
+						'title': '排行榜设置',
+						'areaArry': ['500px', '300px'],
+						'moduleBgcolor': '', //背景颜色
+						'moduleColor': '' //文字颜色
+					};
+					break;
+				default:
+					return false;
+			}
+			openTmpEdit(data.title, data.areaArry, template(data.uidstr, data));
+			minicolorsFun();
+            $("#photo_file").uploadify({ 
+                'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                'uploader': '<{:U("app/upload/uploadify",array("model"=>"tuan"))}>',
+                'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                'buttonText': '上传图片',
+                'fileTypeExts': '*.gif;*.jpg;*.png',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {                	
+                    $("#data_photo").val(data);
+                }
+            });
+            $("#photo_file1").uploadify({ 
+                'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                'uploader': '<{:U("app/upload/uploadify",array("model"=>"tuan"))}>',
+                'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                'buttonText': '上传图片',
+                'fileTypeExts': '*.gif;*.jpg;*.png',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {                	
+                    $("#data_photo1").val(data);
+                }
+            });
+            $("#photo_file2").uploadify({ 
+                'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                'uploader': '<{:U("app/upload/uploadify",array("model"=>"tuan"))}>',
+                'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                'buttonText': '上传图片',
+                'fileTypeExts': '*.gif;*.jpg;*.png',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {                	
+                    $("#data_photo2").val(data);
+                }
+            });
+		});
+		//页头编辑
+		$(document).on("click",".tmpHeadEdit",function(){
+			var jsonData={
+						'uidstr': 'tmpHead',
+						'title': '页头设置',
+						'areaArry': ['980px', '450px'],
+						'moduleBgcolor': '', //背景颜色
+						'backgroundImage': '__STATIC__/template/images/shop-3dianzhao.jpg', //背景图片
+						'banInterStyle':'<{$primp_data.head_bgground_repeat}>',//背景显示
+						'banInterAlign':'<{$primp_data.head_bgground_align}>',//左右对齐
+						'banInterVertical':'<{$primp_data.head_bgground_vertical}>'//垂直对齐
+					};
+			openTmpEdit(jsonData.title, jsonData.areaArry, template(jsonData.uidstr, jsonData));
+			minicolorsFun();
+            $("#photo_file").uploadify({ 
+                'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                'uploader': '<{:U("app/upload/uploadify",array("model"=>"tuan"))}>',
+                'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                'buttonText': '上传图片',
+                'fileTypeExts': '*.gif;*.jpg;*.png',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {                	
+                    $("#data_photo").val(data);
+                    $("#photo_img").attr('src', '__ROOT__/attachs/' + data).show();
+                }
+            });			
+		});
+		//页面编辑
+		$(document).on("click",".tmpBodyEdit",function(){
+			var jsonData={
+						'uidstr': 'tmpBody',
+						'title': '页面设置',
+						'areaArry': ['980px', '450px'],
+						'moduleBgcolor': '', //背景颜色
+						'backgroundImage': 'template/images/shop-3dianzhao.jpg', //背景图片
+						'banInterStyle':'<{$primp_data.body_bgground_repeat}>',//背景显示
+						'banInterAlign':'<{$primp_data.body_bgground_align}>',//左右对齐
+						'banInterVertical':'<{$primp_data.body_bgground_vertical}>'//垂直对齐
+					};
+			openTmpEdit(jsonData.title, jsonData.areaArry, template(jsonData.uidstr, jsonData));
+			minicolorsFun();
+            $("#photo_file").uploadify({ 
+                'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                'uploader': '<{:U("app/upload/uploadify",array("model"=>"tuan"))}>',
+                'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                'buttonText': '上传图片',
+                'fileTypeExts': '*.gif;*.jpg;*.png',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {                	
+                    $("#data_photo").val(data);
+                    $("#photo_img").attr('src', '__ROOT__/attachs/' + data).show();
+                }
+            });	
+		});
+		//banner编辑
+		$(document).on("click",".banner",function(){
+			var	jsonData = {
+					'uidstr': 'tmpBanner',
+					'title': 'banner幻灯片设置',
+					'areaArry': ['980px', '450px'],
+					'uidBanner': [],
+					'banHeight': 500, //自动运行间隔时间
+					'banWidth': "tmp-banner-wide", //宽度设置'tmp-banner-wide'or'tmp-banner-min'
+					'banEffect': '<{$option.effect}>', //切换效果
+					'banEasing': 'swing', //缓动效果
+					'banTrigger': 'mouseover', //触发方式
+					'banDelayTime': 700, //效果速度
+					'banAutoPlay': '<{$option.autoplay}>', //自动播放
+					'banInterTime': '' //自动运行间隔时间,为空时为默认
+				};
+			openTmpEdit(jsonData.title, jsonData.areaArry, template(jsonData.uidstr, jsonData));
+			minicolorsFun();
+			$("#photo_file").uploadify({ 
+                'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                'uploader': '<{:U("app/upload/uploadify",array("model"=>"tuan"))}>',
+                'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                'buttonText': '上传图片',
+                'fileTypeExts': '*.gif;*.jpg;*.png',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {                	
+                    $("#data_photo").val(data);
+                }
+            });
+            $("#photo_file1").uploadify({ 
+                'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                'uploader': '<{:U("app/upload/uploadify",array("model"=>"tuan"))}>',
+                'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                'buttonText': '上传图片',
+                'fileTypeExts': '*.gif;*.jpg;*.png',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {                	
+                    $("#data_photo1").val(data);
+                }
+            });
+            $("#photo_file2").uploadify({ 
+                'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                'uploader': '<{:U("app/upload/uploadify",array("model"=>"tuan"))}>',
+                'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                'buttonText': '上传图片',
+                'fileTypeExts': '*.gif;*.jpg;*.png',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {                	
+                    $("#data_photo2").val(data);
+                }
+            });	
+		});
+		function selectInitFn(strObj){
+			$(strObj).each(function(i){
+				var dataCurr=$(this).attr("data-setcont");
+				$(this).find("option[value='"+dataCurr+"']").prop("selected",true);
+			});
+		}
+        //选择商品
+        $(document).on("click",".J_goods",function(){
+            var data_type = $(this).attr('data_type');
+            var layer1 = layer.open({
+                type:2,
+                title:"选择商品",
+                content:"<{:U('pchome/goods/select_view')}>"+"?recommend_type="+data_type+"&shop_id=<{$shop_id}>",
+                area:['800px','600px'],
+            });
+        });
+        //将商品加入推荐1
+        function add_recommoned_1(id){
+            var len =$(".recommoned_1").children().length;
+            if(len>=8){
+                layer.msg("推荐商品已有8个，请删除要替换的商品，再推荐");
+            }else{
+                $.post("<{:U('pchome/goods/get_one_goods_info_for_ul')}>",{"goods_id":id,"recomend_type":1},function(data){
+                    $(".recommoned_1").append(data);
+                });
+                
+            }
+            
+        }
+         //将商品加入推荐1
+        function add_recommoned_2(id){
+            var len =$(".recommoned_2").children().length;
+            if(len>=8){
+                layer.msg("推荐商品已有8个，请删除要替换的商品，再推荐");
+            }else{
+                $.post("<{:U('pchome/goods/get_one_goods_info_for_ul')}>",{"goods_id":id,"recomend_type":2},function(data){
+                    $(".recommoned_2").append(data);
+                });
+                
+            }
+            
+        }
+        //删除推荐商品
+        $(document).on("click",".windowtitle_close",function(){
+            $(this).closest("li").remove();
+        })
+        
+	</script>
+	<!--需要引入部分结束-->
+	</body>
+</html>

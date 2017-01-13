@@ -1,0 +1,92 @@
+<include file="public:header"/>
+<link rel="stylesheet" href="/static/default/wap/css/wuye.css">
+<header class="top-fixed bg-yellow bg-inverse">
+	<div class="top-back">
+		<a class="top-addr" href="<{:U('wuye/index/index')}>"><i class="icon-angle-left"></i></a>
+	</div>
+		<div class="top-title">
+			物业中心
+		</div>
+	<div class="top-signed">
+		<a href="<{:U('wuye/index/index')}>"><i class="icon-envelope"></i></a>
+	</div>
+</header>
+
+<div class="index-top">
+	<div class="top-a">
+		<div class="user">	
+			<span class="avatar">    
+            <img src="__ROOT__/attachs/<{$MEMBER.face|default='default.jpg'}>" />         
+            </span>
+			<div class="info">	
+				<p>欢迎您，<b style="color: red;"><{$COMMUNITY.name}></b>的管理员<{$MEMBER.nickname}>！</p>	
+				<p>
+					<span>积分：<{$MEMBER.integral}></span>
+					<span>余额：<{$MEMBER['money']}></span>
+					<span>金块：<{$MEMBER['gold']}></span>
+				</p>	
+			</div>	
+		</div>	
+
+	</div>
+	
+	
+	
+	
+</div>
+
+
+<div class="panel-list">
+	<ul>
+		
+        
+        <li>
+			<a href="<{:U('communitynews/index')}>">
+				<span class="icon-bullhorn"></span>
+				通知管理
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+		<li>
+			<a href="<{:U('feedback/index')}>">
+				<span class="icon-edit"></span>
+				问题反馈
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+		<li>
+			<a href="<{:U('convenientphone/index')}>">
+				<span class="icon-phone"></span>
+				便民电话
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+        
+        <li>
+			<a href="#">
+				<span class="icon-user"></span>
+				小区成员（筹）
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+        
+        <li>
+			<a href="#">
+				<span class="icon-money"></span>
+				缴费管理（筹）
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+        
+        
+		<li>
+			<a href="<{:U('wuye/passport/logout')}>">
+				<span class="icon-sign-out"></span>
+				注销登录
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<include  file='public:footer'/>

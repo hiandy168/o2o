@@ -1,0 +1,146 @@
+2016.11.17   bao_hotel:
+改名：store_logo => logo; telephone => phone(商家电话); boss_tel => con_phone; boss_name => contacts; addtime => begin_num; hotel_img => hotel_imgs; zaof => breakfast; score => star_num; browse_nums => browser_num; notice => bulletin; hotel_id => store_id; hotel_imgs => store_imgs; hotel_cate=> cate_id; hotel_brand => brand;
+添加：'' => other;
+删除：zhizhao => ''; qitaziliao => ''; flag => '';
+
+2016.11.17   bao_hotel_order:
+添加：hotel_id => store_id; need_pay_money => pay_price; room_num => num;
+添加：'' => remark; '' => is_reminder; '' => pay_status; '' => pay_type;
+删除：room_id => '';
+
+2016.11.17   bao_hotel_product:
+改名：room_id => product_id; room_name => product_name; browse_nums => browser_num; examine_mark => exame_explain; room_people => people_num; room_count => count; stock => inventory; content_room => desc; reserve_num =>sold_num; is_tags => is_hot; fuwu_b=> expired_back; coupon_price => pay_price;
+添加：'' => product_num; '' => product_time; '' => update_time;
+删除：is_wifi => ''; facility_b => '';  facility_a => ''; type(床类型  1单人床2双人床3三人床4其它) => ''; comment_star(平均评价星数) => ''; detail => '';
+
+
+2016.11.17   older
+store_logo => logo; telephone => phone(商家电话); boss_tel => con_phone; boss_name => contacts; addtime => begin_num; hotel_img => hotel_imgs; zaof => breakfast; score => star_num; browse_nums => browser_num; notice => bulletin; hotel_id => store_id; hotel_imgs => store_imgs; hotel_cate=> cate_id; hotel_brand => brand;
+'' => other;
+zhizhao => ''; qitaziliao => ''; flag => '';
+CREATE TABLE `bao_hotel` (
+  `hotel_id` int(11) NOT NULL AUTO_INCREMENT,
+  `shop_id` int(11) NOT NULL DEFAULT '0' COMMENT '商家ID',
+  `store_name` varchar(100) NOT NULL DEFAULT '0' COMMENT '店铺名字',
+  `city_id` int(11) NOT NULL DEFAULT '0' COMMENT '所在城市ID',
+  `area_id` int(11) NOT NULL DEFAULT '0' COMMENT '所在区域ID',
+  `business_id` int(11) NOT NULL DEFAULT '0' COMMENT '所在商圈ID',
+  `address` varchar(100) NOT NULL DEFAULT '' COMMENT '商家地址',
+  `lng` double(18,14) NOT NULL DEFAULT '0.00000000000000' COMMENT '百度地图经度',
+  `lat` double(18,14) NOT NULL DEFAULT '0.00000000000000' COMMENT '百度地图纬度',
+  `store_logo` varchar(100) NOT NULL DEFAULT '0' COMMENT '店铺logo',
+  `level` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '店铺级别1为个人2为企业',
+  `valid_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '店铺有效时间',
+  `audit` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '0未通过1通过2没通过',
+  `exame_explain` varchar(255) NOT NULL COMMENT '审批理由',
+  `telephone` varchar(20) NOT NULL DEFAULT '0' COMMENT '商家电话',
+  `business_start_time` time NOT NULL DEFAULT '08:00:00' COMMENT '营业开始时间',
+  `business_end_time` time NOT NULL DEFAULT '22:00:00' COMMENT '营业结束时间',
+  `credit` tinyint(1) NOT NULL DEFAULT '0' COMMENT '信誉5分为满分',
+  `is_authentication` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否身份认证',
+  `is_bail` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否交纳保证金',
+  `bail_sum` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '保证金',
+  `is_open` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否开门营业（在营时间内的关店）',
+  `is_default` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否是默认店铺',
+  `intro` text NOT NULL COMMENT '描述',
+  `quality` int(5) unsigned NOT NULL DEFAULT '0' COMMENT '商家资质',
+  `store` int(1) unsigned NOT NULL DEFAULT '0' COMMENT '商家信誉',
+  `is_pay` int(1) unsigned NOT NULL COMMENT '在线付款 1代表在线付款0代表到店付',
+  `identity_pic` int(20) NOT NULL DEFAULT '0' COMMENT '身份证照片',
+  `license_pic` int(20) NOT NULL DEFAULT '0' COMMENT '营业执照照片',
+  `card` char(18) NOT NULL DEFAULT '0' COMMENT '身份证号码',
+  `licence` char(50) NOT NULL DEFAULT '0' COMMENT '营业执照号码',
+  `boss_name` varchar(50) NOT NULL DEFAULT '0' COMMENT '联系人姓名',
+  `boss_tel` varchar(12) NOT NULL DEFAULT '0' COMMENT '联系人电话',
+  `email` varchar(50) NOT NULL DEFAULT '' COMMENT '邮箱',
+  `corporate` varchar(50) NOT NULL COMMENT '法定代表',
+  `scope` varchar(255) NOT NULL COMMENT '经营范围',
+  `zhizhao` int(10) NOT NULL DEFAULT '0' COMMENT '执照图片',
+  `qitaziliao` int(10) NOT NULL DEFAULT '0' COMMENT '其他资料',
+  `hotel_cate` int(10) NOT NULL DEFAULT '1' COMMENT '酒店分类',
+  `hotel_brand` int(10) NOT NULL DEFAULT '0' COMMENT '酒店品牌',
+  `hotel_img` varchar(255) NOT NULL DEFAULT '' COMMENT '酒店轮播图',
+  `addtime` int(10) NOT NULL DEFAULT '0' COMMENT '增加时间',
+  `notice` varchar(255) NOT NULL DEFAULT '0' COMMENT '店铺公告',
+  `park` tinyint(1) NOT NULL DEFAULT '0' COMMENT '免费停车 0为没有 1为有',
+  `wifi` tinyint(1) NOT NULL DEFAULT '0' COMMENT '无线WiFi0为没有 1为有',
+  `deposit` tinyint(1) NOT NULL DEFAULT '0' COMMENT '行李寄存0为没有 1为有',
+  `awaken` tinyint(1) NOT NULL DEFAULT '0' COMMENT '叫醒服务0为没有 1为有',
+  `plane` tinyint(1) NOT NULL DEFAULT '0' COMMENT '接机服务0为没有 1为有',
+  `zaof` tinyint(1) NOT NULL DEFAULT '0' COMMENT '早饭  0为没有 1为有',
+  `ambient` int(10) NOT NULL DEFAULT '0' COMMENT '酒店环境',
+  `score` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '评论总星数',
+  `browse_nums` int(10) unsigned NOT NULL DEFAULT '1' COMMENT '浏览总数',
+  `flag` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否删除（0删除）',
+  `closed` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0没有删除 1删除',
+  `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `money` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '店铺金额',
+  PRIMARY KEY (`hotel_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=utf8 COMMENT='酒店店铺表';
+
+2016.11.17   older
+hotel_id => store_id; need_pay_money => pay_price; room_num => num;
+'' => remark; '' => is_reminder; '' => pay_status; '' => pay_type;
+room_id => '';
+CREATE TABLE `bao_hotel_order` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hotel_id` int(11) NOT NULL DEFAULT '0',
+  `need_pay_money` decimal(10,2) DEFAULT '0.00' COMMENT '需要支付的金额',
+  `phone` varchar(20) CHARACTER SET utf8 NOT NULL DEFAULT '0' COMMENT '客户电话',
+  `status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '0待付款 1未使用 2已使用3申请退款 4 已退款 -1已取消定单',
+  `is_comment` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未评价，1已评价',
+  `create_time` int(11) NOT NULL COMMENT '创建时间',
+  `room_id` int(11) NOT NULL COMMENT '房间ID',
+  `create_ip` varchar(15) DEFAULT NULL COMMENT '创建IP',
+  `user_id` int(11) unsigned DEFAULT NULL,
+  `closed` tinyint(1) DEFAULT '0' COMMENT '1是订单删除',
+  `other` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '客户其他要求',
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT '0' COMMENT '客户姓名',
+  `code` int(11) unsigned DEFAULT NULL COMMENT '密码',
+  `room_num` int(3) NOT NULL,
+  `plan_time` date NOT NULL COMMENT '预计入住时间',
+  `planleave_time` date NOT NULL COMMENT '预计离店时间',
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=latin1 COMMENT='酒店订单';
+
+2016.11.17   older
+room_id => product_id; room_name => product_name; browse_nums => browser_num; examine_mark => exame_explain; room_people => people_num; room_count => count; stock => inventory; content_room => desc; reserve_num =>sold_num; is_tags => is_hot; fuwu_b=> expired_back; coupon_price => pay_price; facility_b => free_breakfast;
+'' => product_num; '' => product_time; '' => update_time;
+is_wifi => '';  facility_a => ''; type(床类型  1单人床2双人床3三人床4其它) => ''; comment_star(平均评价星数) => ''; detail => '';
+CREATE TABLE `bao_hotel_product` (
+  `room_id` int(10) NOT NULL AUTO_INCREMENT,
+  `store_id` int(10) unsigned DEFAULT '0',
+  `room_cate` int(1) DEFAULT '0' COMMENT '房间类型',
+  `room_count` int(4) unsigned DEFAULT '1' COMMENT '房间总数',
+  `room_name` varchar(1024) CHARACTER SET utf8 DEFAULT '0' COMMENT '房间名字',
+  `price` decimal(10,2) unsigned DEFAULT '0.00' COMMENT '原价',
+  `stock` smallint(5) unsigned DEFAULT '1' COMMENT '库存数量',
+  `type` int(1) unsigned DEFAULT '1' COMMENT '床类型  1单人床2双人床3三人床4其它',
+  `comment_star` int(1) unsigned DEFAULT '0' COMMENT '平均评价星数',
+  `fuwu_a` int(1) unsigned NOT NULL DEFAULT '0' COMMENT '1随时退服务',
+  `end_time` int(11) unsigned DEFAULT '0' COMMENT '到期时间',
+  `reserve_num` int(3) unsigned NOT NULL DEFAULT '0' COMMENT '销量',
+  `content_room` varchar(255) CHARACTER SET utf8 DEFAULT '0' COMMENT '描述',
+  `closed` tinyint(3) unsigned DEFAULT '0' COMMENT '0没有删除 1删除',
+  `is_new` tinyint(3) unsigned DEFAULT '0' COMMENT '是否新单 1是',
+  `is_tags` tinyint(4) unsigned DEFAULT '0' COMMENT '热门 1是0否',
+  `is_selection` tinyint(4) unsigned DEFAULT '0' COMMENT '精选',
+  `is_make` tinyint(3) unsigned DEFAULT '0' COMMENT '免预约',
+  `fuwu_b` tinyint(4) unsigned DEFAULT '0' COMMENT '1为提供过期退服务',
+  `fuwu_c` tinyint(4) unsigned DEFAULT '0' COMMENT '1为提供真实评价',
+  `facility_a` tinyint(4) unsigned DEFAULT '0' COMMENT '1免费宽带2wifi3无',
+  `detail` varchar(255) CHARACTER SET utf8 DEFAULT '0' COMMENT '详情',
+  `coupon_price` decimal(10,2) unsigned DEFAULT '0.00' COMMENT '优惠后的价格',
+  `create_time` int(11) unsigned DEFAULT '0' COMMENT '创建时间',
+  `facility_b` int(10) unsigned DEFAULT '0' COMMENT '1免费早餐',
+  `room_people` char(50) CHARACTER SET utf8 DEFAULT '1' COMMENT '房间人数',
+  `is_wifi` tinyint(3) unsigned DEFAULT '0' COMMENT '1有wifi  0没有wifi',
+  `window` tinyint(3) DEFAULT '1' COMMENT '1有窗户2没有窗户',
+  `bathroom` tinyint(3) DEFAULT '1' COMMENT '1共用2独立   房间卫浴',
+  `audit` tinyint(3) unsigned DEFAULT '1' COMMENT '1待审核2通过3未通过',
+  `examine_mark` text CHARACTER SET utf8 COMMENT '审核备注',
+  `is_out` tinyint(3) unsigned DEFAULT '0' COMMENT '是否下架  1：是   0：否',
+  `photo` varchar(128) CHARACTER SET utf8 DEFAULT '0' COMMENT '图片',
+  `browse_nums` int(10) unsigned DEFAULT '0' COMMENT '浏览总数',
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1 COMMENT='酒店房间表';

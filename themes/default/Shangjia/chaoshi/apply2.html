@@ -1,0 +1,670 @@
+<include file='public:header'/>
+<link href="__PUBLIC__/css/base.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/validform5.3.2.js"></script>
+<style type="text/css">
+    .Validform_checktip{margin-left:0;}
+    .info{
+        border:1px solid #ccc;
+        padding:2px 20px 2px 5px;
+        color:#666;
+        position:absolute;
+        display:none;
+        line-height:20px;
+        background-color:#fff;
+    }
+    .dec {
+        bottom: -8px;
+        display: block;
+        height: 8px;
+        overflow: hidden;
+        position: absolute;
+        left: 10px;
+        width: 17px;
+    }
+    .dec s {
+        font-family: simsun;
+        font-size: 16px;
+        height: 19px;
+        left: 0;
+        line-height: 21px;
+        position: absolute;
+        text-decoration: none;
+        top: -9px;
+        width: 17px;
+    }
+    .dec .dec1 {
+        color: #ccc;
+    }
+    .dec .dec2 {
+        color: #fff;
+        top: -10px;
+    }
+    input.disabled{
+        border:1px solid #DDD;
+        background-color:#F5F5F5;
+        color:#ACA899;
+    }
+</style>
+<div class="sjgl_lead">
+    <ul>
+        <li><em class="sjgl_leadico sjgl_leadico4"></em><a href="#">超市</a></li>
+        <li>&gt;<a class="sjgl_leadEnd" href="#">入驻申请</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+    	<div class="tuan_top_t">
+            <div class="left tuan_topser_l">注意：商家入驻要在后台审核之后才能显示</div>
+        </div>
+    </div>
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli tabli_change on"><a href="#">基本资料</a></li>
+            
+        </ul>
+    </div>
+    <div class="tabnr_change show">
+	  <form  target="baocms_frm" action="<{:U('chaoshi/apply')}>" method="post" id="checkForm" onsubmit="return checkImg()">
+        <table class="tuanfabu_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+       
+            <tr>
+                <td><p class="tuanfabu_t">店铺名称：</p></td>
+                <td><div class="tuanfabu_nr"><input type="text" class="tuanfabu_int tuanfabu_intw2" name="data[shop_name]" value="<{$detail.shop_name}>" datatype="*" nullmsg="请输入店铺名称"/>
+                    <div class="info"><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                </div>
+
+                </td>
+            </tr>     
+            <tr>
+            <td class="tuanfabu_t" valign="top" style="padding-top:40px;">
+                <js file='__PUBLIC__/js/uploadify/jquery.uploadify.min.js'/>
+                <link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
+         	上传LOGO：
+                </td>
+                 <td class="tuanfabu_nr">
+                    <div style="width: 300px;height: 100px;padding-top:35px; float: left;">
+                        <div class="info" style="display: none;margin-top:-35px;" id="checkphoto_logo"><span class="Validform_checktip Validform_wrong">请上传店铺LOGO</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                        <input type="hidden" name="data[logo]" id="data_logo" value="<{$detail.logo}>" />
+                        <input id="logo_file" name="identity_file" type="file" multiple="true" value="" />
+                    </div>
+                    <div style="width: 300px;height: 100px; float: left;">
+                        <img id="photo_logo" width="80" height="80"  src="__ROOT__/attachs/<{$detail.logo|default='default.jpg'}>" />
+                        <a href="<{:U('setting/attachs')}>">缩略图设置</a>
+                               建议尺寸<{$CONFIG.attachs.goods.thumb}>
+                    </div>
+                    <script>
+                        $("#logo_file").uploadify({
+                            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                            'uploader': '<{:U("app/upload/uploadify",array("model"=>"goods"))}>',
+                            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                            'buttonText': '上传LOGO',
+                            'fileTypeExts': '*.gif;*.jpg;*.png',
+                            'queueSizeLimit': 1,
+                            'onUploadSuccess': function (file, data, response) {
+                                $("#data_logo").val(data);
+                                $("#photo_logo").attr('src', '__ROOT__/attachs/' + data).show();
+                                $('#checkphoto_logo').slideUp();
+                            }
+                        });
+
+                    </script>
+                </td>
+            </tr> 
+            <tr>
+                    <td class="tuanfabu_t">所在区域：</td>
+                    <td class="tuanfabu_nr">
+                        
+                          <select name="data[city_id]" style="float: left; margin-right: 20px;"  id="city_id" class="tuanfabu_int tuanfabu_intw2" datatype="/^[1-9]\d*$/" errormsg="请选择城市" ></select>
+                        <div class="info" ><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                       <select name="data[area_id]" style="float: left;"  id="area_id" class="tuanfabu_int tuanfabu_intw2" datatype="/^[1-9]\d*$/" errormsg="请选择区域" nullmsg="请选择区域"></select>
+                        <div class="info" ><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+
+                    </td>
+                </tr>
+                 <script src="<{:U('app/datas/cityarea')}>"></script>
+                <script>
+                    var city_id = <?php echo (int)$detail['city_id'];?>;
+                    var area_id = <?php echo (int)$detail['area_id'];?>;
+                    function changeCity(cid){
+                        var area_str = '<option value="0">请选择.....</option>';
+                        for(a in cityareas.area){
+                           if(cityareas.area[a].city_id ==cid){
+                                if(area_id == cityareas.area[a].area_id){
+                                    area_str += '<option selected="selected" value="'+cityareas.area[a].area_id+'">'+cityareas.area[a].area_name+'</option>';
+                                }else{
+                                     area_str += '<option value="'+cityareas.area[a].area_id+'">'+cityareas.area[a].area_name+'</option>';
+                                }  
+                            }
+                        }
+                        $("#area_id").html(area_str);
+                    }
+                    $(document).ready(function(){
+                        var city_str = '<option value="0">请选择.....</option>';
+                        for(a in cityareas.city){
+                           if(city_id == cityareas.city[a].city_id){
+                               city_str += '<option selected="selected" value="'+cityareas.city[a].city_id+'">'+cityareas.city[a].name+'</option>';
+                           }else{
+                                city_str += '<option value="'+cityareas.city[a].city_id+'">'+cityareas.city[a].name+'</option>';
+                           }  
+                        }
+                        $("#city_id").html(city_str);
+                        if(city_id){
+                            changeCity(city_id);
+                        }
+                        $("#city_id").change(function(){
+                            city_id = $(this).val();
+                            changeCity($(this).val());
+                        });
+                        
+                        $("#area_id").change(function () {
+                            var url = '<{:U("business/child",array("area_id"=>"0000"))}>';
+                            if ($(this).val() > 0) {
+                                var url2 = url.replace('0000', $(this).val());
+                                $.get(url2, function (data) {
+                                    $("#business_id").html(data);
+                                }, 'html');
+                            }
+
+                        });
+                    });
+                </script>
+
+			  <tr>
+                    <td class="tuanfabu_t">是否支持在线付款：</td>
+                    <td class="tuanfabu_nr">
+                        <label> <input type="radio" name="data[is_pay]" class="is_pay" value="1" datatype="is_pay"  <eq name="detail.is_pay" value="1">checked="checked"</eq>  /> 支持</label>
+                        <label> <input type="radio" name="data[is_pay]" class="is_pay" value="0"  <eq name="detail.is_pay" value="0">checked="checked"</eq> /> 不支持</label>
+                        <div class="info" style="display: none;margin-top:-50px;" id="is_pay"><span class="Validform_checktip Validform_wrong">请选择是否支持在线支付</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tuanfabu_t">是否返利：</td>
+                    <td class="tuanfabu_nr">
+                        <label> <input type="radio" name="data[is_fan]" class="is_fan" value="1" datatype="is_fan"  <eq name="detail.is_fan" value="1">checked="checked"</eq>  /> 支持</label>
+                        <label> <input type="radio" name="data[is_fan]" class="is_fan" value="0"  <eq name="detail.is_fan" value="0">checked="checked"</eq> /> 不支持</label>
+                        <div class="info" style="display: none;margin-top:-50px;" id="is_fan"><span class="Validform_checktip Validform_wrong">请选择是否返利</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+				 <tr>
+                    <td class="tuanfabu_t">最高返利金额：</td>
+                     <td class="tuanfabu_nr">
+                        <input type="text" name="data[fan_money]" value="<{$detail['fan_money']}>" class="tuanfabu_int tuanfabu_intw2" id="fan" datatype="/^(([0-9]+)|([0-9]+\.[0-9]{1,2}))$/" errormsg="只能输入非负数，且小数点后只能保留两位" nullmsg="请输入最高返利金额" />
+                         <div class="info" ><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                        <code>比如填写的是9元 那么很可能也只会反1元也可能会返现几角几分！如果填写0就不返利</code>
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tuanfabu_t">新客户下单立减：</td>
+                    <td class="tuanfabu_nr">
+                        <label> <input type="radio" name="data[is_new]" class="is_new" value="1" datatype="is_new" <eq name="detail.is_new" value="1">checked="checked"</eq>  /> 支持</label>
+                        <label> <input type="radio" name="data[is_new]" class="is_new" value="0"  <eq name="detail.is_new" value="0">checked="checked"</eq> /> 不支持</label>
+                        <div class="info" style="display: none;margin-top:-50px;" id="is_new"><span class="Validform_checktip Validform_wrong">请选择是否支持新客户下单立减</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tuanfabu_t">满多少钱：</td>
+                    <td class="tuanfabu_nr"><input type="text" name="data[full_money]" id="full_money" value="<{$detail['full_money']}>" class="tuanfabu_int tuanfabu_intw2" datatype="/^(([0-9]+)|([0-9]+\.[0-9]{1,2}))$/" errormsg="只能输入非负数，且小数点后只能保留两位" nullmsg="请输入满多少钱才能享受减免"/>
+                        <div class="info" ><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tuanfabu_t">减多少钱：</td>
+                    <td class="tuanfabu_nr">
+                        <input type="text" name="data[new_money]" id="new_money" value="<{$detail['new_money']}>" class="tuanfabu_int tuanfabu_intw2" datatype="/^(([0-9]+)|([0-9]+\.[0-9]{1,2}))$/" errormsg="只能输入非负数，且小数点后只能保留两位" nullmsg="请输入减免的金额"/>
+                        <div class="info" ><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tuanfabu_t">配送费：</td>
+                    <td class="tuanfabu_nr"><input type="text" name="data[logistics]" value="<{$detail['logistics']}>" datatype="*" nullmsg="请输入配送费" class="tuanfabu_int tuanfabu_intw2" />
+                        <div class="info" ><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tuanfabu_t">起送价：</td>
+                    <td class="tuanfabu_nr"><input type="text" name="data[since_money]" value="<{$detail['since_money']}>" datatype="*" nullmsg="请输入起送价" class="tuanfabu_int tuanfabu_intw2" />
+                        <div class="info" ><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                        <code>满多少钱才能下单！</code>
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tuanfabu_t">配送：</td>
+                    <td class="tuanfabu_nr">
+                        <input type="text" name="data[distribution]" value="<{$detail.distribution|default='100'}>" class="tuanfabu_int tuanfabu_intw2" datatype="*" nullmsg="请输入配送时间" />
+                        <div class="info" ><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                        分钟送达
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tuanfabu_t">电话：</td>
+                    <td class="tuanfabu_nr"><input type="text" name="data[phone]" value="<{$detail.phone|default=''}>" datatype="isPhone" nullmsg="请输入电话号码" errormsg="请输入正确的电话号码（手机或固定电话）"  class="tuanfabu_int tuanfabu_intw2" />
+                        <div class="info" ><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tuanfabu_t">地址：</td>
+                    <td class="tuanfabu_nr"><input type="text" name="data[address]" value="<{$detail.address|default=''}>" class="tuanfabu_int tuanfabu_intw2" datatype="*" nullmsg="请输入地址" />
+                        <div class="info" ><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tuanfabu_t">配送距离：</td>
+                    <td class="tuanfabu_nr"><input type="text" name="data[distance]" value="<{$detail.distance|default='5000'}>" class="tuanfabu_int tuanfabu_intw2" datatype="*" nullmsg="请输入配送距离" />
+                        <div class="info" ><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                        米
+                    </td>
+                </tr>
+				    <tr>
+                <td width="120"><p class="tuanfabu_t">地图：</p></td>
+                <td><div class="tuanfabu_nr">
+                <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7b92b3afff29988b6d4dbf9a00698ed8"></script>
+                            <div class="top" style="width:700px; margin-bottom: 20px;">
+                                <div id="r-result">关键字:<input type="text" id="suggestId" class="mapinputs" size="20" value="合肥" /></div>    
+                            </div>
+                            <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                    <div class="info" style="display: none;margin-top:-35px;margin-left:200px;" id="checkMap"><span class="Validform_checktip Validform_wrong">请在地图上点击店铺位置</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                            <div id="allmap" style="width: 600px; height:500px;"></div>
+                            <script type="text/javascript">
+                            // 百度地图API功能
+                                var map = new BMap.Map("allmap");
+                                var lng = "<{$detail.lng}>";
+                                var lat = "<{$detail.lat}>";
+                                if(!lng&&!lat){
+                                    map.centerAndZoom("合肥");
+                                    var point = new BMap.Point(117.260852,31.825717);
+                                }else{
+                                map.centerAndZoom(new BMap.Point(lng,lat), 15);
+                                var point = new BMap.Point(lng,lat);
+                            }
+                                map.centerAndZoom(point, 15);
+                                var marker = new BMap.Marker(point);  // 创建标注
+                                map.clearOverlays();
+                                map.addOverlay(marker);              // 将标注添加到地图中
+                                marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                                function showPoint(e) {
+                                    $('#checkMap').slideUp();
+                                    document.getElementById('lat').value = e.point.lat;
+                                    document.getElementById('lng').value = e.point.lng;
+                                    var p = new BMap.Point(e.point.lng,e.point.lat);
+                                    var mk = new BMap.Marker(p); 
+                                    map.clearOverlays();
+                                    map.addOverlay(mk); 
+                                    mk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                                }
+                                map.enableScrollWheelZoom(true);
+                                map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+                                map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}));  //右上角，仅包含平移和缩放按钮
+                                map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_LEFT, type: BMAP_NAVIGATION_CONTROL_PAN}));  //左下角，仅包含平移按钮
+                                map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));  //右下角，仅包含缩放按钮
+                                map.addEventListener("click", showPoint);
+                                function G(id) {
+                                    return document.getElementById(id);
+                                }
+
+                                var ac = new BMap.Autocomplete(//建立一个自动完成的对象
+                                        {"input": "suggestId"
+                                            , "location": map
+                                        });
+
+                                ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+                                    var str = "";
+                                    var _value = e.fromitem.value;
+                                    var value = "";
+                                    if (e.fromitem.index > -1) {
+                                        value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                                    }
+                                    str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+                                    value = "";
+                                    if (e.toitem.index > -1) {
+                                        _value = e.toitem.value;
+                                        value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                                    }
+                                    str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+                                    G("searchResultPanel").innerHTML = str;
+                                });
+
+                                var myValue;
+                                ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+                                    var _value = e.item.value;
+                                    myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+                                    G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+                                    setPlace();
+                                });
+
+
+                                function setPlace() {
+                                    map.clearOverlays();    //清除地图上所有覆盖物
+                                    $('#checkMap').slideUp();
+                                    function myFun() {
+                                        var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+                                        map.centerAndZoom(pp, 18);
+                                        var kk = new BMap.Marker(pp);
+                                        map.addOverlay(kk);    //添加标注
+                                        kk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                                    }
+                                    var local = new BMap.LocalSearch(map, {//智能搜索
+                                        onSearchComplete: myFun
+                                    });
+                                    local.search(myValue);
+                                }
+
+                            </script>
+                </div></td>
+            </tr>
+            <tr>
+                    <td class="tuanfabu_t">商家坐标：</td>
+                    <td class="tuanfabu_nr">
+                        <span><input type="text" class="disabled" name="data[lng]" id="lng" value="<{$detail.lng|default=''}>" readonly/>经度</span>
+                        <span><input type="text" class="disabled" name="data[lat]" id="lat" value="<{$detail.lat|default=''}>" readonly/>纬度</span>
+                    </td>
+                </tr>
+			<tr>
+            <td class="tuanfabu_t" valign="top" style="padding-top:40px;">
+         	上传身份证：
+                </td>
+                 <td class="tuanfabu_nr">
+                    <div style="width: 300px;height: 100px;padding-top:35px; float: left;">
+                        <div class="info" style="display: none;margin-top:-35px;" id="checkphoto_identity"><span class="Validform_checktip Validform_wrong">请上身份证照</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                        <input type="hidden" name="data[identity_pic]" id="data_identity_pic" value="<{$detail.identity_pic}>" />
+                        <input id="identity_file" name="identity_file" type="file" multiple="true" value="" />
+                    </div>
+                    <div style="width: 300px;height: 100px; float: left;">
+                        <img id="photo_identity" width="80" height="80"  src="__ROOT__/attachs/<{$detail.identity_pic|default='default.jpg'}>" />
+                        <a href="<{:U('setting/attachs')}>">缩略图设置</a>
+                               建议尺寸<{$CONFIG.attachs.goods.thumb}>
+                    </div>
+                    <script>
+                        $("#identity_file").uploadify({
+                            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                            'uploader': '<{:U("app/upload/uploadify",array("model"=>"goods"))}>',
+                            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                            'buttonText': '上传身份证',
+                            'fileTypeExts': '*.gif;*.jpg;*.png',
+                            'queueSizeLimit': 1,
+                            'onUploadSuccess': function (file, data, response) {
+                                $("#data_identity_pic").val(data);
+                                $("#photo_identity").attr('src', '__ROOT__/attachs/' + data).show();
+                                $('#checkphoto_identity').slideUp();
+                            }
+                        });
+
+                    </script>
+                </td>
+            </tr>
+			<tr>
+            <td class="tuanfabu_t" valign="top" style="padding-top:40px;">
+         	上传营业执照：
+                </td>
+                 <td class="tuanfabu_nr">
+                    <div style="width: 300px;height: 100px;padding-top:35px;  float: left;">
+                        <div class="info" style="display: none;margin-top:-35px;" id="checkphoto_license"><span class="Validform_checktip Validform_wrong">请上传营业执照</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                        <input type="hidden" name="data[license_pic]" id="data_license_pic" value="<{$detail.license_pic}>" />
+                        <input id="license_file" name="license_file" type="file" multiple="true" value="" />
+                    </div>
+                    <div style="width: 300px;height: 100px; float: left;">
+                        <img id="photo_license" width="80" height="80"  src="__ROOT__/attachs/<{$detail.license_pic|default='default.jpg'}>" />
+                        <a href="<{:U('setting/attachs')}>">缩略图设置</a>
+                               建议尺寸<{$CONFIG.attachs.goods.thumb}>
+                    </div>
+                    <script>
+                        $("#license_file").uploadify({
+                            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                            'uploader': '<{:U("app/upload/uploadify",array("model"=>"goods"))}>',
+                            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                            'buttonText': '上传缩略图',
+                            'fileTypeExts': '*.gif;*.jpg;*.png',
+                            'queueSizeLimit': 1,
+                            'onUploadSuccess': function (file, data, response) {
+                                $("#data_license_pic").val(data);
+                                $("#photo_license").attr('src', '__ROOT__/attachs/' + data).show();
+                                $('#checkphoto_license').slideUp();
+                            }
+                        });
+
+                    </script>
+                </td>
+            </tr>
+              <tr>
+                <td valign="top"><p class="tuanfabu_t">详情：</p></td>
+                <td><div class="tuanfabu_nr">
+                    <div class="info" style="display: none;margin-top:-35px;" id="contentDetial"><span class="Validform_checktip Validform_wrong">请输入店铺详情</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                <script type="text/plain" id="data_details" name="data[intro]" style="width:800px;height:360px;"><{$detail.intro|htmlspecialchars_decode=###}></script>
+                </div></td>
+            </tr>
+			<link rel="stylesheet" href="__PUBLIC__/umeditor/themes/default/css/umeditor.min.css" type="text/css">
+            <script type="text/javascript" charset="utf-8" src="__PUBLIC__/umeditor/umeditor.config.js"></script>
+            <script type="text/javascript" charset="utf-8" src="__PUBLIC__/umeditor/umeditor.min.js"></script>
+            <script type="text/javascript" src="__PUBLIC__/umeditor/lang/zh-cn/zh-cn.js"></script>
+            <script>
+                um = UM.getEditor('data_details', {
+                    imageUrl: "<{:U('public/editor')}>",
+                    imagePath: '__ROOT__/attachs/editor/',
+                    lang: 'zh-cn',
+                    langPath: UMEDITOR_CONFIG.UMEDITOR_HOME_URL + "lang/",
+                    focus: false
+                });
+                um.addListener( 'focus', function(  ) {
+                    $('#contentDetial').slideUp();
+                } );
+            </script>
+        </table>
+        <div class="tuanfabu_an"><input  type="submit" class="radius3 sjgl_an tuan_topbt" value="确认申请" /></div>
+        </form>
+</div>
+<script>
+    $('#city_id').change(function () {
+        var cityId = $('#city_id').val();
+        if (cityId != 0){
+            var cityName = $("#city_id").find('option:selected').text();
+            map.centerAndZoom(cityName);
+            $('#lng').val('');
+            $('#lat').val('');
+        }
+    });
+    $('#area_id').change(function () {
+        var areaId = $('#area_id').val();
+        if (areaId != 0){
+            var cityName = $("#city_id").find('option:selected').text();
+            var areaName = $("#area_id").find('option:selected').text();
+            var myGeo = new BMap.Geocoder();
+            // 将地址解析结果显示在地图上,并调整地图视野
+            myGeo.getPoint(areaName, function(point){
+                if (point) {
+                    map.centerAndZoom(point, 16);
+                    document.getElementById('lat').value = point.lat;
+                    document.getElementById('lng').value = point.lng;
+                    var p = new BMap.Point(point.lng,point.lat);
+                    var mk = new BMap.Marker(p);
+                    map.clearOverlays();
+                    map.addOverlay(mk);
+                    mk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                    document.getElementById('lat').value = "";
+                    document.getElementById('lng').value = "";
+                }
+            },cityName);
+        }
+    });
+    //    $('#business_id').change(function () {
+    //        var businessId = $('#business_id').val();
+    //        if (businessId != 0){
+    //            var business = $('#business_id').children('option[value = '+businessId+']');
+    //            var businessName = business[0].innerText;
+    //        }
+    //
+    //    });
+    $(function () {
+        $('.is_pay').click(function () {
+            $('#is_pay').css('display','none');
+        });
+        $('.is_fan').click(function () {
+            $('#is_fan').css('display','none');
+            if($(this).val() == 0){
+                $('#fan').val(0);
+            }
+        });
+        $('.is_new').click(function () {
+            $('#is_new').css('display','none');
+        });
+        $("#checkForm").Validform({
+            tiptype:function(msg,o,cssctl){
+                //msg：提示信息;
+                //o:{obj:*,type:*,curform:*}, obj指向的是当前验证的表单元素（或表单对象），type指示提示的状态，值为1、2、3、4， 1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态, curform为当前form对象;
+                //cssctl:内置的提示信息样式控制函数，该函数需传入两个参数：显示提示信息的对象 和 当前提示的状态（既形参o中的type）;
+
+                if(!o.obj.is("form")){ //验证表单元素时o.obj为该表单元素，全部验证通过提交表单时o.obj为该表单对象;
+                    var objtip=o.obj.next().find(".Validform_checktip");
+
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+
+                    var infoObj=o.obj.next();
+
+                    if(o.type==2){
+                        infoObj.fadeOut(0);
+                    }else{
+                        if(infoObj.is(":visible")){return;}
+                        var left=o.obj.offset().left,
+                                top=o.obj.offset().top;
+
+                        infoObj.css({
+                            left:left,
+                            top:top-45
+                        }).show().animate({
+                            top:top-35
+                        },200);
+                    }
+
+                }
+            },ajaxPost:false,
+            datatype:{
+                "isIdCardNo":function(num,obj,curform,regxp){
+                    //参数gets是获取到的表单元素值，obj为当前表单元素，curform为当前验证的表单，regxp为内置的一些正则表达式的引用;
+                    //if (isNaN(num)) {alert("输入的不是数字！"); return false;}
+                    var len = num.length, re;
+                    if (len == 15)
+                        re = new RegExp(/^(\d{6})()?(\d{2})(\d{2})(\d{2})(\d{2})(\w)$/);
+                    else if (len == 18)
+                        re = new RegExp(/^(\d{6})()?(\d{4})(\d{2})(\d{2})(\d{3})(\w)$/);
+                    else {
+                        //alert("输入的数字位数不对。");
+                        return false;
+                    }
+                    var a = num.match(re);
+                    if (a != null)
+                    {
+                        if (len==15)
+                        {
+                            var D = new Date("19"+a[3]+"/"+a[4]+"/"+a[5]);
+                            var B = D.getYear()==a[3]&&(D.getMonth()+1)==a[4]&&D.getDate()==a[5];
+                        }
+                        else
+                        {
+                            var D = new Date(a[3]+"/"+a[4]+"/"+a[5]);
+                            var B = D.getFullYear()==a[3]&&(D.getMonth()+1)==a[4]&&D.getDate()==a[5];
+                        }
+                        if (!B) {
+                            //alert("输入的身份证号 "+ a[0] +" 里出生日期不对。");
+                            return false;
+                        }
+                    }
+                    if(!re.test(num)){
+                        //alert("身份证最后一位只能是数字和字母。");
+                        return false;
+                    }
+                    return true;
+                },
+                "isEmail":function(gets,obj,curform,regxp){
+                    //参数gets是获取到的表单元素值，obj为当前表单元素，curform为当前验证的表单，regxp为内置的一些正则表达式的引用;
+                    //if (isNaN(num)) {alert("输入的不是数字！"); return false;}
+                    var re = new RegExp(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ );
+                    if(!re.test(gets)){
+                        return false;
+                    }
+                    return true;
+                },
+                "isMobilePhone":function(gets,obj,curform,regxp){
+                    if(!(/^1[3|4|5|7|8]\d{9}$/.test(gets))) {
+                        return false;
+                    }
+                },
+                "isPhone":function(gets,obj,curform,regxp){
+                    if(!(/(^(\d{3,4}-)?\d{7,8})$|^((1[0-9][0-9]\d{8}$))/.test(gets))) {
+                        return false;
+                    }
+                },
+                "is_pay":function(){
+                    // 5.0 版本之后，要实现二选一的验证效果，datatype 的名称 不 需要以 "option_" 开头;
+                    var isPayValue = $('.is_pay:checked').val();
+                    if (isPayValue == undefined){
+                        $('#is_pay').slideDown();
+                        return false;
+                    }
+                },
+                "is_fan":function(){
+                    // 5.0 版本之后，要实现二选一的验证效果，datatype 的名称 不 需要以 "option_" 开头;
+                    var isFanValue = $('.is_fan:checked').val();
+                    if (isFanValue == undefined){
+                        $('#is_fan').slideDown();
+                        return false;
+                    }
+                },
+                "is_new":function(){
+                    // 5.0 版本之后，要实现二选一的验证效果，datatype 的名称 不 需要以 "option_" 开头;
+                    var isNewValue = $('.is_new:checked').val();
+                    if (isNewValue == undefined){
+                        $('#is_new').slideDown();
+                        return false;
+                    }
+                }
+
+            },
+            showAllError:true
+
+        });
+    });
+    var photo_logo = $('#photo_logo').attr('src');
+    var photo_identity = $('#photo_identity').attr('src');
+    var photo_license = $('#photo_license').attr('src');
+    function checkImg() {
+        var photo_logoNew = $('#photo_logo').attr('src');
+        var photo_identityNew = $('#photo_identity').attr('src');
+        var photo_licenseNew = $('#photo_license').attr('src');
+        var content = um.hasContents();
+        var checkSign = 0;
+        if(photo_licenseNew == photo_license){
+            checkSign = 1;
+            $('#checkphoto_license').slideDown();
+            var heightLicense = $('#checkphoto_license').offset().top;
+            $(window).scrollTop(heightLicense - 300);
+        }
+        if(photo_identityNew == photo_identity){
+            checkSign = 1;
+            $('#checkphoto_identity').slideDown();
+            var heightIdentity = $('#checkphoto_identity').offset().top;
+            $(window).scrollTop(heightIdentity - 300);
+        }
+        if($('#lng').val() == '' || $('#lat').val() == '' ){
+            checkSign = 1;
+            $('#checkMap').slideDown();
+            var heightMap = $('#checkMap').offset().top;
+            $(window).scrollTop(heightMap - 300);
+        }
+        if(photo_logoNew == photo_logo){
+            checkSign = 1;
+            $('#checkphoto_logo').slideDown();
+            var heightLogo = $('#checkphoto_logo').offset().top;
+            $(window).scrollTop(heightLogo - 300);
+        }
+        if(!content){
+            checkSign = 1;
+            $('#contentDetial').slideDown();
+        }
+        if(checkSign == 1){
+            return false;
+        }
+    }
+</script>
+<include file='public:footer'/>

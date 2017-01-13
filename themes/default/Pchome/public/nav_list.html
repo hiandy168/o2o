@@ -1,0 +1,5 @@
+<volist name=":C('pchome_channel_list')" id="vo">
+    <li class="navLi">
+    <a <if condition="$ctl eq  $vo['current']"> class="navA  on"<else/>class="navA"</if> title="<{$vo.title}>" href="<{$vo.url}>" ><{$vo.title}></a>
+    </li>
+</volist>

@@ -1,0 +1,112 @@
+<div style="clear:both;"></div>
+
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/base.css" />
+            <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/footer.css" />
+    <div class="footer">
+    <div class="cont-box">
+                <div class="foot-service-box">
+                    <dl class="fl foot-service-list">
+                        <dt class="YaHei"><i class="foot-icon foot-icon-user"></i>新手入门</dt>
+                        <dd><a href="#"><b>&bull;</b>购物流程</a></dd>
+                        <dd><a href="#"><b>&bull;</b>商品验货与签收</a></dd>
+                        <dd><a href="#"><b>&bull;</b>联系客服</a></dd>
+                        <dd><a href="#"><b>&bull;</b>常见问题</a></dd>
+                    </dl>
+                    <dl class="fl foot-service-list">
+                        <dt class="YaHei"><i class="foot-icon foot-icon-service"></i>配送服务</dt>
+                        <dd><a href="#"><b>&bull;</b>配送进度查询</a></dd>
+                        <dd><a href="#"><b>&bull;</b>配送范围与运费</a></dd>
+                        <dd><a href="#"><b>&bull;</b>自提服务</a></dd>
+                    </dl>
+                    <dl class="fl foot-service-list">
+                        <dt class="YaHei"><i class="foot-icon foot-icon-pay"></i>支付方式</dt>
+                        <dd><a href="#"><b>&bull;</b>货到付款</a></dd>
+                        <dd><a href="#"><b>&bull;</b>网上支付</a></dd>
+                        <dd><a href="#"><b>&bull;</b>银行转账</a></dd>
+                        <dd><a href="#"><b>&bull;</b>抵用券使用</a></dd>
+                    </dl>
+                    <dl class="fl foot-service-list">
+                        <dt class="YaHei"><i class="foot-icon foot-icon-love"></i>售后服务</dt>
+                        <dd><a href="#"><b>&bull;</b>退换货政策</a></dd>
+                        <dd><a href="#"><b>&bull;</b>退换货地址</a></dd>
+                        <dd><a href="#"><b>&bull;</b>退款说明</a></dd>
+                        <dd><a href="#"><b>&bull;</b>售后服务电话</a></dd>
+                    </dl>
+                    <dl class="fl foot-service-list">
+                        <dt class="YaHei"><i class="foot-icon foot-icon-set"></i>自助服务</dt>
+                        <dd><a href="#"><b>&bull;</b>取消订单</a></dd>
+                        <dd><a href="#"><b>&bull;</b>退换货申请</a></dd>
+                        <dd><a href="#"><b>&bull;</b>在线投诉</a></dd>
+                        <dd><a href="#"><b>&bull;</b>补开发票</a></dd>
+                        <dd><a href="#"><b>&bull;</b>绑定手机邮箱</a></dd>
+                    </dl>
+                    <dl class="fl foot-service-list">
+                        <dt class="YaHei"><i class="foot-icon foot-icon-cooperate"></i>招商合作</dt>
+                        <dd><a href="#"><b>&bull;</b>好吉来入驻</a></dd>
+                        <dd><a href="#"><b>&bull;</b>招商政策</a></dd>
+                    </dl>
+                    <div class="clear"></div>
+                </div>
+            </div>
+ <div class="cont-box">
+  <div class="foot-tpic"><img src="__PUBLIC__/images/foot-t-pic.jpg" width="1200" height="64"></div>
+  <div class="foot-menu">
+   <a href="#">关于我们</a>|
+   <a href="#">联系我们</a>|
+   <a href="#">人才招聘</a>|
+   <a href="#">商家入驻</a>|
+   <a href="#">友情链接</a>|
+   <a href="#">销售联盟</a>|
+   <a href="#">帮助</a>
+  </div>
+   <div class="foot-cpyInfo">
+   <p>版权所有<a href="#" title="四川好吉来电子商务有限公司">四川好吉来电子商务有限公司</a><a href="#" title="ICP">蜀ICP备15012705号 网络文化经营许可证 编号 川网文：（2015）1283-012号</a>热线电话：400-0535-033</p>
+   <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51070402110025" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="http://www.haojilai.com/Public/static/images/beian.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">川公网安备 51070402110025号</p></a>
+      </div>
+   <p>
+   <a href="#"><img src="http://www.haojilai.com/Public/static/images/link_1.jpg" width="108" height="40" alt=""></a>
+   
+   </p>
+  </div>
+ </div>
+</div>
+<div class="topUp">
+    <ul>
+        <li class="topBack"><div class="topBackOn">回到<br />顶部</div></li>
+        <li class="topUpWx"><div class="topUpWxk"><img src="__PUBLIC__/img/wx.png" width="149" height="149" /><p>扫描二维码关注微信</p></div></li>
+    </ul>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 100) {
+                $(".topUp").show();
+                $(".indexpop").show();
+            } else {
+                $(".topUp").hide();
+                $(".indexpop").hide();
+            }
+            var ctl = "<{$ctl}>";
+            if(ctl == 'coupon'){
+                if ($(window).scrollTop() > 665) {
+                    $(".spxq_xqT2").show();
+                } else {
+                    $(".spxq_xqT2").hide();
+                }
+            }else{
+                if ($(window).scrollTop() > 750) {
+                    $(".spxq_xqT2").show();
+                } else {
+                    $(".spxq_xqT2").hide();
+                }
+            }
+        });
+        $(".topBack").click(function () {
+            $("html,body").animate({scrollTop: 0}, 200);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<include file="public:header" />
+<link href="__PUBLIC__/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="__PUBLIC__/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/messages_zh.min.js"></script>
+<link href="__TMPL__/statics/css/chaoshi/shequchaoshi.css" rel="stylesheet" type="text/css"/>
+<script src="__TMPL__/statics/js/chaoshi/validate.js"></script>
+<script src="__TMPL__/statics/js/chaoshi/myLayer.js"></script>
+<form action="<{:U('chaoshiorder/cancel')}>" method="post" >
+<div id="quxiaodingdan" style="">
+    <div style="padding:10px;">
+        <table>
+            <tr>
+                <td class="td_right font_tk" style="width:20%">订单编号：</td>
+                <td class="xiugai"><span class="font_bh"><{$_GET['order_id']}></span></td>
+            </tr>
+            <tr>
+                <td class="td_right font_tk" valign="top">取消原因：</td>
+                <td class="xiugai">
+                    <p><input type="radio" name="remark" value="无法备齐货物" checked />无法备齐货物</p><br />
+                    <p><input type="radio" name="remark" value="不是有效订单" />不是有效订单</p><br />
+                    <p><input type="radio" name="remark" value="买家主动要求" />买家主动要求</p><br />
+                    <p><input type="radio" name="remark" value="其他原因" id="otherReason" />其他原因</p><br />
+                    <input type="hidden" name="order_id" value="<{$_GET['order_id']}>" />
+                    <p style="padding-right:20px;visibility: hidden" id="otherReason_input"><input type="text" id="input_or" name="" class="form-control"  /></p>
+                </td>
+            </tr>
+            <script>
+                $('input[type="radio"]').click(function(){
+                    if (this.value == 3){
+                        $('#input_or').val('');
+                        $('#otherReason_input').css("visibility","visible");
+                    }
+                    else{
+                        $('#otherReason_input').css("visibility","hidden");
+                    }
+                });
+            </script>
+            <tr>
+                <td colspan="2" align="center" valign="middle" style="padding-top:20px;width:500px;">
+                    <button class="btn_dingdan" onclick="quxiao(0)">提交</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </div>
+</form>

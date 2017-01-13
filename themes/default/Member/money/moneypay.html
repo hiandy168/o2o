@@ -1,0 +1,38 @@
+<include file="public:header"/>
+<div class="content_right">  
+<style>
+.con_right_font .payment {
+    background: none repeat scroll 0 0 #fd3c00;
+    border: 0 none;
+    color: #fff;
+    font-family: "微软雅黑";
+    font-size: 18px;
+    line-height: 38px;
+    text-align: center;
+    width: 110px;
+    float:left;
+    margin-left:-10px;
+    margin-top:35px;
+	border-radius: 5px;
+}
+</style>
+    <div class="con_right">
+        <div class="con_right_nav" style="border-bottom:1px solid #cecece; padding: 10px 0px 20px 0px; font-size: 14px;">余额充值</div>
+        <div class="con_right_font">
+            <div class="password_nr">
+                <div class="password_input">
+                    <div class="left">充值：</div>
+                    <div class="lef" style="line-height: 30px;"><{$money}></div>
+                </div>
+                <div class="password_input">
+                    <div class="left"><p>需要支付金额：</p></div>
+                    <div class="lef" style="line-height: 30px; color:#f12000;"><{$money}></div>
+                </div>
+                <{$button}>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="public:footer"/>
+ 
+

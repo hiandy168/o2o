@@ -1,0 +1,74 @@
+  <div class="container">
+    <div class=" meau">
+      <div class="col-xs-4 meau-left">
+        <a href="<{:U('pchome/index/index')}>" class="pull-left">
+          <img src="__PUBLIC__/images/logo.jpg" width="193" height="63">
+        </a>
+        <div class="pull-left">
+          <h4 class="meau-h4"><{$city_name}></h4>
+          <a href="<{:U('pchome/city/index')}>"><button class="meau-btn">切换城市</button></a>
+        </div>
+      </div>
+
+      <div class="col-xs-5 meau-mid">
+        <div class="input-group">
+        <a href="<{:U('pchome/chaoshi/index')}>">更换收货地址</a>
+<!--           <form action="<{:U('chaoshi/shoplist')}>" method="post" id="form1"> -->
+          	<input type="hidden" id="city_id" name="city_id" value="<{$city_id}>"/>
+            <input type="text" class="form-control meau-mid-text"  id="form2" name="chaoshi"  value="" placeholder="请输入搜索地址">
+            <span class="input-group-addon  meau-search" id="search">搜索</span>
+<!--           </form> -->
+        </div>
+      </div>
+      	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=K6NUCfSkWYRoWgpp7ssdfPc2"></script>
+	    <script type="text/javascript">
+	    var ac = new BMap.Autocomplete(//建立一个自动完成的对象
+	            {"input": "form2"
+	            });
+		$('#search').click(function(){
+			var city_id = $('#city_id').val();
+			if(!city_id){
+				layer.msg('请选择城市');
+				return false;
+			}
+			var gc= new BMap.Geocoder();
+	        var myValue = '<{$city_name}>'+$('#form2').val();
+			if(!myValue){
+				layer.msg('请输入地址');
+				return false;
+			}
+	        baidu_position(gc,myValue,city_id);
+		});
+	    //递归定位
+	    function baidu_position(obj,key,city_id){
+	        
+	        obj.getPoint(key,function(options){
+	           
+				if(!options){
+				 
+	                 key = key.substr(0,key.length-1);
+				     if(key!=""){
+	                    baidu_position(obj,key,city_id);
+				     }else{
+					    layer.msg('地点查询失败，请修改搜索地址');
+	                }
+					return false;
+				}else{
+				url = '<{:U('chaoshi/shoplist')}>';				
+	            $.post("<{:U('pchome/chaoshi/set_cookie')}>",{'name':'chaoshi_addr_search','value':key},function(){
+	                $.post("<{:U('pchome/chaoshi/set_cookie_lng_lat')}>",{'lng':options.lng,'lat':options.lat},function(){
+	                	location.href = url;
+	                });
+	            }); 		
+	            }				
+			});
+	    }
+	    </script>
+<!--       <div class="col-md-3 meau-right pull-right">
+        <p>
+          购物车去结算
+          <span>(0)</span>
+          <img src="__TMPL__statics/css/chaoshi/images/list2.gif"></p>
+      </div> -->
+    </div>
+  </div>

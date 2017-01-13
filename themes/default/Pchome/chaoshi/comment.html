@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>好吉来超市店铺</title>
+  
+  <link href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="__TMPL__statics/css/chaoshi/shopstyle.css">
+  <link rel="stylesheet" type="text/css" href="__TMPL__statics/css/chaoshi/salelist.css">
+  <link rel="stylesheet" type="text/css" href="__TMPL__statics/css/chaoshi/store.css">
+  <script type="text/javascript" src="__TMPL__statics/js/jquery.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/js/fancyzoom/zoom.js"></script>
+  <script src="__PUBLIC__/js/layer/layer.js"></script>
+  <script src="__TMPL__statics/js/jquery.cookie.js"></script>
+  <!--[if lt IE 9]>
+  <script src="__PUBLIC__/js/browser-check.js"></script>
+  <![endif]-->
+  
+  <!--[if lt IE 9]>
+  <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <!-- 顶部左边 -->
+  <nav class="navbar navbar-default nav-fixed-top nav-top">
+    <div class="container nav-main">
+      <div class="navbar-header">
+        <a class="navbar-brand starlogo" href="javascript:void(0)">
+          <img src="__TMPL__statics/css/chaoshi/images/shopstar.jpg" alt="收藏好吉来" class="shopstar" />
+          <span>收藏好吉来</span>
+        </a>
+      </div>
+      <!-- 顶部左边结束 -->
+
+      <!-- 顶部中间 -->
+      <div>
+        <ul class="nav navbar-nav navbar-right nav-right">
+        <if condition="empty($MEMBER)">
+          <li>
+            <a href="<{:U('passport/login')}>" class="color">[登录]</a>
+          </li>
+          <li>
+            <a href="<{:U('passport/register')}>" class="color">[免费注册]</a>
+          </li>              
+          <else/>
+          <li>
+          	<a>欢迎 <{$MEMBER.nickname}> 来到<{$CONFIG.site.sitename}></a>
+          </li>
+          <li>
+       		<a href="<{:U('pchome/passport/logout')}>" >退出登录</a>
+          </li>
+          </if>
+          <li>
+            <a href="<{:U('pchome/index/index')}>" class="color">好吉来首页</a>
+          </li>
+          <li>
+            <a href="<{:U('member/index/index')}>">
+              <span>我的好吉来</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="<{:U('shangjia/index/index')}>">
+              <span>卖家中心</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li>
+<!--           <li>
+            <a href="">
+              <span>收藏夹</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li> -->
+        </ul>
+      </div>
+
+      <!-- 顶部左边 -->
+<!--       <div>
+        <ul  class="nav navbar-nav navbar-right nav-right">
+          <li>
+            <a href="#">
+              <img src="__TMPL__statics/css/chaoshi/images/shouji.gif">
+              <span class="shouji">手机好吉来</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="kefu">客户服务</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="#">联系我们</a>
+          </li>
+        </ul>
+      </div> -->
+      <!-- 顶部右边结束 --> </div>
+  </nav>
+  <!-- 顶部完成 ！-->
+
+  <!-- LOGO部分 -->
+      <include file="chaoshipublic:header" />
+  <!-- 内容部分 -->
+  <div class="container">
+  <div class="contentLeft">
+  <div class="paging">
+    <ul>
+      <li>
+        <a href="<{:U('chaoshi/index')}>">首页</a>
+      </li>
+      <span>&gt;</span>
+      <li>
+        <a href="<{:U('chaoshi/shoplist',array('lng'=>$lng,'lat'=>$lat))}>">社区超市</a>
+      </li>
+      <span>&gt;</span>
+      <li>
+        <a href="<{:U('chaoshi/shop',array('store_id'=>$detail['store_id'],'lng'=>$lng,'lat'=>$lat))}>"><{$detail.store_name}></a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="shop-header">
+    <div>
+      <ul class="nav navbar-nav navbar-left">
+        <li class=" shop_nav">
+          <a href="<{:U('chaoshi/shop',array('store_id'=>$detail['store_id'],'lng'=>$lng,'lat'=>$lat))}>" class="" >商品</a>
+          <a href="javascript:;" class="evalute item" >评价</a>
+        </li>
+      </ul>
+      <hr/>
+    </div>
+  </div>
+              
+    <!-- 评论 -->
+    <div class="comment">
+      <div class="comment-header">
+        <form action="">
+        <fieldset>
+          <legend class="legend">评论选择</legend>
+          <ul>
+            <li><input type="radio" name="all" id="all"><label for="all" id="lall">全部评论<span>< <{$all_count}> ></span></label></li>
+            <li><input type="radio" name="h" id="good"><label for="good" id="lgood">好评<span>< <{$h_count}> ></span></label></li>
+            <li><input type="radio" name="m" id="mid"><label for="mid" id="lmid">中评<span>< <{$m_count}> ></span></label></li>
+            <li><input type="radio" name="l" id="bad"><label for="bad" id="lbad">差评<span>< <{$l_count}> ></span></label></li>
+          </ul>
+        </fieldset>
+      </form>
+      </div>
+      <hr/>
+      <div class="comment-content">
+      <foreach name="list" item="var">
+      <div  class="comment-content_list">
+            <div class="comment-content_left">
+          <figure>
+            <img src="<{$users[$var['user_id']]['face']|get_remote_file_path=###}>" alt="">
+            <figcaption style="font-size:10px;"><{$users[$var['user_id']]['nickname']}></figcaption>
+          </figure>
+        </div>
+        <div class="comment-content_mid">
+          <div class="pingfen">
+            <ul>
+            <php>for($i=0;$i<$var['score'];$i++) {</php>
+              <li><img src="__TMPL__statics/css/chaoshi/images/star.jpg" alt=""></li>
+			<php>};</php>
+            </ul>
+            <strong><eq name="var.score" value="5">好评</eq><if condition="$var.score elt 4 and $var.score egt 2">中评</if><elt name="var.score" value="1">差评</elt></strong>
+          </div>
+          <div class="shopShow clearfix">
+            <ul>
+            <foreach name="pics" item="pic">
+ 			<eq name="pic.comment_id" value="$var.comment_id">
+               <li class="pic"><a href="#pic_<{$pic['pic_id']}>"><img src="<{$pic['pic']|get_remote_file_path=###}>"></a></li>
+               <div id="pic_<{$pic['pic_id']}>" style="display:none;"><img src="<{$pic['pic']|get_remote_file_path=###}>" /></div>
+            </eq>   
+            </foreach>
+            </ul>
+          </div>
+          <p><{$var.contents}></p>
+          <if condition="!empty($var['reply'])"><p class="huifu">回复：<{$var.reply}></p></if>
+        </div>
+        <div class="comment-content-right">
+          <p><{$var.show_date}></p>
+        </div>
+        <div class="line"></div>
+      </div>
+      </foreach>
+      </div>
+
+      <div class="x">
+        <b><{$page}></b>
+      </div>  
+    </div>
+ </div>
+</div>
+    <!--评价结束-->
+
+
+
+
+
+
+
+  <!--底部 -->
+  <div class="container">
+    <div class="footer1 clearfix">
+      <div class="col-xs-2 col col-1">
+        <div class="media">
+          <div class="media-left media-top">
+            <img src="__TMPL__statics/css/chaoshi/images/user1.gif" alt="" class="media-object"></div>
+          <div class="media-body">
+            <h4 class="media-heading footerlist-1">新手指南</h4>
+            <ul class="text-muted user">
+              <calldata mdl="article" where="cate_id = 22 " cache="600" order="article_id asc" limit="0,4">
+                <li>
+                  <span>·</span>
+                  <a href="<{:U('news/detail',array('article_id'=>$item['article_id']))}>">
+                    <{$item.title}>
+                  </a>
+                </li>
+              </calldata>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2 col">
+        <div class="media">
+          <div class="media-left media-top">
+            <img src="__TMPL__statics/css/chaoshi/images/user2.gif" alt="" class="media-object"></div>
+          <div class="media-body">
+            <h4 class="media-heading footerlist-1">服务管理规范</h4>
+            <ul class="text-muted user">
+              <calldata mdl="article" where="cate_id = 31 " cache="600" order="article_id asc" limit="0,4">
+                <li>
+                  <span>·</span>
+                  <a href="<{:U('news/detail',array('article_id'=>$item['article_id']))}>">
+                    <{$item.title}>
+                  </a>
+                </li>
+              </calldata>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2 col">
+        <div class="media">
+          <div class="media-left media-top">
+            <img src="__TMPL__statics/css/chaoshi/images/user3.gif" alt="" class="media-object"></div>
+          <div class="media-body">
+            <h4 class="media-heading footerlist-1">支付方式</h4>
+            <ul class="text-muted user">
+              <calldata mdl="article" where="cate_id = 24 " cache="600" order="article_id asc" limit="0,4">
+                <li>
+                  <span>·</span>
+                  <a href="<{:U('news/detail',array('article_id'=>$item['article_id']))}>">
+                    <{$item.title}>
+                  </a>
+                </li>
+              </calldata>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2 col">
+        <div class="media">
+          <div class="media-left media-top">
+            <img src="__TMPL__statics/css/chaoshi/images/user4.gif" alt="" class="media-object"></div>
+          <div class="media-body">
+            <h4 class="media-heading footerlist-1">网络防骗知识</h4>
+            <ul class="text-muted user">
+              <calldata mdl="article" where="cate_id = 35 " cache="600" order="article_id asc" limit="0,4">
+                <li>
+                  <span>·</span>
+                  <a href="<{:U('news/detail',array('article_id'=>$item['article_id']))}>">
+                    <{$item.title}>
+                  </a>
+                </li>
+              </calldata>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2 col">
+        <div class="media">
+          <div class="media-left media-top">
+            <img src="__TMPL__statics/css/chaoshi/images/user5.gif" alt="" class="media-object"></div>
+          <div class="media-body">
+            <h4 class="media-heading footerlist-1">自助服务</h4>
+            <ul class="text-muted user">
+              <calldata mdl="article" where="cate_id = 26 " cache="600" order="article_id asc" limit="0,4">
+                <li>
+                  <span>·</span>
+                  <a href="<{:U('news/detail',array('article_id'=>$item['article_id']))}>">
+                    <{$item.title}>
+                  </a>
+                </li>
+              </calldata>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2 col col-right">
+        <div class="media">
+          <div class="media-left media-top">
+            <img src="__TMPL__statics/css/chaoshi/images/user6.gif" alt="" class="media-object"></div>
+          <div class="media-body">
+            <h4 class="media-heading footerlist-1">招商合作</h4>
+            <ul class="text-muted user">
+              <calldata mdl="article" where="cate_id = 27 " cache="600" order="article_id asc" limit="0,4">
+                <li>
+                  <span>·</span>
+                  <a href="<{:U('news/detail',array('article_id'=>$item['article_id']))}>">
+                    <{$item.title}>
+                  </a>
+                </li>
+              </calldata>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 底部第二部分 -->
+    <div class="row footer2">
+      <div class="col-xs-2 col-2">
+        <div class="media footer-left-1">
+          <div class="media-left media-top">
+            <img src="__TMPL__statics/css/chaoshi/images/user7.gif" alt=""></div>
+          <div class="media-body footer-h4">
+            <h4 class="media-heading footerlist-2">好及时</h4>
+            <p class="footer-text">部分区县支持24小时内送货上门</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2 col-3">
+        <div class="media footer-left-1">
+          <div class="media-left">
+            <img src="__TMPL__statics/css/chaoshi/images/user8.gif" alt=""></div>
+          <div class="media-body footer-h4">
+            <h4 class="media-heading footerlist-2">好服务</h4>
+            <p class="footer-text">7天无理由放心退</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2 col-4">
+        <div class="media">
+          <div class="media-left">
+            <img src="__TMPL__statics/css/chaoshi/images/user9.gif" alt=""></div>
+          <div class="media-body footer-h4">
+            <h4 class="media-heading footerlist-2">好实惠</h4>
+            <p class="footer-text">天天低价 放心购</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2 col-5">
+        <div class="media">
+          <div class="media-left">
+            <img src="__TMPL__statics/css/chaoshi/images/user10.gif" alt=""></div>
+          <div class="media-body footer-h4">
+            <h4 class="media-heading footerlist-2">好商品</h4>
+            <p class="footer-text">正品保证 购物无忧</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2 col-6">
+        <div class="media">
+          <div class="media-left">
+            <img src="__TMPL__statics/css/chaoshi/images/user11.gif" alt=""></div>
+          <div class="media-body footer-h4">
+            <h4 class="media-heading footerlist-2">好方便</h4>
+            <p class="footer-text">遍布你身边</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 脚部 -->
+  <footer class="footrlist-3">
+    <div class="container">
+      <ul>
+        <li>
+          <a href="">关于我们</a>
+          <span>|</span>
+        </li>
+        <li>
+          <a href="">联系我们</a>
+          <span>|</span>
+        </li>
+        <li>
+          <a href="">人才招聘</a>
+          <span>|</span>
+        </li>
+        <li>
+          <a href="">商家入驻</a>
+          <span>|</span>
+        </li>
+        <li>
+          <a href="">友情链接</a>
+          <span>|</span>
+        </li>
+        <li>
+          <a href="">销售联盟</a>
+          <span>|</span>
+        </li>
+        <li>
+          <a href="">帮助</a>
+        </li>
+      </ul>
+      <p>
+        <span>版权所有</span>
+        <span>四川好吉来电子商务有限公司</span>
+        <span>蜀ICP备15012705号-1</span> 热线电话：400-0535-033
+      </p>
+    </div>
+  </footer>
+        <script  type="text/javascript">
+             $(function(){
+              	$("#food_lists>li").each(function(i){
+	                if(!((i+1)%4)){
+	                  $(this).css({"margin-right":0})
+		                }
+	              });
+              
+                var type = '<{$type}>';
+    			switch(type){ 
+    					case 'h':
+    						$('#lgood').attr('class','default');
+    						$('#good').attr('checked','checked');
+    						break;
+    					case 'm': 
+    						$('#lmid').attr('class','default');
+    						$('#mid').attr('checked','checked');
+    						break;
+    					case 'l': 
+    						$('#lbad').attr('class','default');
+    						$('#bad').attr('checked','checked');
+    						break;
+    					default: 
+    						$('#lall').attr('class','default');
+    						$('#all').attr('checked','checked');
+    						break;
+    				}
+              	
+				$('#good').change(function(){
+					var good = $(this).prop('checked');					
+					if(good){
+						location.href = '<{:U('chaoshi/comment')}>?store_id=<{$store_id}>&type=h';
+					}
+				});
+				$('#mid').change(function(){
+					var mid = $(this).prop('checked');					
+					if(mid){
+						location.href = '<{:U('chaoshi/comment')}>?store_id=<{$store_id}>&type=m';
+					}
+				});
+				$('#bad').change(function(){
+					var bad = $(this).prop('checked');					
+					if(bad){
+						location.href = '<{:U('chaoshi/comment')}>?store_id=<{$store_id}>&type=l';
+					}
+				});
+				$('#all').change(function(){
+					var all = $(this).prop('checked');					
+					if(all){
+						location.href = '<{:U('chaoshi/comment')}>?store_id=<{$store_id}>';
+					}
+				});			
+				$('.pic a').fancyZoom({scaleImg: true, closeOnClick: true,width:400, height:300});
+              });	
+          </script>
+		</body>
+        </html>
+
+<!-- 检测浏览器版本过低时弹出框样式 -->
+<div class="check-browser none">
+    <p class="check-tit">hi!你的浏览器版本过低，可能存在风险，建议升级浏览器:</p>
+    <p class="browser-list"><a href="http://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html">谷歌Chrome</a><a href="http://www.firefox.com.cn/">火狐Firefox</a></p>
+    <p class="layer-erweima">或者直接用<span>好吉来APP扫码浏览:</span></p>
+    <div>
+        <div class="erweimaList">
+            <img src="__PUBLIC__/images/erweima.png" alt="">
+        </div>
+        <div class="erweimaList">
+            <img src="__PUBLIC__/images/erweima.png" alt="">
+        </div>
+    </div>
+    
+</div>

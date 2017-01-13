@@ -1,0 +1,213 @@
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/base.css" />
+        	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/footer.css" />
+    <div class="footer">
+    <div class="cont-box">
+				<div class="foot-service-box">
+					<volist  name="helpCates" id="helpCate">
+                        <dl class="fl foot-service-list">
+                            <dt class="YaHei"><i class="<{$helpCate['icon']}>"></i><{$helpCate['cate_name']}></dt>
+                            <volist  name="helpCate['son']" id="helpCa">
+                                <dd><a href="<{:U('Pchome/helpcenter/index',['cate_id'=>$helpCa['cate_id']])}>"><b>&bull;</b><{$helpCa['cate_name']}></a></dd>
+                            </volist>
+                        </dl>
+					</volist>
+					<div class="clear"></div>
+				</div>
+			</div>
+ <div class="cont-box">
+  <div class="foot-tpic"><img src="__PUBLIC__/images/foot-t-pic.jpg" width="1200" height="64"></div>
+  <div class="foot-menu">
+   <a href="<{:U('article/system',array('content_id'=>1))}>">关于我们</a>|
+   <a href="<{:U('article/system',array('content_id'=>3))}>">用户协议</a>|
+   <a href="<{:U('article/system',array('content_id'=>2))}>">新闻中心</a>|
+   <a href="<{:U('openshop/index')}>">加入我们</a>|
+   <a href="<{:U('article/system',array('content_id'=>5))}>">法律声明</a>|
+   <a href="<{:U('article/system',array('content_id'=>4))}>">合作伙伴</a>|
+   <a href="<{:U('Pchome/helpcenter/index',array('cate_id'=>39))}>">联系我们</a>
+  </div>
+   <div class="foot-cpyInfo">
+   <p>版权所有<a href="#" title="四川好吉来电子商务有限公司">四川好吉来电子商务有限公司</a><a href="#" title="ICP">蜀ICP备15012705号 网络文化经营许可证 编号 川网文：（2015）1283-012号</a>热线电话：400-0535-033</p>
+   <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51070402110025" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="__PUBLIC__/img/beian.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">川公网安备 51070402110025号</p></a>
+      </div>
+   <p>
+   <a href="#"><img src="__PUBLIC__/images/link_1.jpg" width="108" height="40" alt=""></a>
+   
+   </p>
+
+  </div>
+ </div>
+</div>
+
+<style type="text/css">
+	/*返回头部样式开始*/
+
+.topUp {position:fixed;height:100%;bottom:0px;right:0px;z-index:999;}
+.sidebarLeft{position:relative;width:40px;height:100%;background:#262626;float:left;}
+.fixRight-top>ul>li{margin-top:15px;}
+.fixRight-top{position:absolute;bottom:280px;right:0;}
+.user-top>img{margin-top:0px;}
+.siderUser-left{position:absolute;top:16px;right:60px;height:40px;width:80px;background:#787878;line-height:40px;text-align:center;z-index:2;display:none;}
+div..siderUser-left.hover{display:block;}
+.siderUser-left a{color:#fff;height:40px;display:block;}
+.fixRight-top li.sideCar{height:125px;color:#fff;overflow:hidden;}
+.sideBcar-top>img{margin-top:-55px;}
+p.sideBcar-mid{height:55px;font-size:12px;padding:0 14px;}
+p.sideBcar-bottom{width:20px;height:20px;border-radius:50%;background:#911618;border:1px solid #911618;text-align:center;line-height:16px;margin-left:10px;}
+p.sideBcar-bottom span{font-family:simsun;}
+.siderAsset,.siderCollect,.sideStore{height:65px;overflow:hidden;}
+.siderAsset-top>img{margin-top:-175px;}
+.siderCollect-top>img{margin-top:-240px;}
+.sideStore-top>img{margin-top:-315px;}
+.siderAsset p,.siderCollect p,.sideStore p{color:#fff;font-size:12px;font-family:simsun;margin-top:0px;margin-left:8px;}
+.fixRight-top li:hover,.fixRight-top li.hover{background:#8c060b;cursor:pointer;}
+
+.fixRight-bottom{ position:absolute;bottom:0px;right:0px;width:40px;}
+.fixRight-bottom li,.siderUser{width:40px;height:40px;overflow:hidden;}
+.fixRight-bottom>ul>li{margin-top:10px;}
+.kefu-top,.wx-top,.back-top,.user-top,.sideBcar-top,.siderAsset-top,.siderCollect-top,.sideStore-top{height:40px;position:relative;}
+.kefu-top>img{margin-top:1px;}
+.kefu_open,.topBackOn{position:absolute;right:60px;height:40px;width:80px;background:#787878;line-height:40px;text-align:center;color:#fff;z-index:2;}
+.kefu_open{top:10px;}
+.kefu_open a{color:#fff;display:block;height:40px;}
+.topBack .sanRight,.kefu .sanRight,.siderUser-left .sanRight{width:0;height:0;border-top:5px solid transparent;border-left:5px solid #787878;border-bottom:5px solid transparent;position:absolute;top:15px;right:-5px;}
+li.hover .kefu_open:hover,li.hover .topBackOn:hover,.siderUser-left:hover{background:#d71719;color:#fff;}
+div.two_code.hover{display:block;}
+.two_code .sanRight{width:0;height:0;border-top:5px solid transparent;border-left:5px solid #787878;border-bottom:5px solid transparent;position:absolute;top:60px;right:-5px;}
+.wx-top>img{margin-top:-45px;}
+.two_code{position:absolute;top:15px;right:40px;width:110px;height:110px;padding:10px;background:#787878;}
+.two_code>img{vertical-align:middle;}
+.back-top>img{margin-top:-90px;}
+.topBackOn{top:110px;}
+li.hover .kefu_open:hover .sanRight,li.hover .topBackOn:hover .sanRight,.siderUser-left:hover .sanRight{border-left:5px solid #d71719;}
+.fixRight-bottom>ul>li:hover{background:#d71719;color:#fff;cursor:pointer;}
+.kefu_open,.topBackOn,.two_code{display:none;}
+
+/* 购物车 */
+.sidebarRight{width:300px;height:100%;float:right;background:#E6E6E6;position:relative;}
+.sidebarRight-top{height:30px;line-height:30px;padding:0 15px;}
+.sidebarRight-top label{float:left;font-size:12px;color:#808080;margin-left:5px;}
+.inputAll{float:left;}
+.seeAll{float:right;}
+.seeAll a{font-size:12px;color:#808080;}
+
+.sidebarRight-mid-info{padding:5px 15px;background:#fff;}
+.sidebarRight-mid-top-left{margin-top:2px;}
+.sidebarRight-mid-top-left,.sidebarRight-mid-top-mid,.sidebarRight-mid-bottom-left,.sidebarRight-mid-bottom-img{float:left;}
+.sidebarRight-mid-top-right,.sidebarRight-mid-bottom-right{float:right;}
+.sidebarRight-mid-top-mid{margin-left:5px;}
+.sidebarRight-mid-top-mid span{font-size:12px;}
+.sidebarRight-mid-list{padding-bottom:5px;border-bottom:1px solid #ccc;}
+.sidebarRight-mid-top-right strong{font-size:12px;font-weight:normal;color:#666;}
+.sidebarRight-mid-bottom{padding-top:5px;}
+.sidebarRight-mid-bottom-left{margin-top:20px;}
+.sidebarRight-mid-bottom-img{margin-left:5px;}
+.sidebarRight-mid-bottom-img img{display:block;width:50px;height:50px;}
+.sidebarRight-mid-bottom-right span{display:block;margin-top:15px;font-size:12px;}
+
+.sidebarRight-bottom{position:absolute;bottom:0px;width:100%;margin-bottom:15px;}
+.ebarRight-bottom-left{float:left;margin-left:15px;font-size:12px;}
+.ebarRight-bottom-right{float:right;margin-right:15px;color:#d71719;}
+.sidebarRight-bottom-bottom a{display:block;width:270px;height:40px;line-height:40px;text-align:center;background:#d71719;margin-left:15px;margin-top:10px;color:#fff;font-size:14px;font-weight:bold;}
+.sidebarRight-bottom-bottom a:hover{background:#9b0006;}
+
+.sidebarRight{margin-right:-300px;}
+/*返回头部样式结束*/
+
+.detail_spxq_qg_tit{ display:inline-block; width:60px; padding-right:15px; color:#999; line-height:24px; text-align:right;}
+
+/*重复使用部分结束*/
+
+/* 浏览器检测弹出框 */
+.check-browser{width:500px;height:400px;background-color:#FF4400;padding:20px 40px 40px;border:10px solid #000;box-sizing:border-box;}
+.check-tit{font:bold 16px/40px simsun;color:#fff;}
+.browser-list{margin-top:10px;}
+.browser-list a{display:inline-block;width:140px;height:38px;background-color:#e8e8e8;color:#71A403;font:14px/38px "微软雅黑";text-align:center;margin-right:30px;}
+.browser-list a:hover{color:#d71719;font-weight:bold;}
+.layer-erweima{font:bold 16px/40px simsun;color:#fff;margin-top:20px;margin-bottom:10px;}
+.layer-erweima span{font-size:20px;margin-left:5px;}
+.erweimaList{float:left;margin-right:25px;}
+.erweimaList img{width:135px;height:135px;}
+.none{display:none;}
+
+
+
+</style>
+
+
+<script>
+	$(function(){
+		$(".kefu").hover(function(){
+			$(".kefu_open").finish().fadeIn(100).animate({"right":"-=20px"},300);
+		},
+		function(){
+			$(".kefu_open").finish().animate({"right":"+=20px"},300).fadeOut(100);	
+		});
+		$(".siderUser").hover(function(){
+			$(".siderUser-left").finish().fadeIn(100).animate({"right":"-=20px"},300);
+		},
+		function(){
+			$(".siderUser-left").finish().animate({"right":"+=20px"},300).fadeOut(100);	
+		});
+		$(".topBack").hover(function(){
+			$(".topBackOn").finish().fadeIn(100).animate({"right":"-=20px"},300);
+		},
+		function(){
+			$(".topBackOn").finish().animate({"right":"+=20px"},300).fadeOut(100);	
+		});
+		$(".wx-top").hover(function(){
+			$(".two_code").addClass("hover");
+		})
+		$(".fixRight-top li").click(function(){
+			$(this).addClass("hover");
+			$($(this).siblings()).removeClass("hover");
+		})
+		$(document).on("click",function(e){
+			$(".two_code").removeClass("hover");
+			e.stopPropagation();
+		});
+		$(".topBackOn").click(function(){
+			$("html,body").animate({
+				scrollTop:0
+			},800);
+		});
+		$(".sideCar").click(function(sideCar){
+			if($(".sidebarRight").css("margin-right")=="-300px"){
+				$(".sidebarRight").animate({"margin-right":"+=300px"},300);	
+			}else{
+				$(".sidebarRight").animate({"margin-right":"-=300px"},300);
+				$(this).removeClass("hover");	
+			}
+			sideCar.stopPropagation();
+		});
+	});
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+          var hm = document.createElement("script");
+          hm.src = "//hm.baidu.com/hm.js?76b7a8df7f038757afa0ddb41135b1f7";
+          var s = document.getElementsByTagName("script")[0];
+       	  s.parentNode.insertBefore(hm, s);
+     })();
+</script>
+		
+<!-- 检测浏览器版本过低时弹出框样式 -->
+<div class="check-browser none">
+    <p class="check-tit">hi!你的浏览器版本过低，可能存在风险，建议升级浏览器:</p>
+    <p class="browser-list"><a href="http://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html">谷歌Chrome</a><a href="http://www.firefox.com.cn/">火狐Firefox</a></p>
+    <p class="layer-erweima">或者直接用<span>好吉来APP扫码浏览:</span></p>
+    <div>
+        <div class="erweimaList">
+            <img src="__PUBLIC__/images/erweima.png" alt="">
+        </div>
+        <div class="erweimaList">
+            <img src="__PUBLIC__/images/erweima.png" alt="">
+        </div>
+    </div>
+    
+</div>
+	
+
+
+

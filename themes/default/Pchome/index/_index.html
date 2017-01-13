@@ -1,0 +1,983 @@
+
+<include file="public:header" /> 
+<include file="public:top"/>
+<include file="public:nav"/>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.sy_flexslider').flexslider({
+            directionNav: true,
+            slideshowSpeed: 3000,
+            pauseOnAction: false
+        });
+        $('.hotShop_flexslider').flexslider({
+            animation: "slide",
+            direction: "vertical",
+            easing: "swing",
+            controlNav: false,
+            slideshowSpeed: 3000,
+        });
+    });//首页轮播js
+
+    $(function () {
+        
+        $("#meishi a").each(function (e) {
+            $(this).mouseover(function (event) {
+                $("#meishi a").removeClass("on");
+                $(this).addClass("on");
+                $("#sy_meishi_list_box .sy_buy_list").each(function (i) {
+                    if (e == i)
+                    {
+                        $(this).parent().find(".sy_buy_list").hide();
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });//首页美食部分结束
+
+        $("#shangcheng a").each(function (e) {
+            $(this).mouseover(function (event) {
+                $("#shangcheng a").removeClass("on");
+                $(this).addClass("on");
+                $("#sy_shangcheng_list_box .sy_buy_list").each(function (i) {
+                    if (e == i)
+                    {
+                        $(this).parent().find(".sy_buy_list").hide();
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });//首页商城部分结束
+        
+         $("#jiudian a").each(function (e) {
+            $(this).mouseover(function (event) {
+                $("#jiudian a").removeClass("on");
+                $(this).addClass("on");
+                $("#sy_jiudian_list_box .sy_buy_list").each(function (i) {
+                    if (e == i)
+                    {
+                        $(this).parent().find(".sy_buy_list").hide();
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });//首页酒店部分结束
+        
+        $("#lvyou a").each(function (e) {
+            $(this).mouseover(function (event) {
+                $("#lvyou a").removeClass("on");
+                $(this).addClass("on");
+                $("#sy_lvyou_list_box .sy_buy_list").each(function (i) {
+                    if (e == i)
+                    {
+                        $(this).parent().find(".sy_buy_list").hide();
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });//首页旅游部分结束
+        
+        $("#life a").each(function (e) {
+            $(this).mouseover(function (event) {
+                $("#life a").removeClass("on");
+                $(this).addClass("on");
+                $("#sy_life_list_box .sy_buy_list").each(function (i) {
+                    if (e == i)
+                    {
+                        $(this).parent().find(".sy_buy_list").hide();
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });//首页生活服务结束
+         $("#waimai a").each(function (e) {
+            $(this).mouseover(function (event) {
+                $("#waimai a").removeClass("on");
+                $(this).addClass("on");
+                $("#sy_waimai_list_box .sy_buy_list").each(function (i) {
+                    if (e == i)
+                    {
+                        $(this).parent().find(".sy_buy_list").hide();
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });//首页生活服务结束
+        
+
+     
+    });
+</script>
+<!--首页第一部分开始-->
+<div class="sy_hotgz">
+    <div class="sy_flexslider">
+        <ul class="slides">
+            <calldata mdl="Ad" where=" closed=0 AND site_id=1 AND  city_id IN ({$city_ids}) and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,6" cache="3600" order="orderby asc">
+                 <li class="list" style="background:url('__ROOT__/attachs/<{$item.photo}>') center center no-repeat;">
+                     <a target="_blank" href="<{$item.link_url}>"></a>
+            </li>
+            </calldata>
+        </ul>
+    </div>
+    <div class="pagewd posit_lr_box">
+        <div class="left posit_l"><include file="public:cate"/></div>
+        <div class="right posit_r">
+            <div class="sy_download_box">
+                <div class="img"><a href="<{:U('pchome/shop/apply')}>"><img src="__TMPL__statics/images/sy_down.png" width="210" height="140" /></a></div>
+                <div class="btn_box">
+                    <a target="_blank" href="<{$CONFIG.site.android}>" class="btn bg_1">Andriod下载</a>
+                    <a target="_blank" href="<{$CONFIG.site.ios}>" class="btn bg_2">IOS下载</a>
+                </div>
+            </div>
+            <div class="sy_c1wx">
+                <div class="left"><img src="__PUBLIC__/img/wx.png" width="100" height="103" /></div>
+                <div class="right"><p>扫一扫体验微信O2O</p><img src="__TMPL__statics/images/sywx_03.png" width="64" height="45" /></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <ul class="sy_flsx">
+        <li class="bg_1">
+            <h3>热门抢购</h3>
+        <php>$i=0;</php>
+        <foreach name="tuancates" item="item">
+            <eq name="item.is_hot" value="1">
+            <php>$i++;if($i<10){</php>
+            <if condition="$item['parent_id'] eq 0">
+                <a title="<{$item.cate_name}>" target="_blank" href="<{:U('tuan/index',array('cat'=>$item['cate_id']))}>"><{$item['cate_name']}></a>
+                <else/>
+                <a title="<{$item.cate_name}>" target="_blank" href="<{:U('tuan/index',array('cat'=>$item['parent_id'],'cate_id'=>$item['cate_id']))}>"><{$item['cate_name']}></a>
+            </if>
+            <php>}</php>
+            </eq>
+
+        </foreach>
+        </li>
+        <li class="bg_2">
+            <h3>全部区域</h3>
+        <php>$i=0;</php>
+        <foreach name="areas" item="item">
+            <php>$i++;if($i<=10&&$item['city_id'] == $city_id){</php>
+            <a href="<{:U('tuan/index',array('area'=>$item['area_id']))}>"><{$item['area_name']}></a>
+            <php>}</php>
+        </foreach>
+        </li>
+        <li class="bg_3">
+            <h3>热门商圈</h3>
+        <php>$i=0;</php>
+        <foreach name="bizs" item="item">
+            <php>if(in_array($item['area_id'],$limit_area)&&$i<=10&&$item['is_hot']=='1'){</php>
+            <a href="<{:U('tuan/index',array('area'=>$item['area_id'],'business'=>$item['business_id']))}>"><{$bizs[$item['business_id']]['business_name']}></a>
+            <php>$i++;}</php>
+        </foreach>
+        </li>
+    </ul>
+</div>
+<div style="min-width:1350px;margin: 0 auto;">
+<!--首页第一部分结束-->
+<div class="pagewd" id="index-gun">
+    <!--首页美食部分开始-->
+    <div class="sy_FloorBt" data="top_1" id="floor1">
+        <div class="left sy_FloorBtz"><i class="ico_1 "></i><span class="bt cl_1">美食</span>
+        
+             <span class="sy_buy_tab" id="meishi">
+                       
+                <volist name="meishi_cate" id="item2" key="i">
+
+                    <a target="_blank" <php>if($i == 1) echo 'class="on"';</php> title="<{$item2.cate_name}>" href="<{:U('tuan/index',array('cat'=>$item2['cate_id']))}>"><{$item2.cate_name}></a>
+                    
+                </volist>
+            </span>
+        </div>
+        <div class="right"><a  title="美食" target="_blank" href="<{:U('tuan/index')}>">更多&gt;&gt;</a></div>
+    </div>
+    <div class="sy_buy_nr">
+        <div class="left sy_buy_ad"><img width="230" height="380" src="__PUBLIC__/img/xx-1.jpg" /></div>
+        <div class="right sy_buy_list_box" id="sy_meishi_list_box">
+        
+        
+         <!--美食循环开始-->
+            <div class="sy_buy_list_box_bg">
+                  
+                <volist name="meishi_cate" id="cate" key="im">
+                    
+                    <ul class="sy_buy_list" <eq name='im' value='1'>style="display:block;"<else /> style="display:none;"</eq>>
+                        <php>$cate_ids = D('Tuancate')->getChildren($cate['cate_id']); $cate_ids = join(',',$cate_ids);</php>
+                        <calldata mdl="Tuan" where="audit = 1 AND closed=0 AND city_id=$city_id AND cate_id IN ($cate_ids)" cache="600" order="orderby asc,sold_num desc" limit="0,10">
+                            <li>
+                                <div class="syPub_list">
+                                    <a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+	                                    <h3><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+	                                    <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+	                                </div>
+                                    <div class="btn_box">
+                                        <div class="left price">¥<{$item['tuan_price']}><del>¥<{$item['price']}></del></div>
+                                        <div class="right"><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="btn">立即购买</a></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </calldata>
+                    </ul>
+
+                   
+                </volist>
+                
+
+            </div>
+             <!--美食循环结束-->
+            
+            
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页抢购部分结束-->
+
+     <!--首页好商城部分开始-->
+    <div class="sy_FloorBt" data="top_2" id="floor2">
+        <div class="left sy_FloorBtz"><i class="ico_2"></i><span class="bt cl_2">好商城</span>
+        
+        
+        
+            <span class="sy_buy_tab" id="shangcheng">
+                <volist name="goods_cate_info" id="item2" key="i">
+
+                    <a target="_blank" <php>if($i == 1) echo 'class="on"';</php> title="<{$item2.cate_name}>" href="<{:U('mall/index',array('cat'=>$item2['cate_id']))}>"><{$item2.cate_name}></a>
+                    
+                </volist>
+            </span>
+        </div>
+        <div class="right"><a  title="好商城" target="_blank" href="<{:U('mall/index')}>">更多&gt;&gt;</a></div>
+    </div>
+    <div class="sy_buy_nr">
+        <div class="left sy_buy_ad"><img width="230" height="380" src="__PUBLIC__/img/haoshangcheng.jpg" /></div>
+        <div class="right sy_buy_list_box" id="sy_shangcheng_list_box">
+        
+        
+         <!--好商城循环开始-->
+            <div class="sy_buy_list_box_bg">
+                <volist name="goods_cate_info" id="cate" key="im">
+                    
+                    <ul class="sy_buy_list <{$im}>" <eq name='im' value='1'>style="display:block;"<else /> style="display:none;"</eq>>
+                        <php>$cate_ids = D('ReadGoodsCate')->unlimitedForLevel($cate['cate_id'],0); $cate_ids = join(',',array_map(function($n){return $n['cate_id'];},$cate_ids));</php>
+                        <calldata mdl="ReadGoods" where="cate_id IN ($cate_ids)" cache="1" order="goods_id desc" limit="0,10" >
+                            <li>
+                                <div class="syPub_list">
+                                    <a target="_blank" title="<{$item['title']}>" href="<{:U('mall/detail',array('goods_id'=>$item['goods_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a target="_blank" title="<{$item['title']}>" href="<{:U('mall/detail',array('goods_id'=>$item['goods_id']))}>" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                    <div class="btn_box">
+                                        <div class="left price">¥<{$item['tuan_price']}><del>¥<{$item['price']}><{$im}></del></div>
+                                        <div class="right"><a target="_blank" title="<{$item['title']}>" href="<{:U('mall/detail',array('goods_id'=>$item['goods_id']))}>" class="btn">立即购买</a></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </calldata>
+                    </ul>
+
+                   
+                </volist>
+
+            </div>
+             <!--好商城循环结束-->
+            
+            
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页好商城部分结束-->
+
+    <!--首页酒店部分开始-->
+    <div class="sy_FloorBt" data="top_3" id="floor3">
+        <div class="left sy_FloorBtz"><i class="ico_3"></i><span class="bt cl_3">酒店</span>
+        
+        
+        
+            <span class="sy_buy_tab" id="jiudian">
+                <volist name="jiudian_cate" id="item2" key="i">
+
+                    <a target="_blank" <php>if($i == 1) echo 'class="on"';</php> title="<{$item2.cate_name}>" href="<{:U('tuan/index',array('cat'=>$item2['cate_id']))}>"><{$item2.cate_name}></a>
+                    
+                </volist>
+            </span>
+        </div>
+        <div class="right"><a  title="酒店" target="_blank" href="<{:U('tuan/index')}>">更多&gt;&gt;</a></div>
+    </div>
+    <div class="sy_buy_nr">
+        <div class="left sy_buy_ad"><img width="230" height="380" src="__PUBLIC__/img/jiudian.jpg" /></div>
+        <div class="right sy_buy_list_box" id="sy_jiudian_list_box">
+        
+        
+         <!--酒店循环开始-->
+            <div class="sy_buy_list_box_bg">
+                <volist name="jiudian_cate" id="cate" key="im">
+                    
+                    <ul class="sy_buy_list" <eq name='im' value='1'>style="display:block;"<else /> style="display:none;"</eq>>
+                        <php>$cate_ids = D('Tuancate')->getChildren($cate['cate_id']); $cate_ids = join(',',$cate_ids);</php>
+                        <calldata mdl="Tuan" where="audit = 1 AND closed=0 AND city_id=$city_id AND cate_id IN ($cate_ids)" cache="600" order="orderby asc,sold_num desc" limit="0,10">
+                            <li>
+                                <div class="syPub_list">
+                                    <a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                    	<h3><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                    <div class="btn_box">
+                                        <div class="left price">¥<{$item['tuan_price']}><del>¥<{$item['price']}></del></div>
+                                        <div class="right"><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="btn">立即购买</a></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </calldata>
+                    </ul>
+
+                   
+                </volist>
+
+            </div>
+             <!--酒店循环结束-->
+            
+            
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页酒店部分结束-->
+    
+    <!--首页周边游/旅游部分开始-->
+    <div class="sy_FloorBt" data="top_4" id="floor4">
+        <div class="left sy_FloorBtz"><i class="ico_4"></i><span class="bt cl_4">周边游/旅游</span>
+        
+        
+        
+            <span class="sy_buy_tab" id="lvyou">
+                <volist name="lvyou_cate" id="item2" key="i">
+
+                    <a target="_blank" <php>if($i == 1) echo 'class="on"';</php> title="<{$item2.cate_name}>" href="<{:U('tuan/index',array('cat'=>$item2['cate_id']))}>"><{$item2.cate_name}></a>
+                    
+                </volist>
+            </span>
+        </div>
+        <div class="right"><a  title="周边游/旅游" target="_blank" href="<{:U('tuan/index')}>">更多&gt;&gt;</a></div>
+    </div>
+    <div class="sy_buy_nr">
+        <div class="left sy_buy_ad"><img width="230" height="380" src="__PUBLIC__/img/ee-1.jpg" /><a href="<{:U('tuan/nearby')}>" class="btn1"></a><a href="<{:U('tuan/index')}>" class="btn2"></a></div>
+        <div class="right sy_buy_list_box" id="sy_lvyou_list_box">
+        
+        
+         <!--周边游/旅游循环开始-->
+            <div class="sy_buy_list_box_bg">
+                <volist name="lvyou_cate" id="cate" key="im">
+                    
+                    <ul class="sy_buy_list" <eq name='im' value='1'>style="display:block;"<else /> style="display:none;"</eq>>
+                        <php>$cate_ids = D('Tuancate')->getChildren($cate['cate_id']); $cate_ids = join(',',$cate_ids);</php>
+                        <calldata mdl="Tuan" where="audit = 1 AND closed=0 AND city_id=$city_id AND cate_id IN ($cate_ids)" cache="600" order="orderby asc,sold_num desc" limit="0,10">
+                            <li>
+                                <div class="syPub_list">
+                                    <a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                      <h3><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                      <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>	
+                                    </div>
+                                    <div class="btn_box">
+                                        <div class="left price">¥<{$item['tuan_price']}><del>¥<{$item['price']}></del></div>
+                                        <div class="right"><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="btn">立即购买</a></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </calldata>
+                    </ul>
+                </volist>
+
+            </div>
+             <!--周边游/旅游循环结束-->
+            
+            
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页周边游/旅游部分结束-->
+	
+	<!--首页休闲娱乐部分开始-->
+    <div class="sy_FloorBt" data="top_5" id="floor5">
+        <div class="left sy_FloorBtz"><i class="ico_5"></i><span class="bt cl_5">休闲娱乐</span>
+        
+        
+        
+            <span class="sy_buy_tab" id="life">
+                <volist name="life_cate" id="item2" key="i">
+
+                    <a target="_blank" <php>if($i == 1) echo 'class="on"';</php> title="<{$item2.cate_name}>" href="<{:U('tuan/index',array('cat'=>$item2['cate_id']))}>"><{$item2.cate_name}></a>
+                    
+                </volist>
+            </span>
+        </div>
+        <div class="right"><a  title="休闲娱乐" target="_blank" href="<{:U('tuan/index')}>">更多&gt;&gt;</a></div>
+    </div>
+    <div class="sy_buy_nr">
+        <div class="left sy_buy_ad"><img width="230" height="380" src="__PUBLIC__/img/yule.gif" /><a href="<{:U('tuan/nearby')}>" class="btn1"></a><a href="<{:U('tuan/index')}>" class="btn2"></a></div>
+        <div class="right sy_buy_list_box" id="sy_life_list_box">
+        
+        
+         <!--休闲娱乐循环开始-->
+            <div class="sy_buy_list_box_bg">
+                <volist name="life_cate" id="cate" key="im">
+                    
+                    <ul class="sy_buy_list" <eq name='im' value='1'>style="display:block;"<else /> style="display:none;"</eq>>
+                        <php>$cate_ids = D('Tuancate')->getChildren($cate['cate_id']); $cate_ids = join(',',$cate_ids);</php>
+                        <calldata mdl="Tuan" where="audit = 1 AND closed=0 AND city_id=$city_id AND cate_id IN ($cate_ids)" cache="600" order="orderby asc,sold_num desc" limit="0,10">
+                            <li>
+                                <div class="syPub_list">
+                                    <a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                    	<h3><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+	                                    <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                    <div class="btn_box">
+                                        <div class="left price">¥<{$item['tuan_price']}><del>¥<{$item['price']}></del></div>
+                                        <div class="right"><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="btn">立即购买</a></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </calldata>
+                    </ul>
+
+                   
+                </volist>
+
+            </div>
+             <!--休闲娱乐循环结束-->         
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页休闲娱乐部分结束-->
+
+     <!--首页房产部分开始-->
+    <div class="sy_FloorBt" data="top_6" id="floor6">
+        <div class="left sy_FloorBtz"><i class="ico_6"></i><span class="bt cl_6">房产</span>
+            <span class="sy_buy_tab" id="fangchan">
+                
+            </span>
+        </div>
+        <div class="right"><a  title="房产" target="_blank" href="#"></a></div>
+    </div>
+    <div class="sy_buy_nr">
+        <div class="left sy_buy_ad"><img width="230" height="380" src="__PUBLIC__/img/fangchan.jpg" /></div>
+        <div class="right sy_buy_list_box" id="sy_fangchang_list_box">
+        
+        
+         <!--房产循环开始-->
+            <div class="sy_buy_list_box_bg">
+              <ul class="sy_buy_list" style="display:block;">                 
+                            <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/fangchan.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li>
+                            <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/fangchan.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/fangchan.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/fangchan.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/fangchan.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li>
+                             <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/fangchan.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li>
+                            <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/fangchan.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/fangchan.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/fangchan.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/fangchan.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li>  
+                    </ul>
+
+            </div>
+             <!--房产循环结束-->       
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页房产部分结束-->
+
+         <!--首页外卖部分开始-->
+    <div class="sy_FloorBt" data="top_7" id="floor7">
+        <div class="left sy_FloorBtz"><i class="ico_7"></i><span class="bt cl_7">外卖</span>
+            <span class="sy_buy_tab" id="waimai">
+                <a target="_blank" class="on" title="快餐" href="<{:U('pchome/ele/index')}>">快餐</a>
+                <a target="_blank"  title="社区超市" href="#">社区超市</a>
+                
+            </span>
+        </div>
+        <div class="right"></div>
+    </div>
+    <div class="sy_buy_nr">
+        <div class="left sy_buy_ad"><img width="230" height="380" src="__PUBLIC__/img/waimai.jpg" /></div>
+        <div class="right sy_buy_list_box" id="sy_waimai_list_box">   
+         <!--外卖循环开始-->
+            <div class="sy_buy_list_box_bg">                
+                    <ul class="sy_buy_list" style="display:block;">
+                        <calldata mdl="Ele" where="audit = 1 AND city_id=$city_id "  order="orderby asc,sold_num desc" limit="0,10" cache="600">
+                           
+                            <li>
+                                <div class="syPub_list">
+                                    <a target="_blank" title="<{$item['title']}>" href="<{:U('ele/shop',array('shop_id'=>$item['shop_id']))}>"><img src="__ROOT__/attachs/<{$shops[$item['shop_id']]['photo']}>"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a target="_blank" title="<{$item['title']}>" href="<{:U('ele/shop',array('shop_id'=>$item['shop_id']))}>" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                  
+                                </div>
+                            </li>
+                        </calldata>
+                    </ul>
+                     <ul class="sy_buy_list" style="display:none;">
+                        <li></li>
+                    </ul>
+            </div>
+             <!--外卖循环结束-->
+            
+            
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页外卖部分结束-->
+    
+    <!--首页二手部分开始-->
+    <div class="sy_FloorBt" data="top_8" id="floor8">
+        <div class="left sy_FloorBtz"><i class="ico_8"></i><span class="bt cl_8">二手</span>
+            <span class="sy_buy_tab" id="waimai">
+               
+            </span>
+        </div>
+        <div class="right"></div>
+    </div>
+    <div class="sy_buy_nr">
+        <div class="left sy_buy_ad"><img width="230" height="380" src="__PUBLIC__/img/ershou.jpg" /></div>
+        <div class="right sy_buy_list_box" id="sy_waimai_list_box">
+        
+        
+         <!--二手循环开始-->
+            <div class="sy_buy_list_box_bg">               
+				              <ul class="sy_buy_list" style="display:block;">                 
+                            <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/ershou.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li>
+                            <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/ershou.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/ershou.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/ershou.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/ershou.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li>
+                             <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/ershou.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li>
+                            <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/ershou.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/ershou.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/ershou.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/ershou.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li>  
+                    </ul>
+            </div>
+             <!--二手循环结束-->
+            
+            
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页二手部分结束-->
+
+    <!--首页生活服务部分开始-->
+    <div class="sy_FloorBt" data="top_9" id="floor9">
+        <div class="left sy_FloorBtz"><i class="ico_9"></i><span class="bt cl_9">生活服务</span>
+            <span class="sy_buy_tab" id="shenhuo">
+                
+            </span>
+        </div>
+        <div class="right"><a  title="好商城" target="_blank" href="<{:U('mall/index')}>">更多&gt;&gt;</a></div>
+    </div>
+    <div class="sy_buy_nr">
+        <div class="left sy_buy_ad"><img width="230" height="380" src="__PUBLIC__/img/fuwu.jpg" /></div>
+        <div class="right sy_buy_list_box" id="sy_shenhuo_list_box">
+            <ul class="sy_buy_list" style="display:block;">                      
+                            <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/jiazheng.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li>
+                            <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/jiazheng.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/jiazheng.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/jiazheng.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/jiazheng.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li>
+                             <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/jiazheng.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>                                   
+                                </div>
+                            </li>
+                            <li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/jiazheng.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/jiazheng.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/jiazheng.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li><li>
+                                <div class="syPub_list">
+                                    <a  title="<{$item['title']}>" href="javascript:void(0);"><img src="__PUBLIC__/img/jiazheng.png"  width="200" height="200" /></a>
+                                    <div class="syPub-sctioin-box">
+                                        <h3><a  title="<{$item['title']}>" href="javascript:void(0);" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                        <p class="overflow_clear"><{:msubstr($item['intro'],0,18)}></p>
+                                    </div>
+                                   
+                                </div>
+                            </li>
+                        
+                    </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页生活部分结束-->
+
+</div>
+<div class="indexpop" id="fox-food">
+    <ul>
+        <li><a href="#floor1"><div class="wz">美食</div></a></li>
+        <li><a href="#floor2"><div class="wz">商城</div></a></li>
+        <li><a href="#floor3"><div class="wz">酒店</div></a></li>
+        <li><a href="#floor4"><div class="wz">旅游</div></a></li>
+        <li><a href="#floor5"><div class="wz">娱乐</div></a></li>
+        <li><a href="#floor6"><div class="wz">房产</div></a></li>
+        <li><a href="#floor7"><div class="wz">外卖</div></a></li>
+        <li><a href="#floor8"><div class="wz">二手</div></a></li>
+        <li><a href="#floor9"><div class="wz">信息</div></a></li>
+    </ul>
+</div>
+<script>
+    $(function () {
+        $("#fox-food li").each(function (e) {
+            $(this).click(function (event) {
+                $(".radius3").each(function (i) {
+                    if (e == i)
+                    {
+                        $("html,body").animate({scrollTop: $(this).offset().top}, 500);
+                        event.preventDefault();
+                    }
+                });
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            var top = $(document).scrollTop();          //定义变量，获取滚动条的高度
+            var menu = $("#fox-food");                      //定义变量，抓取#menu
+            var items = $("#index-gun").find(".sy_FloorBt");    //定义变量，查找.item
+
+            var curId = "";                             //定义变量，当前所在的楼层item #id 
+
+            items.each(function () {
+                var m = $(this);                        //定义变量，获取当前类
+                var itemsTop = m.offset().top;        //定义变量，获取当前类的top偏移量
+                if (top > itemsTop - 300) {
+                    curId = "#" + m.attr("id");
+                } else {
+                    return false;
+                }
+            });
+
+            //给相应的楼层设置cur,取消其他楼层的cur
+            var curLink = menu.find(".cur");
+            if (curId && curLink.attr("href") != curId) {
+                curLink.removeClass("cur");
+                menu.find("[href=" + curId + "]").addClass("cur");
+            }
+            // console.log(top);
+        });
+        /*控制*/
+        $(window).scroll(function () {
+            if ($(window).scrollTop() < 420) {
+                $(".indexpop").css("top", "420px");
+                $(".indexpop").css("bottom", "auto");
+                $(".indexpop").css("display", "none");
+
+            }
+            else {
+                $(".indexpop").css("top", "160px");
+                $(".indexpop").css("bottom", "auto");
+                $(".indexpop").css("display", "block");
+            }
+        });
+        
+
+    });
+
+/*$(".topBack").click(function() {
+                    $("html,body").animate({
+                        scrollTop: 0
+                    }, 200);
+                });
+            $(window).scroll(function() {
+                    var top = $(document).scrollTop(); //定义变量，获取滚动条的高度
+                    var menu = $(".topUp"); //定义变量，抓取topUp
+                    var items = $(".footerOut"); //定义变量，查找footerOut 
+                    items.each(function() {
+                        var m = $(this);
+                        var itemsTop = m.offset().top; //定义变量，获取当前类的top偏移量
+                        if (itemsTop - 360 <= top - 360) {
+                            menu.css('bottom', '360px');
+                            menu.css('top', 'auto');
+                        } else {
+                            menu.css('bottom', '0px');
+                            menu.css('top', 'auto');
+                        }
+                    });
+                });*/
+           
+        
+
+
+</script>
+<include file="public:footer" />
+
+
+
+
+
+
+
+

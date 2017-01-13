@@ -1,0 +1,48 @@
+<include file="public:header" />
+	<link href="__PUBLIC__/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>	   
+	<script src="__PUBLIC__/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/js/jquery-validation/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+    <script src="__PUBLIC__/js/jquery-validation/messages_zh.min.js"></script>
+    
+     <link href="__TMPL__/statics/css/chaoshi/shequchaoshi.css" rel="stylesheet" type="text/css"/>
+    <script src="__TMPL__/statics/js/chaoshi/validate.js"></script>
+    <script src="__TMPL__/statics/js/chaoshi/myLayer.js"></script>
+    <form action="" method="post" id="form">
+        <div style="padding:20px;">
+            <table>
+                <tr>
+                    <td class="td_right font_tk">买家：</td>
+                    <td class="font_tk" colspan="3"><{$orderuser.nickname}></td>
+                </tr>
+                <tr>
+                    <td class="td_right font_tk">订单编号：</td>
+                    <td colspan="3"><span class="font_bh"><{$detail.order_id}></span></td>
+                </tr>
+                <tr>
+                    <td class="td_right font_tk" valign="center">收货地址：</td>
+                    <td>
+                        <div>
+                            <input type="text" name="receipt_addr" value="<{$detail.receipt_addr}>" style="width:307px;margin-top:10px" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right font_tk">联系人：</td>
+                    <td colspan="3"><input type="text" name="name" value="<{$detail.name}>" /></td>
+                </tr>
+                <tr>
+                    <td class="td_right font_tk">手机号码：</td>
+                    <td colspan="3"><input type="text" name="phone" value="<{$detail.phone}>" /></td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="center" valign="middle" style="padding-top:50px">
+                        <input type="button" value="发货" class="btn_dingdan" id="tijiaofahuo" style="width:120px;" />
+                    </td>
+                </tr>
+                <input type="hidden" name="order_id" value="<{$detail.order_id}>" />
+            </table>
+        </div>
+      </form>
+</body>
+</html>        

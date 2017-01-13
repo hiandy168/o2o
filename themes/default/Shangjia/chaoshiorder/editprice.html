@@ -1,0 +1,36 @@
+<include file="public:header" />
+	<link href="__PUBLIC__/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>	   
+	<script src="__PUBLIC__/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/js/jquery-validation/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+    <script src="__PUBLIC__/js/jquery-validation/messages_zh.min.js"></script>
+    
+     <link href="__TMPL__/statics/css/chaoshi/shequchaoshi.css" rel="stylesheet" type="text/css"/>
+    <script src="__TMPL__/statics/js/chaoshi/validate.js"></script>
+    <script src="__TMPL__/statics/js/chaoshi/myLayer.js"></script>
+    <form action="" method="post" id="form" onkeydown="if(event.keyCode==13)return false;">
+        <div style="padding:20px;">
+            <table>
+                <tr>
+                    <td class="td_right font_tk" style="width:20%">买家：</td>
+                    <td class="font_tk xiugai"><{$orderuser.nickname}></td>
+                </tr>
+                <tr>
+                    <td class="td_right font_tk">订单编号：</td>
+                    <td class="xiugai"><span class="font_bh"><{$detail.order_id}></span></td>
+                </tr>
+                <tr>
+                    <td class="td_right font_tk">修改价格：</td>
+                    <td class="xiugai"><input type="text" name="price" value="<{$detail.pay_price}>" class="form-control" style="width:200px;" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center" valign="middle" style="padding-top:50px;width:500px;">
+                        <input type="button" value="提交" class="btn_dingdan" id="tijiaoxiugai" />
+                    </td>
+                </tr>
+                <input type="hidden" name="order_id" value="<{$detail.order_id}>" />
+            </table>
+        </div>
+    </form>
+</body>
+</html>     

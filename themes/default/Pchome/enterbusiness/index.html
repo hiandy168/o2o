@@ -1,0 +1,101 @@
+<include file="public:header"/>
+<style>
+    .new:after{content: url('__TMPL__statics/images/new_news.png');margin-left:10px;}
+    ul li{height:31px;}
+    .img-box img{margin-bottom:4px;}
+</style>
+<div class="topTwo">
+    <div class="left">
+        <h1><a href="/index.php/pchome/index/index.html"><img width="193" height="63" src="/Public/images/logo.jpg"></a></h1>
+    </div>
+    <div class="right topTwo_b" style="position: relative;">
+        <div style="width: 240px; height: 46px; right: 0px; top: 0;"><img src="/Public/images/nav-tle.png" width="240" height="46"></div>
+    </div>
+</div>
+<div>
+    <img src="__TMPL__statics/images/ruzhu_btn.png" id="rz_btn" onclick="location.href='<{:U(\'shangjia/index/index\')}>'" style="position: absolute;cursor: pointer;left:44%;margin-top:18%;"/>
+    <img src="__TMPL__statics/images/ruzhu.png" id="rz_bg" style="width: 100%;min-width: 1200px;"/>
+
+</div>
+<div style="width:1170px;min-width:1170px;margin:0 auto;margin-top:25px;">
+    <img src="__TMPL__statics/images/ruzhu_step.png" />
+</div>
+<div style="width:100%;background:rgb(248,248,248);margin-top:30px;">
+    <div style="width:1170px;margin:0 auto;">
+        <div style="float:left;width:775px;">
+            <div style="font-size:24px;color:rgb(88,88,88);padding-top:40px;padding-bottom:40px;">合作商家</div>
+            <div style="margin-bottom:85px;" class="img-box">
+                <img src="__TMPL__statics/images/shop_1.png"  />
+                <img src="__TMPL__statics/images/shop_2.png"  />
+                <img src="__TMPL__statics/images/shop_3.png"  />
+                <img src="__TMPL__statics/images/shop_4.png"  />
+                <img src="__TMPL__statics/images/shop_5.png"  />
+                <img src="__TMPL__statics/images/shop_6.png"  />
+                <img src="__TMPL__statics/images/shop_7.png"  />
+                <img src="__TMPL__statics/images/shop_8.png"  />
+                <img src="__TMPL__statics/images/shop_9.png"  />
+                <img src="__TMPL__statics/images/shop_10.png" />
+            </div>
+        </div>
+        <div style="float:left;margin-left:75px;">
+            <div style="font-size:24px;color:rgb(88,88,88);padding-top:40px;padding-bottom:40px;">商家帮助</div>
+            <div>
+                <ul>
+                    <li><code style="font-size:12px;margin-right:5px;">•</code><a href="<{:U('news/index')}>">好吉来2017年度各类目续签考核标准公告</a></li>
+                    <li><code style="font-size:12px;margin-right:5px;">•</code><a href="<{:U('news/index')}>" class="new">好吉来2017招商标准</a></li>
+                    <li><code style="font-size:12px;margin-right:5px;">•</code><a href="<{:U('news/index')}>">美食商家资质要求</a></li>
+                    <li><code style="font-size:12px;margin-right:5px;">•</code><a href="<{:U('news/index')}>">社区超市2017年资费标注</a></li>
+                    <li><code style="font-size:12px;margin-right:5px;">•</code><a href="<{:U('news/index')}>">续签什么是i和开始？什么时候结束？</a></li>
+                    <li><code style="font-size:12px;margin-right:5px;">•</code><a href="<{:U('news/index')}>">什么是保证金？</a></li>
+                    <li><code style="font-size:12px;margin-right:5px;">•</code><a href="<{:U('news/index')}>" class="new">什么是技术服务费年费？</a></li>
+                    <li><code style="font-size:12px;margin-right:5px;">•</code><a href="<{:U('news/index')}>">哪些情况会被好吉来限制入驻？</a></li>
+                    <li><code style="font-size:12px;margin-right:5px;">•</code><a href="<{:U('news/index')}>">好吉来入驻申请如何查询审核进度？</a></li>
+                    <li><code style="font-size:12px;margin-right:5px;">•</code><a href="<{:U('news/index')}>">如何开多家店铺？</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+<script>
+    var bg_width = $('#rz_bg').css('width');
+    bg_width = bg_width.split('px');
+    var percent = bg_width[0] / 1903;
+    var btn_width = 260 * percent;
+    $('#rz_btn').css('width',btn_width);
+    var window_width = document.body.offsetWidth;
+    if(window_width <= 1200){
+        $('#rz_btn').css('left','527px');
+        $('#rz_btn').css('margin-top','215px');
+    }
+    else{
+        $('#rz_btn').css('left','44%');
+        $('#rz_btn').css('margin-top','18%');
+    }
+    $(function(){
+        $(window).resize(function() {
+            var bg_width = $('#rz_bg').css('width');
+            bg_width = bg_width.split('px');
+            var percent = bg_width[0] / 1903;
+            var btn_width = 260 * percent;
+            $('#rz_btn').css('width',btn_width);
+            var window_width = document.body.offsetWidth;
+            if(window_width <= 1200){
+                $('#rz_btn').css('left','527px');
+                $('#rz_btn').css('margin-top','215px');
+            }
+            else{
+                $('#rz_btn').css('left','44%');
+                $('#rz_btn').css('margin-top','18%');
+            }
+        });
+
+        $('#rz_btn').hover(function(){
+            $(this).attr('src','__TMPL__statics/images/ruzhu_btn_hover.png');
+        },function () {
+            $(this).attr('src','__TMPL__statics/images/ruzhu_btn.png');
+        })
+    })
+</script>
+
+<include file="public:footer_for_ruzhu"/>

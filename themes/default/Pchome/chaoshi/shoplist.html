@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>好吉来超市店铺</title>
+
+<link href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="__TMPL__statics/css/chaoshi/shopstyle.css">
+<link rel="stylesheet" type="text/css"
+	href="__TMPL__statics/css/chaoshi/shoplist.css">
+<link rel="stylesheet" type="text/css"
+	href="__TMPL__statics/css/chaoshi/shoplist-caution.css">
+
+<!--[if lt IE 9]>
+  <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+<script src="__TMPL__statics/js/jquery.js"></script>
+<script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+<script src="__TMPL__statics/js/js.js?v=20150718"></script>
+<script src="__PUBLIC__/js/layer/layer.js"></script>
+<!--[if lt IE 9]>
+  <script src="__PUBLIC__/js/browser-check.js"></script>
+  <![endif]-->
+</head>
+<body>
+	<!-- 顶部左边 -->
+	<include file="chaoshipublic:top" />
+	<!-- 顶部完成 ！-->
+
+	<!-- LOGO部分 -->
+
+	<include file="chaoshipublic:header" />
+	<!-- 内容部分 -->
+	<div class="container content-2">
+		<div class="btn-group content-group" role="group" aria-label="...">
+			<button type="button" id="noorderby"
+				class="btn btn-default btn-more content-btn">默认</button>
+			<button type="button" id="morderby"
+				class="btn btn-default content-btn">
+				按销量 <span class="glyphicon glyphicon-arrow-down"></span>
+			</button>
+			<button type="button" id="dorderby"
+				class="btn btn-default content-btn">
+				按送货速度 <span class="glyphicon glyphicon-arrow-down"></span>
+			</button>
+			<button type="button" id="sorderby"
+				class="btn btn-default content-btn">
+				起送价筛选 <span class="glyphicon glyphicon-arrow-down"></span>
+			</button>
+			<form class="content-form pull-left">
+				<input type="checkbox" name="" id="is_fan"
+				<eq name="is_fan" value="1">checked="checked"</eq>
+				> <label for="is_fan">下单立减</label> <input type="checkbox" name=""
+					id="is_new"
+				<eq name="is_new" value="1">checked="checked"</eq>
+				> <label for="is_new">新用户优惠</label> <input type="checkbox" name=""
+					id="is_pay"
+				<eq name="is_pay" value="1">checked="checked"</eq>
+				> <label for="is_pay">在线支付</label>
+			</form>
+		</div>
+	</div>
+
+	<!-- 内容开始 -->
+	<if condition="empty($list)">
+	<div class="content">
+		<div class="container">
+			<div class="cautionInfo">
+				<i><span class="glyphicon glyphicon-remove"></span></i>本地区没有搜索到数据!
+			</div>
+		</div>
+	</div>
+	</if>
+	<div class="container">
+
+		<div class="content-3 clearfix">
+			<foreach name="list" item="var">
+			<div class="shop1 pull-left">
+				<table>
+					<tr>
+						<th><a
+							href="<{:LinkTo('chaoshi/shop',array('store_id'=>$var['store_id']))}>">
+								<img src="<{$var.logo|get_remote_file_path=###}>"
+								alt="<{$var.store_name}>" class="store-list">
+						</a></th>
+					</tr>
+					<tr>
+						<td class="size"><a
+							href="<{:LinkTo('chaoshi/shop',array('store_id'=>$var['store_id']))}>"><{$var.store_name}></a></td>
+					<tr>
+						<td>
+							<ul>
+								<egt name="var.star_num" value="1">
+								<li><img src="__TMPL__statics/css/chaoshi/images/star.jpg" alt="#"></li>								
+								</egt>
+								<egt name="var.star_num" value="2">
+								<li><img src="__TMPL__statics/css/chaoshi/images/star.jpg" alt="#"></li>								
+								</egt>
+								<egt name="var.star_num" value="3">
+								<li><img src="__TMPL__statics/css/chaoshi/images/star.jpg" alt="#"></li>								
+								</egt>
+								<egt name="var.star_num" value="4">
+								<li><img src="__TMPL__statics/css/chaoshi/images/star.jpg" alt="#"></li>								
+								</egt>
+								<egt name="var.star_num" value="5">
+								<li><img src="__TMPL__statics/css/chaoshi/images/star.jpg" alt="#"></li>								
+								</egt>
+								<em><{$var.star_num}>分</em>
+								<span class="sale">月售<{$var.month_num}>单</span>
+							</ul>
+						</td>
+					</tr>
+					<tr class="size2">
+						<td><span class="pull-left">起送:￥<{$var.since_money}>&nbsp;
+								配送费:￥<{$var.logistics}></span> <span class="buy"> <img
+								src="__TMPL__statics/css/chaoshi/images/time.jpg" class="time"
+								alt="#"><{$var.distribution}>分钟
+						</span></td>
+					</tr>
+					</tr>
+				</table>
+				<div class="buy2">
+					<eq name="var.is_pay" value="1">
+					<img src="__TMPL__statics/css/chaoshi/images/fu.jpg" alt="付">
+					</eq>
+					<eq name="var.is_new" value="1">
+					<img src="__TMPL__statics/css/chaoshi/images/shou.jpg" alt="首">
+					</eq>
+					<eq name="var.is_fan" value="1">
+					<img src="__TMPL__statics/css/chaoshi/images/jian.jpg" alt="减">
+					</eq>
+				</div>
+				<eq name="var.is_open" value="0">
+				<div class="closedTime">
+					<a href=""> <b>CLOSED</b>
+						<p>店铺已打烊</p>
+					</a>
+				</div>
+				</eq>
+			</div>
+
+			</foreach>
+		</div>
+
+	</div>
+	<div class="paging pagination"><{$page}></div>
+	<div class="scroll"
+		style="position: fixed; bottom: 5px; right: 0; display: none">
+		<img class="back-to-top" src="__PUBLIC__/images/back_to_top.png"
+			style="width: 40px; height: 40px; cursor: pointer;" />
+	</div>
+	<script>
+      $(function () {
+          showScroll();
+          function showScroll() {
+              $(window).scroll(function () {
+                  var scrollValue = $(window).scrollTop();
+                  scrollValue > 100 ? $('div[class=scroll]').fadeIn() : $('div[class=scroll]').fadeOut();
+              });
+          }
+      });
+      $('.back-to-top').click(function(){
+          $("html,body").animate({
+              scrollTop:0
+          },200);
+      });
+      $('.back-to-top').mouseover(function(){
+          $('.back-to-top').attr('src','__PUBLIC__/images/back_to_top_hover.png');
+      });
+      $('.back-to-top').mouseout(function(){
+          $('.back-to-top').attr('src','__PUBLIC__/images/back_to_top.png');
+      });
+  </script>
+	<!-- 内容结尾 -->
+	<script>
+    $(function () {
+      $('#noorderby').click(function(){
+        location.href = '<{:U('chaoshi/shoplist')}>?is_pay=<{$is_pay}>&is_new=<{$is_new}>&is_fan=<{$is_fan}>';
+      });
+      $('#dorderby').click(function(){
+        location.href = '<{:U('chaoshi/shoplist')}>?order=d&is_pay=<{$is_pay}>&is_new=<{$is_new}>&is_fan=<{$is_fan}>';
+      });
+      $('#sorderby').click(function(){
+        location.href = '<{:U('chaoshi/shoplist')}>?order=s&is_pay=<{$is_pay}>&is_new=<{$is_new}>&is_fan=<{$is_fan}>';
+      });
+      $('#morderby').click(function(){
+        location.href = '<{:U('chaoshi/shoplist')}>?order=m&is_pay=<{$is_pay}>&is_new=<{$is_new}>&is_fan=<{$is_fan}>';
+      });
+
+      var orderby = '<{$order}>';
+      switch(orderby){
+        case 'd':
+          $('#dorderby').attr('class','btn btn-default content-btn btn-1');
+          break;
+        case 's':
+          $('#sorderby').attr('class','btn btn-default content-btn btn-1');
+          break;
+        case 'm':
+          $('#morderby').attr('class','btn btn-default content-btn btn-1');
+          break;
+        default:
+          $('#noorderby').attr('class','btn btn-default content-btn btn-1');
+          break;
+      }
+      $('#is_pay').change(function(){
+        var ispay = $(this).prop('checked');
+        if(ispay){
+          location.href = '<{:U('chaoshi/shoplist')}>?order=<{$order}>&is_pay=1&is_new=<{$is_new}>&is_fan=<{$is_fan}>';
+        }else{
+          location.href = '<{:U('chaoshi/shoplist')}>?order=<{$order}>&is_new=<{$is_new}>&is_fan=<{$is_fan}>';
+        }
+      });
+      $('#is_new').change(function(){
+        var isnew = $(this).prop('checked');
+        if(isnew){
+          location.href = '<{:U('chaoshi/shoplist')}>?order=<{$order}>&is_pay=<{$is_pay}>&is_new=1&is_fan=<{$is_fan}>';
+        }else{
+          location.href = '<{:U('chaoshi/shoplist')}>?order=<{$order}>&is_pay=<{$is_pay}>&is_fan=<{$is_fan}>';
+        }
+      });
+      $('#is_fan').change(function(){
+        var isfan = $(this).prop('checked');
+        if(isfan){
+          location.href = '<{:U('chaoshi/shoplist')}>?order=<{$order}>&is_pay=<{$is_pay}>&is_new=<{$is_new}>&is_fan=1';
+        }else{
+          location.href = '<{:U('chaoshi/shoplist')}>?order=<{$order}>&is_pay=<{$is_pay}>&is_new=<{$is_new}>';
+        }
+      });
+
+    });
+    $(function(){
+        $(".headerTop-right>ul.nav-right>li").hover(function(){
+          $(this).toggleClass("active");
+        });
+
+    //去掉店铺列表页对应最右边的有边距
+    for(var i=0;i<$(".content-3>.shop1").length;i++){
+      if(!((i+1)%5)){
+        $(".content-3>.shop1").eq(i).css({"margin-right":0});
+      }
+    }
+
+    });
+  </script>
+
+	<!--底部 -->
+	<div class="container">
+		<div class="footer1 clearfix">
+			<volist  name="helpCates" id="helpCate">
+				<div class="col-xs-2 col">
+					<div class="media">
+						<div class="media-left media-top">
+							<img src="<{$helpCate['icon']}>" alt="" class="media-object"></div>
+						<div class="media-body">
+							<h4 class="media-heading footerlist-1"><{$helpCate['cate_name']}></h4>
+							<ul class="text-muted user">
+								<volist  name="helpCate['son']" id="helpCa">
+									<li>
+										<span>·</span>
+										<a href="<{:U('Pchome/helpcenter/index',['cate_id'=>$helpCa['cate_id']])}>">
+											<{$helpCa['cate_name']}>
+										</a>
+									</li>
+								</volist>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</volist>
+		</div>
+
+		<!-- 底部第二部分 -->
+		<div class="row footer2">
+			<div class="col-xs-2 col-2">
+				<div class="media footer-left-1">
+					<div class="media-left media-top">
+						<img src="__TMPL__statics/css/chaoshi/images/user7.gif" alt="">
+					</div>
+					<div class="media-body footer-h4">
+						<h4 class="media-heading footerlist-2">好及时</h4>
+						<p class="footer-text">部分区县支持24小时内送货上门</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-2 col-3">
+				<div class="media footer-left-1">
+					<div class="media-left">
+						<img src="__TMPL__statics/css/chaoshi/images/user8.gif" alt="">
+					</div>
+					<div class="media-body footer-h4">
+						<h4 class="media-heading footerlist-2">好服务</h4>
+						<p class="footer-text">7天无理由放心退</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-2 col-4">
+				<div class="media">
+					<div class="media-left">
+						<img src="__TMPL__statics/css/chaoshi/images/user9.gif" alt="">
+					</div>
+					<div class="media-body footer-h4">
+						<h4 class="media-heading footerlist-2">好实惠</h4>
+						<p class="footer-text">天天低价 放心购</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-2 col-5">
+				<div class="media">
+					<div class="media-left">
+						<img src="__TMPL__statics/css/chaoshi/images/user10.gif" alt="">
+					</div>
+					<div class="media-body footer-h4">
+						<h4 class="media-heading footerlist-2">好商品</h4>
+						<p class="footer-text">正品保证 购物无忧</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-2 col-6">
+				<div class="media">
+					<div class="media-left">
+						<img src="__TMPL__statics/css/chaoshi/images/user11.gif" alt="">
+					</div>
+					<div class="media-body footer-h4">
+						<h4 class="media-heading footerlist-2">好方便</h4>
+						<p class="footer-text">遍布你身边</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- 脚部 -->
+	<footer class="footrlist-3">
+		<div class="container">
+			<ul>
+				<li><a href="">关于我们</a> <span>|</span></li>
+				<li><a href="">联系我们</a> <span>|</span></li>
+				<li><a href="">人才招聘</a> <span>|</span></li>
+				<li><a href="">商家入驻</a> <span>|</span></li>
+				<li><a href="">友情链接</a> <span>|</span></li>
+				<li><a href="">销售联盟</a> <span>|</span></li>
+				<li><a href="">帮助</a></li>
+			</ul>
+			<p>
+				<span>版权所有</span> <span>四川好吉来电子商务有限公司</span> <span>蜀ICP备15012705号-1</span>
+				热线电话：400-0535-033
+			</p>
+		</div>
+	</footer>
+</body>
+</html>
+
+<!-- 检测浏览器版本过低时弹出框样式 -->
+<div class="check-browser none">
+	<p class="check-tit">hi!你的浏览器版本过低，可能存在风险，建议升级浏览器:</p>
+	<p class="browser-list">
+		<a
+			href="http://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html">谷歌Chrome</a><a
+			href="http://www.firefox.com.cn/">火狐Firefox</a>
+	</p>
+	<p class="layer-erweima">
+		或者直接用<span>好吉来APP扫码浏览:</span>
+	</p>
+	<div>
+		<div class="erweimaList">
+			<img src="__PUBLIC__/images/erweima.png" alt="">
+		</div>
+		<div class="erweimaList">
+			<img src="__PUBLIC__/images/erweima.png" alt="">
+		</div>
+	</div>
+
+</div>

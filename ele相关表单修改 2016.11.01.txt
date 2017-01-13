@@ -1,0 +1,149 @@
+2016.11.01   bao_ele:
+改名：shop_name => store_name; logo_img => logo; addtime => create_time; telephone => phone(商家电话); boss_tel => con_phone; boss_name => contacts; pingfen => star_num
+添加：'' => identity_pic; '' => license_pic; '' => fans_num; '' => other; '' => distance; '' => begin_time
+删除：zhizhao => ''; qitaziliao => ''; 'store_name' => '';
+
+2016.11.01   bao_ele_order:
+添加：'' => remark; '' => is_reminder;
+
+2016.11.01   bao_ele_product:
+改名：stock => inventory;
+添加：'' => product_num; '' => product_time;
+删除：flag => '';
+
+2016.11.03  bao_ele_product_cate;
+将外卖的bao_ele_cate表停用，改为bao_ele_product_cate, 其结构与社区超市的bao_chaoshi_product_cate相同;
+
+
+2016.11.01   older
+shop_name => store_name; logo_img => logo; addtime => create_time; telephone => phone(商家电话); boss_tel => con_phone; boss_name => contacts; pingfen => star_num
+'' => identity_pic; '' => license_pic; '' => fans_num; '' => other; '' => distance; '' => begin_time
+zhizhao => ''; qitaziliao => ''; 'store_name' => '';
+CREATE TABLE `bao_ele` (
+  `store_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `shop_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '商家ID',
+  `shop_name` varchar(64) DEFAULT '0' COMMENT '冗余方便查询',
+  `city_id` smallint(5) unsigned DEFAULT '0',
+  `area_id` smallint(5) DEFAULT '0',
+  `business_id` smallint(5) DEFAULT '0',
+  `address` varchar(150) DEFAULT '0' COMMENT '外卖店铺的地址',
+  `lng` double(18,14) DEFAULT '0.00000000000000',
+  `lat` double(18,14) DEFAULT '0.00000000000000',
+  `logo_img` varchar(100) CHARACTER SET utf8mb4 DEFAULT '0' COMMENT '店铺图片',
+  `level` tinyint(1) unsigned DEFAULT '1' COMMENT '店铺级别1为个人2为企业',
+  `valid_time` int(10) unsigned DEFAULT '0' COMMENT '店铺有效时间',
+  `audit` tinyint(3) DEFAULT '0' COMMENT '0审核中1成功入驻2未通过',
+  `exame_explain` varchar(255) DEFAULT '0' COMMENT '审核理由',
+  `cate` varchar(64) DEFAULT '0',
+  `is_open` tinyint(1) DEFAULT '1' COMMENT '1 代表营业中',
+  `is_pay` tinyint(1) DEFAULT '0' COMMENT '1代表支持在线付款',
+  `is_fan` tinyint(1) DEFAULT '0' COMMENT '1 代表返现',
+  `fan_money` decimal(10,2) DEFAULT '0.00' COMMENT ' 比如填写的是9元 那么很可能也只会反1元也可能会返现几角几分！如果填写0就不返利',
+  `is_new` tinyint(1) DEFAULT '0',
+  `full_money` decimal(10,2) DEFAULT '0.00' COMMENT '满多少MONEY 立刻减几元',
+  `new_money` decimal(10,2) DEFAULT '0.00' COMMENT '新用户首单减多少钱',
+  `discount_money` decimal(10,2) DEFAULT '0.00' COMMENT '减多少钱  比如说 满20减5元',
+  `logistics` decimal(10,2) DEFAULT '0.00' COMMENT '0代表不收取配送费 填写其他的将代表收取',
+  `since_money` decimal(10,2) DEFAULT '0.00' COMMENT '起送价',
+  `month_num` int(10) DEFAULT '0' COMMENT '月销量',
+  `sold_num` int(10) DEFAULT '0',
+  `intro` varchar(1024) DEFAULT '0',
+  `orderby` tinyint(3) unsigned DEFAULT '100' COMMENT '数字越小排序越高',
+  `distribution` tinyint(3) unsigned DEFAULT '30' COMMENT '分钟  配送时间',
+  `rate` int(11) DEFAULT '60' COMMENT '费率 每个商品的结算价格',
+  `is_default` tinyint(1) DEFAULT '1' COMMENT '是否为默认1是0不是',
+  `range` smallint(5) DEFAULT '5000' COMMENT '配送范围',
+  `start_time` time NOT NULL DEFAULT '08:00:00' COMMENT '外卖开始营业时间',
+  `end_time` time NOT NULL DEFAULT '22:00:00' COMMENT '外卖打烊时间',
+  `pingfen` varchar(2) DEFAULT '5' COMMENT '评分',
+  `telephone` varchar(20) DEFAULT '0' COMMENT '商家电话',
+  `peisong_time` time DEFAULT '00:00:00' COMMENT '配送起始时间',
+  `peisongend_time` time DEFAULT '00:00:00' COMMENT '配送结束时间',
+  `store_name` varchar(255) DEFAULT '0' COMMENT '公司名称',
+  `boss_name` varchar(255) DEFAULT '0' COMMENT '联系人姓名',
+  `boss_tel` char(15) DEFAULT '0' COMMENT '联系人电话',
+  `email` varchar(100) DEFAULT '0' COMMENT '电子邮箱',
+  `corporate` varchar(50) DEFAULT '0' COMMENT '法定代表',
+  `licence` char(20) DEFAULT '0' COMMENT '营业执照编号',
+  `scope` varchar(1024) DEFAULT '0' COMMENT '法定经营范围',
+  `zhizhao` int(10) DEFAULT '0' COMMENT '营业执照图片',
+  `qitaziliao` int(10) DEFAULT '0' COMMENT '其它资料图片',
+  `card` char(15) DEFAULT '0' COMMENT '身份证编号',
+  `addtime` int(10) DEFAULT '0' COMMENT '填加时间',
+  `seok` varchar(120) DEFAULT '0' COMMENT '店铺关键字',
+  `is_tuijian` tinyint(1) DEFAULT '0' COMMENT '1为推荐店家',
+  `closed` tinyint(1) DEFAULT '0' COMMENT '1代表删除',
+  `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `money` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '店铺金额',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '商家状态0：正常1：整改中',
+  PRIMARY KEY (`store_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8 COMMENT='外卖店铺表';
+
+2016.11.01   older
+'' => remark; '' => is_reminder;
+CREATE TABLE `bao_ele_order` (
+  `order_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) DEFAULT '0',
+  `user_id` int(11) DEFAULT '0',
+  `addr_id` int(11) DEFAULT '0',
+  `total_price` decimal(10,2) DEFAULT '0.00',
+  `logistics` decimal(10,2) DEFAULT '0.00',
+  `need_pay` decimal(10,2) DEFAULT '0.00' COMMENT '需要支付的价格',
+  `num` int(11) DEFAULT '0',
+  `fan_money` decimal(10,2) DEFAULT '0.00' COMMENT '满多少',
+  `settlement_price` decimal(10,2) DEFAULT '0.00',
+  `status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '0待付款 1待发货  2已发货 3已取消  4退款  5 已完成',
+  `new_money` decimal(10,2) unsigned DEFAULT '0.00' COMMENT '新用户优惠',
+  `discount_money` decimal(10,2) DEFAULT '0.00' COMMENT '满减优惠',
+  `create_time` int(11) DEFAULT '0',
+  `create_ip` varchar(15) DEFAULT NULL,
+  `audit_time` int(11) DEFAULT '0',
+  `closed` tinyint(1) DEFAULT '0' COMMENT '1代表删除',
+  `month` int(11) DEFAULT '201501',
+  `name` varchar(15) DEFAULT NULL,
+  `phone` char(15) DEFAULT NULL,
+  `receipt_addr` tinytext COMMENT '地址',
+  `pay_price` decimal(10,2) DEFAULT '0.00' COMMENT '实际支付价格',
+  `send_start_time` time DEFAULT '00:00:00' COMMENT '送货开始时间',
+  `send_end_time` time DEFAULT '00:00:00' COMMENT '送货结束时间',
+  `send_time` int(11) DEFAULT '0' COMMENT '送达时间',
+  `is_comment` char(5) DEFAULT '0' COMMENT '1为已评价',
+  `finish_time` int(11) DEFAULT '0' COMMENT '收货时间',
+  `refund_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '退款0 ：未申请  1 ：已申请2 ：通过3 ：拒绝',
+  `pay_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 ：未支付  1 ：已支付2 ：已退款',
+  `pay_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1 ：货到付款 2 ：支付宝支付3：微信支付4 ：余额支付',
+  `arbitrament_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '仲裁0 ：未申请  1 ：已申请2 ：已处理',
+  `store_arbitrament_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '商家响应仲裁状态0：未提交资料1已提交',
+  `is_update_price` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否修改过价格0：否1：是',
+  `referer_status` tinyint(2) NOT NULL DEFAULT '-1' COMMENT '申请退款时订单状态',
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=361 DEFAULT CHARSET=utf8 COMMENT='外卖订单表';
+
+2016.11.01   older
+stock => inventory;
+'' => product_num; '' => product_time;
+flag => '';
+CREATE TABLE `bao_ele_product` (
+  `product_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(32) DEFAULT NULL COMMENT '产品名字',
+  `desc` varchar(255) NOT NULL COMMENT '产品描述',
+  `store_id` int(11) DEFAULT NULL COMMENT '商家ID',
+  `cate_id` int(11) DEFAULT NULL COMMENT '美食分类',
+  `photo` varchar(128) DEFAULT NULL COMMENT '美食封面',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '美食价格',
+  `stock` smallint(5) DEFAULT '1' COMMENT '库存数量',
+  `settlement_price` decimal(10,2) unsigned DEFAULT NULL,
+  `is_new` tinyint(1) DEFAULT '0',
+  `is_hot` tinyint(1) DEFAULT '0',
+  `is_tuijian` tinyint(1) DEFAULT '0',
+  `sold_num` int(11) DEFAULT '0',
+  `month_num` int(11) DEFAULT '0',
+  `create_time` int(11) unsigned DEFAULT NULL,
+  `create_ip` varchar(15) DEFAULT NULL,
+  `closed` tinyint(1) DEFAULT '0',
+  `audit` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0审核中1通过2不通过',
+  `is_out` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0为上架1为下架',
+  `flag` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否删除（0删除）',
+  PRIMARY KEY (`product_id`),
+  KEY `shop_id` (`store_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=265 DEFAULT CHARSET=utf8;

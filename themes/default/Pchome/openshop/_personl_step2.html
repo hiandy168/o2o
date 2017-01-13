@@ -1,0 +1,470 @@
+<include file="public:header" />
+<link href="__PUBLIC__/css/add.css" rel="stylesheet" type="text/css" /> 
+<script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/validform5.3.2.js"></script>
+
+<include file="public:top"/>
+<style type="text/css">
+    .Validform_checktip{margin-left:0;}
+    .info{
+        border:1px solid #ccc;
+        padding:2px 20px 2px 5px;
+        color:#666;
+        position:absolute;
+        display:none;
+        line-height:20px;
+        background-color:#fff;
+    }
+    .dec {
+        bottom: -8px;
+        display: block;
+        height: 8px;
+        overflow: hidden;
+        position: absolute;
+        left: 10px;
+        width: 17px;
+    }
+    .dec s {
+        font-family: simsun;
+        font-size: 16px;
+        height: 19px;
+        left: 0;
+        line-height: 21px;
+        position: absolute;
+        text-decoration: none;
+        top: -9px;
+        width: 17px;
+    }
+    .dec .dec1 {
+        color: #ccc;
+    }
+    .dec .dec2 {
+        color: #fff;
+        top: -10px;
+    }
+</style>
+<div class="cl"></div>
+<div class="main">
+    <ul class="fbMenu">
+        <li class="cur">1.提交资料</li>
+        <li>2.等待审核</li>
+        <li>3.开店成功</li>
+    </ul>
+    <div class="fbMain">
+        <h3>基本资料</h3>
+        <form method="post" action=""  target="baocms_frm" class="fbMain-one" id="checkForm" onsubmit="return checkIdCard()">
+            <table cellpadding="0" cellspacing="0" width="100%">
+               
+
+                <tr>
+                    <th>
+                        <span class="color_r">*</span>姓名：
+                    </th>
+                    <td>
+                        <input type="text" name="realname" value="<{$auth_info.realname}>" class="btn_1" datatype="*" nullmsg="姓名不能为空" />
+                        <div class="info"><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <span class="color_r">*</span>身份证号码：
+                    </th>
+                    <td>
+                       <input type="text" name="identity" value="<{$auth_info.identity}>" class="btn_1" datatype="isIdCardNo" errormsg="请输入正确的身份证号码" nullmsg="身份证号码不能为空" >
+                        <div class="info"><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <span class="color_r">*</span>手持身份证照片：
+                    </th>
+                    <td>
+                       <div class="tuanfabu_nr">
+                            <div class="left tuanfabu_scimg">
+                               
+                                
+                            </div>
+                            <div class="register-left">
+                                <div class="tuanfabu_sjimg">
+                                    <div class="info" style="display: none;margin-top:-10px;" id="imgFace"><span class="Validform_checktip Validform_wrong">请上传手持身份证照片</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                                    <img id="id_img_face" width="120" height="90" src="<{$auth_info.id_img_face|get_remote_file_path=###}>">
+                                    <input type="hidden" name="id_face" value="<{$auth_info.id_face}>" /> 
+                                    <a id="id_face" class="btn_2" value="上传并预览">上传并预览</a>
+                                    
+                                </div>
+                                <div class="preview_1">
+                                    <div class="preview-left">
+                                        示例：
+                                    </div>
+                                    <div class="preview-mid">
+                                        <img src="__PUBLIC__/images/photo_1.jpg" alt="">
+                                    </div>
+                                    <div class="preview-right">
+                                        <ol>
+                                            <li>1. 五官可见</li>
+                                            <li>2. 证件全部信息清晰无遮挡</li>
+                                            <li>3. 完整露出双手手臂</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="register-line">  </div>
+                        </div>
+                      
+                    </td>
+                </tr>
+                <tr class="face">
+                    <th>
+                        <span class="color_r">*</span>身份证正面：
+                    </th>
+
+                    <td>
+                        <div class="tuanfabu_nr">
+                            <div class="left tuanfabu_scimg">
+                                
+                                
+                            </div>
+                            <div class="register-left">
+                                <div class="tuanfabu_sjimg">
+                                    <div class="info" style="display: none;margin-top:-10px;" id="imgBack"><span class="Validform_checktip Validform_wrong">请上传身份证正面照片</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                                    <img id="id_img_back" width="120" height="90" src="<{$auth_info.id_img_back|get_remote_file_path=###}>">
+                                        <input type="hidden" name="id_back" value="<{$auth_info.id_back}>"/>
+                                        <a id="id_back"  class="btn_2" value="上传">上传</a>
+                                    
+                                </div>
+                                <div class="preview_1">
+                                    <div class="preview-left">
+                                        示例：
+                                    </div>
+                                    <div class="preview-mid">
+                                        <img src="__PUBLIC__/images/photo_2.jpg" alt="">
+                                    </div>
+                                    <div class="preview-right2">
+                                        <ol>
+                                            <li>证件文字清晰可识别</li> 
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                      <script>
+                             $("#id_face").uploadify({
+                                 'swf': '/Public/js/uploadify/uploadify.swf',
+                                 'uploader': "<{:C('PICLIBUPLOAD_URL')}>",
+                                 'cancelImg': '/Public/js/uploadify/uploadify-cancel.png',
+                                 'buttonText': '上传并预览',
+                                 'buttonClass':'btn_2',
+                                 'fileTypeExts': '*.gif;*.jpg;*.png',
+                                 'queueSizeLimit': 1,
+                                 'onUploadSuccess': function (file, data) {
+                                    data = eval("("+data+")");
+                                    $("#id_img_face").attr('src',"<{:C('PICLIB_URL')}>/"+data.data.Filedata.path);
+                                    $("input[name=id_face]").val(data.data.Filedata.id);
+                                     $('#imgFace').slideUp();
+                                    
+                                     
+                                 }
+                             });
+                             $("#id_back").uploadify({
+                                 'swf': '/Public/js/uploadify/uploadify.swf',
+                                 'uploader': "<{:C('PICLIBUPLOAD_URL')}>",
+                                 'cancelImg': '/Public/js/uploadify/uploadify-cancel.png',
+                                 'buttonText': '上传',
+                                 'buttonClass':'btn_2',
+                                 'fileTypeExts': '*.gif;*.jpg;*.png',
+                                 'queueSizeLimit': 1,
+                                 'onUploadSuccess': function (file, data, response) {
+                                     data = eval("("+data+")");
+                                    $("#id_img_back").attr('src',"<{:C('PICLIB_URL')}>/"+data.data.Filedata.path);
+                                    $("input[name=id_back]").val(data.data.Filedata.id);
+                                     $('#imgBack').slideUp();
+                                 }
+                             });
+                             
+
+                        </script>
+                            
+                        <div class="register-line">  </div>
+                    </td>
+                </tr>
+
+           
+
+                <tr class="linkus">
+                    <th><span class="color_r">*</span> 联系地址：</th>
+                    <td>
+                        <div class="rcleix">
+                            
+                              <span>
+                                <select name="data[region_0]"   style="float: left;" class="selects sanjiao region_selects">
+                                  <volist name="privonce_region" id="vo">
+                                      <option value="<{$vo.areaid}>"><{$vo.areaname}></option>  
+                                  </volist>  
+                                </select>
+                            </span>
+                        <input type="hidden" name="address_id" value="<{$auth_info.address_id}>" />
+                        <script>
+                            $(document).on("change",".region_selects",function(){
+                                var _this = $(this);
+                                _this.nextAll().remove();
+                                var id = _this.val();
+                                var len = _this.parent().children().length;
+                                
+                                var name="data[region_"+len+"]";
+                                $("input[name='address_id'").val(id);
+                                //加入下面的列表
+                                var str="";
+                                    _this.parent().children().each(function(i,n){
+                                       
+                                        str += $(n).find("option:selected").html();
+                                    })
+                                    $("input[name='address_detail']").val(str); 
+                                    
+                                $.post("<{:U('app/Region/select_list')}>",{'area_id':id,'select_name':name,'class':'region_selects'},function(data){
+                                    _this.after(data);
+                                    
+                                });
+                                
+                                     
+                                
+                            })
+                        </script>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="color_r">*</span>详细地址：</th>
+                    <td>
+                        
+                            <input type="text" name="address_detail" value="<{$auth_info.address_detail}>" class="btn_4" datatype="*" nullmsg="详细地址不能为空" >
+                        <div class="info"><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="color_r">*</span> 联系手机：</th>
+                    <td>
+                        <div class="rcleix code">
+                            
+                            <input type="text" id="mobile" name="link_mobile" value="<{$auth_info.link_mobile}>" class="btn_5"  datatype="isMobilePhone" errormsg="请输入正确的手机号码" nullmsg="手机号码不能为空">
+                            <div class="info"><span class="Validform_checktip"></span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                           
+                        
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+					<th><span class="color_r">*</span> 效验码：</th>				
+                    <td>
+                        <input  class="btn_5 not" name="scode"  type="text"  value="" placeholder="短信验证码" />
+                        <a href="javascript:void(0);" class="m_zcyz" id="m_zcyz">发送验证码</a>
+                        </td>
+                        <script>
+                var mobile_timeout;
+                var mobile_count = 100;
+                var mobile_lock = 0;
+                $(function () {
+                    $("#m_zcyz").click(function () {
+                        if (mobile_lock == 0) {
+                            mobile_lock = 1;
+                            $.ajax({
+                                url: '/index.php/passport/sendmobilesms.html',
+                                data: 'mobile=' + $("#mobile").val(),
+                                type: 'post',
+                                success: function (data) {
+                                    if (data == 1) {
+                                    	
+                                        // alert(data);
+                                        mobile_count = 60;
+                                        BtnCount();
+                                    } else {
+                                        mobile_lock = 0;
+                                        error(data);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+                BtnCount = function () {
+                    if (mobile_count == 0) {
+                        $('#m_zcyz').html("重新发送");
+                        mobile_lock = 0;
+                        clearTimeout(mobile_timeout);
+                    }
+                    else {
+                        mobile_count--;
+                        $('#m_zcyz').html("获取(" + mobile_count.toString() + ")秒");
+                        mobile_timeout = setTimeout(BtnCount, 1000);
+                    }
+                };
+            </script>
+                </tr>
+                   <tr class="linkus">
+                    <th><span class="color_r">*</span> 选择店铺类型：</th>
+                    <td>
+                        <div class="rcleix">
+                            
+                              <span>
+                                <select name="store_class"   style="float: left;" class="selects sanjiao region_selects">
+                                  <volist name="store_class" id="vo">
+                                      <option value="<{$vo.sc_id}>"><{$vo.sc_name}></option>  
+                                  </volist>  
+                                </select>
+                            </span>
+                       
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <input type="hidden" name="shop_cate_id" value="<{$auth_info.shop_cate_id}>" />
+                        <input type="hidden" name="auth_type" value="<{$auth_info.auth_type}>" />
+                        <input type="hidden"  name="auth_id" value="<{$auth_info.auth_id}>" />
+                        <input type="hidden" class="not" name="auth_status" value="<{$auth_info.auth_status}>" />
+                        <div class="btn_box"><input type="submit" class="aniu" value="下一步"/></div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</div>
+
+<div class="cl"></div>
+<script>
+    $(function(){
+        $("#personal_form").Validform({
+            tiptype:4,
+            ajaxPost:true,
+            callback:function(data){
+                
+            }
+        });
+        //检测状态改变
+        $("input:not('.not')").change(function(){
+           $("input[name=auth_status]").val(1);
+        })
+    })
+</script>
+<script>
+    var checkIdCard_face = $('#id_img_face').attr('src');
+    var checkIdCard_back = $('#id_img_back').attr('src');
+    $(function () {
+        $("#checkForm").Validform({
+            tiptype:function(msg,o,cssctl){
+                //msg：提示信息;
+                //o:{obj:*,type:*,curform:*}, obj指向的是当前验证的表单元素（或表单对象），type指示提示的状态，值为1、2、3、4， 1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态, curform为当前form对象;
+                //cssctl:内置的提示信息样式控制函数，该函数需传入两个参数：显示提示信息的对象 和 当前提示的状态（既形参o中的type）;
+
+                if(!o.obj.is("form")){ //验证表单元素时o.obj为该表单元素，全部验证通过提交表单时o.obj为该表单对象;
+                    var objtip=o.obj.next().find(".Validform_checktip");
+
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+
+                    var infoObj=o.obj.next();
+
+                    if(o.type==2){
+                        infoObj.fadeOut(0);
+                    }else{
+                        if(infoObj.is(":visible")){return;}
+                        var left=o.obj.offset().left,
+                                top=o.obj.offset().top;
+
+                        infoObj.css({
+                            left:left,
+                            top:top-45
+                        }).show().animate({
+                            top:top-35
+                        },200);
+                    }
+
+                }
+            },ajaxPost:false,
+            datatype:{
+                "isIdCardNo":function(num,obj,curform,regxp){
+                    //参数gets是获取到的表单元素值，obj为当前表单元素，curform为当前验证的表单，regxp为内置的一些正则表达式的引用;
+                    //if (isNaN(num)) {alert("输入的不是数字！"); return false;}
+                    var len = num.length, re;
+                    if (len == 15)
+                        re = new RegExp(/^(\d{6})()?(\d{2})(\d{2})(\d{2})(\d{2})(\w)$/);
+                    else if (len == 18)
+                        re = new RegExp(/^(\d{6})()?(\d{4})(\d{2})(\d{2})(\d{3})(\w)$/);
+                    else {
+                        //alert("输入的数字位数不对。");
+                        return false;
+                    }
+                    var a = num.match(re);
+                    if (a != null)
+                    {
+                        if (len==15)
+                        {
+                            var D = new Date("19"+a[3]+"/"+a[4]+"/"+a[5]);
+                            var B = D.getYear()==a[3]&&(D.getMonth()+1)==a[4]&&D.getDate()==a[5];
+                        }
+                        else
+                        {
+                            var D = new Date(a[3]+"/"+a[4]+"/"+a[5]);
+                            var B = D.getFullYear()==a[3]&&(D.getMonth()+1)==a[4]&&D.getDate()==a[5];
+                        }
+                        if (!B) {
+                            //alert("输入的身份证号 "+ a[0] +" 里出生日期不对。");
+                            return false;
+                        }
+                    }
+                    if(!re.test(num)){
+                        //alert("身份证最后一位只能是数字和字母。");
+                        return false;
+                    }
+                    return true;
+                },
+                "isEmail":function(gets,obj,curform,regxp){
+                    //参数gets是获取到的表单元素值，obj为当前表单元素，curform为当前验证的表单，regxp为内置的一些正则表达式的引用;
+                    //if (isNaN(num)) {alert("输入的不是数字！"); return false;}
+                    var re = new RegExp(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ );
+                    if(!re.test(gets)){
+                        return false;
+                    }
+                    return true;
+                },
+                "isMobilePhone":function(gets,obj,curform,regxp){
+                    if(!(/^1[3|4|5|7|8]\d{9}$/.test(gets))) {
+                        return false;
+                    }
+                },
+                "phone":function(){
+                    // 5.0 版本之后，要实现二选一的验证效果，datatype 的名称 不 需要以 "option_" 开头;
+
+                }
+            },
+            beforeSubmit:function(curform){
+                checkIdCard();
+            },
+            showAllError:true
+
+        });
+    });
+    function checkIdCard(){
+        var idCard_faceNew = $('#id_img_face').attr('src');
+        var idCard_backNew = $('#id_img_back').attr('src');
+        var checkNum = 0;
+        if (checkIdCard_face == idCard_faceNew){
+            $('#imgFace').slideDown();
+            checkNum++;
+        }
+        if (checkIdCard_back == idCard_backNew){
+            $('#imgBack').slideDown();
+            checkNum++;
+        }
+        if (checkNum != 0){
+            return false;
+        }
+    }
+</script>
+<!--main end-->
+<include file="public:footer" />

@@ -1,0 +1,48 @@
+<include file="public:topOne" />
+    <div class="topTwo">
+        <div class="left">
+            <if condition="!empty($CONFIG['site']['logo'])">
+                <h1><a href="<{:U('index/index')}>"><img width="214" height="53" src="__ROOT__/attachs/<{$CONFIG.site.logo}>" /></a></h1>
+                <else/>
+                <h1><a href="<{:U('index/index')}>"><img width="214" height="53" src="__PUBLIC__/img/logo_03.png" /></a></h1>
+            </if> 
+            <div class="changeCity"><a href="<{:U('pchome/city/index')}>" class="changeCity_name"><{$city_name}></a></div>
+        </div>
+        <div class="left center">
+            <div class="searchBox">
+                <script>
+                    $(document).ready(function () {
+                        $(".selectList li a").click(function () {
+                            $("#search_form").prop('action', $(this).attr('rel'));
+                            $("#selectBoxInput").html($(this).html());
+                            $('.selectList').hide();
+                        });
+                    });
+                </script>
+                <form id="search_form"  method="post" action="<{:U('shop/index')}>">
+                    <div class="selectBox"> 
+                        <span class="select"  id="selectBoxInput">商家</span>
+                        <div  class="selectList">
+                            <ul>
+                                <li><a href="javascript:void(0);" rel="<{:U('shop/index')}>">商家</a></li>
+                                <li><a href="javascript:void(0);" rel="<{:U('tuan/index')}>">抢购</a></li>
+                                <li><a href="javascript:void(0);" rel="<{:U('life/index')}>">生活信息</a></li>
+                                <li><a href="javascript:void(0);" rel="<{:U('mall/index')}>">商品</a></li>
+                                <li><a href="javascript:void(0);" rel="<{:U('share/index')}>">分享</a></li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                    <input type="text" class="text" value="输入您要搜索的内容" onclick="if (value == defaultValue) {
+                                value = '';
+                                this.style.color = '#000'
+                            }"  onBlur="if (!value) {
+                                        value = defaultValue;
+                                        this.style.color = '#999'
+                                    }" />
+                    <input type="submit" class="submit" value="搜索" />
+                </form>
+            </div>
+        </div>
+        <div class="rightss right"><a class="radius20" href="<{:U('mall/cart')}>">购物车<span id="num" class="radius100"><{$cartnum|default='0'}></span></a></div>
+    </div>

@@ -1,0 +1,41 @@
+<style>
+    .main-nav{padding-left:68px;font-weight:bold;padding-top:10px;padding-bottom:10px;background:rgb(245,245,245);}
+    .main-nav span{font-size:14px;font-family:'宋体';cursor:pointer;}
+    .sub-nav{padding-left:68px;padding-top:10px;padding-bottom:10px;border-bottom:1px dashed rgb(221,221,221);}
+    .sub-nav a{font-size:12px;font-family:'宋体';cursor: pointer;}
+</style>
+<div style="width:230px;background:rgb(206,16,12);color:white;padding-top:10px;padding-bottom:10px;">
+   <span style="margin-left:68px;font-size:14px;font-weight:bold;font-family:'宋体';">帮助中心</span>
+</div>
+<volist name="helpCates" id="helpCate">
+    <eq name="helpCate.parent_id" value="0">
+        <ul>
+            <volist name="helpCates" id="helpCa">
+                <eq  name="helpCa.parent_id" value="{$helpCate['cate_id']}">
+                    <li class="main-nav"><span class="nav_<{$key}>"><{$helpCa.cate_name}></span><img src="__TMPL__statics/images/triangle_down.png" height="6px" style="position:absolute;margin-top:7px;margin-left:10px;"></li>
+                    <ul id="nav_<{$key}>" style="display:none;">
+                        <volist name="helpCates" id="help">
+                            <eq  name="help.parent_id" value="{$helpCa['cate_id']}">
+                                <li class="sub-nav"><a href="<{:U('Pchome/helpcenter/index', ['cate_id' => $help['cate_id']])}>"><{$help.cate_name}></a></li>
+                            </eq>
+                        </volist>
+                    </ul>
+                </eq>
+            </volist>
+        </ul>
+    </eq>
+</volist>
+<script>
+    $(function(){
+        $('.main-nav').click(function () {
+            var nav_id = $(this).find('span').attr('class');
+            if($('#' + nav_id).css('display') == 'block'){
+                $(this).find('img').attr('src','__TMPL__statics/images/triangle_down.png')
+            }
+            else{
+                $(this).find('img').attr('src','__TMPL__statics/images/triangle_up.png')
+            }
+            $('#' + nav_id).slideToggle();
+        })
+    })
+</script>

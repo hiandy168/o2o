@@ -1,0 +1,25 @@
+@charset="utf-8"
+body{font-family:"Helvetica Neue",Helvetica,Arial,"Microsoft YaheiUI","Microsoft YaHei",SimHei,"\5B8B\4F53",simsun,sans-serif;}
+
+/*头部*/
+.header-center{width:1200px;height:60px;margin:0 auto;}
+.logo{float:left;width:210px;height:60px;}
+.header-right{float:right;height:60px;line-height:60px;}
+.header-right li{display:inline-block;list-style-type:none;color:#fff;}
+.header-right li a{color:#e8e8e8;text-decoration:none;}
+.header-right li a:hover{font-size:16px;font-weight:bold;color:#fff;}
+/*内容部分*/
+.content-top input.text:focus{box-shadow:0px 0px 5px rgba(215,23,25,1);}
+.content .btn1:hover,.content .btn2:hover{color:#d71719;background:#f0f0f0;}
+.content .text{float:left;width:480px;height:60px;color:#333;border: 1px solid #fff;background-color: #fff;padding:0 10px;font:18px simsun;}
+.content .btn2{float:right;width:130px;height:60px;font-weight:500;font-size:18px;color:black;background:#fff;border:1px solid #fff;}
+
+/*脚部*/
+.footer{width:550px;margin:0 auto;margin-top:105px;}
+.footer ul{margin-left:-25px;color:#fff;}
+.footer ul a{color:#fff;text-decoration:none;}
+.footer ul a:hover{color:#d71719;}
+.footer ul li{display:inline-block;list-style-type:none;margin:0 6px 5px 6px;font-size:12px;}
+.footer p{font-size:12px;color:#ccc;margin-left:10px;}
+.footer p span{margin-right:10px;}
+

@@ -1,0 +1,90 @@
+<div class="header-top">
+  <nav class="navbar navbar-default nav-fixed-top nav-top">
+    <div class="container nav-main">
+      <div class="navbar-header">
+        <a class="navbar-brand starlogo" href="javascript:void(0)">
+          <img src="__TMPL__statics/css/chaoshi/images/shopstar.jpg" alt="收藏好吉来" class="shopstar">
+          <span>收藏好吉来</span>
+        </a>
+      </div>
+      <!-- 顶部左边结束 -->
+
+      <!-- 顶部中间 -->
+      <div class="headerTop-right pull-right">
+        <ul class="nav navbar-nav navbar-right nav-right clearfix">
+          <li>
+            <a href="<{:U('pchome/index/index')}>" class="color">好吉来首页</a>
+          </li>
+          <li class="">您好<b style="color:#e11719;font-size:14px;margin-left:2px;"><{$MEMBER.nickname}></b>，欢迎来到好吉来！</li>
+          <if condition="empty($MEMBER)">
+            <li>
+              <a href="<{:U('passport/login')}>" class="color">[登录]</a>
+            </li>
+            <li>
+              <a href="<{:U('passport/register')}>" class="color">[免费注册]</a>
+            </li>
+            <else/>
+            <li>
+              <a class="color" href="<{:U('pchome/passport/logout')}>">[退出]</a>
+            </li>
+          </if>
+
+
+          <li class="my-cont">
+            <a href="<{:U('Pcucenter/index/index','','',false,C('BASE_SITE'))}>">
+              我的好吉来
+              <span class="top_icon"></span>
+            </a>
+            <!-- <div class="my-cont-list">
+    <ul>
+      <li>
+        <a href="">我的好吉来</a>
+      </li>
+      <li>
+        <a href="">我的好吉来</a>
+      </li>
+      <li>
+        <a href="">我的好吉来</a>
+      </li>
+      <li>
+        <a href="">我的好吉来</a>
+      </li>
+    </ul>
+  </div> -->
+          </li>
+          <li>
+            <a href="<{:U('shangjia/index/index')}>">
+              卖家中心
+              <span class="top_icon"></span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+
+      <!-- 顶部左边 -->
+<!--       <div>
+        <ul  class="nav navbar-nav navbar-right nav-right">
+          <li>
+            <a href="#">
+              <img src="__TMPL__statics/css/chaoshi/images/shouji.gif">
+              <span class="shouji">手机好吉来</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="kefu">客户服务</span>
+              <img src="__TMPL__statics/css/chaoshi/images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="#">联系我们</a>
+          </li>
+        </ul>
+      </div> -->
+      <!-- 顶部右边结束 --> </div>
+  </nav>
+</div>
+
+  

@@ -1,0 +1,75 @@
+@charset "utf-8";
+html{height:100%;overflow-y: scroll;overflow: -moz-scrollbars-vertical}
+body{min-height:100%;position:relative; display:block;}
+.wrapbox{min-height: 100%; display: block;}
+.header{width:100%; min-width:1200px; height:115px; position:relative; border-bottom: 1px solid #dadada; background:url(../images/loginHeaderbg.jpg) #fff repeat-x 0px bottom;}
+.logo{width:193px; height: 63px; margin-top:28px;}
+.logo-conTx{width:auto; margin-top: 60px; margin-left:10px; font-size: 20px; color: #666666;}
+.header-Tel{width: 400px; text-align:right; margin-top: 15px;}
+.header-Tel span,.header-Tel label{display:inline-block;}
+.header-Tel span{width: 70px; height: 80px; position: relative;top: 5px;}
+.header-Tel label{font-size: 30px; height: 40px;line-height: 40px; margin-top:20px; margin-left: 10px; color: #a52927;}
+
+.content-box{min-height: 100%;}
+.login-cont{width: auto; height:430px; padding-left: 605px; position: relative; margin-top: 80px; border:8px solid #f1f1f1;}
+.login-ad-slide{width: 605px; height: 446px; overflow: hidden; position: absolute; top: -8px; left: -8px;}
+.login-info-cont{width: 320px; height: auto; margin:40px auto;}
+.login-title{font-size: 25px; height: 40px; line-height: 40px; margin: 20px 0; color: #636363;}
+.items-rows{height:25px; line-height: 25px; padding:10px 3px; border: 1px solid #d5d5d5; position: relative; margin-top: -1px;}
+.login-icon{padding-left: 45px; background:url(../images/login-icon-img.jpg) no-repeat;}
+.user-icon{background-position: 13px 14px;}
+.pwd-icon{background-position: 13px -33px;}
+.login-tx{width: 100%; height: 25px; line-height: 25px; border: none; color:#666666;}
+.login-ctrl{height: 30px; line-height:30px; margin:5px 0;}
+.login-ctrl label,.login-ctrl>div{width: 49%;}
+.login-ctrl>div{text-align: right;}
+.login-submit,.registered-submit{width:100%;height:45px; line-height: 45px; display: block; background: #d83434; font-size: 16px; color: #fff; border:none; cursor: pointer;}
+.login-submit:hover,.registered-submit:hover{text-decoration:none;}
+
+.rg-content-info{width:425px; height: auto; margin-left: 50px;}
+.rg-item-row{width:auto; height:38px; position: relative; padding: 15px 0;}
+.rg-item-row span{width:95px; line-height:20px; padding:9px 0; color: #555555; font-size: 14px;}
+.rg-item-row span em{display: inline-block; height: 20px; vertical-align: middle; width:18px; color: #a52927; font-style: normal;}
+.rg-tx-box{width:330px; height: 38px; position: relative; color: #666666;}
+.rg-tx-box .register-tx{width: 320px; height: 24px;line-height: 24px; padding: 6px 5px; border: 1px solid #e2e2e2; color:#666666; font-size: 14px; display: inline-block; vertical-align: middle;}
+.reg-mob-btn{width:94px; height: 38px; line-height: 38px; text-align: center; font-size: 14px; color: #fff; overflow: auto; display: inline-block; margin-left: 5px; border: none; background: #a3a3a3; vertical-align: middle; cursor:pointer;}
+.reg-mob-btn:hover{text-decoration: none;}
+.rg-item-row p{line-height: 24px;}
+
+.rg-code-cont{width: 280px; margin-right: 50px;}
+.link-login-btn{width:257px; height: 67px; line-height: 67px; display: block; text-align: center; color: #fff; font-size:30px; background: #d7aa66;}
+.link-login-btn:hover{text-decoration: none;}
+.rg-code-pic{width: 150px; height: auto; margin-top:50px; text-align: center;}
+.rg-code-pic img{width: 146px; height: 146px;}
+.rg-code-pic p{line-height: 1.8; color: #666666; text-align: center;}
+
+
+.footer{width:100%; height:auto; min-width:1200px; margin: 0px auto 0 auto;word-spacing: 3px; overflow: hidden; padding-bottom:10px; padding-top: 30px; background: url(../images/login-footerbg.jpg) repeat-x 0px top; position: absolute;left: 0; bottom: 0; zoom: 1;}
+.footer p{line-height: 1.6; text-align: center; color: #4d4c4c;}
+.footer .weblink-box{height: auto; text-align: center; margin: 15px 0;}
+.footer .weblink-box a{display: inline-block; margin: 5px;}
+.footer .weblink-box img{width: 108px; height: 40px;}
+
+.items-rows .Validform_checktip,.rg-tx-box .Validform_checktip{width:auto;white-space:nowrap;position: absolute; left:100%; display: inline-block; top: 50%; margin-top: -10px;}
+
+.serviceTerms-warp-cont{width: 820px; position:absolute; left: 50%; top: 50%; display: none; background: #fff; border: 5px solid #dddddd;-webkit-box-shadow:0px 2px 5px #333;}
+.service-terms{width: 780px; height: 300px; padding: 20px; overflow-x: hidden; overflow-y: auto; color: #000;}
+.service-head{height:auto; padding:20px; position: relative;}
+.service-head .close-btn{display: inline-block; width: auto; height:24px; line-height: 24px; padding: 0 5px; position: absolute; right:10px;top:10px; font-size: 18px; font-weight: 900;}
+.service-terms h1,.service-terms h2,.service-head h1{font-size: 16px;font-weight: bold; line-height: 1.6; margin:5px 0;}
+.service-terms h1.service-terms-title,.service-head h1.service-terms-title{color: #a72a28;}
+.service-terms h2{margin-top: 20px;}
+.service-terms p{line-height: 1.6;}
+.service-terms-submit{width:260px; height: 46px; line-height: 46px; text-align: center; display: block; margin: 0 auto; background: #a72a28; color: #fff; font-size: 14px; cursor: pointer; border: 0;}
+
+.rg-item-row span.verification-pic{width:160px; height:38px; display: inline-block; margin: 0 5px; position: relative; top:-7px; cursor: pointer; vertical-align:top;}
+.rg-item-row span.verification-pic img{width: 100%; height:38px; vertical-align: top;}
+
+.reg-success-tip{width: 420px; margin:90px auto;}
+.reg-tip-title{height:50px; width:auto; font-size: 24px; color: #c42725;}
+.reg-tip-title i{width: 50px; height: 50px; display: inline-block; margin-right: 10px; position: relative; top:-4px;}
+.reg-tip-title i img{vertical-align: middle;}
+.reg-tip-row{line-height:30px; font-size:18px; color: #666666; margin-left: 90px;}
+.reg-tip-row label,.reg-tip-row span{display:inline-block; text-align: left; margin-left: 10px;}
+.reg-tip-row label{color:#c83533;}
+.reg-tip-row span{color: #eda52f;}

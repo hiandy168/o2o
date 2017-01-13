@@ -1,0 +1,526 @@
+<link href="/themes/default/Pchome/statics/css/style.css?v=<{:date('Ymd')}>" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/base.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/js/layer/skin/layer.css" />
+
+<style>
+#change_addr *{font-size: 12px;}
+ .layui-layer-content{overflow:hidden;}
+ .annotation{margin-bottom:10px;}
+.change_adds{padding:30px 10px;}
+.area_tit,.changeArea,.adds{height:29px;line-height:29px;}
+.area_tit{display: inline-block;margin-right:10px;width:100px;text-align: right;}
+.area_tit i{color:red;font-style:normal;}
+.changeArea{border:1px solid #ccc;padding:0 8px;margin-right:10px;}
+.adds{width:280px;border:1px solid #ccc;padding:0 10px;cursor:pointer;}
+.area_cont{margin-bottom:10px;}
+.txtArea{width:308px;height:80px;}
+.area_txt{width:200px;height:27px;padding:0 5px;}
+.txtArea,.area_txt,.area_select,.area_txt_1{border:1px solid #ccc;}
+.area_select{width:100px;height:27px;}
+.area_txt_1{width:65px;height:27px;line-height:27px;padding:0 5px;}
+.area_check{margin-left:100px;margin-top:20px;}
+.area_check label{margin-left:5px;position:relative;top:-2px;}
+
+
+
+/* 地图样式 */
+.addsMap{width:310px;height:310px;border:1px solid #eee;}
+</style>
+<style type="text/css">
+td{line-height:38px;}
+.Validform_checktip{margin-left:0;}
+.info{
+    border:1px solid #ccc; 
+    padding:2px 20px 2px 5px; 
+    color:#666; 
+    position:absolute;
+    display:none;
+    line-height:20px;
+    background-color:#fff;
+}
+.dec {
+    bottom: -8px;
+    display: block;
+    height: 8px;
+    overflow: hidden;
+    position: absolute;
+    left: 10px;
+    width: 17px;
+}
+.dec s {
+    font-family: simsun;
+    font-size: 16px;
+    height: 19px;
+    left: 0;
+    line-height: 21px;
+    position: absolute;
+    text-decoration: none;
+    top: -9px;
+    width: 17px;
+}
+.dec .dec1 {
+    color: #ccc;
+}
+.dec .dec2 {
+    color: #fff;
+    top: -10px;
+}
+</style>
+<js file="__PUBLIC__/js/jquery.js" />
+<js file="__PUBLIC__/js/validform5.3.2.js" />
+<js file="__PUBLIC__/js/layer/layer.js" />
+
+<!-- 修改地址弹出层 -->
+        <div class="change_adds clearfix" id="change_addr">
+            <div class="fl">
+                <p class="annotation">电话号码、手机号选填一项,其余均为必填项</p>
+                <form id="addform">
+                    <div class="area clearfix">
+                        <span class="fl area_tit">所在地区 <i>*</i></span>
+                        <div class="fl area_cont">
+                           <select  class="area_select" id="city_id"  name="city_id">
+                             </select>
+
+                            <select class="area_select" id="area_id" name="area_id">
+                                
+                               
+                            </select>
+
+                            <select class="area_select" id="business_id" name="business_id">
+                                
+                                
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="area area_cont clearfix">
+                        <span class="fl area_tit">详细地址 <i>*</i></span>
+                        <div class="fl">
+                            <!--<textarea class="txtArea" id="addr" name="addr" datatype="*" nullmsg="收货人地址不能为空"><{$address.addr}></textarea>-->
+                            <input class="area_txt" id="suggestId" name="addr"  autocomplete="off" type="text" style="width:306px;" datatype="*" nullmsg="收货人地址不能为空">
+                            <div class="info"><span class="Validform_checktip">昵称至少6个字符,最多18个字符</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+
+                        </div>
+
+                    </div>
+                    
+                    <div class="area area_cont clearfix">
+                        <span class="fl area_tit">收货人姓名 <i>*</i></span>
+                        <div class="fl">
+                            <input class="area_txt" type="text" datatype="*" value="<{$address.name}>" nullmsg="收货人姓名不能为空" name="name" />
+                            <div class="info"><span class="Validform_checktip">昵称至少6个字符,最多18个字符</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                        </div>
+                    </div>
+                    <div class="area area_cont clearfix">
+                        <span class="fl area_tit">手机号码 <i>*</i></span>
+                        <div class="fl">
+                            <input class="area_txt" type="text" value="<{$address.mobile}>" datatype="m" nullmsg="手机号码不能为空" errormsg="手机号码有误" name="mobile" />
+                            <div class="info"><span class="Validform_checktip">昵称至少6个字符,最多18个字符</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                        </div>
+                    </div>
+                    <div class="area area_cont clearfix" style="display:none">
+                        <span class="fl area_tit">百度地图经度：</span>
+                        <div class="fl">
+                            <input  class="area_txt" id="lng" type="text" value="<{$address.lng}>" name="lng">
+                        </div>
+                    </div>
+                    <div class="area area_cont clearfix" style="display:none">
+                        <span class="fl area_tit">百度地图纬度：</span>
+                        <div class="fl">
+                            
+                            <input class="area_txt" id="lat" type="text" value="<{$address.lat}>" name="lat">
+                        </div>
+                    </div>
+                    <p class="area_check"><input id="check_defau" <if condition="$address[is_default] eq 1"> checked </if> value="1" name="is_default" type="checkbox"><label for="check_defau">设为默认收货地址</label></p>
+                    
+            </div>
+            <div class="fr">
+                
+                        <!--<span class="fl ">搜索地址：</span>-->
+                        <!--<div>-->
+                            <!--<input class="area_txt" id="suggestId" autocomplete="off" type="text"  >-->
+                        <!--</div>-->
+                   
+            <!-- layer地图 -->
+            <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                <div class="addsMap" id="addsMap">
+                    
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-layer-btn"><a class="layui-layer-btn0">确认</a><a class="layui-layer-btn1" >取消</a></div>
+        <input type="hidden" name="addr_id" value="<{$address.addr_id}>" />
+        </form>
+         <!--选择城市-->
+          <script src="<{:U('app/datas/cityarea')}>"></script>
+                <script>
+                    var city_id = "<{$address.city_id}>";
+                    if(city_id==""){
+                        city_id = "<{$_COOKIE.city_id}>";
+                    }
+                    var area_id = "<{$address.area_id}>";
+                    var business_id = "<{$address.business_id}>";
+                    
+                    function changeCity(cid){
+                        var area_str = '<option value="0">请选择.....</option>';
+                        
+                           
+                        for(a in cityareas.area){
+                             
+
+                            if(cityareas.area[a].city_id ==cid){
+                                if(area_id == cityareas.area[a].area_id){
+                                    area_str += '<option selected="selected" value="'+cityareas.area[a].area_id+'">'+cityareas.area[a].area_name+'</option>';
+                                }else{
+                                    area_str += '<option value="'+cityareas.area[a].area_id+'">'+cityareas.area[a].area_name+'</option>';
+                                }
+                            }
+                        }
+                        
+                        $("#area_id").html(area_str);
+                    }
+                    $(document).ready(function(){
+                        var city_str = '<option value="0">请选择.....</option>';
+                        for(a in cityareas.city){
+                            if(city_id == cityareas.city[a].city_id){
+                                city_str += '<option selected="selected" value="'+cityareas.city[a].city_id+'">'+cityareas.city[a].name+'</option>';
+                            }else{
+                                city_str += '<option value="'+cityareas.city[a].city_id+'">'+cityareas.city[a].name+'</option>';
+                            }
+                        }
+                        $("#city_id").html(city_str);
+                        if(city_id){
+                            changeCity(city_id);
+                        }
+                        $("#city_id").change(function(){
+                            city_id = $(this).val();
+                            changeCity($(this).val());
+                        });
+
+
+                        $("#area_id").change(function () {
+                            
+                            get_bussiness_list($(this).val(),0);
+
+                        });
+                        if(business_id){
+                          get_bussiness_list(area_id,business_id);  
+                        }
+
+                    });
+                    function get_bussiness_list(area_id,busi_id){
+                        var url = '<{:U("pchome/business/children",array("area_id"=>"0000","curr_id"=>"1111"))}>';
+                            if (area_id > 0) {
+
+                                var url2 = url.replace('0000', area_id);
+                                var url2 = url2.replace('1111', busi_id);
+                                $.get(url2, function (data) {
+                                    $("#business_id").html(data);
+                                }, 'html');
+                            }
+                    }
+                </script>
+          <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=K6NUCfSkWYRoWgpp7ssdfPc2"></script>
+
+               <script type="text/javascript">
+                        // 百度地图API功能
+                        var map = new BMap.Map("addsMap");
+                        var lng = "<{$address.lng}>";
+                        var lat = "<{$address.lat}>";
+                        if(!lng&&!lat){
+                            map.centerAndZoom("成都");
+                            var point = new BMap.Point(104.067385,30.553513);
+                        }else{
+                            map.centerAndZoom(new BMap.Point(lng,lat), 18);
+                            var point = new BMap.Point(lng,lat);
+                        }
+                        
+                        var marker = new BMap.Marker(point);  // 创建标注
+                        map.clearOverlays();
+                        map.addOverlay(marker);              // 将标注添加到地图中
+                        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                        function showPoint(e) {
+                            document.getElementById('lat').value = e.point.lat;
+                            document.getElementById('lng').value = e.point.lng;
+                            var p = new BMap.Point(e.point.lng,e.point.lat);
+                            var mk = new BMap.Marker(p);
+                            map.clearOverlays();
+                            map.addOverlay(mk);
+                            mk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                            geocoder.getLocation(p,function(o){
+                                
+                                $("#addr").val(o.address);
+                                $("#addr").blur();
+                            })
+                        }
+                        map.enableScrollWheelZoom(true);
+                        map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+                        map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}));  //右上角，仅包含平移和缩放按钮
+                        map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_LEFT, type: BMAP_NAVIGATION_CONTROL_PAN}));  //左下角，仅包含平移按钮
+                        map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));  //右下角，仅包含缩放按钮
+                        map.addEventListener("click", showPoint);
+                        function G(id) {
+                            return document.getElementById(id);
+                        }
+                        //获得点对应的地图位置
+                        var geocoder = new BMap.Geocoder();
+
+                        var ac = new BMap.Autocomplete(//建立一个自动完成的对象
+                                {"input": "suggestId"
+                                    , "location": map
+                                });
+
+                        ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+                            var str = "";
+                            var _value = e.fromitem.value;
+                            var value = "";
+                            if (e.fromitem.index > -1) {
+                                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                            }
+                            str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+                            value = "";
+                            if (e.toitem.index > -1) {
+                                _value = e.toitem.value;
+                                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                            }
+                            str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+                            G("searchResultPanel").innerHTML = str;
+                        });
+                        ac.setInputValue('<{$address.addr}>');
+
+                        var myValue;
+                        ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+                            var _value = e.item.value;
+                            myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+                            G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+                            
+                            setPlace();
+                        });
+
+
+                        function setPlace() {
+                            map.clearOverlays();    //清除地图上所有覆盖物
+                            function myFun() {
+                                var local_addrinfo =local.getResults().getPoi(0);
+
+                                var pp = local_addrinfo.point;    //获取第一个智能搜索的结果
+                                map.centerAndZoom(pp, 18);
+                                var kk = new BMap.Marker(pp);
+                                map.addOverlay(kk);    //添加标注
+                                kk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                                geocoder.getLocation(pp,function(p){
+                                $("#addr").val(p.address);
+                                $("#addr").blur();
+                                document.getElementById('lat').value = pp.lat;
+                                document.getElementById('lng').value = pp.lng;
+                                })
+                            }
+                            var local = new BMap.LocalSearch(map, {//智能搜索
+                                onSearchComplete: myFun
+                            });
+                            local.search(myValue);
+
+                        }
+
+                    </script>
+        <!--表单提交-->
+        <script type="text/javascript">
+            $(function(){
+            $("#addform").Validform({
+                tiptype:function(msg,o,cssctl){
+            //msg：提示信息;
+            //o:{obj:*,type:*,curform:*}, obj指向的是当前验证的表单元素（或表单对象），type指示提示的状态，值为1、2、3、4， 1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态, curform为当前form对象;
+            //cssctl:内置的提示信息样式控制函数，该函数需传入两个参数：显示提示信息的对象 和 当前提示的状态（既形参o中的type）;
+            
+            if(!o.obj.is("form")){ //验证表单元素时o.obj为该表单元素，全部验证通过提交表单时o.obj为该表单对象;
+                var objtip=o.obj.next().find(".Validform_checktip");
+                
+                cssctl(objtip,o.type);
+                objtip.text(msg);
+                
+                var infoObj=o.obj.next();
+                
+                if(o.type==2){
+                    infoObj.fadeOut(0);
+                }else{
+                    if(infoObj.is(":visible")){return;}
+                    var left=o.obj.offset().left,
+                        top=o.obj.offset().top;
+    
+                    infoObj.css({
+                        left:left,
+                        top:top-45
+                    }).show().animate({
+                        top:top-35  
+                    },200);
+                }
+                
+            }   
+        },ajaxPost:true,
+        callback:function(data){
+                  if(data.status=="yes"){
+
+                        layer.msg(data.info,{time: 1000},function(){
+                            parent.addresslist();
+                            parent.layer.closeAll();
+                        });
+                  }else{
+                    layer.msg(data.info);
+                  }  
+            },
+        showAllError:true,
+
+            });
+            $(".layui-layer-btn0").click(function(){
+                var lng = "<{$_GET['lng']}>";
+                var lat = "<{$_GET['lat']}>";
+                var curr_lng = $("#lng").val();
+                var curr_lat = $("#lat").val();
+                var distance = "<{$_GET['distance']}>";
+                    distance = parseInt(distance);
+                if(!lng|| !lat){
+                    $("#addform").submit();
+                }else{
+                    var startPoint = new BMap.Point(curr_lng,curr_lat);
+                    var endPoint = new BMap.Point(lng,lat);
+                    var curr_distance = map.getDistance(startPoint,endPoint);
+                    if(curr_distance>distance){
+
+                        if(confirm("增加的地址不在配送范围，确认要新增吗？")){
+                            $("#addform").submit();
+                        }
+                    }else{
+                       $("#addform").submit(); 
+                    }
+                    
+                }
+
+                
+            });
+                $('.layui-layer-btn1').click(function () {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                })
+            })
+        </script>
+<script>
+    var str = '';
+    $(function () {
+        var cityName = $("#city_id").find('option:selected').text();
+        var myGeo = new BMap.Geocoder();
+        // 将地址解析结果显示在地图上,并调整地图视野
+        myGeo.getPoint(cityName, function(point){
+            if (point) {
+                map.centerAndZoom(cityName);
+                document.getElementById('lat').value = point.lat;
+                document.getElementById('lng').value = point.lng;
+                var p = new BMap.Point(point.lng,point.lat);
+                var mk = new BMap.Marker(p);
+                map.clearOverlays();
+                map.addOverlay(mk);
+                mk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+            }
+        },cityName);
+    });
+    $('#city_id').change(function () {
+        var cityId = $('#city_id').val();
+        if (cityId != 0){
+            var cityName = $("#city_id").find('option:selected').text();
+            str = '';
+            str += cityName;
+            ac.setInputValue(str);
+            var myGeo = new BMap.Geocoder();
+            // 将地址解析结果显示在地图上,并调整地图视野
+            myGeo.getPoint(str, function(point){
+                if (point) {
+                    map.centerAndZoom(point, 16);
+                    document.getElementById('lat').value = point.lat;
+                    document.getElementById('lng').value = point.lng;
+                    var p = new BMap.Point(point.lng,point.lat);
+                    var mk = new BMap.Marker(p);
+                    map.clearOverlays();
+                    map.addOverlay(mk);
+                    mk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                }
+            },cityName);
+        }
+    });
+    $('#area_id').change(function () {
+        var areaId = $('#area_id').val();
+        if (areaId != 0){
+            var areaName = $("#area_id").find('option:selected').text();
+            var cityName = $("#city_id").find('option:selected').text();
+            str = '';
+            str += cityName;
+            str += areaName;
+            ac.setInputValue(str);
+            var myGeo = new BMap.Geocoder();
+            // 将地址解析结果显示在地图上,并调整地图视野
+            myGeo.getPoint(str, function(point){
+                if (point) {
+                    map.centerAndZoom(point, 16);
+                    document.getElementById('lat').value = point.lat;
+                    document.getElementById('lng').value = point.lng;
+                    var p = new BMap.Point(point.lng,point.lat);
+                    var mk = new BMap.Marker(p);
+                    map.clearOverlays();
+                    map.addOverlay(mk);
+                    mk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                }
+            },cityName);
+        }
+
+    });
+    $('#business_id').change(function () {
+        var businessId = $('#business_id').val();
+        if (businessId != 0){
+            var businessName = $("#business_id").find('option:selected').text();
+            var areaName = $("#area_id").find('option:selected').text();
+            var cityName = $("#city_id").find('option:selected').text();
+            str = '';
+            str += cityName;
+            str += areaName;
+            str += businessName;
+            ac.setInputValue(str);
+            var myGeo = new BMap.Geocoder();
+            // 将地址解析结果显示在地图上,并调整地图视野
+            myGeo.getPoint(str, function(point){
+                if (point) {
+                    map.centerAndZoom(point, 16);
+                    document.getElementById('lat').value = point.lat;
+                    document.getElementById('lng').value = point.lng;
+                    var p = new BMap.Point(point.lng,point.lat);
+                    var mk = new BMap.Marker(p);
+                    map.clearOverlays();
+                    map.addOverlay(mk);
+                    mk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                }
+            },cityName);
+        }
+
+    });
+    $('#suggestId').bind('input' ,function () {
+        var cityId = $('#city_id').val();
+        var city = $('#city_id').children('option[value = '+cityId+']');
+        var cityName = city[0].innerText;
+        var str = $('#suggestId').val();
+//        str = cityName + str;
+        // 创建地址解析器实例
+        var myGeo = new BMap.Geocoder();
+        // 将地址解析结果显示在地图上,并调整地图视野
+        myGeo.getPoint(str, function(point){
+            if (point) {
+                map.centerAndZoom(point, 16);
+                document.getElementById('lat').value = point.lat;
+                document.getElementById('lng').value = point.lng;
+                var p = new BMap.Point(point.lng,point.lat);
+                var mk = new BMap.Marker(p);
+                map.clearOverlays();
+                map.addOverlay(mk);
+                mk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+            }
+        },cityName);
+    });
+</script>

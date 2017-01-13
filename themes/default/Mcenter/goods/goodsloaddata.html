@@ -1,0 +1,38 @@
+<foreach name="list" item="order">
+<div class="panel-list">
+	<ul>
+		<li>
+			<a href="<{:U('goods/detail',array('order_id'=>$order['order_id']))}>">
+				订单编号：<{$order.order_id}>  
+				<em class="text-small text-dot margin-left">商品：￥<{$order['total_price']}></em>
+				<em class="text-small text-dot">运费：￥<{$order['total_express']}></em>
+			</a>
+		</li>
+	</ul>
+</div>
+<foreach name="goods" item="good">
+<if condition="$good['order_id'] eq $order['order_id']">
+<li class="line padding">
+	<div class="x3">
+		<img style="width:90%;" src="__ROOT__/attachs/<{$products[$good['goods_id']]['photo']}>" />
+	</div>
+    <div class="x9">
+		<p><{$products[$good['goods_id']]['title']}></p>
+		<p class="text-small padding-top">小计：<span class="text-dot">￥<{$good['price']}> x <{$good.num}> = <{$good['total_price']}> 元</span></p>
+	</div>
+</li>       
+</if>
+</foreach>
+<div class="padding text-right">
+	<switch name="order.status">
+		<case value="0">
+			<a class="button button-small bg-dot" href="<{:U('mobile/mall/pay',array('order_id'=>$order['order_id']))}>">去付款</a>
+			<a class="button button-small" href="<{:U('goods/orderdel',array('order_id'=>$order['order_id']))}>"><span class="shop-del">取消订单</span></a>
+		</case>
+		<case value="1"><span class="text-yellow">已付款</span></case>
+		<case value="8"><a class="button button-small bg-dot" href="<{:U('dianping/goods',array('order_id'=>$order['order_id']))}>">我要确认</a></case>
+		<case value="10"><span class="text-green">已完成</span></case>
+	</switch>
+</div>
+<div class="blank-10 bg"></div>
+</foreach>

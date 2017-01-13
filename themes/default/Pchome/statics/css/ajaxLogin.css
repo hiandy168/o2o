@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+
+*{padding: 0;margin: 0;}
+
+.baodialog{ width: 100%; height: 100%; position: absolute; display: none;z-index:1000; left: 0px; top: 0px}
+
+
+
+.baodialog_bg{width: 100%; height: 100%; overflow: hidden; background: #000;opacity: 0.3;-moz-opacity:0.3; -webkit-opacity:0.3;filter: Alpha(Opacity=30);}
+
+/**************AJAX login******************/
+
+
+
+.loginBack{ text-align:center; font:normal 16px/24px 'Microsoft Yahei'; color:#000; }
+
+
+
+.loginBack em{ width:38px; height:29px; display:inline-block; background:url(../images/icon2.gif) no-repeat -71px -219px;}
+
+
+
+.loginPop{ width:616px; height:408px; border-radius:10px; border:7px solid #9b9b9b; background:#fff; position: absolute; z-index: 101; top:100px; left: 200px;  }
+
+
+
+.loginTit{ background:#f1f1f1; height:60px; font:normal 20px/60px 'Microsoft Yahei'; padding:0px 20px}
+
+
+
+.loginTit span{ float:right; width:20px; height:20px; background:url(../images/icon2.gif) no-repeat -71px -258px; display:inline-block; margin-top:20px; cursor:pointer}
+
+
+
+.loginLog{ width:345px; float:left; padding:0px 68px 0 27px; margin-top:27px; border-right:1px dashed #d5d5d5}
+
+
+
+.loginLog table tr td{ padding:5px 0;}
+
+
+
+.loginLog img{ float:left; width:90px; margin:0px 5px}
+
+
+
+.loginLog em a{ display:inline-block; float:left; color:#0284c1; width:60px; text-align:center; line-height:50px}
+
+
+
+.loginLog table tr td span{ float:right}
+
+
+
+.loginLog table tr td span a{ color:#000}
+
+
+
+.loginTipsbtn{ background:url(../images/btn.jpg) no-repeat 0px -255px; width:263px; height:53px; border:none; cursor:pointer}
+
+
+
+.loginTipsbtn2{ width:182px; background-position:0px -318px; height:47px;}
+
+
+
+.loginHz{ width:182px; margin:30px 0 0 24px; float:left; display:inline}
+
+
+
+.loginHzA{ margin-top:55px;}
+
+
+
+.loginHzA h3{ font-size:12px; line-height:20px; font-weight:normal; color:#000}
+
+
+
+.loginHzA a{ display:block; width:182px; height:36px; background:url(../images/btn.jpg) no-repeat 0px -365px; margin-top:12px;}
+
+
+
+.loginHzA a.a2{ background-position:0px -401px}
+
+
+
+.loginHzA a.a3{ background-position:0px -437px;}
+
+
+
+.loginInput,.loginInput2,.loginInput3{ border:1px solid #adb6c9;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px; height:48px; width:298px; line-height:48px; color:#888;font-size:16px; padding-left:16px;}.loginInput4{ width:115px; float:left;}
+

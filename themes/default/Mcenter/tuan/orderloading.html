@@ -1,0 +1,38 @@
+<foreach name="list" item="item">
+    <!-- 循环 -->
+    <li class="line padding">
+        <div class="x4">
+            <a href="<{:U('mobile/tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img style="width:90%;" src="__ROOT__/attachs/<{$tuans[$item['tuan_id']]['photo']}>"></a>
+        </div>
+        <div class="x8">
+            <p><a href="<{:U('mobile/tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><{$tuans[$item['tuan_id']]['title']}></a> <a class="text-dot" href="<{:U('tuan/detail',array('order_id'=>$item['order_id']))}>">详情</a></p>
+            <p class="text-small">
+				<span class="text-dot margin-right">总价：￥<{$item['total_price']}></span>
+				<span class="text-dot">数量：<{$item['num']}></span>
+				<span class="float-right"><eq name="item.status" value="0">等待付款<else />已完成</eq></span>
+			</p>
+			<p class="text-right padding-top">
+            <eq name="item.status" value="0">
+            <a href="<{:U('tuan/delete',array('order_id'=>$item['order_id']))}>" class="button button-small">取消</a>
+            <a href="<{:U('mobile/tuan/pay',array('order_id'=>$item['order_id']))}>" class="button button-small bg-dot">付款</a>
+            <else /> 
+            <php>
+                $tc = D('TuanCode');
+                $rtc = $tc -> where('order_id ='.$item['order_id']) -> find();
+            </php>
+            <eq name="rtc.is_used" value="1">
+                <a href="javascript:void(0)">已完成</a>
+                <eq name="item.is_dianping" value="0">
+                    <a href="<{:U('tuan/detail',array('order_id'=>$item['order_id']))}>" class="button button-small bg-yellow">点评</a>
+                <else/>
+                    <a href="javascript:void(0)">已评价</a>
+                </eq>
+            <else/>
+                <a href="javascript:void(0)">已付款</a><a href="javascript:void(0)">未消费</a>
+            </eq>
+			</eq>
+			</p>
+        </div>
+    </li>
+    <!-- 循环 -->
+</foreach>

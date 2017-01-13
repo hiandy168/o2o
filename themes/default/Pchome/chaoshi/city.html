@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <title>好吉来超市</title>
+  <!-- Bootstrap -->
+  <script type="text/javascript" src="__TMPL__statics/js/jquery.js"></script>
+  <script src="__PUBLIC__/js/layer/layer.js"></script>
+</head>
+	<body>
+      	所在城市：
+          <div class="rcleix">
+              <span>
+                  <select name="data[region_0]"   style="float: left;" class="region_selects">
+                    <volist name="citys" id="vo">
+                        <option value="<{$vo.city_id}>"><{$vo.name}></option>  
+                    </volist>  
+                  </select>
+              </span>
+          </div>
+         <input style="border:1px solid #dbdbdb; width: 100px; height: 38px; line-height: 38px; text-align: center;" type="button" id="select_btn" class="remberBtn" value="确定选择" />          
+	</body>
+		<script>
+	    $(document).ready(function (e) {
+	        $("#select_btn").click(function () {
+                var len = $(".region_selects").parent().children().length;    
+                var len1 = len-1;
+                var name = "select[name='data[region_"+len1+"]'";
+				var city_id = $(name).find("option:selected").val();
+				var city_name = $(name).find("option:selected").text();
+				if(!city_id){
+					layer.msg('请选择城市');
+				}
+				parent.selectCallBack('city_id', 'city_name', city_id, city_name);
+	        });
+
+	    });
+		
+              $(document).on("change",".region_selects",function(){
+                  var _this = $(this);
+                  _this.nextAll().remove();
+                  var id = _this.val();
+                  var len = _this.parent().children().length;                 
+                  var name="data[region_"+len+"]";
+                  //加入下面的列表
+                  var str="";
+                      _this.parent().children().each(function(i,n){                       
+                          str += $(n).find("option:selected").html();
+                      })                      
+                  if(len<1){
+	                  $.post("<{:U('app/Region/select_list')}>",{'area_id':id,'select_name':name,'class':'region_selects'},function(data){
+	                      _this.after(data);
+	                      
+	                  });    
+                  }
+              })
+          </script>
+</html>

@@ -1,0 +1,66 @@
+<include file="public:header"/>
+
+<header class="top-fixed bg-yellow bg-inverse">
+	<div class="top-back">
+		<a class="top-addr" href="<{:U('index/index')}>"><i class="icon-angle-left"></i></a>
+	</div>
+		<div class="top-title">
+			商户中心
+		</div>
+	<div class="top-signed">
+		<a href="<{:U('passport/logout')}>"><i class="icon-sign-out"></i></a>
+	</div>
+</header>
+
+<div class="index-top">
+	<div class="top-a">
+		<div class="user">	
+			<span class="avatar">    
+            <img src="__ROOT__/attachs/<{$SHOP.logo}>" />         
+            </span>
+			<div class="info">	
+				<p>欢迎您，<{$SHOP.shop_name}></p>	
+				<p><span>店铺类型：<{$shopcates[$SHOP['cate_id']]['cate_name']}></span></p>	
+                <p>
+					<span>邮件： <if condition="!empty($MEMBER['mobile'])">已认证<else/>去认证</if>
+                    </span>
+					<span>手机：<if condition="!empty($MEMBER['email'])">已认证<else/>去认证</if></span>
+					<span>金块：<{$MEMBER.gold}>去充值</span>
+				</p>
+                
+                
+			</div>	
+		</div>	
+
+	</div>
+	
+	
+	
+	
+</div>
+
+
+<div class="panel-list">
+	<ul>
+		
+        
+<li><a href="<{:U('branch/index')}>"><span class="icon-asterisk"></span>商家管理<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('tuan/index')}>"><span class="icon-tags"></span>抢购优惠<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('coupon/index')}>"><span class="icon-key"></span>优惠劵验证<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('mart/index')}>"><span class="icon-home"></span>微店管理<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('fans/index')}>"><span class="icon-group"></span>粉丝<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('ele/index')}>"><span class="icon-home"></span>外卖<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('life/index')}>"><span class="icon-truck"></span>同城信息<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('Ding/index')}>"><span class="icon-cog"></span>订座<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('money/index')}>"><span class="icon-calendar"></span>结算<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('award/index')}>"><span class="icon-briefcase"></span>营销管理<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('nearwork/index')}>"><span class="icon-github"></span>人才招聘<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('housework/index')}>"><span class="icon-random"></span>家政服务<i class="icon-angle-right"></i></a></li>
+<li><a href="<{:U('passport/logout')}>"><span class="icon-sign-out"></span>注销登录<i class="icon-angle-right"></i></a></li>
+		
+        
+       
+	</ul>
+</div>
+
+<include  file='public:footer'/>

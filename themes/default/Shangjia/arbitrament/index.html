@@ -1,0 +1,293 @@
+<include file="public:header" />
+    <link href="__TMPL__/statics/css/newstyle.css" rel="stylesheet" type="text/css"/>
+    <link href="__TMPL__/statics/css/main_cate.css" rel="stylesheet" type="text/css"/>
+    <link href="__TMPL__/statics/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <!--社区超市全部页面引用的Css-->
+    <link href="__PUBLIC__/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="__TMPL__/statics/css/chaoshi/shequchaoshi.css" rel="stylesheet" type="text/css"/>
+    <!--END-->
+    <link href="__PUBLIC__/webuploader/webuploader.css" rel="stylesheet" type="text/css"/>
+    <script>
+        var BAO_PUBLIC = '/Public';
+        var BAO_ROOT = '';
+        // 加载图片生产插件的样式，
+        var BASE_URL = '__PUBLIC__/webuploader';
+    </script>
+    <script src="__PUBLIC__/js/jquery.js"></script>
+    <script src="__PUBLIC__/js/jquery-ui.js"></script>
+    <script src="__PUBLIC__/js/web.js"></script>
+    <!--社区超市全部页面引用的JS-->
+    <script src="__PUBLIC__/js/bootstrap/js/bootstrap.min.js"></script>
+    <!--END-->
+    <script src="__PUBLIC__/webuploader/webuploader.min.js"></script>
+</head>
+<body>
+<iframe id="baocms_frm" name="baocms_frm" style="display:none;"></iframe>
+
+<div class="sjgl_lead">
+
+    <ul>
+        <li><a href="#">
+            <eq name="list.order_type" value="1">社区超市</eq>
+            <eq name="list.order_type" value="2">外卖</eq>
+            <eq name="list.order_type" value="3">美食</eq>
+            <eq name="list.order_type" value="4">酒店</eq>
+            <eq name="list.order_type" value="5">房产</eq>
+        </a>
+            > <a href="">订单管理</a>
+            > <a>订单详情</a></li>
+    </ul>
+
+</div>
+
+<div class="tuan_content">
+
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">提交仲裁</div>
+        </div>
+    </div>
+
+    <div class="tuanfabu_tab">
+
+    </div>
+    <div id="content_dingdan_detial" style="margin-top:60px;width:1140px;height:auto;border:1px solid rgb(221, 218, 218);">
+        <div style="width:100%;height:300px;">
+            <table style="float:left;margin-left:40px;margin-top:15px;">
+                <tr>
+                    <td colspan="4" align="left"><span class="detial_td_font" style="font-weight: bold">订单信息</span></td>
+                </tr>
+                <tr><td><br /></td></tr>
+                <tr>
+                    <td><span class="detial_td_font">买家：</span></td>
+                    <td colspan="3" class="detial_td_font"><span class="detial_td_font"><{$list.nickname}></span></td>
+                </tr>
+                <tr><td><br /></td></tr>
+                <tr>
+                    <td><span class="detial_td_font">订单编号：</span></td>
+                    <td colspan="2"><span class="detial_td_font"><{$list.order_id}></span></td>
+                    <td><span class="detial_td_font">下单时间：<{$list.create_time|date="Y-m-d H:i:s", ###}></span></td>
+                </tr>
+                <tr><td><br/></td></tr>
+                <tr>
+                    <td><span class="detial_td_font">支付方式：</span></td>
+                    <td colspan="2"><span class="detial_td_font">
+                        <eq name="list.pay_type" value="1">货到付款</eq>
+                        <eq name="list.pay_type" value="2">支付宝支付</eq>
+                        <eq name="list.pay_type" value="3">微信支付</eq>
+                        <eq name="list.pay_type" value="4">余额支付</eq>
+                    </span></td>
+                </tr>
+                <tr><td><br/></td></tr>
+                <tr>
+                    <td><span class="detial_td_font">收货人：</span></td>
+                    <td colspan="3"><span class="detial_td_font"><{$list.name}></span></td>
+                </tr>
+                <tr><td><br/></td></tr>
+                <tr>
+                    <td><span class="detial_td_font">联系方式：</span></td>
+                    <td colspan="3"><span class="detial_td_font"><{$list.phone}></span></td>
+                </tr>
+                <tr><td><br/></td></tr>
+                <tr>
+                    <td><span class="detial_td_font">收货地址：</span></td>
+                    <td colspan="3"><span class="detial_td_font"><{$list.receipt_addr}></span></td>
+                </tr>
+                <tr><td><br/></td></tr>
+                <tr>
+                    <td><span class="detial_td_font">送达时间：</span></td>
+                    <td colspan="3"><span class="detial_td_font"><{$list.send_time|date="Y-m-d H:i:s", ###}></span></td>
+                </tr>
+            </table>
+            <form action="<{:U('arbitrament/index')}>" method="post" enctype="multipart/form-data">
+                <table  style="float:right;margin-right:70px;margin-top:40px;">
+                    <tr>
+                        <td valign="top"><span style="color:red;font-size:20px;position:absolute;margin-top:-3px;">*</span><span style="margin-left:10px;">申请说明： </span></td>
+                        <td style="padding-bottom:20px;padding-left:10px;">
+                            <textarea style="width:380px;height:100px;resize: none" name="store_explain"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="padding-top:7px;"><span style="color:red;font-size:20px;position:absolute;margin-top:-3px;">*</span><span style="margin-left:10px;">上传凭证： </span></td>
+                        <td style="padding-left:10px;">
+                            <div style="margin-bottom:10px;">
+                                <div id="uploader-demo" class="wu-example">
+                                    <div id="fileList" class="uploader-list"></div>
+                                    <div id="filePicker">选择图片</div>
+                                </div>
+                                <input type="file" style="display: none" id="upLoad" />
+                            </div>
+                            <span>每张图片大小不能超过5M，最多3张，支持GIF、JPG、PNG、BMP格式</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="padding-top:20px;padding-left:10px;">
+                            <input type="hidden" name="arbitrament_id" value="<{$list['arbitrament_id']}>">
+                            <input type="submit" value="提交仲裁申请" class="btn btn-danger" >
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div style="width:100%;margin-bottom:30px;">
+            <table>
+                <tr style="text-align:center;">
+                    <td class="detial_td_font td_border_left td_border_top td_border_bottom" style="width:520px;height: 45px;">商品名称</td>
+                    <td class="detial_td_font td_border_top td_border_bottom" style="width:120px;">单价（元）</td>
+                    <td class="detial_td_font td_border_top td_border_bottom" style="width:120px;">数量</td>
+                    <td class="detial_td_font td_border_top td_border_bottom" style="width:110px;">优惠</td>
+                    <td class="detial_td_font td_border_top td_border_bottom" style="width:120px;">配送费</td>
+                    <td class="detial_td_font td_border_top td_border_right td_border_bottom" style="width:120px;">订单状态</td>
+                </tr>
+                    <tr>
+                        <td class="td_border_left td_border_bottom" style="padding-left:35px;">
+                            <volist name="findOrderProducts" id="orderProduct">
+                            <p class="text-uppercase"><{$orderProduct.product_name}></p>
+                            <br />
+                            </volist>
+                        </td>
+                        <td class="td_center_border ">
+                            <volist name="findOrderProducts" id="orderProduct">
+                            <p>￥<{$orderProduct.price}></p>
+                            <br />
+                            </volist>
+                        </td>
+                        <td class="td_center_border">
+                            <volist name="findOrderProducts" id="orderProduct">
+                            <p><{$orderProduct.num}></p>
+                            <br />
+                            </volist>
+                        </td>
+                        <td class="td_center_border" valign="top" style="vertical-align: middle;">
+                            <span class="detial_td_font">
+                                <eq name="list.discount_money" value="0">
+                                    <eq name="list.new_money" value="0">无优惠<else/>新用户优惠<br/>-￥<{$list.new_money}></eq>
+                                    <else/>
+                                    <eq name="list.new_money" value="0">减满优惠<br/>-￥<{$list.discount_money}><else/>新用户优惠<br/>-￥<{$list.new_money}><br/>减满优惠<br/>-￥<{$list.discount_money}></eq>
+                                </eq>
+                            </span>
+                        </td>
+                        <td class="td_center_border" valign="top" style="vertical-align: middle;"><span class="detial_td_font">￥<{$list.logistics}></span></td>
+                        <td class="td_center_border td_border_right" valign="top" style="vertical-align: middle;"><span style="color:#eb0e00;font-weight:bold;">拒绝退款</span></td>
+                    </tr>
+            </table>
+            <div>
+                <table style="float: right">
+                    <tr style="line-height: 24px">
+                        <td style="text-align: right">订单总金额：</td>
+                        <td>￥<{$list.total_price}></td>
+                    </tr>
+                    <tr style="line-height: 24px">
+                        <td style="text-align: right">结算金额：</td>
+                        <td>￥<{$list.settlement_price}></td>
+                    </tr>
+                    <tr style="line-height: 24px;color:red;">
+                        <td style="text-align: right">实际支付金额：</td>
+                        <td>￥<{$list.pay_price}></td>
+                    </tr>
+                </table>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    // 图片上传demo
+    jQuery(function() {
+        var $ = jQuery,
+                $list = $('#fileList'),
+                // 优化retina, 在retina下这个值是2
+                ratio = window.devicePixelRatio || 1,
+
+                // 缩略图大小
+                thumbnailWidth = 100 * ratio,
+                thumbnailHeight = 100 * ratio,
+
+                // Web Uploader实例
+                uploader;
+
+        // 初始化Web Uploader
+        uploader = WebUploader.create({
+
+            // 选完文件后，是否自动上传。
+            auto: true,
+
+            // swf文件路径
+            swf: BASE_URL + '/Uploader.swf',
+
+            // 文件接收服务端。
+            server: '__PICUPLOADURL__',
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#filePicker',
+
+            // 只允许选择图片文件。
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+        uploader.on( 'fileQueued', function( file ) {
+            var $li = $(
+                            '<div id="' + file.id + '" class="file-item thumbnail">' +
+                            '<img>' +
+                            '<div class="info">' + file.name + '</div>' +
+                            '</div>'
+                    ),
+                    $img = $li.find('img');
+            $list.append( $li );
+            // 创建缩略图
+            uploader.makeThumb( file, function( error, src ) {
+                if ( error ) {
+                    $img.replaceWith('<span>不能预览</span>');
+                    return;
+                }
+
+                $img.attr( 'src', src );
+            }, thumbnailWidth, thumbnailHeight );
+        });
+        // 文件上传过程中创建进度条实时显示。
+        uploader.on( 'uploadProgress', function( file, percentage ) {
+            var $li = $( '#'+file.id ),
+                    $percent = $li.find('.progress span');
+
+            // 避免重复创建
+            if ( !$percent.length ) {
+                $percent = $('<p class="progress"><span></span></p>')
+                        .appendTo( $li )
+                        .find('span');
+            }
+
+            $percent.css( 'width', percentage * 100 + '%' );
+        });
+        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        uploader.on( 'uploadSuccess', function( file,data ) {
+            var str = '<div><input type="hidden" name="photos[]" value="' + data.data.file.id + '" /></div>';
+            $list.append(str);
+            $( '#'+file.id ).addClass('upload-state-done');
+        });
+        // 文件上传失败，现实上传出错。
+        uploader.on( 'uploadError', function( file ) {
+            var $li = $( '#'+file.id ),
+                    $error = $li.find('div.error');
+            // 避免重复创建
+            if ( !$error.length ) {
+                $error = $('<div class="error"></div>').appendTo( $li );
+            }
+
+            $error.text('上传失败');
+        });
+        // 完成上传完了，成功或者失败，先删除进度条。
+        uploader.on( 'uploadComplete', function( file ) {
+            $( '#'+file.id ).find('.progress').remove();
+        });
+    });
+    $("div .webuploader-pick").children('.webuploader-pick').css('padding','0');
+</script>
+
+</body>
+</html>

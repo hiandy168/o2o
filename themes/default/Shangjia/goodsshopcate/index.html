@@ -1,0 +1,72 @@
+<include  file='public:header'/>
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">商家管理</a> > <a href="">分类</a> > <a>分类列表</a></li>
+    </ul>
+</div>
+<div class="main-cate">
+    <p class="attention"><span>注意：</span>暂时2级分类</p>
+    <div class="jsglNr">
+        <form id="cate_action" action="" target="baocms_frm" method="post">
+            <div class="selectNr" style="border-top: 1px solid #dbdbdb;">
+                <div class="left">
+                <a href="<{:U('Goodsshopcate/create')}>" mini="load" w="600" h="300" >添加一级分类</a>                   
+                </div>
+                <div class="right">
+                 <a href="<{:U('Goodsshopcate/update')}>" mini="list">更新</a>   
+                   
+                </div>
+            </div>
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF; text-align:center;">
+                    <tr bgcolor="#3896C9" height="48px;" style="color:#FFF; font-size:16px; line-height:48px;">
+                      <td>UID</td>
+                        <td>分类</td>
+                        <td>排序</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <if condition="($var.parent_id eq 0)">  
+
+                            <tr bgcolor="#B3DCF0" height="48px" style="font-size:14px; color:#545454; text-align:left; line-height:48px;">
+                              <td style="padding-left:20px;"><{$var.cate_id}></td>
+
+                                <td style="padding-left:20px;"><{$var.cate_name}></td>
+                                <td style="padding-left:70px;"><input name="orderby[<{$var.cate_id}>]" value="<{$var.orderby}>" type="text" class="remberinput w80" /></td>
+
+                                <td style="text-align: center;">
+                                    <a href="<{:U('Goodsshopcate/create',array('parent_id'=>$var['cate_id']))}>" mini="load" w="600" h="300" >添加子分类</a>
+                                    <a href="<{:U('Goodsshopcate/edit',array('cate_id'=>$var['cate_id']))}>" mini="load" w="600" h="300" >编辑</a>
+                                    <a href="<{:U('Goodsshopcate/delete',array('cate_id'=>$var['cate_id']))}>" mini="act" >删除</a>
+                                </td>
+
+                            </tr>
+                           <foreach name="list" item="var2">
+                                <eq name="var2.parent_id" value="$var.cate_id">
+                                <tr bgcolor="#CBEBFA" style="font-size:14px; color:#545454; text-align:center; line-height:48px;" height="48px">
+                                  <td align="left" style="padding-left:20px;"><{$var2.cate_id}></td>
+                                    <td align="left" style="padding-left:20px;">&nbsp;&nbsp;&nbsp;&nbsp;|----<{$var2.cate_name}></td>
+                                    <td style="padding-left:70px;">&nbsp;&nbsp;&nbsp;&nbsp;<input name="orderby[<{$var2.cate_id}>]" value="<{$var2.orderby}>" type="text" class="remberinput w80" /></td>
+
+                                    <td style="text-align: center;">
+                                        <a href="<{:U('Goodsshopcate/edit',array('cate_id'=>$var2['cate_id']))}>" mini="load" w="600" h="300" >编辑</a>
+                                         <a href="<{:U('Goodsshopcate/delete',array('cate_id'=>$var2['cate_id']))}>" mini="act" >删除</a>                                       
+                                    </td>
+                                </tr>
+                                </eq>
+                            </foreach>
+                        </if>
+                    </foreach>        
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>
+
+
+
+
+
+
+

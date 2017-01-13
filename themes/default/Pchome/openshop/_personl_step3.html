@@ -1,0 +1,63 @@
+<include file="public:header" />
+<link href="__PUBLIC__/css/add.css" rel="stylesheet" type="text/css" /> 
+<script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/validform5.3.2.js"></script>
+
+<include file="public:top"/>
+<style type="text/css">
+    .Validform_checktip{margin-left:0;}
+    .info{
+        border:1px solid #ccc;
+        padding:2px 20px 2px 5px;
+        color:#666;
+        position:absolute;
+        display:none;
+        line-height:20px;
+        background-color:#fff;
+    }
+    .dec {
+        bottom: -8px;
+        display: block;
+        height: 8px;
+        overflow: hidden;
+        position: absolute;
+        left: 10px;
+        width: 17px;
+    }
+    .dec s {
+        font-family: simsun;
+        font-size: 16px;
+        height: 19px;
+        left: 0;
+        line-height: 21px;
+        position: absolute;
+        text-decoration: none;
+        top: -9px;
+        width: 17px;
+    }
+    .dec .dec1 {
+        color: #ccc;
+    }
+    .dec .dec2 {
+        color: #fff;
+        top: -10px;
+    }
+</style>
+<div class="cl"></div>
+<div class="main">
+    <ul class="fbMenu">
+        <li>1.提交资料</li>
+        <li>2.等待审核</li>
+        <li class="cur">3.开店成功</li>
+    </ul>
+    <div class="fbMain">
+
+        <if condition="$auth_info['auth'] eq 1">开店成功！<a href="<{:U(shangjia/index/index)}>">进入卖家中心</a><elseif condition="$auth_info['auth'] eq 0"  />审核中……<else />审核失败<a href="<{:U('pchome/openshop/index')}>">重新提交</a></if>
+    </div>
+
+</div>
+
+<div class="cl"></div>
+
+<!--main end-->
+<include file="public:footer" />

@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/base/css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/base/css/header.css" />
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/base/css/templateBase.css" />
+		
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/base/css/shopTemplate_th.css" />
+	
+		
+		<link href="__TMPL__statics/css/style.css?v=20150718" rel="stylesheet" type="text/css">
+		<script>
+			var BAO_PUBLIC = '/Public';
+			var BAO_ROOT = '';
+		</script>
+		<script src="__STATIC__/js/Scripts/jquery.js"></script>
+		<script src="__STATIC__/css/base/js/superslide.2.1.js"></script>
+		<script src="__STATIC__/css/base/js/global.js"></script>
+		<script src="__STATIC__/js/Scripts/layer.js"></script>
+		<script src="__STATIC__/js/Scripts/jquery.flexslider-min.js"></script>
+		<script src="__STATIC__/js/Scripts/js.js"></script>
+		<script src="__STATIC__/js/Scripts/web.js"></script>
+		<script src="__STATIC__/js/Scripts/baocms.js"></script>
+	</head>
+
+	<body>
+		<iframe id="baocms_frm" name="baocms_frm" style="display:none;"></iframe>
+		<include file="public:top" />
+				<div>
+			<!--描述：店铺中心header-->
+				<div class="temlpate-header" style="background: <if condition="$primp_data.head_pic_hide eq 0"> url(__ROOT__/attachs/<{$primp_data.head_bgground_pic}>) <{$primp_data.head_bgground_color}> <elseif condition="$primp_data.head_pic_hide eq 1" /> <{$primp_data.head_bgground_color}></if> <{$primp_data.head_bgground_vertical}> <{$primp_data.head_bgground_align}> <{$primp_data.head_bgground_repeat}>;">
+					<div class="temlpate-global-info">
+						<div class="cont-box module-layout temlpate-signboard" data-moduleid="1" style="background: url(__STATIC__/css/base/template/images/hotle-images/tto-haed-body.jpg) #fff no-repeat 0px 0px;">
+							<div class="tmp-logo hide">
+								<a href="#"><img src="__STATIC__/css/base/template/images/tp-logo.jpg" width="280" height="120"></a>
+							</div>
+						</div>
+					</div>
+					<div class="tlp-header-nav" style="background:<{$primp_data.nav_bgground_color}>;">
+						<div class="cont-box module-layout" data-moduleid="2" style="background:<{$primp_data.nav_bgground_color}>;">
+							<ul class="tlp-header-nav-list YaHei">
+							<foreach name="shopnav" item="shopnav">	
+								<li><a style="color:<{$primp_data.nav_text_color}>" href="<{$shopnav.url}>"><{$shopnav.title}></a></li>
+							</foreach>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!--描述：店铺中心header结束-->
+			</div>
+			<!--End header-->
+			<!--描述：店铺主体-->
+			<div class="shop-main-content YaHei" style="background:<if condition="$primp_data.body_pic_hide eq 0"> url(__ROOT__/attachs/<{$primp_data.body_bgground_pic}>) <{$primp_data.body_bgground_color}> <elseif condition="$primp_data.body_pic_hide eq 1" /> <{$primp_data.body_bgground_color}></if>  <{$primp_data.body_bgground_vertical}> <{$primp_data.body_bgground_align}> <{$primp_data.body_bgground_repeat}>">
+				<!--描述：店铺中心banner-->
+				<div class="tlp-banner module-layout" data-moduleid="3">
+					<!--描述：tlp-banner窄屏用：cont-box-->
+					<div class="tmp-banner-wide">
+						<ul class="tmp-banner-list">
+						<volist name="banners" id="banners">
+							<li>
+								<a href="<{$banners.link}>"><img src="__ROOT__/attachs/<{$banners.photo}>"></a>
+							</li>
+						</volist>
+						</ul>
+						<div class="clear"></div>
+					</div>
+					<div class="slide-ctrlbox alpha">
+						<ul></ul>
+					</div>
+				</div>
+				<!--描述：店铺中心banner结束-->
+				<div class="cont-box col-main">
+					<div class="fl col-sub">
+						<div class="tmp-module-box module-layout"  data-moduleid="9">
+							<div class="title" style="background:<{$primp_data.service_bgground_color}>;color:<{$primp_data.service_text_color}>;">客服中心</div>
+							<div class="contentbox">
+								<div style="padding: 10px; border: 1px solid #dcdcdc;">
+									<div style="line-height:1.6; padding: 0 10px; padding-bottom: 10px; border-bottom: 1px dashed #dddddd;">
+										<h2 style="margin: 8px 0;color:<{$primp_data.service_text_color}>;"><strong>营业时间</strong></h2>
+									    <p"><{$ex.business_time}></p>
+									</div>
+									<div style="line-height:1.6; padding: 0 10px; padding-bottom: 10px; border-bottom: 1px dashed #dddddd;">
+										<h2 style="margin: 8px 0;color:<{$primp_data.service_text_color}>;"><strong>商家电话</strong></h2>
+									    <p>座机：<{$detail.tel}>-<{$detail.extension}></p>
+									    <p>手机：<{$detail.mobile}></p>
+									</div>
+									<div style="line-height:1.6; padding: 0 10px; padding-bottom: 10px;">
+										<h2 style="margin: 8px 0;color:<{$primp_data.service_text_color}>;"><strong>商家地址</strong></h2>
+									    <p><{$detail.addr}></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tlp-search module-layout" data-moduleid="4">
+						<form action="<{:U('shop/goods',array('shop_id'=>$shop_id))}>" method="get">
+							<div class="title" style="background:<{$primp_data.search_bgground_color}>;color:<{$primp_data.search_text_color}>;">本店搜索</div>
+							<div class="tlp-search-content">
+								<div>关键字
+									<input type="text" name="keyword" value="<{$keyword}>" class="tlp-search-tx" placeholder="请输入关键字">
+								</div>
+								<div>价格
+									<input type="text" name="lprice" value="<{$lprice}>" class="tlp-search-tx" style="width:40px;">-
+									<input type="text" name="bprice" value="<{$bprice}>" class="tlp-search-tx" style="width:40px;">
+								</div>
+								<div style="margin-top: 20px; text-align: center;">
+									<input type="submit" class="tlp-search-btn" style="background:<{$primp_data.search_bgground_color}>;color:<{$primp_data.search_text_color}>;" value="搜索" />
+								</div>
+							</div>
+						</form>
+						</div>
+						<!--店铺二级分类 -->
+						<div class="shop-menu-type module-layout" data-moduleid="5">
+							<div style="background:<{$primp_data.menu_bgground_color}>;color:<{$primp_data.menu_text_color}>;" class="menu-type-title"><strong>宝贝个性化分类</strong></div>
+							<div class="menu-type-content">
+								<a href="<{:U('shop/goods#aa',array('shop_id'=>$shop_id))}>" class="inner-all">所有宝贝&rsaquo;&rsaquo;</a>
+								<dl class="menu-type-list">
+									<dt>
+	  				  				<a href="<{:U('shop/goods#aa',array('shop_id'=>$shop_id,'order'=>'s'))}>">按销量</a>
+	  				  				<a href="<{:U('shop/goods#aa',array('shop_id'=>$shop_id,'order'=>'c'))}>">按新品</a>
+	  				  				<a href="<{:U('shop/goods#aa',array('shop_id'=>$shop_id,'order'=>'p'))}>">按价格</a>
+	  				  			</dt>
+	  				  			<foreach name="shopcate" item="shopcate">
+									<dd>
+										<a href="#"><strong><{$shopcate.cate_name}></strong></a>
+										<ul>
+										<foreach name="shopcate.child" item="child">
+											<li><a href="<{:U('shop/goods#aa',array('shopcate'=>$child['cate_id'],'shop_id'=>$child['shop_id']))}>"><{$child.cate_name}></a></li>
+										</foreach>
+										</ul>
+									</dd>	
+								</foreach>								
+								</dl>
+							</div>
+						</div>
+						<!--End 店铺二级分类 -->
+						<div class="tlp-ranking module-layout" data-moduleid="10">
+							<div  style="background:<{$primp_data.ranking_bgground_color}>;color:<{$primp_data.ranking_text_color}>;" class="tlp-ranking-head">
+								<a href="javascript:void(0);" data-index="1" class="tab-selected">销售量</a>
+								<a href="javascript:void(0);" data-index="2">人气榜</a>
+							</div>
+							<div class="tlp-ranking-content">
+								<ul class="tlp-ranking-list">
+								<foreach name="hotsalegoods" item="hotsalegoods">
+									<li>
+										<a href="<{:U('mall/detail',array('goods_id'=>$hotsalegoods['goods_id']))}>">
+											<div class="fl pic"><img src="__ROOT__/attachs/<{$hotsalegoods.photo}>"></div>
+											<div>
+												<h4><strong><{$hotsalegoods.title}></strong></h4>
+												<p><strong class="color-red">￥<{$hotsalegoods['mall_price']}></strong></p>
+												<p>
+													<label>已售出<{$hotsalegoods.sold_num}>笔</label>
+												</p>
+											</div>
+										</a>
+										<div class="clear"></div>
+									</li>
+								</foreach>
+								</ul>
+								<ul class="tlp-ranking-list" style="display: none;">
+								<foreach name="hotviewgoods" item="hotviewgoods">
+									<li>
+										<a href="<{:U('mall/detail',array('goods_id'=>$hotviewgoods['goods_id']))}>">
+											<div class="fl pic"><img src="__ROOT__/attachs/<{$hotviewgoods.photo}>"></div>
+											<div class="">
+												<h4><strong><{$hotviewgoods.title}></strong></h4>
+												<p><strong class="color-red">￥<{$hotviewgoods['mall_price']}></strong></p>
+												<p>
+													<label>已售出<{$hotviewgoods.sold_num}>笔</label>
+												</p>
+											</div>
+										</a>
+										<div class="clear"></div>
+									</li>
+								</foreach>
+								</ul>
+							</div>
+							<div class="ranking-foot"><a href="<{:U('shop/goods',array('shop_id'=>$shop_id))}>">查看更多宝贝</a></div>
+						</div>
+					</div>
+					<div class="fr tmp-user-right-box" >
+						<div  class="tmp-detail-section module-layout" data-moduleid="7">
+							<a  name="aa"></a>
+							<div style="background:<{$primp_data.good_bgground_color}>;color:<{$primp_data.good_text_color}>;" class="tmp-detail-head"><strong><{$primp_data.good_data_title}></strong></div>
+							<div class="tmp-detail-shop">
+								<ul class="tmp-detail-shop-list">
+									<volist name="goods" id="goods">
+									<li>
+										<div class="pic">
+											<a href="<{:U('mall/detail',array('goods_id'=>$goods['goods_id']))}>"><img src="__ROOT__/attachs/<{$goods.photo}>"></a>
+										</div>
+										<div class="link-title"><a href="#"><{$goods.title}></a></div>
+										<div class="detail-price-info"><span>￥<strong><{$goods['mall_price']}></strong></span>
+											<label>总销量：<{$goods.sold_num}></label>
+										</div>
+									</li>
+									</volist>
+								</ul>
+								<div class="clear"></div>
+							</div>							
+						</div>
+					<div class="x">
+						<{$page}>
+					</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+		<!--店铺服务指南-->
+		<div class="cont-box" style="overflow: hidden;">
+			<div class="auto-box tmp-service">
+				<img src="__STATIC__/css/base/template/images/tmp-service.jpg" />
+			</div>
+		</div>
+		<!--End 店铺服务指南-->
+		</div>
+		<script type="text/javascript">
+		$(function() {
+			jQuery(".tlp-banner").slide({
+					mainCell: "ul.tmp-banner-list",
+					titCell: ".slide-ctrlbox ul",
+					effect: "<{$option.effect}>",
+					autoPlay: <{$option.autoplay}>,
+					autoPage: true
+				});
+				$(".tlp-banner .slide-ctrlbox").each(function() {
+					$(this).css({
+						left: "50%",
+						marginLeft: -$(this).outerWidth() / 2
+					});
+				$(".tlp-ranking-head a").on("click", function() {
+					$(this).addClass("tab-selected").siblings().removeClass("tab-selected");
+					$(".tlp-ranking-list").hide().eq(parseInt($(this).attr("data-index")) - 1).show();
+				});
+			});
+		});
+		</script>
+		<!--描述：店铺主体结束-->
+		</div>
+		<include file="public:footer" />	
+	</body>
+
+</html>

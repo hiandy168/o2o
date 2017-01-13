@@ -1,0 +1,208 @@
+<include file="public:header"/>
+
+<header class="top-fixed bg-yellow bg-inverse">
+	<div class="top-back">
+		<a class="top-addr" href="<{:U('mobile/index/index')}>"><i class="icon-angle-left"></i></a>
+	</div>
+		<div class="top-title">
+			会员中心
+		</div>
+	<div class="top-signed">
+		<a href="<{:U('mobile/message/index')}>"><i class="icon-envelope"></i></a>
+	</div>
+</header>
+
+<div class="index-top">
+	<div class="top-a">
+		<div class="user">	
+			<span class="avatar">
+            
+            
+              <?php if(strstr($MEMBER['face'],"http")){ ?>
+                            <img src="<{$MEMBER.face}>" />
+                            <?php }else{ ?>
+                            <img src="__ROOT__/attachs/<{$MEMBER.face|default='default.jpg'}>" />
+							<?php }?>
+
+            
+            
+            
+            </span>
+			<div class="info">	
+				<p><{$MEMBER.nickname}> （VIP <{$MEMBER['rank_id']}>）</p>	
+				<p>
+					<span>积分：<{$MEMBER.integral}></span>
+					<span>余额：<{$MEMBER['money'}></span>
+					<span>金块：<{$MEMBER['gold']}></span>
+				</p>	
+			</div>	
+		</div>	
+
+	</div>
+	<div class="top-b">
+	</div>
+	
+	<div class="top-g">
+		<div class="line">
+			<a class="x4 btn btn-1"  href="<{:U('mobile/favorites/index')}>">
+				<i class="icon-star-o"></i>
+				<p>我的收藏</p>
+			</a>
+			<a class="x4 btn btn-2"  href="<{:U('tuan/index')}>">
+				<i class="icon-bookmark-o"></i>
+				<p>团购订单</p>
+			</a>
+			<a class="x4 btn btn-3"  href="<{:U('goods/index')}>">
+				<i class="icon-sticky-note-o"></i>
+				<p>购物订单</p>
+			</a>
+			<a class="x4 btn btn-4"  href="<{:U('eleorder/index')}>">
+				<i class="icon-cutlery"></i>
+				<p>我的订餐</p>
+			</a>
+			<a class="x4 btn btn-5"  href="<{:U('ding/index')}>">
+				<i class="icon-tty"></i>
+				<p>我的订座</p>
+			</a>
+			<a class="x4 btn btn-6"  href="<{:U('yuyue/index')}>">
+				<i class="icon-history"></i>
+				<p>我的预约</p>
+			</a>
+		</div>
+	</div>
+	<a class="top-s"  href="<{:U('information/index')}>">
+		 <i class="icon-cog"></i>
+	</a>
+</div>
+<!-- php>
+	$domain_arr = explode('.',$CONFIG['site']['host']);
+	$domain_str = $domain_arr[1].'.'.$domain_arr[2];
+</php>
+<if condition="strpos($MEMBER['account'],$domain_str)">
+<div class="panel-list">
+	<ul>
+		<li>
+			<a href="<{:U('info/account')}>">
+				<span class="icon-user"></span>
+				修改帐号为手机
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="blank-10 bg"></div>
+</if -->
+
+<div class="panel-list">
+	<ul>
+		<li>
+			<a href="<{:U('info/account')}>">
+				<span class="icon-user"></span>
+				更换绑定帐号
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="blank-10 bg"></div>
+
+<div class="panel-list">
+	<ul>
+		<li>
+			<a href="<{:U('tuancode/index')}>">
+				<span class="icon-film"></span>
+				我的团购券
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+		<li>
+			<a href="<{:U('coupon/index')}>">
+				<span class="icon-ticket"></span>
+				我的优惠券
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+		<li>
+			<a href="<{:U('hdmobile/index')}>">
+				<span class="icon-flag"></span>
+				我的活动
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+        
+        <li>
+			<a href="<{:U('community/index')}>">
+				<span class="icon-tasks"></span>
+				我的小区
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+        
+        
+        <li>
+			<a href="<{:U('tieba/index')}>">
+				<span class="icon-comments"></span>
+				我的贴吧
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+        
+        
+		<li>
+			<a href="<{:U('exchange/index')}>">
+				<span class="icon-gift"></span>
+				我的礼品
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+		<li>
+			<a href="<{:U('money/index')}>">
+				<span class="icon-database"></span>
+				余额充值
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+
+        
+        <li>
+			<a href="<{:U('cash/index')}>">
+				<span class="icon-money"></span>
+				申请提现
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+   
+		<li>
+        
+        
+			<a href="<{:U('message/index')}>">
+				<span class="icon-exclamation-triangle"></span>
+				系统通知
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+		<li>
+			<a href="<{:U('info/password')}>">
+				<span class="icon-keyboard-o"></span>
+				修改密码
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+		<li>
+			<a href="<{:U('information/index')}>">
+				<span class="icon-mobile"></span>
+				帐号绑定
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+		<li>
+			<a href="<{:U('mobile/passport/logout')}>">
+				<span class="icon-sign-out"></span>
+				注销登录
+				<i class="icon-angle-right"></i>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<include  file='public:footer'/>

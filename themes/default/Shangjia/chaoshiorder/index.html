@@ -1,0 +1,162 @@
+<include file="public:header" />
+	<link href="__PUBLIC__/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>	   
+	<script src="__PUBLIC__/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/js/jquery-validation/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+    <script src="__PUBLIC__/js/jquery-validation/messages_zh.min.js"></script>
+    
+     <link href="__TMPL__/statics/css/chaoshi/shequchaoshi.css" rel="stylesheet" type="text/css"/>
+    <script src="__TMPL__/statics/js/chaoshi/validate.js"></script>
+    <script src="__TMPL__/statics/js/chaoshi/myLayer.js"></script>
+    
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">社区超市</a> > <a href="">订单管理</a> > <a>所有订单</a></li>
+    </ul>
+</div>
+<div class="tuan_content" <if  condition="$chaoshi['status'] eq 1">style="background-image:url('__TMPL__/statics/images/shopClose.png');background-repeat:no-repeat;background-size:70%;background-position: 200px 180px;height: 1023px;"</if>  >
+    <form action="" method="post">
+        <div class="radius5 tuan_top">
+            <div class="tuan_top_t">
+                <div class="left tuan_topser_l">订单编号：<input type="text" name="order_id" value="<{$order_id|default=''}>" class="radius3 tuan_topser" />
+                    下单时间：<input style="height:30px;"  class="Wdate" type="text" id="d15" name="bg_date" value="<{$bg_date|default=''}>" onFocus="WdatePicker({isShowClear:false,readOnly:true})"/> - <input style="height:30px;" class="Wdate" type="text" id="d16" name="end_date" value="<{$end_date|default=''}>" onFocus="WdatePicker({isShowClear:false,readOnly:true})"/>
+                    买家：<input type="text" class="radius3 tuan_topser" name="keyword" value="<{$keyword|default=''}>"/>
+                    <input type="submit" style="margin-left:10px;" class="radius3 sjgl_an tuan_topbt" value="搜 索"/></div>
+            </div>
+        </div>
+    </form>
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli tabli_change <eq name="act" value="index">on</eq>"><a href="<{:U('chaoshiorder/index')}>">所有订单</a></li>
+            <li class="tuanfabu_tabli tabli_change <eq name="act" value="waitpay">on</eq>"><a href="<{:U('chaoshiorder/waitpay')}>">待付款</a></li>
+            <li class="tuanfabu_tabli tabli_change <eq name="act" value="waitsend">on</eq>"><a  href="<{:U('chaoshiorder/waitsend')}>">待发货</a></li>
+            <li class="tuanfabu_tabli tabli_change <eq name="act" value="sended">on</eq>"><a  href="<{:U('chaoshiorder/sended')}>">已发货</a></li>
+            <li class="tuanfabu_tabli tabli_change <eq name="act" value="over">on</eq>"><a  href="<{:U('chaoshiorder/over')}>">已完成</a></li>            
+            <li class="tuanfabu_tabli tabli_change <eq name="act" value="refunded">on</eq>"><a  href="<{:U('chaoshiorder/refunded')}>">退款</a></li>
+            <li class="tuanfabu_tabli tabli_change <eq name="act" value="canceled">on</eq>"><a  href="<{:U('chaoshiorder/canceled')}>">已取消</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a  href="<{:U('chaoshicomment/index')}>">评价管理</a></li>
+        </ul>
+    </div>
+    <table class="table">
+    <foreach name="list" item="var">
+        <tr style="text-align:center;" class="active">
+            <td style="width:30%;min-width:350px;border-left:1px solid #d5cecc">商品名称</td>
+            <td style="width:5%;min-width:100px;">单价（元）</td>
+            <td style="width:5%;min-width:100px;">数量</td>
+            <td style="width:5%;min-width:130px;">优惠</td>
+            <td style="width:5%;min-width:120px;">小计</td>            
+            <td style="width:5%;min-width:150px;">买家</td>            
+            <td style="width:5%;min-width:115px;">配送费</td>
+            <td style="width:5%;min-width:140px;">订单金额</td>
+            <td style="width:5%;min-width:130px;">订单状态</td>
+            <td style="width:5%;min-width:150px;border-right:1px solid #d5cecc">操作</td>
+        </tr>
+        <tr>
+            <td style="border-left:1px solid #d5cecc">
+                <span>订单编号：<{$var.order_id}></span>
+                <span style="margin-left:20px;">下单时间：<{$var.create_time|date='Y-m-d H:i:s',###}></span>
+            </td>
+            <td colspan="9" style="border-right:1px solid #d5cecc">
+                <div class="right_main" style="margin-right:30px;">
+                    <button class="btn_print" onclick="window.open('<{:U('chaoshiorder/orderprint',array('order_id'=>$var['order_id']))}>')">打印发货单</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="border-bottom:1px solid #d5cecc;border-left:1px solid #d5cecc">        
+	        <foreach name="orderproducts" item="orderproduct">
+     		<if condition="$orderproduct['order_id'] eq $var['order_id']"> 
+              <p class="text-uppercase"><img src="<{$products[$orderproduct['product_id']]['photo']|get_remote_file_path=###}>"  width="40"  height="40" />  <span style="margin-left:10px;"><{$products[$orderproduct['product_id']]['product_name']}></span></p><br />
+         	</if>
+	       	</foreach>
+
+            </td>
+            <td class="td_center_border ">
+            <foreach name="orderproducts" item="orderproduct">
+       		<if condition="$orderproduct['order_id'] eq $var['order_id']">                         
+                <p style="height:40px;padding-top:13px;"><{$products[$orderproduct['product_id']]['price']}></p><br />
+            </if>
+         	</foreach>                
+            </td>
+            <td class="td_center_border">
+	        <foreach name="orderproducts" item="orderproduct">
+	     	<if condition="$orderproduct['order_id'] eq $var['order_id']">                         
+	            <p style="height:40px;padding-top:13px;"><{$orderproduct.num}></p><br />
+	        </if>
+	       	</foreach>                 
+            </td>
+            <td class="td_center_border" style="padding-top:20px;">
+            <if condition="!empty($var['new_money'])"><p>新用户立减优惠<br />-￥<{$var['new_money']}></p></if>
+            <if condition="!empty($var['discount_money'])"><p>满减优惠<br />-￥<{$var['discount_money']}></p></if></td>
+            <td class="td_center_border">
+            <foreach name="orderproducts" item="orderproduct">
+       		<if condition="$orderproduct['order_id'] eq $var['order_id']">                         
+                <p style="height:40px;padding-top:13px;"><{$products[$orderproduct['product_id']]['price'] * $orderproduct.num}></p><br />
+            </if>
+         	</foreach>
+            </td>
+            <td class="td_center_border" style="padding-top:20px;"><{$users[$var['user_id']]['nickname']}></td>
+            <td class="td_center_border" style="padding-top:20px;"><b>￥<{$chaoshi.logistics}></b></td>
+            <td class="td_center_border" style="padding-top:20px;"><span style="color:red;font-weight:bold;font-size:13px;">￥<{$var['pay_price']}></span><br />
+                <if condition="$var.status eq 1 and $var.refund_status eq 0 and $var.pay_type eq 1">货到付款</if>
+                <if condition="$var.status eq 1 and $var.refund_status eq 0 and $var.pay_type neq 1">已支付</if>
+            </td>
+            <td class="td_center_border" style="padding-top:20px;"><span style="color:deepskyblue;">
+	             <if condition="$var.status eq 0 and $var.refund_status eq 0">待付款</if>
+	             <if condition="$var.status eq 1 and $var.refund_status eq 0">待发货</if>
+	             <if condition="$var.status eq 2 and $var.refund_status eq 0">已发货</if>
+	             <if condition="$var.status eq 3 and $var.refund_status eq 0">已取消</if>
+	             <if condition="$var.status eq 4 and $var.refund_status eq 2">已退款</if>
+	             <if condition="$var.status eq 5 and $var.refund_status eq 0">已完成</if>
+	             <if condition="$var.status eq 5 and $var.refund_status eq 2">已完成</if>
+	             <if condition="$var.refund_status eq 1">退款申请中</if>
+	             <if condition="$var.refund_status eq 3">拒绝退款</if>
+                </span><br/>
+                <a style="color:red" href="<{:U('chaoshiorder/detail',array('order_id'=>$var['order_id']))}>" target="main_frm">订单详情</a>
+            </td>
+            <td class="td_center_border" style="border-right:1px solid #d5cecc;padding-top:20px;">
+                <if condition="$var.status eq 1 and $var.refund_status eq 0">
+                    <p><button class="btn_dingdan" url="<{:U('chaoshiorder/fahuo',array('order_id'=>$var['order_id']))}>" onclick="fahuo(this)">发货</button></p><br />
+                </if>
+                <if condition="$var.refund_status eq 1">
+                    <p><button class="btn_dingdan" url="<{:U('chaoshiorder/tuikuan',array('order_id'=>$var['order_id']))}>" onclick="tuikuan(this)">退款审核</button></p><br />
+                </if>
+                <if condition="$var.status eq 0 || ($var.status eq 1 && $var.pay_type eq 1)">
+                    <p><button class="btn_dingdan" url="<{:U('chaoshiorder/cancel',array('order_id'=>$var['order_id']))}>" onclick="quxiao(this)">取消订单</button></p><br />
+                </if>
+                <if condition="$var.status eq 0 and $var.pay_status eq 0">
+                    <p><button class="btn_dingdan" url="<{:U('chaoshiorder/editprice',array('order_id'=>$var['order_id']))}>" onclick="xiugaijiage(this)">修改价格</button></p><br />
+                </if>
+                <if condition="$var.refund_status eq 3 and $var.arbitrament_status eq 1 and $var.store_arbitrament_status eq 0">
+                    <p><button class="btn_dingdan" url="<{:U('arbitrament/index',array('order_type' => 1, 'order_id'=>$var['order_id']))}>" onclick='window.open("<{:U('arbitrament/index',array('order_type' => 1, 'order_id'=>$var['order_id']))}>" ,"main_frm")'>仲裁申请</button></p>
+                </if>
+                <if condition="$var.refund_status eq 3 and $var.arbitrament_status eq 1 and $var.store_arbitrament_status eq 1">
+                    <p style="margin:5px"><a href="#">仲裁裁决中</a></p>
+                </if>
+                <if condition="$var.arbitrament_status eq 2">
+                    <button class="btn_dingdan" onclick='window.open("<{:U('arbitrament/detail', array('order_type' => 1, 'order_id' => $var['order_id']))}>","main_frm")'>仲裁详情</button><br />
+                    <if condition="$var.arbitrament_result eq 1 and $var.refund_status  eq 2">仲裁：买家合理</if>
+                    <if condition="$var.arbitrament_result eq 2 and $var.refund_status  eq 3">仲裁：商家合理</if>
+                </if>
+            </td>
+        </tr>
+        <tr><td><br /></td></tr>
+    </foreach>
+    </table>
+    <table style="width:100%">
+        <tr>
+            <td style="text-align:center">
+            	<{$page}>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+function mysubmit(){
+	if($('#otherReason').prop('checked')){
+		$('#otherReason').val($('#input_or').val());
+	}
+}
+</script>
+</body>
+</html>

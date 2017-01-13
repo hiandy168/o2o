@@ -1,0 +1,15 @@
+<li>
+ <div>
+       <span class="windowtitle_close">X</span>
+        <img src="<{:__HOST__}>/attachs/<{$vo.photo}>" />
+        <div>
+            <p><{$vo.title}></p>
+            <p>分类：<{:D('Goodscate')->where(array('cate_id'=>$vo[cate_id]))->getField('cate_name')}>&nbsp;价格：<{$vo.price}></p>
+            <eq name="recomend_type" value="1">
+                <input type="hidden" name="recommened1[]" value="<{$vo.goods_id}>"/>
+            <else />
+                <input type="hidden" name="recommened2[]" value="<{$vo.goods_id}>"/>
+            </eq>
+        </div>
+    </div>
+</li>

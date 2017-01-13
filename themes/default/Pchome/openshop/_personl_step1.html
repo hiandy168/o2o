@@ -1,0 +1,26 @@
+<form method="post">
+    <label>店铺名字:<input name="shop_name" type="input" value="<{$store_info.shop_name}>"/></label>
+    <label>店铺logo:<input name="logo" type="input" value="<{$store_info.logo}>" /></label>
+    <label>城市:<input name="city_id" type="input"  value="<{$store_info.city_id}>" /></label>
+    <label>经纬度:X<input name="lng" type="input" value="<{$store_info.lng}>" />Y<input  name="lat" type="input" value="<{$store_info.lat}>"/></label>
+    <label>
+        <input name="store_id" type="hidden" value="<{$store_info.store_id}>" />
+        <input name="shop_id" type="hidden" value="<{$shop_info.shop_id}>" />
+    </label>
+
+    <label>
+    店铺类型：
+    <if condition="empty($curr_store_class)">
+    <select name="sc_id">
+        <volist name="store_class" id="sc">
+            <option value="<{$sc.sc_id}>"><{$sc.sc_name}></option>
+        </volist>
+    </select>
+    <else />
+        <{$store_class[$curr_store_class]['sc_name']}>
+        <input type="hidden" name="sc_id" value="<{$curr_store_class}>" />
+
+    </if>
+    </label>
+    <label><input type="submit" value="下一步"></label>
+</form>

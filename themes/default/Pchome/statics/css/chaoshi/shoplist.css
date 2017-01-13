@@ -1,0 +1,60 @@
+@charset"utf-8";
+.content-top-list{background-color:#f8f8f8;padding:20px 0 50px 0;margin:20px -15px  0 -30px;}
+.content-top-list li{display:inline-block;}
+.content-top-list_1{font-weight:bold;}
+.content-top-list li a{color:#666;margin-left:20px;font-size:15px;}
+.content-top-list li span{color:#e11719;}
+.content-2{}
+.content-2 .glyphicon-arrow-down{font-size:12px;}
+.content-group{margin:10px 0;}
+.content-btn{border-radius:0;padding:9px 15px;color:#555;}
+.content-btn:hover{background-color:#fff;color:#d8171a;border:1px solid #ccc;outline:none;}
+.content-2 .btn:active,.content-2 .btn:focus{outline:none;}
+.content-2 .btn-1{border-top:3px solid #d8171a;position: relative;top:-2px;color:#d8171a;}
+.content-2 .btn-1 span{-webkit-transform:rotate(180deg);-moz-transform:rotate(180deg);transform:rotate(180deg;)}
+.content-btn img{margin-left:5px;}
+.content-form{margin-left:20px;}
+.content-form label{padding:0 20px 0 5px;line-height:40px;font-weight: normal;cursor:pointer;}
+.content-3{}
+.content-3 .store-list{display:block;width: 220px;height: 225px;border:1px solid #eee;}
+.content-3 .shop1{width:220px;height:365px;display:block;margin-right:10px;margin-bottom: 20px;position:relative;}
+.content-3 .shop1:hover th img{border-color:#d8171a;}
+.shop1 table{display:block;border-bottom:1px solid #ddd;}
+.shop1 table td{color:#666;font-size:12px;width:220px;}
+.shop1 td ul{padding:0;}
+.shop1 td ul>em{margin-left:5px;font-style:normal;}
+.shop1 td li{display:inline-block;list-style-type:none;font-size:12px;}
+.shop1 .buy,
+.sale{display:inline-block;float:right;}
+.shop1 .sale{margin-right:10px;color:#e11719;}
+.shop1 tr>th{width:220px;height:225px;}
+.shop1 td ul img{margin-right:-5px;vertical-align:text-top;}
+.shop1 td ul
+.shop1 .time{width:16px;height:14px;margin-top:-5px;}
+.shop1 .buy2{clear:both;height:25px;margin-top:7px;margin-left:5px;}
+.shop1 .buy2 img{margin-right:5px;}
+.shop1 .size{padding-top:10px; font-size:14px;height:50px;display:block;overflow:hidden;margin-bottom:3px;cursor:pointer;}
+.shop1 .size a{color:#555;line-height:1;}
+.shop1 .size:hover a{color:#e11719;text-decoration:underline;}
+.shop1 .size2{display:inline-block;margin:-10px 0 5px 0;}
+.size2 img{margin-bottom:3px;}
+.shop1 .buy{float:right;}
+.shop-right{margin-right:-10px;}
+.pagination{display:block;text-align:center;clear:both;}
+.closedTime a{width:120px;height:60px;position:absolute;top:70px;left:55px;background-color:rgba(204,204,204,0.9);z-index:2;text-align:center;border-radius:10px;font-family:simsun;color:#000;}
+.closedTime a:hover{text-decoration:none;}
+.closedTime b{font-size:26px;}
+.closedTime p{margin:0;padding:0;font-weight:bold;}
+
+
+/* 浏览器检测弹出框 */
+.check-browser{width:500px;height:400px;background-color:#FF4400;padding:20px 40px 40px;border:10px solid #000;}
+.check-tit{font:bold 16px/40px simsun;color:#fff;}
+.browser-list{margin-top:10px;}
+.browser-list a{display:inline-block;width:140px;height:38px;background-color:#e8e8e8;color:#71A403;font:14px/38px "微软雅黑";text-align:center;margin-right:30px;box-shadow:3px 5px 3px #888;}
+.browser-list a:hover{color:#d71719;font-weight:bold;}
+.layer-erweima{font:bold 16px/40px simsun;color:#fff;margin-top:20px;margin-bottom:10px;}
+.layer-erweima span{font-size:20px;margin-left:5px;}
+.erweimaList{float:left;margin-right:25px;overflow:hidden;}
+.erweimaList img{width:135px;height:135px;}
+.none{display:none;}

@@ -1,0 +1,87 @@
+@charset "utf-8";
+
+.temlpate-header{height: 160px;width: 100%; min-width: 1200px;}
+.temlpate-global-info{height: 120px; overflow: hidden;}
+.temlpate-signboard{height: 120px; position: relative;}
+.tmp-logo{width: 280px; height: 120px; position: absolute; left: 0; bottom: 0;}
+.collect-link{position: absolute; right:0; bottom:0;}
+.collect-link a{display:block;height: 65px;}
+
+.tlp-header-nav{width: 100%; min-width: 1200px; height:36px;line-height: 36px; background: #422a9a; margin-top: 4px;}
+.tlp-header-nav-list li{float: left; display: inline; font-size: 14px; color: #fff; margin:  0 20px;}
+.tlp-header-nav-list li a{display: block; line-height: 36px; color: #fff;}
+.tlp-header-nav-list li a:hover{}
+
+.tlp-banner{width: 100%; min-width: 1200px; position: relative; overflow: hidden;}
+.tmp-banner-box{width: 1920px; min-height: 500px; position: relative; left: 50%; margin-left: -960px;}
+.tmp-banner-box .tmp-banner-list li{text-align: center;}
+.tlp-banner .slide-ctrlbox{width:auto; height:20px; position:absolute; z-index:2; border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px; bottom:10px; padding:0 8px;}
+.tlp-banner .slide-ctrlbox ul{width:auto; height:10px; position:relative; margin-top:5px;}
+.tlp-banner .slide-ctrlbox ul li{width:10px; height:10px; overflow:hidden;border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;-o-border-radius:50%;-webkit-border-radius:50%; overflow:hidden; text-indent:-55px; cursor:pointer; background:#fff; float:left; display:inline; margin:0px 2px;}
+.tlp-banner .slide-ctrlbox ul li.on{background:#f00;}
+
+
+.col-main{margin-top: 30px;}
+.col-sub{width: 190px;}
+.col-sub .tlp-search{width: 190px;}
+.tlp-search{width: 202px; height: auto; margin-top: 20px;}
+.tlp-search .title{width: auto; height: 40px; line-height: 40px; text-align: center; font-size: 14px; font-weight: bold; color: #fff; background: #422a9a;}
+.tlp-search-content{width: auto; padding: 10px; border: 1px solid #dcdcdc;}
+.tlp-search-content>div{height: 30px; line-height: 30px; margin: 5px 0; color: #666666;}
+.tlp-search-content .tlp-search-tx{width:118px; height: 18px; line-height: 18px; color: #666666; padding: 2px; font-size: 12px; border: 1px solid #ada9a9; display: inline-block; margin: 0 5px;}
+.tlp-search-content .tlp-search-btn{width: auto;min-width:70px; height: 30px; line-height: 30px; display: inline-block; margin: 0 auto; background: #422a9a; color: #fff; text-align: center; padding: 0 15px; font-weight: bold; border: none; cursor:pointer;}
+
+.tlp-search{width: 202px; height: auto; margin-top: 20px;}
+.tlp-search .tlp-search-tx{width:110px; height: 18px; line-height: 18px; color: #666666; padding: 2px; font-size: 12px; border: 1px solid #ada9a9; display: inline-block; margin: 0 3px;}
+
+.shop-menu-type{margin-top: 20px;}
+.menu-type-title{height:40px; line-height: 40px; text-align: center; font-size: 14px; background: #422a9a; color: #fff;}
+.menu-type-content{border: 1px solid #DDDDDD; margin-top: -1px; padding-bottom: 20px;}
+.menu-type-content .inner-all{display: block; height: 26px; line-height: 26px; padding: 0 15px; background: #f2f2f2;}
+.menu-type-list{padding: 0 8px; display: block;}
+.menu-type-list dt a{display: inline-block; margin: 0 2px; color: #b6b5b5;}
+.menu-type-list dt a:hover{color: #BA1E1F;}
+.menu-type-list dt,.menu-type-list dd>a,.menu-type-list li{line-height:30px; border-bottom: 1px dashed #b6b5b5;}
+.menu-type-list dd a{display: block; padding-left:30px; color: #000; background: url(../template/images/tlp-list-items.png) no-repeat;}
+.menu-type-list dd a:hover,.menu-type-list li.list-selected a{color: #BA1E1F;}
+.menu-type-list dd>a{background-position:10px 11px;}
+.menu-type-list dd li>a{background-position:15px -71px;}
+.menu-type-list ul{display: none;}
+.menu-type-list dd.current>a{background-position:10px -29px;}
+
+
+.tlp-ranking{border: 1px solid #DDDDDD; margin-top: 20px;}
+.tlp-ranking-head{height: 28px; line-height: 28px; display: block; background: #e1e1e1;}
+.tlp-ranking-head a{width: 50%; height: 28px; line-height: 28px; float: left; display: inline; text-align: center; color:#2953a6;}
+.tlp-ranking-head a:hover{text-decoration: none;}
+.tlp-ranking-head a.tab-selected{background: #fff;}
+.tlp-ranking-content{padding:10px;}
+.tlp-ranking-list li{width: auto; border-bottom: 1px solid #ede5e3; padding: 10px 0;}
+.tlp-ranking-list li a{display: block;}
+.tlp-ranking-list li .pic,.tlp-ranking-list li img{width: 50px; height: 50px; overflow: hidden;}
+.tlp-ranking-list li .ranking-info{width:112px; word-break: break-all;}
+.tlp-ranking-list li .ranking-info h4,.tlp-ranking-list li .ranking-info p{width: 100%; height: 1.6; line-height: 1.6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.tlp-ranking .ranking-foot{display: block; height: auto; line-height: 2; text-align: center; padding: 0 10px;}
+.tlp-ranking .ranking-foot a{display: block;}
+
+
+.detail-shop-detail{width:977px; position: relative;}
+.user-right-box{width:982px; height: auto;}
+.tmp-detail-section{width: auto;}
+.tmp-detail-head{height: 40px; line-height: 40px; background: #422a9a; color: #fff; padding:  0 20px; position: relative;}
+.tmp-detail-head strong{font-size: 14px;}
+.tmp-detail-head a{color: #fff;}
+.tmp-more{position: absolute; height: 22px; line-height: 22px; display: inline-block; right:5px; top: 50%; margin-top: -12px;}
+
+
+.tmp-detail-shop-list li{width:232px; height:310px; float: left; display: inline; margin:15px 6px;}
+.tmp-detail-shop-list li .pic{width: 230px; height: 230px; border: 1px solid #eeeeee;overflow: hidden; text-align: center;}
+.tmp-detail-shop-list li .pic a{display: block;width: 230px; height: 230px;}
+.tmp-detail-shop-list li .pic img{max-width: 230px; max-height: 230px; vertical-align: middle;}
+.tmp-detail-shop-list li .link-title{height: auto; height:36px; line-height: 18px; overflow: hidden; margin-top: 10px;}
+.tmp-detail-shop-list li .detail-price-info{ margin-top:8px; height: 22px; line-height: 22px; color: #666666;}
+.tmp-detail-shop-list li .detail-price-info span{color: #999999; display: inline-block; margin-right:20px;}
+.tmp-detail-shop-list li .detail-price-info strong{font-size: 14px; color: #ff4400;}
+
+.tmp-service{margin-top: 20px;border: 1px solid #dddddd; text-align: center; padding: 20px;}
+

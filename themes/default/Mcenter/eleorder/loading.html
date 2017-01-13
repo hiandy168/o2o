@@ -1,0 +1,50 @@
+<foreach name="list" item="order">
+<div class="panel-list">
+	<ul>
+		<li>
+			<a href="<{:U('eleorder/detail',array('order_id'=>$order['order_id']))}>">
+				订单编号：<{$order.order_id}>
+				<em class="text-small text-dot margin-left">费用：&yen;<{$order['total_price']}></em>
+				<em class="text-small text-gray"><{$order.create_time|date='Y-m-d',###}></em>
+			</a>
+		</li>
+	</ul>
+</div>
+
+
+<foreach name="products" item="product">
+	<if condition="$product['order_id'] eq $order['order_id']">
+	<li class="line padding">
+		<div class="x3">
+			<img style="width:90%;" src="__ROOT__/attachs/<{$eleproducts[$product['product_id']]['photo']}>" />
+		</div>
+		<div class="x9">
+			<p><{$eleproducts[$product['product_id']]['product_name']}></p>
+			<p class="text-small padding-top">小计：<span class="text-dot">￥<{$eleproducts[$product['product_id']]['price']}> x <{$product.num}> = <{$product['total_price']}> 元</span></p>
+			<p class="text-small padding-top">小计：<span class="text-dot">￥<{$eleproducts[$product['product_id']]['price']}> x <{$product.num}> = <{$product['total_price']}> 元</span></p>
+		</div>
+	</li>
+	</if>
+</foreach>
+<div class="padding text-right">
+		<eq name="order.is_pay" value="1">
+			<eq name="order.status" value="0">
+				<a href="<{:U('mobile/ele/pay',array('order_id'=>$order['order_id']))}>"><span class="button button-small bg-dot">去付款</span></a>
+			<else />
+				<a class="shop-status" href="javascript:void(0);"><{$cfg[$order['status']]}></a> 
+				<if condition="$order['status'] eq 1">
+				<a mini='confirm' href="<{:U('mcenter/eleorder/del',array('order_id'=>$order['order_id']))}>">取消订单</a>
+				</if>
+			</eq>
+		<else />
+			<eq name="order.status" value="0">
+				<a href="<{:U('mobile/ele/pay',array('order_id'=>$order['order_id']))}>"><span class="button button-small bg-dot">去付款</span></a>
+			<else />
+			<span class="text-yellow">餐到付款</span>&nbsp;&nbsp;<span class="text-blue"><{$cfg[$order['status']]}></span>
+			</eq>
+		</eq>
+</div>
+<div class="blank-10 bg"></div>
+
+
+</foreach>

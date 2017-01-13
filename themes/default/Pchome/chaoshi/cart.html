@@ -1,0 +1,295 @@
+<include file="public:header" />
+<script src="__PUBLIC__/js/my97/WdatePicker.js"></script>
+<style type="text/css">
+    
+.change_addr p input.error{border:1px solid #F02E0A}
+</style>
+<script>
+    $(function () {
+        $(".order-add").click(function () {
+            $(".order-cover").show();
+        });
+        $(".order-xg").click(function () {
+            $(".order-cover").show();
+        });
+        $(".add-off").click(function () {
+            $(".order-cover").hide();
+        })
+        $(".add-close").click(function () {
+            $(".order-cover").hide();
+        })
+    })
+
+</script>
+<include file="public:topOne" />
+
+<div class="between clearfix">
+    <div class="bet_bj">
+        <div class="all" style="padding-bottom: 40px;">
+            <div class="all_3">
+                <a href="<{:U('pchome/index/index')}>"><img width="193" height="63" src="/attachs/2016/03/28/56f88c2ad3318.jpg"></a>
+            </div>
+            <div class="all_2">
+                <ul>
+                    <li class="on">1.提交订单<em>&nbsp;</em></li>
+                    <li>2.去支付<em>&nbsp;</em></li>
+                    <li>3.完成<em>&nbsp;</em></li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <iframe id="baocms_frm" name="baocms_frm" style="display:none;"></iframe>
+        <form method="post" target="baocms_frm" action="<{:U('chaoshi/order',array('t'=>$nowtime))}>">
+        <!-- 收货地址 -->
+        <div class="receiving">
+            <div class="receiving-tit clearfix">
+                <h4>收货地址及收货人信息</h4>
+                <a class="J_modify_receipt_addr" data-id="" href="javascript:;">添加新地址</a>
+            </div>
+            <ul class="addsList-ul">
+               
+                
+            </ul>
+            
+        </div>
+        
+ 
+      
+        <!--修改收货地址-->
+        <script type="text/javascript">
+
+            $(function(){
+                
+                $(document).on("click",".J_modify_receipt_addr",function(){
+                    var addr_id = $(this).attr('data-id');
+                    layer.open({area:['850px','500px'],'title':'完善或修改收货地址','type':2,'content':"<{:U('member/address/ajaxadd',array('lng'=>$chaoshi_info['lng'],'lat'=>$chaoshi_info['lat'],'distance'=>$chaoshi_info['distance']))}>?addr_id="+addr_id});
+                });
+                $(document).on("click",".J_modify_receipt_addr_delete",function(){
+                    var addr_id = $(this).attr('data-id');
+                    layer.confirm('确定删除该地址吗', function () {
+                        $.post("<{:U('member/address/del')}>", {addr_id: addr_id}, function (map) {
+                            if (map == 1) {
+                                layer.msg("删除成功");
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 1000);
+                            } else {
+                                layer.msg(map)
+                            }
+                        });
+                    });
+                })
+            })
+        </script>
+       
+       <!--  送达时间 -->
+        <div class="receiving">
+            <div class="receiving-tit clearfix">
+                <h4>送达时间</h4>
+            </div>
+            <ul class="receiving-list delivery-list">
+                <li class="delivery">
+                    <label for="delivery-radio"> </label><input class="delivery-text" onfocus="WdatePicker({dateFmt:'HH:mm',realTimeFmt: 'HH:mm',startDate:'<{$chaoshi_info.start_time|default='08:00'}>',minDate:'<{$chaoshi_info.start_time|default='08:00'}>',maxDate:'<{$chaoshi_info.end_time|default='22:00'}>'});" type="text" name="send_start_time" value="<{$chaoshi_info.start_time|default='08:00'}>" ><span>-</span><input class="delivery-text" type="text" onfocus="WdatePicker({dateFmt:'HH:mm',realTimeFmt: 'HH:mm',startDate:'<{$chaoshi_info.start_time|default='08:00'}>',minDate:'<{$chaoshi_info.start_time|default='08:00'}>',maxDate:'<{$chaoshi_info.end_time|default='22:00'}>'});" name="send_end_time" value="<{$chaoshi_info.end_time|default='22:00'}>" >
+                </li>
+            </ul>
+        </div>
+        <!-- 购买详情列表 -->
+        <div class="mode_dingdan">
+            <h5 class="mode_dingdan-h5">店铺：<{$chaoshi_info.shop_name}></h5>
+            
+                <div class="order-box">
+                    <table class="order" width="100%">
+                        <tr>
+                            <th>项目</th>
+                            <th>单价</th>
+                            <th>数量</th>
+                            <th width="120">总价</th>
+                            <!--<th>操作</th>-->
+                        </tr>
+                        <php>$total_money = 0;</php>
+                        <foreach name="cart_goods" item="item">
+                            <tr>
+                                <td>
+                                    <div class="tab_nr">
+                                        <div class="left tab_img"><img src="<{$item.product_info.photo|get_remote_file_path=###}>" width="134" class="img_3" /></div>
+                                        <div class="left tab_wz">
+                                            <p class="tab_nr1"><{$item.product_info.product_name}></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="115"><div class="tab_price">￥<span class="price"><{$item.price}></span></div></td>               
+                                <td width="116">
+                                    <div class="ko">
+                                        <span data="<{$item.product_id}>"  class="jian" url="<{:U('Mhome/ChaoshiCart/add_cart',array('product_id'=>$item['product_id'],'num'=>1,'store_id'=>$item['store_id'],'opt'=>'-','uid'=>$MEMBER['user_id']),'','',C('BASE_SITE'))}>">—</span>
+                                        <input type="text" value="<{$item.num}>" data="<{$item.product_id}>" rel="<{$item.price}>" name="cart_num[<{$item['product_id']}>]" class="spinner" url="<{:U('Mhome/ChaoshiCart/update_cart',array('cart_id'=>$item['id'],'num'=>XXXX,'store_id'=>$item['store_id'],'uid'=>$MEMBER['user_id']),'','',C('BASE_SITE'))}>">
+                                        <span data="<{$item.product_id}>" class="jia" url="<{:U('Mhome/ChaoshiCart/add_cart',array('product_id'=>$item['product_id'],'num'=>1,'store_id'=>$item['store_id'],'uid'=>$MEMBER['user_id']),'','',C('BASE_SITE'))}>">+</span>
+                                    </div>
+                                </td>
+                                <td><span id="jq_total_<{$item.product_id}>" class="money2">￥<{$item['price'] *  $item['num']}></span></td>
+                                <!--<td><a class="jq_delete" rel="<{$item.product_id}>" href="javascript:void(0);">删除</a></td>-->
+                            <php>$total_money+= $item['price'] *  $item['num'];</php>
+                            </tr>
+                          </foreach>
+                            <tr>
+                                <td class="peisong">配送费（不计入起送价）</td>
+                                <td></td>
+                                <td></td>
+                                <td>￥<{$chaoshi_info.logistics}></td>
+                            </tr>                        
+                    </table>
+                    <script>
+                  		$(function(){
+                  			$('.jian').click(function(){
+                    			var url = $(this).attr('url');
+                    			$.get(url,function(){
+                    			location.reload();
+                  				}); 
+                  			});
+                  			$('.jia').click(function(){
+                    			var url = $(this).attr('url');
+                    			$.get(url,function(data){
+                    			location.reload();
+                  				});                  			
+                  			});
+                  		});
+                        function changetotal(obj) {
+                            var money = obj.parent().find('.spinner').attr('rel');
+                            var num = obj.parent().find('.spinner').val();
+                            var total = money * num;
+                            $("#jq_total_" + obj.attr('data')).html('￥' + total.toFixed(2));
+                            changealltotal();
+                        }
+                        function changealltotal() {
+
+                            var total_price = 0;
+                            $(".spinner").each(function () {
+                                total_price += $(this).val() * $(this).attr('rel');
+                            });
+                            $("#jq_total").html(total_price.toFixed(2));
+                        }
+                        $(document).ready(function (e) {
+//                             $(".jian").click(function () {
+//                                 var v = $(this).parent().find(".spinner").val();
+//                                 if (v > 1) {
+//                                     v--;
+//                                     $(this).parent().find(".spinner").val(v);
+//                                 }
+
+//                                 changetotal($(this));
+
+//                             });
+//                             $(".jia").click(function () {
+//                                 var v = $(this).parent().find(".spinner").val();
+//                                 if (v < 99) {
+//                                     v++;
+//                                     $(this).parent().find(".spinner").val(v);
+//                                 }
+//                                 changetotal($(this));
+//                             });
+
+                            $(".spinner").change(function () {
+                                var url = $(this).attr('url');
+                                var num = $(this).val();
+                                if((/^(\+|-)?\d+$/.test(num))&&num>0){  
+                                	var href = url.replace('XXXX',num);
+                                }else {
+                                	layer.msg('必须输入正整数');
+                                	$(this).val(<{$item.num}>);
+                                	return false;
+                                }                           	
+                    			$.get(href,function(data){
+                        			location.reload();
+                      				});   
+                            });
+                            $(".jq_delete").click(function () {
+                            	product_id = $(this).attr('rel');
+                                layer.confirm('您确定要删除该商品？', {
+                                    title:'删除商品',
+                                    area: ['150px', '150px'], //宽高
+                                    btn: ['是的', '不'], //按钮
+                                    shade: false //不显示遮罩
+                                }, function () {
+                                    $.post("<{:U('chaoshi/cartdel')}>", {product_id: product_id,store_id:<{$store_id}>}, function (result) {
+                                        if (result.status == "success") {
+                                            layer.msg(result.msg);
+                                            setTimeout(function () {
+                                                location.reload();
+                                            }, 1000);
+                                        } else {
+                                            layer.msg(result.msg);
+                                        }
+                                    }, 'json');
+                                });
+                                $('.layui-layer-btn0').css('background', '#2fbdaa');
+                            });
+
+                        });
+                        /*地址选取变换样式*/
+                        $(function(){
+                            $(document).on("click",".addsList-ul>li",function(){
+                                $(this).addClass("active")
+                                    .find(".changeAdds").show()
+                                    .end()
+                                    .find(".adds_inpt").prop("checked",true)
+                                    .end()
+                                    .siblings().removeClass("active").find(".adds_inpt").prop("checked",false)
+                                    .end()
+                                    .children('.changeAdds').hide();
+                            });
+                            $(".addsList-ul>li").hover(function(){
+                                $(this).find(".adds_set").show();
+                            },function(){
+                                $(this).find(".adds_set").hide();
+                            });
+                        });
+                    </script>
+                    <div class="order_p1">
+                        <div class="order_s3">
+                            商品总额：<span class="rmb">￥</span><label id="jq_total" class="money"><{$total_money}></label>
+                        </div>   
+                        <div class="cha"><a href="<{:U('chaoshi/shop',array('store_id'=>$store_id))}>" class="back">返回上一步</a><input type="submit" value="确认" id="submit_sub" class="sub"></div>
+                    
+                    </div>
+                    <div class="clear"></div>
+                </div>   
+                <input type="hidden" name="store_id" value="<{$store_id}>" />
+           
+        </div>
+         </form>
+    </div>
+</div>
+<script type="text/javascript">
+    function addresslist(){
+        var lng = "<{$chaoshi_info.lng}>";
+        var lat = "<{$chaoshi_info.lat}>";
+        var distance = "<{$chaoshi_info.distance}>";
+        var str="";
+        $.post("<{:U('member/address/ajax_getlist')}>",{'lng':lng,'lat':lat,'distance':distance},function(data){
+            //console.log(data);
+            var str="";
+            $.each(data.data,function(k,v){
+                
+                if(v.is_default==1){
+                    str+="<li class=\"addsList active clearfix\" ><span class=\"none\"><i></i>寄送至</span><p><input name=\"addr_id\" value=\""+v.addr_id+"\" class=\"adds_inpt\" id=\"inpt_"+v.addr_id+"\" type=\"radio\" checked=\"checked\"><label class=\"inpt_1\" for=\"inpt_"+v.addr_id+"\">"+v.addr+"（"+v.name+" 收）<em style=\"font-size:16px;font-weight:bold; color:#888;margin-left: 0;font-style: normal;\">"+v.mobile+" &nbsp;&nbsp;</em></label></p><a data-id='"+v.addr_id+"' class=\"changeAdds J_modify_receipt_addr\" href=\"javascript:;\">修改本地址</a><a data-id='"+v.addr_id+"' class=\"changeAdds J_modify_receipt_addr_delete\" href=\"javascript:;\">删除本地址</a></li>";
+                }else{
+                    str+="<li class=\"addsList clearfix\" ><span class=\"none\"><i></i>寄送至</span><p><input name=\"addr_id\" value=\""+v.addr_id+"\" class=\"adds_inpt\"  id=\"inpt_"+v.addr_id+"\" type=\"radio\"><label class=\"inpt_1\" for=\"inpt_"+v.addr_id+"\">"+v.addr+"（"+v.name+" 收）<em style=\"font-size:14px; margin-left: 0;font-style: normal;\">"+v.mobile+" &nbsp;&nbsp;</em></label><a class=\"adds_set none\" data-id='"+v.addr_id+"' href=\"javascript:;\">设为默认地址</a></p><a data-id='"+v.addr_id+"' class=\"changeAdds none J_modify_receipt_addr\" href=\"javascript:;\">修改本地址</a><a data-id='"+v.addr_id+"' class=\"changeAdds none J_modify_receipt_addr_delete\" href=\"javascript:;\">删除本地址</a></li>";
+                }
+                
+            })
+            $(".addsList-ul").empty().append(str);
+        });
+        
+    }
+    addresslist();
+
+    $(function(){
+        $(document).on("click",".adds_set",function(){
+            var addr_id = $(this).attr('data-id');
+            console.log(addr_id);
+            $.post("<{:U('member/address/set_default_addr')}>",{'addr_id':addr_id});
+        })
+    })
+</script>
+<include file="public:footer" />
+
+       

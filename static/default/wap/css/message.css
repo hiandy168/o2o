@@ -1,0 +1,35 @@
+body{background:#e9f0f5;}
+.msg-list {padding:0;}
+.msg-list ul{list-style:none;padding:0;}
+.msg-list li{width:100%;height:70px;}
+.msg-list li .item-left{position:relative;}
+.msg-list li .item-left .tline{position:absolute;right:15%;top:0;}
+.msg-list li .item-left .time{text-align:center;height:70px;line-height:60px;font-size:10px;width:85%;display:block;color:#999;position:absolute;left:0;}
+.msg-list li .item-right{border-bottom:thin solid #D7E4ED;height:70px;padding:10px;position:relative;}
+.msg-list li .item-right p{font-size:12px;margin:0;height:25px;line-height:25px;overflow:hidden;width:100%;}
+.msg-list li .item-right p.send{font-size:14px;}
+.msg-list li .item-right p.desc{color:#888;}
+.msg-list li .item-right i{margin-right:5px;}
+.msg-list li .item-right .status{position:absolute;right:10px;top:10px;height:20px;line-height:20px;font-size:10px;}
+
+
+
+.detail-list ul{padding:0;list-style:none;}
+.detail-list li{padding:10px;}
+.detail-list li .avatar{width:80%!important;display:block;}
+.detail-list li .chat-ta{box-shadow: 0px 3px 0px #D7E4ED;width:100%;background:#fff;padding:10px;border-radius: 0.25em;min-height:80px;position:relative;}
+.detail-list li .chat-ta .time{color:#999;position:absolute;right:10px;bottom:10px;font-size:10px;}
+.detail-list li .chat-ta::before {content: '';position:absolute;border-width:7px;border-style:solid;left:18px;height:10px;width:5px;top:10px;left:auto;right:100%;border-color: transparent #FFF transparent transparent;}
+.detail-list li .chat-wo{box-shadow: 0px 3px 0px #D7E4ED;width:100%;background:#fff;padding:10px;border-radius: 0.25em;min-height:80px;position:relative;}
+.detail-list li .chat-wo .time{color:#999;position:absolute;right:10px;bottom:10px;font-size:10px;}
+.detail-list li .chat-wo::after {content:'';left:100%;top:10px;border-color:transparent transparent transparent #FFF;position:absolute;border-width:7px;border-style:solid;}
+
+
+.chat-form textarea{box-shadow: 0px 3px 0px #D7E4ED;width:98%;background:#fff;padding:10px;border-radius: 0.25em;min-height:80px;position:relative;border:none;border:thin solid #D7E4ED;}
+
+
+/*¸¡¶¯µ×À¸*/
+.chat-bar{bottom:0px;display:table;width:100%;height:50px;padding:0px;table-layout:fixed;position:fixed;z-index:10;right:0px;left:0px;background: #FAFAFA;box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.55);backface-visibility:hidden;overflow:hidden;line-height:50px;}
+.chat-bar i{color:#aaa;font-size:16px;margin-right:5px;}
+.chat-bar a{width:100%;height:50px;display:block;}
+.chat-bar em{font-size:20px;color:#ccc;}

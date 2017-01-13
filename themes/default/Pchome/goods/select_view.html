@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap.min.css">
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="__PUBLIC__/bootstrap/js/jquery.js"></script>
+
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/js/validform5.3.2.js"></script>
+    
+</head>
+<body>
+	<div class="container">
+		<form action="<{:U('pchome/goods/get_goods_list_for_table')}>" method="post" id="search"> 
+		  <div class="form-group">
+		    <label for="exampleInputEmail1">选择分类：</label>
+		    <span id="exampleInputEmail1">
+		    <select>
+            <option>请选择分类</option>
+            <volist name="goods_cate_list" id="vo">
+             <option value="<{$vo.cate_id}>"><{$vo.cate_name}></option>
+            </volist>
+            </select>
+		    
+		    </span>
+            <input type="hidden" name="cid" value="0" />
+            <input type="hidden" name="shop_id" value="<{$shop_id}>" />
+		    <input type="submit" value="搜索"/>
+		  </div>
+		</form>
+
+		<table class="table table-bordered">
+			<thead>
+				<tr><th>商品编号</th><th>商品图片</th><th>商品名称</th><th>商品数量</th><th>操作</th></tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+
+	</div>
+</body>
+<script type="text/javascript">
+	//选择商品
+	$(document).on("change","#exampleInputEmail1 select",function(){
+		var _this = $(this);
+		_this.nextAll().remove();
+		var id = _this.val();
+        $("input[name=cid]").val(id);
+		$.post("<{:U('pchome/Goodscate/select_goods_cate_view')}>",{'cid':id},function(data){
+		  
+		      _this.after(data);
+		});
+	})
+    //搜索商品
+    $(document).ready(function(){
+        $("#search").Validform({
+            tiptype:4,
+            ajaxPost:true,
+            callback:function(data){
+                
+                $("table tbody").html(data.responseText);
+            }
+        });
+        
+    })
+    //增加商品到推荐列表
+    $(document).on("click","table tbody tr td button.recommond",function(){
+        var _this = $(this);
+        id = _this.attr('data_id');
+        //获得商品信息
+        var commend_type = "<{$recommend_type}>";
+        if(commend_type == "recomment1"){
+            parent.add_recommoned_1(id);
+        }else if(commend_type == "recomment2"){
+            parent.add_recommoned_2(id);
+        }
+        
+    })
+</script>
+
+</html>

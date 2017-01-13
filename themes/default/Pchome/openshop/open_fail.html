@@ -1,0 +1,32 @@
+    <include file="public:header" />
+ 
+        <link rel="stylesheet" type="text/css" href="__TMPL__statics/css/openshop/uploadify.css">
+        <link rel="stylesheet" type="text/css" href="__TMPL__statics/css/business.css">
+        <script> var BAO_PUBLIC = '/Public'; var BAO_ROOT = '';</script>
+        <script src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js"></script>
+        <script src="__PUBLIC__/js/Validform_v5.3.2_min.js"></script>  
+<include file="public:top"/>     
+<div class="cl"></div>
+<div class="main">
+    <ul class="fbMenu">
+        <li>1.提交资料</li>
+        <li>2.等待审核</li>
+        <li class="cur">3.开店成功</li>
+    </ul>
+    <div class="fbMain" style="height:350px;">
+        <h3></h3>
+        <div class="open-fail" style="width:305px;margin:0 auto;padding-top:60px;">
+            <div style="color:rgb(71,71,71);">
+                <img src="__PUBLIC__/images/fail.png" style="float:left;margin-right:10px;" />
+                <p style="font-family:'微软雅黑';font-size:24px;padding-top:10px;">抱歉，开店审核未通过</p>
+            </div>
+            <div style="margin-top:20px;width:305px;">
+                <a href="<{:U('pchome/Openshop/personl_step1', array('sc_id' => $sc_id, 'st_id' =>$st_id))}>" style="display:block;cursor: pointer;font-weight:700;color:white;background:rgb(209,3,3);padding:10px 30px;width:80px;text-align: center;border-radius: 4px;margin:0 auto;">重新认证</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cl"></div>
+<!--main end-->
+
+<include file="public:footer" />

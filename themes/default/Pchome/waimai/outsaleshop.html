@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>外卖店铺</title>
+  <!-- Bootstrap -->
+  <link href="style/bootstrapCSS/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style/css/shopstyle.css">
+  <link rel="stylesheet" type="text/css" href="style/css/salelist.css">
+  <script src="jQuery/jquery-1.12.2.min.js"></script>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <!-- 顶部左边 -->
+  <nav class="navbar navbar-default nav-fixed-top nav-top">
+    <div class="container nav-main">
+      <div class="navbar-header">
+        <a class="navbar-brand starlogo star-logo" href="#">
+          <img src="images/shopstar.jpg" alt="收藏好吉来" class="shopstar">
+          <span>收藏好吉来</span>
+        </a>
+      </div>
+      <!-- 顶部左边结束 -->
+
+      <!-- 顶部中间 -->
+      <div>
+        <ul class="nav navbar-nav navbar-left nav-mid">
+          <li>
+            <a href="" class="color">好吉来首页</a>
+          </li>
+          <li class="welcome">您好，欢迎来到好吉来！</li>
+          <li>
+            <a href="" class="color">[登录]</a>
+          </li>
+          <li>
+            <a href="" class="color">[免费注册]</a>
+          </li>
+          <li>
+            <a href="">
+              <span>我的好吉来</span>
+              <img src="images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <span>卖家中心</span>
+              <img src="images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <span>收藏夹</span>
+              <img src="images/list.gif" alt=""/>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 顶部左边 -->
+      <div>
+        <ul  class="nav navbar-nav navbar-right nav-right">
+          <li>
+            <a href="#">
+              <img src="images/shouji.gif">
+              <span class="shouji">手机好吉来</span>
+              <img src="images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="kefu">客户服务</span>
+              <img src="images/list.gif" alt=""/>
+            </a>
+          </li>
+          <li>
+            <a href="#">下载PC客户端</a>
+          </li>
+          <li>
+            <a href="#">联系我们</a>
+          </li>
+        </ul>
+      </div>
+      <!-- 顶部右边结束 --> </div>
+  </nav>
+  <!-- 顶部完成 ！-->
+
+  <!-- LOGO部分 -->
+  <div class="container">
+    <div class="row meau">
+      <div class="col-md-4 meau-left">
+        <a href=""class="pull-left">
+          <img src="images/logo.gif"></a>
+        <h4 class="meau-h4">成都</h4>
+        <button class="meau-btn">切换城市</button>
+      </div>
+
+      <div class="col-md-5 meau-mid">
+        <div class="input-group">
+          <form>
+            <input type="text" class="form-control meau-mid-text" value="天府三街" onfocus="this.value='';" onblur="if(this.value==''){this.value='请输入地址'}">
+            <input type="button" class="input-group-addon  meau-search" value="搜索">
+          </form>
+        </div>
+      </div>
+      <div class="col-md-3 meau-right pull-right">
+        <p>
+          购物车去结算
+          <span>(0)</span>
+          <img src="images/list2.gif"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 内容部分 -->
+  <div class="container">
+  <div>
+    <div class="row main">
+      <div class="col-md-6">
+        <a href="">
+          <img src="images/dingxiansheng.jpg" alt="dingxiansheng"class="pull-left main-left-img_1"></a>
+        <h4>丁先生快餐店（软件园店）</h4>
+        <dl class="dl-horizontal pull-left main-left-dl">
+          <dt class="main-left-dt">商家信誉：</dt>
+          <dd class="main-left-dd_1">
+            <ul>
+            <li>
+              <span class="glyphicon glyphicon-star score-star" ></span>
+            <li>
+              <span class="glyphicon glyphicon-star score-star"></span>
+            <li>
+              <span class="glyphicon glyphicon-star score-star"></span>
+            <li>
+              <span class="glyphicon glyphicon-star score-star"></span>
+            <li>
+              <span class="glyphicon glyphicon-star"></span>
+          </ul>
+            </dd>
+          <dt>营业时间：</dt>
+          <dd>
+            08:00-21:00
+            <a class="btn btn-default btn-xs main-left-btn_1" href="" role="button">营业中</a>
+            <a class="btn btn-default btn-xs main-left-btn_2" href="" role="button">休息中</a>
+          </dd>
+          <dt>
+            <span class="ad">地</span>
+            址：
+          </dt>
+          <dd class="main-left-dd_2">成都市武侯区一环路南二段1号附15号</dd>
+        </dl>
+      </div>
+      <div class="col-md-6">
+        <table class="main-mid-table">
+          <thead>
+            <tr>
+              <td>
+                <span class="main-mid-table-size">60</span>
+                分钟
+              </td>
+              <td>
+                <span class="main-mid-table-size main-mid-sale">￥30</span>
+              </td>
+              <td>
+                <span class="main-mid-table-size">￥5</span>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>平均送餐时间</td>
+              <td>起价送</td>
+              <td>配送费</td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="" class="pull-right main-mid-shoucang">
+          <img src="images/shoucang.jpg" alt="">收藏店铺</a>
+
+        
+                </div>
+              </div>
+            </div>
+            <!-- 店铺首页面完成 -->
+
+            <div class="shop-header">
+              <div>
+                <ul class="nav navbar-nav navbar-left">
+                  <li class=" shop_nav">
+                    <a href="#" class="item" id="item">商品</a>
+                    <a href="#" class="evalute" id="evalute">评价</a>
+                  </li>
+                </ul>
+                <hr/>
+              </div>
+              <div class="item-list item-list-color">
+                <ul >
+                  <li class="commodity">
+                    <a href="#">全部商品（560）</a>
+                  </li>
+                  <li class="item-list-color">
+                    <a href="#">营养饭</a>
+                  </li>
+                  <li class="item-list-color">
+                    <a href="#">炒菜劲爆</a>
+                  </li>
+                  <li class="item-list-color">
+                    <a href="#">健康营养美食</a>
+                  </li>
+                  <li class="item-list-color">
+                    <a href="#">店长推荐</a>
+                  </li>
+                  <li class="item-list-color">
+                    <a href="#">爆款套餐</a>
+                  </li>
+                  <li class="item-list-color">
+                    <a href="#">新口味</a>
+                  </li>
+                  <li class="item-list-color">
+                    <a href="#">饮品</a>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- 评论 -->
+              <div class="evalute-list">
+                <ul >
+                  <li>
+                    <a href="#">全部商品（560）</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="comment">
+      <div class="comment-header">
+        <form action="">
+        <fieldset>
+          <legend class="legend">评论选择</legend>
+          <ul>
+            <li><input type="radio" name="all" id="all" checked><label for="all" class="default">全部评论<span>< 0 ></span></label></li>
+            <li><input type="radio" name="all" id="good"><label for="good">好评<span>< 0 ></span></label></li>
+            <li><input type="radio" name="all" id="mid"><label for="mid">中评<span>< 0 ></span></label></li>
+            <li><input type="radio" name="all" id="bad"><label for="bad">差评<span>< 0 ></span></label></li>
+          </ul>
+        </fieldset>
+      </form>
+      </div>
+      <hr/>
+      <div class="comment-content">
+      <div  class="comment-content_list">
+        <div class="comment-content_left">
+          <figure>
+            <img src="images/yonghu.jpg" alt="">
+            <figcaption>17756570802 </figcaption>
+          </figure>
+        </div>
+        <div class="comment-content_mid">
+          <div class="pingfen">
+            <ul>
+              <li><img src="images/star.jpg" alt=""></li>
+              <li><img src="images/star.jpg" alt=""></li>
+              <li><img src="images/star.jpg" alt=""></li>
+              <li><img src="images/star.jpg" alt=""></li>
+              <li><img src="images/star.jpg" alt=""></li>
+            </ul>
+            <strong>好评</strong>
+          </div>
+          <p>不错，不错！</p>
+          <p class="huifu">回复：好的，非常感谢您的评价，马上送你精美礼品！！！</p>
+        </div>
+        <div class="comment-content-right">
+          <p>2016-04-22  17.35</p>
+        </div>
+        <div class="line"></div>
+      </div>
+
+      </div>
+
+      <div class="x">
+        <b>1 条记录 1/1 页</b>
+      </div>
+      
+    </div>
+    <!-- 评论结束 -->
+
+
+              <div class="shop-content">
+                <div class="shop-content-nav pull-left">
+                  <a href="#" class="active">默认</a>
+                  <a href="#" class="content-price">按价格</a>
+                  <a href="#" class="content-sales">按销量</a>
+                </div>
+                <div class="content-search pull-right">
+                  <form>
+                    <input type="text" value="搜索商品" class="cearch-text-1" onfocus="this.value='';" onblur="if(this.value==''){this.value='搜索商品'}">
+                    <input type="button" class="search-btn-1">
+                  </form>
+              </div>
+            </div>
+
+            <!-- 商家公告 -->
+            <div class="bbs pull-right">
+              <h4>商家公告</h4>
+              <ul>
+                <li>配送时间： 10:50 -24:00</li>
+                <li>配送范围：三环内</li>
+                <li>配送条件：满50免费配送</li>
+                <li class="zhongbao">由众包配送提供送餐服务</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- 内容列表    -->
+          <div class="content">
+            <div class="container-top-line"></div>
+            <div class="content-list content-height ">
+            <div class="tabNew_2">
+              <ul id="food_lists">
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list1.jpg" alt="秘制酱烧小羊排 " class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_2" rel="2" data="鱼香肉丝" price="19.8" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">秘制酱烧小羊排</p> 
+                      <div class="left tabNew_p">  
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥19.80</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="秘制酱烧小羊排" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                   <div class="closeTime">
+                        <div class="closeTime-info">
+                           <p class="p1">CLOSED</p>
+                           <p>店铺已打烊</p>
+                        </div>
+                   </div>
+                   <div class="listNorms">
+                     <p>规格 <span>750g</span>装</p>
+                     <p>单果 约<span>50g</span>/个</p>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list2.jpg" alt="泰式烧汁牛柳饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="泰式烧汁牛柳饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">泰式烧汁牛柳饭</p> 
+                      <div class="left tabNew_p"> 
+                        
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥34</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="泰式烧汁牛柳饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list3.jpg" alt="毛爷爷最爱红烧肉" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="毛爷爷最爱红烧肉" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">毛爷爷最爱红烧肉</p> 
+                      <div class="left tabNew_p"> 
+                        
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥12.80</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="毛爷爷最爱红烧肉" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+              
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list4.jpg" alt="家常五香茶叶蛋" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="家常五香茶叶蛋" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">家常五香茶叶蛋</p> 
+                      <div class="left tabNew_p"> 
+                        
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥36.50</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="家常五香茶叶蛋" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+                
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list5.gif" alt="黄焖猪仔排" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="黄焖猪仔排" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">黄焖猪仔排</p>
+                      <div class="left tabNew_p"> 
+                         
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥9.90</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="黄焖猪仔排" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list6.gif" alt="金汤肥牛套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="金汤肥牛套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">金汤肥牛套饭</p> 
+                      <div class="left tabNew_p"> 
+                        
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥39.90</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="金汤肥牛套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list7.gif" alt="豆花肥肠套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="豆花肥肠套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">豆花肥肠套饭</p>
+                      <div class="left tabNew_p"> 
+                         
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥19.90</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="豆花肥肠套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+                  
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list8.gif" alt="石锅豆花肥牛套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="石锅豆花肥牛套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">石锅豆花肥牛套饭</p> 
+                      <div class="left tabNew_p"> 
+                        
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥3.5</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="石锅豆花肥牛套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list9.gif" alt="家常酸菜鱼套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="家常酸菜鱼套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">家常酸菜鱼套饭</p>
+                      <div class="left tabNew_p"> 
+                         
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥16.50</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="家常酸菜鱼套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list10.gif" alt="杏鲍菇牛柳套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="杏鲍菇牛柳套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">杏鲍菇牛柳套饭</p>
+                      <div class="left tabNew_p"> 
+                         
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥17.50</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="杏鲍菇牛柳套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list11.gif" alt="青椒肉丝套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="青椒肉丝套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">青椒肉丝套饭</p>
+                      <div class="left tabNew_p"> 
+                         
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥16.80</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="青椒肉丝套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list12.gif" alt="口水鸡套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="口水鸡套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">口水鸡套饭</p>
+                      <div class="left tabNew_p"> 
+                         
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥32</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="口水鸡套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list13.gif" alt="回锅肉套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="回锅肉套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">回锅肉套饭</p> 
+                      <div class="left tabNew_p"> 
+                        
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥84.90</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="回锅肉套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list14.gif" alt="小炒肉套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="小炒肉套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">小炒肉套饭</p>
+                      <div class="left tabNew_p"> 
+                         
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥19.90</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="小炒肉套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list15.gif" alt="宫保鸡丁套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="宫保鸡丁套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">宫保鸡丁套饭</p>
+                      <div class="left tabNew_p"> 
+                         
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥59.90</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="宫保鸡丁套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list16.gif" alt="鸡米芽菜套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="鸡米芽菜套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">鸡米芽菜套饭</p>
+                      <div class="left tabNew_p"> 
+                         
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥12.90</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="鸡米芽菜套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list17.gif" alt="土豆烧排骨套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="土豆烧排骨套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">土豆烧排骨套饭</p> 
+                      <div class="left tabNew_p"> 
+                        
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥159</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="土豆烧排骨套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list18.gif" alt="小煎鸡套饭" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="小煎鸡套饭" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">小煎鸡套饭</p> 
+                      <div class="left tabNew_p"> 
+                        
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥34</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="小煎鸡套饭" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li>
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list19.gif" alt="蒜苔肉丝" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="蒜苔肉丝" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">蒜苔肉丝</p>
+                      <div class="left tabNew_p"> 
+                         
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥19.90</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="蒜苔肉丝" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li> 
+
+                <li>
+                    <div class="tabNew_div opimagAdd">
+                      <img src="images/list20.jpg" alt="西红柿炒蛋" class="food-list">
+                      <a class="jq_addcart opimagAdd_link" id="price_1" rel="1" data="西红柿炒蛋" price="34" href="javascript:void(0);">来一份</a>  
+                    </div>
+                    <div class="tabNew_div3">
+                      <p class="title">西红柿炒蛋</p>
+                      <div class="left tabNew_p"> 
+                         
+                        <p class="sold shou_num">已售330份</p>
+                        <p class="usd">￥47</p>
+                        
+                      </div>
+                      <div class="usd-buy right">
+                        <p class="stock">库存60</p>
+                        <a class="jq_addcart" id="price_1" rel="1" data="西红柿炒蛋" price="19.8" href="javascript:void(0);"><img src="images/buy.gif"></a>
+                      </div>
+                   </div>
+                </li> 
+
+              </ul>
+            </div>
+              
+
+              
+
+              
+              <div class="pagination">
+                <ul>
+                  <li>
+                    <a href="">上一页</a>
+                  </li>
+                  <li>
+                    <a href="">1</a>
+                  </li>
+                  <li>
+                    <a href="">2</a>
+                  </li>
+                  <li>
+                    <a href="">3</a>
+                  </li>
+                  <li>
+                    <a href="">4</a>
+                  </li>
+                  <li>
+                    <a href="">16</a>
+                  </li>
+                  <li class="more">
+                    <a href="">...</a>
+                  </li>
+                  <li>
+                    <a href="">下一页</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 购物车 -->
+            <div class="check cart">
+              <div class="check-top">
+                <h4>购物车</h4>
+              </div>
+              <form id="forms"  method="post">
+                <table width="100%">
+                  <tbody>
+                    <tr class="tit">
+                      <td class="food" width="46%">商品</td>
+                      <td width="23%">份数</td>
+                      <td width="20%">单价</td>
+                    </tr>
+                   </tbody>
+                  </table>
+                  <div class="center">
+                      <table width="100%" id="food_list">
+                        <!-- <tr id="jq_tr_1">
+                          <td class="food">秘制酱烧小羊排</td>
+                          <td class="numinput">
+                          <div class="cut" rel="1"><img src="images/jian.gif" alt=""></div>
+                          <div>
+                            <input readonly="readonly" id="jq_num_1" name="num[1]" value="1" type="text">
+                          </div>
+                          <div class="add" rel="1"><img src="images/jia.gif" alt=""></div>
+                          </td>
+                          <td class="numinput-td"><span>￥</span><strong>19.8</strong></td>
+                        </tr> -->
+                      </table>
+                  </div>        
+                    <div class="count">
+                      <p><span>配送费（不计入起送价）</span><em class="check-span">￥0.00</em></p>
+                      <p><span id="since"></span></p>
+                    </div>
+                    <div >
+                      <p colspan="2" class="closed">共<span class="c price">￥</span><span id="food_money" class="c price">0</span>元</p>
+                      <span class="ok"><a href="#" id="sub">选好了</a></span>
+                    </div>
+                    <div class="btn btns" >
+                      <img src="images/clear.gif" alt="清空"><input class="btn-reset" id="clearcart" type="button"  value="清空">
+                    </div>
+                  </form>
+            </div>
+
+            </div>
+
+          </div>
+          <!-- 内容结尾 -->
+
+          <!--底部 -->
+          <div class="container">
+            <div class="row footer1">
+              <div class="col-md-2 col col-1">
+                <div class="media">
+                  <div class="media-left media-top">
+                    <img src="images/user1.gif" alt="" class="media-object"></div>
+                  <div class="media-body">
+                    <h4 class="media-heading footerlist-1">新手入门</h4>
+                    <ul class="text-muted user">
+                      <li><span>· </span>
+                        <a href="">购物流程</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">商品验货与签收</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">联系客服</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">常见问题</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2 col">
+                <div class="media">
+                  <div class="media-left media-top">
+                    <img src="images/user2.gif" alt="" class="media-object"></div>
+                  <div class="media-body">
+                    <h4 class="media-heading footerlist-1">配送服务</h4>
+                    <ul class="text-muted user">
+                      <li><span>· </span>
+                        <a href="">配送进度查询</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">配送范围与运费</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">自提服务</a>
+                      </li>
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col">
+                <div class="media">
+                  <div class="media-left media-top">
+                    <img src="images/user3.gif" alt="" class="media-object"></div>
+                  <div class="media-body">
+                    <h4 class="media-heading footerlist-1">支付方式</h4>
+                    <ul class="text-muted user">
+                      <li><span>· </span>
+                        <a href="">货到付款</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">网上支付</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">银行转账</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">抵用券使用</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col">
+                <div class="media">
+                  <div class="media-left media-top">
+                    <img src="images/user4.gif" alt="" class="media-object"></div>
+                  <div class="media-body">
+                    <h4 class="media-heading footerlist-1">售后服务</h4>
+                    <ul class="text-muted user">
+                      <li><span>· </span>
+                        <a href="">退换货政策</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">退换货地址</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">退款说明</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">售后服务电话</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col">
+                <div class="media">
+                  <div class="media-left media-top">
+                    <img src="images/user5.gif" alt="" class="media-object"></div>
+                  <div class="media-body">
+                    <h4 class="media-heading footerlist-1">自助服务</h4>
+                    <ul class="text-muted user">
+                      <li><span>· </span>
+                        <a href="">取消订单</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">退换货申请</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">在线投诉</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">补开发票</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">绑定手机邮箱</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col col-right">
+                <div class="media">
+                  <div class="media-left media-top">
+                    <img src="images/user6.gif" alt="" class="media-object"></div>
+                  <div class="media-body">
+                    <h4 class="media-heading footerlist-1">招商合作</h4>
+                    <ul class="text-muted user">
+                      <li><span>· </span>
+                        <a href="">好吉来入驻</a>
+                      </li>
+                      <li><span>· </span>
+                        <a href="">招商政策</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 底部第二部分 -->
+            <div class="row footer2">
+              <div class="col-md-2 col-2">
+                <div class="media footer-left-1">
+                  <div class="media-left media-top">
+                    <img src="images/user7.gif" alt=""></div>
+                  <div class="media-body footer-h4">
+                    <h4 class="media-heading footerlist-2">好及时</h4>
+                    <p class="footer-text">部分区县支持24小时内送货上门</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2 col-3">
+                <div class="media footer-left-1">
+                  <div class="media-left">
+                    <img src="images/user8.gif" alt=""></div>
+                  <div class="media-body footer-h4">
+                    <h4 class="media-heading footerlist-2">好服务</h4>
+                    <p class="footer-text">7天无理由放心退</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2 col-4">
+                <div class="media">
+                  <div class="media-left">
+                    <img src="images/user9.gif" alt=""></div>
+                  <div class="media-body footer-h4">
+                    <h4 class="media-heading footerlist-2">好实惠</h4>
+                    <p class="footer-text">天天低价 放心购</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2 col-5">
+                <div class="media">
+                  <div class="media-left">
+                    <img src="images/user10.gif" alt=""></div>
+                  <div class="media-body footer-h4">
+                    <h4 class="media-heading footerlist-2">好商品</h4>
+                    <p class="footer-text">正品保证  购物无忧</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2 col-6">
+                <div class="media">
+                  <div class="media-left">
+                    <img src="images/user11.gif" alt=""></div>
+                  <div class="media-body footer-h4">
+                    <h4 class="media-heading footerlist-2">好方便</h4>
+                    <p class="footer-text">遍布你身边</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- 脚部 -->
+          <footer class="footrlist-3">
+            <div class="container">
+              <ul>
+                <li>
+                  <a href="">关于我们</a>
+                  <span>|</span>
+                </li>
+                <li>
+                  <a href="">联系我们</a>
+                  <span>|</span>
+                </li>
+                <li>
+                  <a href="">人才招聘</a>
+                  <span>|</span>
+                </li>
+                <li>
+                  <a href="">商家入驻</a>
+                  <span>|</span>
+                </li>
+                <li>
+                  <a href="">友情链接</a>
+                  <span>|</span>
+                </li>
+                <li>
+                  <a href="">销售联盟</a>
+                  <span>|</span>
+                </li>
+                <li>
+                  <a href="">帮助</a>
+                </li>
+              </ul>
+              <p>
+                <span>版权所有</span>
+                <span>四川好吉来电子商务有限公司</span>
+                <span>蜀ICP备15012705号-1</span>
+                热线电话：400-0535-033
+              </p>
+            </div>
+
+          </footer>
+
+          <script src="js/layer/layer.js"></script>
+          
+          <script src="js/bootstrap.min.js"></script>
+          <script src="js/jquery.cookie.js"></script>
+          <script  type="text/javascript">
+            $(function(){
+              $("#evalute").click(function(){
+                $(".comment").show();
+                $(".item-list,.shop-content,.content-list,.check,.bbs").hide();
+                $("#item").removeClass("item");
+                $("#evalute").addClass("item");})       
+            })
+             $(function(){
+              $("#item").click(function(){
+                $(".comment").hide();
+                $(".item-list,.shop-content,.content-list,.check,.bbs").show();
+                $("#evalute").removeClass("item");
+                $("#item").addClass("item"); })       
+            })
+          </script>
+
+          <script>
+            //购物车parseInt
+            function getCart() {
+                var res = new Array();
+                var cart = $.cookie('eleproducts');
+                if (cart) {
+                    local = cart.split('|');
+                    for (a in local) {
+                        res.push(local[a]);
+                    }
+                }
+                return res;
+            }
+
+            function setCart(product_id, num) {
+                var res = getCart();
+                var status = false;
+                var total = 0;
+                var money = parseFloat($("#food_money").html());
+                for (a in res) {
+                    local = String(res[a]);
+                    goo = local.split('_');
+                    total += parseInt(goo[1]);
+                    if (parseInt(goo[0]) == product_id) {
+                        status = true;
+                        money += parseFloat($("#price_" + product_id).attr('price')) * parseInt(num);
+                        if ((parseInt(goo[1]) + parseInt(num)) < 0) {
+                            $("jq_tr_" + product_id).remove();
+                        } else {
+                            res.splice(a, 1, parseInt(goo[0]) + '_' + (parseInt(goo[1]) + num));
+                            $("#jq_num_" + product_id).val(parseInt(goo[1]) + parseInt(num));
+                        }
+                    }
+                }
+                if (status == false) {
+                    money += parseFloat($("#price_" + product_id).attr('price')) * parseInt(num);
+                    res.push(product_id + '_' + num);
+                }
+                money = money.toFixed(2);
+                total += num;
+                var since_money = "50";
+                var cha = (parseFloat(since_money) - money).toFixed(2);
+                if (cha >0) {
+                    $("#since").html("还差￥" + cha + "起送！").css("color", "#FE4D3D");
+                } else {
+                    $("#since").html("可以起送！").css("color", "#333");
+                }
+
+                $.cookie('eleproducts',  res.join("|"), { path: '/', expires: 7 });
+                $("#food_count").html(total);
+                $("#food_money").html(money);
+            }
+
+
+            $(document).ready(function () {
+                $(".jq_addcart").click(function () {
+                    var product_id = parseInt($(this).attr('rel'));
+                    var product_name = $(this).attr('data');
+                    var price = parseFloat($(this).attr('price'));
+                    //var num = parseInt($("#jq_num_" + $(this).attr('rel')).val());
+                    var str = "";
+                    str += '<tr id="jq_tr_' + product_id + '">';
+                    str += '<td class="food">' + product_name + '</td>';
+                    str += '<td class="numinput">';
+                    str += '<div class="cut" rel="' + product_id + '"><img src="images/jian.gif" alt=""></div>';
+                    str += '<div><input type="text" readonly="readonly" id="jq_num_' + product_id + '" name="num[' + product_id + ']" value="1"></div>';
+                    str += '<div class="add" rel="' + product_id + '"><img src="images/jia.gif" alt=""></div></td>';
+                    str += '<td class="numinput-td"><span>￥</span><strong>'+price+'</strong></td></tr>';
+                    if ($("#jq_tr_" + product_id).length <= 0) {
+                        $("#food_list").append(str);
+                    }
+                    setCart(product_id, 1);
+                });
+
+                $("#food_list").on('click', '.cut', function () {
+                    var obj = $("#jq_num_" + $(this).attr('rel'));
+                    var product_id = $(this).attr('rel');
+                    var num = parseInt(obj.val());
+                    if (num > 0) {
+                        num--;
+                        obj.val(num);
+                        setCart(product_id, -1);
+                    }
+                });
+                $("#food_list").on('click', '.add', function () {
+                    var obj = $("#jq_num_" + $(this).attr('rel'));
+                    var product_id = $(this).attr('rel');
+                    var num = parseInt(obj.val());
+                    num++;
+                    obj.val(num);
+                    setCart(product_id, 1);
+                })
+                $("#sub").click(function () {
+                    var forms = $("#forms").serialize();
+                    var shop_id = "39";
+                    $.post("/index.php/ele/order.html", forms, function (result) {
+                        if (result.status == "login") {
+                            ajaxLogin();
+                        } else if (result.status == "more") {
+                            layer.confirm(result.msg, {
+                                area: '200px', //宽高
+                                btn: ['是的', '不'], //按钮
+                                shade: false //不显示遮罩
+                            }, function () {
+                                $.post("/index.php/ele/delother.html", {shop_id:shop_id}, function (data) {
+                                    if (data.status == "success") {
+                                        layer.msg(data.msg);
+                                        setTimeout(function () {
+                                            location.reload();
+                                        }, 1000);
+                                    } else {
+                                        layer.msg(data.msg);
+                                    }
+                                }, 'json');
+                            });
+                            $('.layui-layer-btn0').css('background', '#2fbdaa');
+                        } else if (result.status == "success") {
+                            $.cookie('eleproducts', null,{ path: '/', expires: 7 });
+                            layer.msg(result.msg, function () {
+                                setTimeout(function () {
+                                    window.location.href = result.url;
+                                }, 1000)
+
+                            });
+                        } else {
+                            layer.msg(result.msg);
+                        }
+                    }, 'json');
+                });
+                $("#clearcart").click(function () {
+                    $.cookie('eleproducts', null,{ path: '/', expires: 7 });
+                    layer.msg("清除成功");
+                    window.location.reload(true);
+                });
+
+
+            });
+        </script>
+
+        <script type="text/javascript">
+          $(document).ready(function () {
+    
+          $(window).scroll(function(){
+            var top = $(document).scrollTop();          //定义变量，获取滚动条的高度
+            var menu = $(".cart");                      //定义变量，抓取topUp
+            var items = $(".footer1");    //定义变量，查找footerOut 
+        
+            items.each(function(){
+              var m=$(this);
+              var itemsTop = m.offset().top;      //定义变量，获取当前类的top偏移量
+              if(itemsTop-1100<= top){
+                menu.css('bottom','auto');
+                menu.css('top','0px');
+              }else{
+                menu.css('bottom','auto');
+                menu.css('top','560px');
+              }
+
+            });
+          });
+    });
+        </script>
+
+</body>
+        </html>

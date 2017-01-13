@@ -1,0 +1,10 @@
+.login-open .icon{font-size:30px;}
+.login-open  a{color:#FFF;}
+.login-open  a:hover{filter:alpha(opacity=50);-moz-opacity:0.5; opacity:0.5;}
+
+.login-form .form-group{overflow:hidden;border-bottom:thin solid #eee;padding:0 10px;}
+.login-form .form-group .input{border:none;box-shadow:none;padding:0 10px 0 40px;height:40px;text-indent:0;}
+.login-form .form-group .icon{height:40px;line-height:40px;}
+
+.reg-form .text-input{border:none;width:100%;}
+.reg-form  label{color:#999;}

@@ -1,0 +1,7 @@
+.module-classification ul li{float: left;width: 200px;height: 300px; margin-right:10px; }
+.module-classification ul li img{width: 200px;height: 200px;}
+.module-classification ul li div{position: relative;}
+.module-classification ul li div .windowtitle_close{position: absolute;display: block; top: 10px;right: 10px;background:#ccc;width: 20px;height: 20px;text-align: center;cursor: pointer;}
+
+
+

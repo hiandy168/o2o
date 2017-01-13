@@ -1,0 +1,370 @@
+
+<include file="public:header" />
+<link href="__PUBLIC__/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="__TMPL__/statics/css/chaoshi/shequchaoshi.css" rel="stylesheet" type="text/css" />
+<script src="__PUBLIC__/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/messages_zh.min.js"></script>
+<script src="__TMPL__/statics/js/chaoshi/validate.js"></script>
+<script src="__PUBLIC__/js/my97/WdatePicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js"></script>
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">系统设置</a> > <a href="">店铺管理</a> > <a>店铺设置</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+
+    </div>
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli tabli_change on"><a href="<{:U('chaoshi/edit')}>">店铺设置 </a></li>
+
+
+        </ul>
+    </div>
+    <div class="tabnr_change  show">
+        <form method="post"  action="<{:U('chaoshi/edit')}>" target="baocms_frm" class="form-horizontal" id="dp_set">
+            <div class="form-group">
+                <label class="col-sm-1 control-label">店铺名称：</label>
+                <div class="col-sm-2">
+                    <input type="text" style="width:232px;"  class="form-control" name="data[store_name]" value="<{$detail.store_name}>" placeholder="店铺名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label" style="padding-top:20px;">上传LOGO：</label>
+                <div class="col-sm-2" style="min-width:420px">
+                    <a href="javascript:void (0)" class="a-upload" style="background-color: green;">
+                        <input type="file" id="logo_file" name="" ><span  style="color:white">上传LOGO</span>
+                        <input type="hidden" name="data[logo]" id="data_logo" value="<{$detail.logo}>" />
+                    </a>
+                    <img src="<{$detail.logo|get_remote_file_path=###}>" id="photo_logo" style="width:80px;height:80px;margin-left:20px;">
+                    <div class="right_main" style="padding-top:60px;">
+                        <a href="<{:U('setting/attachs')}>" style="color:black;">略缩图设置</a>
+                        <span style="font-weight:bold;">建议尺寸 <{$CONFIG.attachs.goods.thumb}></span>
+                    </div>
+                    <script>
+                        $("#logo_file").uploadify({
+                            'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                            'uploader': "<{:C('PICLIBUPLOAD_URL')}>",
+                            'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                            'buttonText': '上传LOGO',
+                            'fileTypeExts': '*.gif;*.jpg;*.png',
+                            'queueSizeLimit': 1,
+                            'onUploadSuccess': function (file, data, response) {
+                                data = eval("("+data+")");
+                                $("#data_logo").val(data.data.Filedata.id);
+                                $("#photo_logo").attr('src', "<{:C('PICLIB_URL')}>" + data.data.Filedata.path).show();
+                            }
+                        });
+
+                    </script>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">所在区域：</label>
+                <td class="col-sm-2">
+
+                    <select name="data[city_id]"   id="city_id" class="tuanfabu_int tuanfabu_intw2"></select>
+                    <select name="data[area_id]"   id="area_id" class="tuanfabu_int tuanfabu_intw2"></select>
+
+                </td>
+                </tr>
+                <script src="<{:U('app/datas/cityarea')}>"></script>
+                <script>
+                    var city_id = <?php echo (int)$detail['city_id'];?>;
+                    var area_id = <?php echo (int)$detail['area_id'];?>;
+                    function changeCity(cid){
+                        var area_str = '<option value="0">请选择.....</option>';
+                        for(a in cityareas.area){
+                            if(cityareas.area[a].city_id ==cid){
+                                if(area_id == cityareas.area[a].area_id){
+                                    area_str += '<option selected="selected" value="'+cityareas.area[a].area_id+'">'+cityareas.area[a].area_name+'</option>';
+                                }else{
+                                    area_str += '<option value="'+cityareas.area[a].area_id+'">'+cityareas.area[a].area_name+'</option>';
+                                }
+                            }
+                        }
+                        $("#area_id").html(area_str);
+                    }
+                    $(document).ready(function(){
+                        var city_str = '<option value="0">请选择.....</option>';
+                        for(a in cityareas.city){
+                            if(city_id == cityareas.city[a].city_id){
+                                city_str += '<option selected="selected" value="'+cityareas.city[a].city_id+'">'+cityareas.city[a].name+'</option>';
+                            }else{
+                                city_str += '<option value="'+cityareas.city[a].city_id+'">'+cityareas.city[a].name+'</option>';
+                            }
+                        }
+                        $("#city_id").html(city_str);
+                        if(city_id){
+                            changeCity(city_id);
+                        }
+                        $("#city_id").change(function(){
+                            city_id = $(this).val();
+                            changeCity($(this).val());
+                        });
+
+                        $("#area_id").change(function () {
+                            var url = '<{:U("business/child",array("area_id"=>"0000"))}>';
+                            if ($(this).val() > 0) {
+                                var url2 = url.replace('0000', $(this).val());
+                                $.get(url2, function (data) {
+                                    $("#business_id").html(data);
+                                }, 'html');
+                            }
+
+                        });
+                    });
+                </script>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-1 control-label">是否支持在线付款：</label>
+                <div class="col-sm-2">
+                    <input type="radio" name="data[is_pay]" value="1" <eq name="detail.is_pay" value="1">checked="checked"</eq> /> 支持
+                    <input type="radio" name="data[is_pay]" value="0"  <eq name="detail.is_pay" value="0">checked="checked"</eq> /> 不支持
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">是否返利：</label>
+                <div class="col-sm-2" style="padding-top: 5px">
+                    <input type="radio" id="fanli" name="data[is_fan]" value="1" <eq name="detail.is_fan" value="1">checked="checked"</eq> /> 支持
+                    <input type="radio" id="bufanli" name="data[is_fan]" value="0"  <eq name="detail.is_fan" value="0">checked="checked"</eq> /> 不支持
+                </div>
+            </div>
+            <div class="form-group" id="zuigaofanli">
+                <label class="col-sm-1 control-label">最高返利金额：</label>
+                <div style="width: 1000px;">
+                    <input type="text" style="width:232px;float:left;margin-left: 13px;" name="data[fan_money]" value="<{$detail['fan_money']}>"  class="form-control" id="" placeholder="0.00"><span style="line-height:35px;">比如填写的9元，那么很可能只会返1元也可能返几角几分！填写0则不返利</span><br />
+                    <label id="zuigaofanli-error" class="error" for="zuigaofanli" style="display: none;margin-left:155px;"><font color="red">请输入最高返利金额</font></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">新客户下单立减：</label>
+                <div class="col-sm-2" style="padding-top: 5px">
+                    <input type="radio" id="support" name="data[is_new]" value="1" <eq name="detail.is_new" value="1">checked="checked"</eq>  /> 支持
+                    <input type="radio" id="nonsupport" name="data[is_new]" value="0"  <eq name="detail.is_new" value="0">checked="checked"</eq> /> 不支持
+                </div>
+            </div>
+            <div id="jianmian">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">满多少钱：</label>
+
+                    <div class="col-sm-2">
+                        <input type="text" style="width:232px;" name="data[full_money]" value="<{$detail['full_money']}>" class="form-control"
+                               placeholder="50.00">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">减多少钱：</label>
+
+                    <div class="col-sm-2">
+                        <input type="text" style="width:232px;" name="data[new_money]" value="<{$detail['new_money']}>" class="form-control"
+                               placeholder="5.00">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">配送费：</label>
+                <div class="col-sm-2">
+                    <input type="text" style="width:232px;" name="data[logistics]" value="<{$detail['logistics']}>"  class="form-control" placeholder="20.00">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">起送价：</label>
+                <div class="col-sm-4" style="min-width:360px">
+                    <input type="text" style="width:232px;float:left" name="data[since_money]" value="<{$detail['since_money']}>"   class="form-control"  placeholder="50.00"><span style="line-height:35px;">满多少才能下单！</span><br />
+                    <label id="qisongjia-error" class="error" for="qisongjia" style="display: none"><font color="red">请输入起送价</font></label>
+                </div>
+
+            </div>
+            <div class="form-group" >
+                <label class="col-sm-1 control-label">配送：</label>
+                <div class="col-sm-3" style="min-width:380px">
+                    <input type="text" style="width:232px;float:left" name="data[distribution]" value="<{$detail.distribution|default='100'}>"  class="form-control"  placeholder="20"><span style="line-height:35px;">分钟送达</span><br />
+                    <label id="time-error" class="error" for="time" style="display: none"><font color="red">请输入配送时间</font></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">开始营业时间：</label>
+                <div class="col-sm-2">
+                    <input type="text" style="width:232px;"  name="data[start_time]" value="<{$detail['start_time']}>" class="form-control" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">店铺打烊时间：</label>
+                <div class="col-sm-2">
+                    <input type="text" style="width:232px;"  name="data[end_time]" value="<{$detail['end_time']}>" class="form-control"  >
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">电话：</label>
+                <div class="col-sm-2">
+                    <input type="text" style="width:232px;"  class="form-control" name="data[phone]" value="<{$detail.phone|default=''}>"  placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">地址：</label>
+                <div class="col-sm-2">
+                    <input type="text" style="width:232px;" name="data[address]" value="<{$detail.address|default=''}>" class="form-control"  placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">配送距离：</label>
+                <div class="col-sm-3" style="min-width:280px">
+                    <input type="text" style="width:232px;float:left" name="data[distance]"  value="<{$detail.distance|default='5000'}>"  class="form-control"  placeholder="5000"><span style="line-height:35px;">米</span><br />
+                    <label id="distance-error" class="error" for="distance" style="display: none"><font color="red">请输入配送距离</font></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">地图：</label>
+                <div class="col-sm-2">
+                    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7b92b3afff29988b6d4dbf9a00698ed8"></script>
+                    <div style="width:700px; margin-bottom: 20px;">
+                        <div id="r-result">关键字:<input type="text" id="suggestId" class="mapinputs" size="20" value="合肥" /></div>
+                    </div>
+                    <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                    <div id="allmap" style="width: 600px; height:500px;"></div>
+                    <script type="text/javascript">
+                        // 百度地图API功能
+                        var map = new BMap.Map("allmap");
+                        var lng = "104.075089";
+                        var lat = "30.643201";
+                        if(!lng&&!lat){
+                            map.centerAndZoom("合肥");
+                            var point = new BMap.Point(117.260852,31.825717);
+                        }else{
+                            map.centerAndZoom(new BMap.Point(lng,lat), 15);
+                            var point = new BMap.Point(lng,lat);
+                        }
+                        map.centerAndZoom(point, 15);
+                        var marker = new BMap.Marker(point);  // 创建标注
+                        map.clearOverlays();
+                        map.addOverlay(marker);              // 将标注添加到地图中
+                        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                        function showPoint(e) {
+                            document.getElementById('lat').value = e.point.lat;
+                            document.getElementById('lng').value = e.point.lng;
+                            var p = new BMap.Point(e.point.lng,e.point.lat);
+                            var mk = new BMap.Marker(p);
+                            map.clearOverlays();
+                            map.addOverlay(mk);
+                            mk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                        }
+                        map.enableScrollWheelZoom(true);
+                        map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+                        map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}));  //右上角，仅包含平移和缩放按钮
+                        map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_LEFT, type: BMAP_NAVIGATION_CONTROL_PAN}));  //左下角，仅包含平移按钮
+                        map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));  //右下角，仅包含缩放按钮
+                        map.addEventListener("click", showPoint);
+                        function G(id) {
+                            return document.getElementById(id);
+                        }
+
+                        var ac = new BMap.Autocomplete(//建立一个自动完成的对象
+                                {"input": "suggestId"
+                                    , "location": map
+                                });
+
+                        ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+                            var str = "";
+                            var _value = e.fromitem.value;
+                            var value = "";
+                            if (e.fromitem.index > -1) {
+                                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                            }
+                            str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+                            value = "";
+                            if (e.toitem.index > -1) {
+                                _value = e.toitem.value;
+                                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                            }
+                            str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+                            G("searchResultPanel").innerHTML = str;
+                        });
+
+                        var myValue;
+                        ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+                            var _value = e.item.value;
+                            myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+                            G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+                            setPlace();
+                        });
+
+
+                        function setPlace() {
+                            map.clearOverlays();    //清除地图上所有覆盖物
+                            function myFun() {
+                                var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+                                map.centerAndZoom(pp, 18);
+                                var kk = new BMap.Marker(pp);
+                                map.addOverlay(kk);    //添加标注
+                                kk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                            }
+                            var local = new BMap.LocalSearch(map, {//智能搜索
+                                onSearchComplete: myFun
+                            });
+                            local.search(myValue);
+                        }
+
+                    </script>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">商家坐标：</label>
+                <div class="col-sm-3" style="width:380px;">
+                    <span><input type="text" name="data[lng]" id="lng" value="<{$detail['lng']}>" />经度</span>
+                    <span><input type="text" name="data[lat]" id="lat" value="<{$detail['lat']}>" />纬度</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">详情：</label>
+                <div class="col-sm-2">
+                    <script type="text/plain" id="data_details" name="data[intro]" style="width:800px;height:360px;"><{$detail.intro}></script>
+                </div>
+                <link rel="stylesheet" href="__PUBLIC__/js/umeditor/themes/default/css/umeditor.min.css" type="text/css">
+                <script type="text/javascript" charset="utf-8" src="__PUBLIC__/js/umeditor/umeditor.config.js"></script>
+                <script type="text/javascript" charset="utf-8" src="__PUBLIC__/js/umeditor/umeditor.min.js"></script>
+                <script type="text/javascript" src="__PUBLIC__/js/umeditor/lang/zh-cn/zh-cn.js"></script>
+                <script>
+                    um = UM.getEditor('data_details', {
+                        imageUrl: "<{:U('public/editor')}>",
+                        imagePath: '__ROOT__/attachs/editor/',
+                        lang: 'zh-cn',
+                        langPath: UMEDITOR_CONFIG.UMEDITOR_HOME_URL + "lang/",
+                        focus: false
+                    });
+                </script>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label"></label>
+                <div class="col-sm-2">
+                    <input  type="submit" class="btn btn-primary" value="确认修改" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('#fanli').click(function(){
+            $('#zuigaofanli').css('display','block');
+        });
+        $('#bufanli').click(function(){
+            $('#zuigaofanli').css('display','none');
+        });
+        $('#support').click(function(){
+            $('#jianmian').css('display','block');
+        });
+        $('#nonsupport').click(function(){
+            $('#jianmian').css('display','none');
+        });
+    });
+</script>
+
+</body>
+</html>

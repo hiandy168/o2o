@@ -1,0 +1,154 @@
+<include file='public:header'/>
+
+<link href="__PUBLIC__/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="__TMPL__statics/css/chaoshi/shequchaoshi.css" rel="stylesheet" type="text/css"/>
+<script src="__PUBLIC__/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/messages_zh.min.js"></script>
+<script src="__TMPL__statics/js/chaoshi/validate.js"></script>
+<script src="__PUBLIC__/js/myLayer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js?t=<{$nowtime}>"></script>
+<div class="sjgl_lead">
+
+    <ul>
+
+        <li><a href="#">社区超市</a> > <a href="">商品管理</a> > <a>添加新商品</a></li>
+
+    </ul>
+
+</div>
+
+<div class="tuan_content">
+
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">添加新商品</div>
+        </div>
+    </div>
+
+    <div class="tuanfabu_tab">
+
+        <ul>
+
+            <li class="tuanfabu_tabli on"><a href="#">添加新商品</a></li>
+
+        </ul>
+
+    </div>
+    <form class="form-horizontal" target="baocms_frm" id="product_info" onsubmit="return checkNum()" action="<{:U('chaoshiproduct/create')}>" method="post"  >
+        <div class="form-group">
+            <label class="col-sm-1 control-label">商品名：</label>
+            <div class="col-sm-2">
+                <input type="text" style="width:232px;" class="form-control" id="productName" name="data[product_name]" value="<{$detail.product_name|default=''}>"   >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">商品编号：</label>
+            <div class="col-sm-2">
+                <input type="text" style="width:232px;" class="form-control" name="data[product_num]">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">库存：</label>
+            <div class="col-sm-2">
+                <input type="text" style="width:232px;" class="form-control" id="inventory" name="data[inventory]" value="<{$detail.inventory|default=''}>"   >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">介绍：</label>
+            <div class="col-sm-2">
+                <input type="text" style="width:232px;" class="form-control" name="data[desc]"  value="<{$detail.desc|default=''}>"  >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">分类：</label>
+            <div class="col-sm-2">
+                <select style="width:232px;" class="form-control"  id="cate_id" name="data[cate_id]">
+                    <option value="0">请选择...</option>
+                    <foreach name="chaoshiproductcates" item="var">
+                        <option value="<{$var.cate_id}>" ><{$var.cate_name}></option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label" style="padding-top:20px;">略缩图：</label>
+            <div class="col-sm-2" style="min-width:420px">
+                <div style="float:left;padding-top:15px">
+                        <input type="hidden" name="data[photo]" value=""  id="data_photo" />
+                        <input id="photo_file"    type="file" name="">
+                    <font color="red" id="errorImg" style="font-weight:700;visibility:hidden">请上传商品图片</font>
+                </div>
+                <img  id="photo_img"    src="<{$detail.photo|get_remote_file_path=###}>" style="width:480px;height:480px;">
+
+                <div style="">
+                    <span style="font-weight:bold;">建议：上传尺寸<{$CONFIG.attachs.goods.thumb}>。要求：尺寸大小不能超过2M</span>
+                </div>
+            </div>
+        </div>
+        <style>
+            #SWFUpload_0{
+                opacity: 0;
+            }
+        </style>
+
+
+        <script>
+            $("#photo_file").uploadify({
+                'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                'uploader': "<{:C('PICLIBUPLOAD_URL')}>",
+                'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                'buttonText': '上传缩略图',
+                'fileTypeExts': '*.gif;*.jpg;*.png',
+                'buttonImage':'/Public/js/uploadify/uploadify-button.png',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {
+                    data = eval("("+data+")");
+                    console.log(data);
+                    if(data.status==1){
+                    $("#data_photo").val(data.data.Filedata.id);
+                    $("#photo_img").attr('src', "<{:C('PICLIB_URL')}>" + data.data.Filedata.path).show();
+                        $('#data_photo-error').remove();
+                    }else{
+                        layer.msg(data.info);
+                    }
+                }
+            });
+        </script>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">价格：</label>
+            <div class="col-sm-2">
+                <input type="text" style="width:232px;" class="form-control" id="price" name="data[price]" value="<{$detail.price|default=''}>" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label"></label>
+            <div class="col-sm-2">
+                <input type="submit" value="确认" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    function checkNum(){
+        var priceVal = $('#price').val();
+        var inventoryVal = $('#inventory').val();
+        var nameLength = $('#productName').val().length;
+        var reg_price = /^[0-9]+(.[0-9]{2})?$/;
+        var reg_inventory = /^\d+$/;
+        if(nameLength > 50){
+            layer.msg("商品名称不能超过五十个字符");
+            return false;
+        }
+        if(!reg_inventory.test(inventoryVal)){
+            layer.msg("库存只能输入正整数");
+            return false;
+        }
+        if (!reg_price.test(priceVal)){
+            layer.msg("价格只能输入有两位小数的正实数");
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

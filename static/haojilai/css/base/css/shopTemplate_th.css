@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+.collect-link{position: absolute; right:0; bottom:0;}
+.collect-link a{display:block;height: 65px;}
+
+.temlpate-header{background: url(../template/images/tmpshopNavbg.jpg) repeat-x;}
+.temlpate-global-info>.cont-box{background: url(../template/images/shop-3dianzhao.jpg) no-repeat;}
+.tlp-header-nav>.cont-box{background: #422a9a;}
+.tlp-header-nav-list li a{color: #fff;}
+.tlp-header-nav-list li a:hover{}
+.tlp-header-nav-list li.current a{}
+
+.tmp-banner-list li{text-align: center; }
+.tlp-banner .slide-ctrlbox{width:auto; height:20px; position:absolute; z-index:2; border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px; bottom:10px; padding:0 8px;}
+.tlp-banner .slide-ctrlbox ul{width:auto; height:10px; position:relative; margin-top:5px;}
+.tlp-banner .slide-ctrlbox ul li{width:10px; height:10px; background:#fff; overflow:hidden;border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;-o-border-radius:50%;-webkit-border-radius:50%; overflow:hidden; text-indent:-55px; cursor:pointer; float:left; display:inline; margin:0px 2px;}
+.tlp-banner .slide-ctrlbox ul li.on{background:#f00;}
+
+.tlp-search .title{color: #fff; background: #422a9a;}
+.tlp-search-content .tlp-search-btn{background: #422a9a; color: #fff;}
+
+.menu-type-title{background: #422a9a; color: #fff;}
+.menu-type-list dd a:hover,.menu-type-list li.list-selected a{color: #BA1E1F;}
+.tlp-ranking-head{background: #e1e1e1;}
+
+.tmp-detail-head{background: #422a9a; color: #fff;}
+
+.tmp-detail-shop-list li{width:232px; height:310px; float: left; display: inline; margin:15px 9px;}
+.tmp-detail-shop-list li .pic{width: 230px; height: 230px; border: 1px solid #eeeeee;overflow: hidden; text-align: center;}
+.tmp-detail-shop-list li .pic a{display: block;width: 230px; height: 230px;}
+.tmp-detail-shop-list li .pic img{max-width: 230px; max-height: 230px; vertical-align: middle;}
+.tmp-detail-shop-list li .link-title{height: auto; height:36px; line-height: 18px; overflow: hidden; margin-top: 10px;}
+.tmp-detail-shop-list li .detail-price-info{ margin-top:8px; height: 22px; line-height: 22px; color: #666666;}
+.tmp-detail-shop-list li .detail-price-info span{color: #999999; display: inline-block; margin-right:20px;}
+.tmp-detail-shop-list li .detail-price-info strong{font-size: 14px; color: #ff4400;}
+
+

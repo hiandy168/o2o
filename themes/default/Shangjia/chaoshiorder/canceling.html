@@ -1,0 +1,72 @@
+<include  file='public:header'/>
+<script src="__PUBLIC__/js/my97/WdatePicker.js"></script>
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">其他</a> > <a href="">超市设置</a> > <a>确认订单</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <form method="post" action="<{:U('chaoshiorder/index')}>">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            开始时间：<input type="text" class="radius3 tuan_topser"  name="bg_date" value="<{$bg_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'});"/>
+            结束时间：<input type="text" class="radius3 tuan_topser"  name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'});"/>
+            订单编号：<input type="text" name="keyword" value="<{$keyword}>" class="radius3 tuan_topser" />
+            <input type="submit" style="margin-left:10px;" class="radius3 sjgl_an tuan_topbt" value="搜 索"/>
+        </div>
+    </div>
+    </form>
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli tabli_change"><a href="<{:U('chaoshiorder/index')}>">确认订单</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a href="<{:U('chaoshiorder/wait')}>">配送订单</a></li>
+            <li class="tuanfabu_tabli tabli_change on"><a href="<{:U('chaoshiorder/canceling')}>">取消申请</a></li>            
+            <li class="tuanfabu_tabli tabli_change"><a href="<{:U('chaoshiorder/canceled')}>">已取消</a></li>            
+            <li class="tuanfabu_tabli tabli_change"><a href="<{:U('chaoshiorder/over')}>">已完成订单</a></li>
+        </ul>
+    </div> 
+    <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <td>订单ID</td>
+            <td>总价值（含配送费）</td>
+            <td>支付金额</td>
+            <td>数量</td>
+            <td>客户</td>  
+            <td>商品</td>
+            <td>下单时间</td>       
+            <td>操作</td>
+        </tr>
+         <php>
+        $shop = D('Shop');
+        </php>
+        <foreach name="list" item="var">
+            <tr>
+                <td><{$var.order_id}></td>
+                <td><{$var['total_price']}></td>
+                <td><eq name="var.is_pay" value="1"><{$var['pay_price']}><else />货到付款</eq></td>
+                <td><{$var.num}></td>
+                <td>
+                    <{$var['receipt_addr']}>、
+                    <{$var['phone']}>、
+                    <{$var['name']}>
+                </td>
+                <td>
+                <foreach name="orderproducts" item="orderproduct">
+                    <if condition="$orderproduct['order_id'] eq $var['order_id']">    
+                        <p>
+                            <{$products[$orderproduct['product_id']]['product_name']}>，数量：<{$orderproduct.num}>
+                        </p>
+                    </if>
+                </foreach>
+                </td>
+                <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
+                <td>
+                    <a mini='confirm' href="<{:U('chaoshiorder/yes_cancel',array('order_id'=>$var['order_id']))}>">允许</a>  |
+                    <a mini='confirm' href="<{:U('chaoshiorder/no_cancel',array('order_id'=>$var['order_id']))}>">拒绝</a>  
+                </td>
+            </tr>
+        </foreach>
+    </table>
+    <{$page}>
+</div>
+<include  file='public:footer'/>

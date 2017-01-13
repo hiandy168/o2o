@@ -1,0 +1,59 @@
+<include file="public:header"/>
+<header class="top-fixed bg-yellow bg-inverse">
+	<div class="top-back">
+		<a class="top-addr" href="<{:U('index/index')}>"><i class="icon-angle-left"></i></a>
+	</div>
+		<div class="top-title">
+			我的贴吧
+		</div>
+	<div class="top-signed">
+		<a href="<{:U('mobile/message/index')}>"><i class="icon-envelope"></i> </a>
+	</div>
+</header>
+
+<!-- 筛选TAB -->
+<div class="line tab-bar">
+	<div class="button-toolbar">
+		<div class="button-group">
+			<a class="block button bg-dot active" href="#">我发布的帖子列表</a>
+		</div>
+	</div>
+</div>
+
+<div class="list-media-x" id="list-media">
+	<ul>
+    
+    
+    
+    <foreach name="list" item="item">
+	<div class="line padding border-bottom">
+		<div class="x12">
+			<p>
+				<a class="title" href="<{:U('mobile/tieba/detail',array('post_id'=>$item['post_id']))}>">
+					<{:bao_Msubstr($item['title'],0,40,true )}>
+				</a>
+			</p>
+			<p class="text-gray">时间：<{$item.create_time|date='H:i',###}></p>
+			<p class="text-gray">作者：<{$users[$item['user_id']]['nickname']}></p>
+
+		</div>
+	</div>
+	<div class="line padding">
+		<span class="x3"><em class="text-dot"><{$item.reply_num}></em>回复</span>
+		<span class="x7">点击：<{$item.views}></span>
+		<span class="x2 text-right"><a class="button button-small bg-dot" href="<{:U('mcenter/tieba/postedit',array('post_id'=>$item['post_id']))}>">编辑</a></span>
+	</div>
+	<div class="blank-10 bg"></div>
+</foreach>
+
+    
+    
+    
+    
+    
+    
+    </ul>
+</div>	
+
+
+<include  file='public:footer'/>

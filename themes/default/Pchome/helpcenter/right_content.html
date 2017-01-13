@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="/static/default/pc/css/base.css" />
+<link rel="stylesheet" href="/static/default/pc/css/<{$ctl}>.css" />
+<style>
+    .right_ul li{margin-left:25px;margin-right:10px;padding-top:10px;padding-bottom:10px;border-bottom:1px dashed rgb(221,221,221);font-family:'宋体';}
+    .right_ul li a{font-family:'宋体';}
+</style>
+<div style="padding:15px;background:#f5f5f5;">
+    <span>当前位置：</span>
+    <volist name="helpCates" id="helpCate">
+        <eq name="helpCate.parent_id" value="0">
+            <span>帮助中心</span>
+            <!--<span><{$helpCate['cate_name']}></span>-->
+            <!--<volist name="helpCates" id="helpCa">-->
+                <!--<eq  name="helpCa.parent_id" value="{$detail['cate_id']}">-->
+                    <!--<span>><{$helpCa['cate_name']}></span>-->
+                    <!--<volist name="helpCates" id="help">-->
+                        <!--<eq  name="help.cate_id" value="{$detail['cate_id']}">-->
+                            <!--<span>><{$help['cate_name']}></span>-->
+                        <!--</eq>-->
+                    <!--</volist>-->
+                <!--</eq>-->
+            <!--</volist>-->
+        </eq>
+    </volist>
+</div>
+<eq name="listDetail" value="2">
+    <div style="padding:25px;font-weight:bold;font-size:14px;font-family:'宋体';">
+        包含一下内容：
+    </div>
+    <ul class="right_ul">
+        <volist name="articles" id="article">
+            <li><code style="font-size:12px;margin-right:5px;">•</code><a href="<{:U('Pchome/helpcenter/index', ['article_id' => $article['article_id']])}>"><{$article['title']}>&ensp;&ensp;&ensp;&ensp;<{$article.create_time|date='Y-m-d',###}></a></li>
+        </volist>
+    </ul>
+</eq>
+<eq name="listDetail" value="1">
+    <div class="x12">
+        <div class="news-detail">
+            <div class="detail">
+                <h1><{$detail.title}></h1>
+                <p class="text-center"><span><{$detail.create_time|date='Y-m-d',###}></span> <span>总浏览：<{$detail.views}></span> <span></span></p>
+                <{$detail.details}>
+            </div>
+        </div>
+    </div>
+</eq>

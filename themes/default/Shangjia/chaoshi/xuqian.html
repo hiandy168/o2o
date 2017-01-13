@@ -1,0 +1,122 @@
+<include file="public:header" />
+<link href="__PUBLIC__/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="__PUBLIC__/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/messages_zh.min.js"></script>
+
+<link href="__TMPL__/statics/css/chaoshi/shequchaoshi.css" rel="stylesheet" type="text/css"/>
+<script src="__TMPL__/statics/js/chaoshi/validate.js"></script>
+<script src="__TMPL__/statics/js/chaoshi/myLayer.js"></script>
+<script src="__TMPL__/statics/js/chaoshi/my97/WdatePicker.js"></script>
+
+
+
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">系统设置</a> > <a href="">店铺管理</a> > <a>申请续签</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">店铺管理</div>
+        </div>
+    </div>
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli tabli_change"><a href="<{:U('chaoshi/edit')}>">店铺设置</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a href="<{:U('chaoshi/xinxi')}>">认证信息</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a  href="<{:U('chaoshi/open')}>">营业状态</a></li>
+            <li class="tuanfabu_tabli tabli_change on"><a  href="<{:U('chaoshi/xuqian')}>">申请续签</a></li>
+
+        </ul>
+    </div>
+    <div class="tabnr_change  show">
+        <table class="table">
+            <tr class="active">
+                <td class="td_center">申请时间</td>
+                <td class="td_center">保证金（元/年）</td>
+                <td class="td_center">签约时长（年）</td>
+                <td class="td_center">付款金额（元）</td>
+                <td class="td_center">续签起止有效期</td>
+                <td class="td_center">付款凭据</td>
+                <td class="td_center">状态</td>
+                <td class="td_center">操作</td>
+            </tr>
+            <tr>
+                <td class="td_center">2016-06-01</td>
+                <td class="td_center">1000.00</td>
+                <td class="td_center">1</td>
+                <td class="td_center">1000.00</td>
+                <td class="td_center">2016-06-03 至 2017-06-02</td>
+                <td class="td_center"><a href="javascript:void(0)">查看</a></td>
+                <td class="td_center">待付款</td>
+                <td class="td_center"><a href="javascript:void(0)">删除</a></td>
+            </tr>
+        </table>
+        <form class="form-horizontal" style="padding-left:50px">
+            <div class="form-group">
+                <label class="control-label" style="width:85px;float: left;" >缴费金额：</label>
+                <div class="col-sm-3" style="padding-top: 5px">
+                    <span style="font-size: 15px;">￥1000.00</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" style="width:85px;float: left;" >上传付款凭证：</label>
+                <div class="col-sm-3" style="padding-top: 5px">
+                    <div class="box">
+                        <input type="text" name="copyFile_1"  class="textbox" />
+                        <a href="javascript:void(0);"  class="link">浏览...</a>
+                        <input type="file" class="uploadFile" name="upload_1"
+                               onchange="getFile(this,'copyFile',1)" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" style="width:85px;float: left;" >上传营业执照：</label>
+                <div class="col-sm-3" style="padding-top: 5px">
+                    <div class="box">
+                        <input type="text" name="copyFile_2"  class="textbox" />
+                        <a href="javascript:void(0);"  class="link">浏览...</a>
+                        <input type="file" class="uploadFile" name="upload_2"
+                               onchange="getFile(this,'copyFile',2)" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" style="width:85px;float: left;" >上传其他资料：</label>
+                <div class="col-sm-3" style="padding-top: 5px">
+                    <div class="box">
+                        <input type="text" name="copyFile_3"  class="textbox" />
+                        <a href="javascript:void(0);"  class="link">浏览...</a>
+                        <input type="file" class="uploadFile" name="upload_3"
+                               onchange="getFile(this,'copyFile',3)" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" style="width:85px;float: left;" >备注：</label>
+                <div class="col-sm-3" style="padding-top: 5px">
+                    <textarea style="width:430px;height:150px;"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" style="width:85px;float: left;" ></label>
+                <div class="col-sm-3" style="padding-top: 5px">
+                    <input type="submit" value="提交" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+        <script type="text/javascript">
+            function getFile(obj,inputName,num){
+                var file_name = $(obj).val();
+                $("input[name='"+inputName+"_"+num+"']").val(file_name);
+            }
+        </script>
+    </div>
+</div>
+
+
+</body>
+</html>

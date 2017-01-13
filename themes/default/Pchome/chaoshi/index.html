@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>好吉来社区超市</title>
+  <!-- Bootstrap -->
+  <link href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="__TMPL__statics/css/chaoshi/style.css">
+  <link rel="stylesheet" type="text/css" href="__TMPL__statics/css/chaoshi/shop.css">
+  <script src="__TMPL__statics/js/jquery.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="__TMPL__statics/js/jquery.cookie.js"></script>
+  <script src="__PUBLIC__/js/layer/layer.js"></script>
+  
+  <!--[if lt IE 9]>
+  <script src="__PUBLIC__/js/browser-check.js"></script>
+  <![endif]-->
+  
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="main">
+    <!--  页头 -->
+    <div class="header">
+      <div class="header-center">
+        <div class="logo">
+          <a href="<{:U('index/index')}>">
+            <img src="__TMPL__statics/css/chaoshi/images/logo_new.jpg" alt="好吉来社区超市"></a>
+        </div>
+        <div class="header-right">
+          <ul>
+          <if condition="empty($MEMBER)">
+            <li>
+              <a href="<{:U('passport/login')}>">登录</a>
+            </li>
+            <li style="margin:0 5px;">|</li>
+            <li>
+              <a href="<{:U('passport/register')}>">注册</a>
+            </li>
+          <else/>
+	          <li>
+	          	<a href="<{:U('Pcucenter/index/index','','',false,C('BASE_SITE'))}>"><{$MEMBER.nickname}></a>
+	          </li>
+            <li>|</li>
+	          <li>
+	       		  <a href="<{:U('pchome/passport/logout')}>" >退出登录</a>
+	          </li>
+           </if>
+           <li style="width:85px;text-align:center;">
+              <a href="<{:U('pchome/index/index')}>" >好吉来首页</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div> 
+    <!-- 页头结束 -->
+
+    <!-- 中间部分 -->
+    <div class="content">
+      <div class="content-top">
+        <p>请填写您的具体收货地址，搜索符合配送条件的店铺</p>
+        <button class="btn1" id="city_btn">
+          <span id="city_name"><{$city_name}></span>
+          
+          <span class="caret"></span>
+        </button>
+        <input type="hidden" id="city_id" name="city_id" value="<{$city_id}>"/>
+        <input type="text" id="suggestId" class="text" placeholder="请填写详细的街道地址" />
+      <button class="btn3" id="search">搜索</button>
+      <button class="btn2 J_history_sreach_address">
+        历史地址
+        <span class="caret"></span>
+      </button>
+    </div>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=K6NUCfSkWYRoWgpp7ssdfPc2"></script>
+    <script type="text/javascript">
+    var ac = new BMap.Autocomplete(//建立一个自动完成的对象
+            {"input": "suggestId"
+            });
+    </script>
+	<!-- 商家推荐开始 -->
+	    <div class="content-buttom carousel slide" id="carousel-example-generic" data-ride="carousel">
+      <div class="hot">
+    <if condition="$list eq null"><else/><h3>推荐商家</h3></if>
+        <ul class="page carousel-indicators">
+        <foreach name="list" item="var" key="key">
+        <if condition="$key%3 eq 0">
+          <li <if condition="$key eq 0"> class="active" </if> data-target="#carousel-example-generic" data-slide-to="<{$key/3}>"></li>
+        </if>
+        </foreach>
+        </ul>
+      </div>
+      <div class="shopShow">
+      <div class="carousel-inner" role="listbox">
+      <div class="item active clearfix">
+      <foreach name="list" item="var" key="key">
+
+      <if condition="$key%3 eq 0 and $key neq 0">
+        </div>
+        <div class="item  clearfix">
+      </if>
+        <div class="shop_item">
+          <div class="shop_logo">
+            <a href="<{:LinkTo('chaoshi/shop',array('store_id'=>$var['store_id']))}>"><img src="<{$var.logo|get_remote_file_path=###}>" alt="<{$var.store_name}>"></a>
+          </div>
+          <div class="shop_bottom">
+            <h4><a href="<{:LinkTo('chaoshi/shop',array('store_id'=>$var['store_id']))}>"><{$var.store_name}></a></h4>
+            <div class="shop-bottom-pj clearfix">
+              <div class="shop_item-left"> 
+              <ul class="shop-app">
+                  <li>
+                    <img src="__TMPL__statics/css/chaoshi/images/star.jpg" alt="#"></li>
+                  <li>
+                    <img src="__TMPL__statics/css/chaoshi/images/star.jpg" alt="#"></li>
+                  <li>
+                    <img src="__TMPL__statics/css/chaoshi/images/star.jpg" alt="#"></li>
+                  <li>
+                    <img src="__TMPL__statics/css/chaoshi/images/star.jpg" alt="#"></li>
+                  <li>
+                    <img src="__TMPL__statics/css/chaoshi/images/star.jpg" alt="#"></li>
+                </ul>
+                <span class="shop_app_num">5分</span>
+                <div class="clearfix"></div>
+                <p>起送:<span>￥<{$var.since_money|intval}></span> 配送费: <span>￥<{$var.logistics|intval}></span></p>
+                </div>
+                <div class="shop_item_right">
+                  <p>月售<em><{$var.month_num}></em>单</p>
+                  <strong><span><{$var.distribution}></span>分钟</strong>
+                </div>
+            </div>
+          </div>
+          <div class="buy2 clearfix">
+          <ul>
+	        <eq name="var.is_pay" value="1"><li><img src="__TMPL__statics/css/chaoshi/images/fu.jpg" alt="付"></li></eq>
+	        <eq name="var.is_new" value="1"><li><img src="__TMPL__statics/css/chaoshi/images/shou.jpg" alt="首"></li></eq>
+	        <eq name="var.is_fan" value="1"><li><img src="__TMPL__statics/css/chaoshi/images/jian.jpg" alt="减"></li></eq>
+          </ul> 
+        </div>
+        </div>
+        </foreach>
+        </div>
+        </div>
+      </div>
+      </div>
+<!-- 商家推荐结束 -->
+  <!-- 内容结束 -->
+
+  <!-- 脚部 -->
+  <div class="footer">
+    <ul>
+      <li>
+        <a href="<{:U('article/system',array('content_id'=>1))}>">关于我们</a>
+      </li>
+      |
+      <li>
+        <a href="<{:U('article/system',array('content_id'=>3))}>">联系我们</a>
+      </li>
+      |
+      <li>
+        <a href="<{:U('article/system',array('content_id'=>2))}>">人才招聘</a>
+      </li>
+      |
+      <li>
+        <a href="<{:U('openshop/index')}>">商家入驻</a>
+      </li>
+      |
+      <li>
+        <a href="<{:U('article/system',array('content_id'=>5))}>">广告合作</a>
+      </li>
+      |
+      <li>
+        <a href="<{:U('article/system',array('content_id'=>4))}>">媒体合作</a>
+      </li>
+      |
+      <li>
+        <a href="<{:U('news/detail',array('article_id'=>8))}>">帮助</a>
+      </li>
+    </ul>
+    <p>
+      <span>版权所有</span>
+      <span>四川好吉来电子商务有限公司</span>
+      <span>蜀ICP备15012705号-1</span>
+      <span>热线电话：400-0535-033</span>
+    </p>
+  </div>
+  <!-- 脚部结束 -->
+  </div>
+<script type="text/javascript">
+	$('#search').click(function(){
+		var city_id = $('#city_id').val();
+		if(!city_id){
+			layer.msg('请选择城市');
+			return false;
+		}
+		var gc= new BMap.Geocoder();
+        var myValue = '<{$city_name}>'+$('#suggestId').val();
+		if(!myValue){
+			layer.msg('请输入地址');
+			return false;
+		}
+        baidu_position(gc,myValue,city_id);
+
+	});
+	
+	$('#city_btn').on('click', function(){
+		location.href="<{:U('pchome/city/index')}>";
+	  
+	}); 
+    
+	function selectCallBack(id, name, v1, v2) {
+	    $("#" + id).val(v1);
+	    $("#" + name).html(v2);
+	    layer.closeAll('iframe');
+	}
+    //递归定位
+    function baidu_position(obj,key,city_id){
+        
+        obj.getPoint(key,function(options){
+           
+			if(!options){
+			 
+                 key = key.substr(0,key.length-1);
+			     if(key!=""){
+                    baidu_position(obj,key,city_id);
+			     }else{
+				    layer.msg('地点查询失败，请修改搜索地址');
+                }
+				return false;
+			}else{
+			url = '<{:U('chaoshi/shoplist')}>';
+				
+            $.post("<{:U('pchome/chaoshi/set_cookie')}>",{'name':'chaoshi_addr_search','value':key},function(){
+                $.post("<{:U('pchome/chaoshi/set_cookie_lng_lat')}>",{'lng':options.lng,'lat':options.lat},function(){
+                	location.href = url;
+                });
+            }); 		
+            
+/*            setTimeout(function(){
+                location.href = url;
+            },500);
+*/
+            }
+			
+		});
+    }
+    //历史搜索
+    $(function(){
+        
+        $(".J_history_sreach_address").click(function(){
+            
+            
+            layer.open({'title':"历史搜索",'type':1,'content':$(".search_address"),area:["600px","400px"]});
+            
+        })
+        //历史内容点击事件
+        $(".search_address ul li").click(function(){
+            
+            $("#suggestId").val($(this).html());
+            $(".layui-layer-close").click();
+        })
+    })
+</script>
+<style>
+    .search_address ul li{cursor: pointer;text-height: 16px;}
+</style>
+<div class="search_address layerArea" style="display: none;">
+    <ul>
+            
+            <notempty name="_COOKIE['chaoshi_addr_search']">
+                <volist name="_COOKIE['chaoshi_addr_search']" id="vo">
+                <li><{$vo}></li>
+                </volist>
+            <else />
+                <li>暂无收搜记录</li>
+            </notempty>
+            
+        
+    </ul>
+</div>
+</body>
+</html>
+
+<!-- 检测浏览器版本过低时弹出框样式 -->
+<div class="check-browser none">
+    <p class="check-tit">hi!你的浏览器版本过低，可能存在风险，建议升级浏览器:</p>
+    <p class="browser-list"><a href="http://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html">谷歌Chrome</a><a href="http://www.firefox.com.cn/">火狐Firefox</a></p>
+    <p class="layer-erweima">或者直接用<span>好吉来APP扫码浏览:</span></p>
+    <div>
+        <div class="erweimaList">
+            <img src="__PUBLIC__/images/erweima.png" alt="">
+        </div>
+        <div class="erweimaList">
+            <img src="__PUBLIC__/images/erweima.png" alt="">
+        </div>
+    </div>  
+</div>

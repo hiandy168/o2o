@@ -1,0 +1,314 @@
+<include file="public:header"/>
+
+<link rel="stylesheet" href="/static/default/wap/css/shop.css">
+
+<link rel="stylesheet" href="/static/default/wap/css/tieba.css">
+
+<link rel="stylesheet" type="text/css" href="/static/default/wap/other/webuploader.css"> 
+
+<script src="/static/default/wap/other/webuploader.js"></script>
+
+<header class="top-fixed bg-yellow bg-inverse">
+
+		<div class="top-back">
+
+			<a class="top-addr" href="<{:U('shop/main')}>"><i class="icon-angle-left"></i></a>
+
+		</div>
+
+		<div class="top-title">
+
+			添加点评
+
+		</div>
+
+		<div class="top-share">
+
+			<a href="javascript:void(0);" id="share-btn"><i class="icon-share"></i></a>
+
+		</div>
+
+	</header>
+
+
+
+<div class="container">
+
+
+
+<div class="line detail-base">
+
+			<div class="x4">
+
+				<div class="pic">
+
+					<img src="__ROOT__/attachs/<{$detail['photo']}>" />
+
+				</div>
+
+			</div>
+
+			<div class="x5">
+
+				<h1><{$detail.shop_name}></h1>
+
+				<p><span class="ui-starbar"><span style="width:<{$detail['score']}>%"></span></span></p>
+
+				<p>地址：<{$detail.addr}></p>
+
+				<p class="text-small"><span class="text-yellow"><{$ex.business_time}> </span></p>
+
+			</div>
+
+			<div class="x3">
+
+				<gt name="detail.niu_date" value="$today" >
+
+					<p class="text-center"><img src="/static/default/wap/image/shop/icon-cx.png" /></p>
+
+				</gt>
+
+				<div class="blank-10"></div>
+
+				<p class="text-center"><a class="text-dot" href="#ping">距离：<{$detail.d}></a></p>
+
+				<p class="text-small text-center">( <em class="text-yellow"><{$totalnum}></em>人评价 )</p>
+
+			</div>
+
+		</div>
+
+  <div class="blank-10"></div>
+
+  </div>
+
+<form class="post-form" action="<{:U('',array('shop_id'=>$detail['shop_id']))}>" method="post" target="x-frame" id="sc_form"  >
+
+
+
+		<div class="line border-bottom">
+
+			<div class="x9 form-title">
+
+				<select  name="data[score]">
+
+					<option value="1">1分</option>
+
+                    <option value="2">2分</option>
+
+                    <option value="3">3分</option>
+
+                    <option value="4">4分</option>
+
+                    <option value="5">5分</option>
+
+				</select>
+
+			</div>
+
+            <div class="x3 text-right">
+
+				<button class="button bg-green margin-small-right" type="submit">评分</button>
+
+			</div>
+
+		</div>
+
+        
+
+        <div class="line border-bottom">
+
+			<div class="x9 form-title">
+
+				<select name="data[d1]">
+
+					<option value="1">1分</option>
+
+                    <option value="2">2分</option>
+
+                    <option value="3">3分</option>
+
+                    <option value="4">4分</option>
+
+                    <option value="5">5分</option>
+
+				</select>
+
+			</div>
+
+            <div class="x3 text-right">
+
+				<button class="button bg-green margin-small-right" type="submit">口味</button>
+
+			</div>
+
+		</div>
+
+        
+
+        <div class="line border-bottom">
+
+			<div class="x9 form-title">
+
+				<select name="data[d2]">
+
+					<option value="1">1分</option>
+
+                    <option value="2">2分</option>
+
+                    <option value="3">3分</option>
+
+                    <option value="4">4分</option>
+
+                    <option value="5">5分</option>
+
+				</select>
+
+			</div>
+
+            <div class="x3 text-right">
+
+				<button class="button bg-green margin-small-right" type="submit">环境</button>
+
+			</div>
+
+		</div>
+
+        
+
+        <div class="line border-bottom">
+
+			<div class="x9 form-title">
+
+				<select name="data[d3]">
+
+					<option value="1">1分</option>
+
+                    <option value="2">2分</option>
+
+                    <option value="3">3分</option>
+
+                    <option value="4">4分</option>
+
+                    <option value="5">5分</option>
+
+				</select>
+
+			</div>
+
+            <div class="x3 text-right">
+
+				<button class="button bg-green margin-small-left" type="submit">服务</button>
+
+			</div>
+
+		</div>
+
+		
+
+		<div class="line border-bottom">
+
+			<div class="x9 form-title">
+
+				<input type="text" name="data[cost]" value="" placeholder="请输入消费金额~"  />
+
+				<input type="hidden" id="photo" name="data[photo]" />
+
+			</div>
+
+		</div>
+
+		
+
+		<div class="line border-bottom">
+
+			<textarea class="form-content" name="data[contents]" placeholder="还记得这家店吗？写点评记录生活、分享体验"></textarea>
+
+		</div>
+
+		
+
+		<div class="blank-10 clearfix"></div>
+
+		
+
+		<div class="Upload-img-box">
+            	<div class="Upload-btn"><input type="file" id="fileToUpload" name="fileToUpload" >上传图片</div>
+                <div class="Upload-img" id="jq_imgs">
+                </div>
+                
+                <script type="text/javascript" src="/themes/default/Mobile/statics/js/ajaxfileupload.js"></script>
+                <script>
+                    function ajaxupload() {
+                        $.ajaxFileUpload({
+                            url: '<{:U("app/upload/upload",array("model"=>"dianping"))}>',
+                            type: 'post',
+                            fileElementId: 'fileToUpload',
+                            dataType: 'text',
+                            secureuri: false, //一般设置为false
+                            success: function (data, status) {
+								var str = '<div class="list-img"><img width="200" height="100" src="__ROOT__/attachs/' + data + '">  <input type="hidden" name="photos[]" value="' + data + '" />  <a href="javascript:void(0);">取消</a></div>';
+                                $("#jq_imgs").append(str);
+                                $("#fileToUpload").unbind('change');
+                                $("#fileToUpload").change(function () {
+                                    ajaxupload();
+                                });
+                            }
+                        });
+                    }
+
+                    $(document).ready(function () {
+                        $("#fileToUpload").change(function () {
+                            ajaxupload();
+                        });
+                        $(document).on("click", "#jq_imgs a", function () {
+                            $(this).parent().remove();
+                        });
+                    });
+                </script>
+                
+                
+            </div>
+
+		
+
+        
+
+        <div class="text-center padding-left padding-right margin-large-top">
+
+			<button id="total_scole" type="submit" class="button button-big button-block bg-yellow">提交评价</button>
+
+		</div>
+
+        
+
+        
+
+		
+
+	</form>
+
+	<style>
+	.Upload-img-box{ padding:0.1rem 0.1rem 0px; font-size:0;}
+.Upload-btn{ height:34px; width:100px; border-radius:3px; color:#fff; font-size:0.14rem; line-height:34px; position:relative; text-align:center; padding-left:0.2rem; background:#2fbdaa url(/themes/default/Mobile/statics/img/upload.png) no-repeat 0.08rem center;}
+.Upload-btn input{ opacity:0; filter:alpha(opacity=0); width:100%; height:100%; position:absolute; left:0; top:0;}
+.Upload-img{ overflow:hidden; height:auto;}
+.Upload-img .list-img{ width:100px; height:100px; float:left; padding-right:0.1rem; padding-top:0.1rem; background:url(/themes/default/Mobile/statics/img/longding1.gif) no-repeat 0.25rem 0.35rem; background-size:0.5rem 0.5rem;}
+.Upload-img .list-img img{ width:100%; height:100%;}
+	</style>
+
+	
+
+  
+
+  
+
+  
+
+  
+
+   
+
+    
+
+<include  file='public:footer'/>

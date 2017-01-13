@@ -1,0 +1,309 @@
+<include  file='public:header'/>  
+<include  file='public:top'/>   
+<div class="cl"></div>
+<div class="main">
+    <ul class="fbMenu">
+        <li class="cur">1.提交资料</li>
+        <li>2.等待审核</li>
+        <li>3.开店成功</li>
+    </ul>
+    <div class="fbMain">
+        <h3>基本资料</h3>
+        <form method="post" id="apply" action="<{:U('shop/apply')}>" target="baocms_frm">
+            <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <th><span class="color_r">*</span>商家名称：</th>
+                    <td><input type="text" name="data[shop_name]"  class="but"  /><p>商户名称是店铺的名称，显示在店铺详情，最多20个字符</p></td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <link href="__PUBLIC__/js/uploadify/uploadify.css" type="text/css" rel="stylesheet">
+                        <script src="__PUBLIC__/js/uploadify/jquery.uploadify.min.js"></script>
+                        商家图片：
+                    </th>
+
+                    <td>
+                        <div class="tuanfabu_nr">
+                            <div class="left tuanfabu_scimg">
+                                <div class="scimgBox">
+                                   <!-- <a  class="radius3 tuan_topbt" href="javascript:void(0);">图片上传</a>  -->
+                                    <input type="hidden" name="data[photo]" value="" id="data_photo" />
+                                    <input id="photo_file" name="photo_file" type="file" multiple="true" value="" />
+                                </div>
+                                <p>建议尺寸<{$CONFIG.attachs.shopphoto.thumb}></p>
+                            </div>
+                            <div class="left">
+                                <div class="tuanfabu_sjimg">
+                                    <img id="photo_img" width="80" height="80" src="<{$detail['photo']|get_remote_file_path=###}>">
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div style="width: 300px;height: 100px; float: left;">
+                            <input type="hidden" name="data[photo]" value="" id="data_photo" />
+                            <input id="photo_file" name="photo_file" type="file" multiple="true" value="" />
+                        </div>
+                        <div style="width: 300px;height: 100px; float: left;">
+                            <img id="photo_img" width="80" height="80"  src="__ROOT__/attachs/<{$detail['photo']|default='default.jpg'}>" />
+                            建议尺寸:<{$CONFIG.attachs.shopphoto.thumb}>
+                        </div>-->
+                        <script>
+                            $("#photo_file").uploadify({
+                                'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                                'uploader': "<{:C('PICLIBUPLOAD_URL')}>",
+                                'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                                'buttonText': '上传店铺图片',
+                                'fileTypeExts': '*.gif;*.jpg;*.png',
+                                'queueSizeLimit': 1,
+                                'onUploadSuccess': function (file, data, response) {
+                                    data = eval("("+data+")");
+                                    $("#data_photo").val(data.data.Filedata.id);
+                                    $("#photo_img").attr('src', "<{:C('PICLIB_URL')}>/"+data.data.Filedata.path).show();
+                                }
+                            });
+
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        商家logo：
+                    </th>
+
+                    <td>
+                        <div class="tuanfabu_nr">
+                            <div class="left tuanfabu_scimg">
+                                <div class="scimgBox">
+                                    
+                                    <input type="hidden" name="data[logo]" value="" id="data_logo" />
+                                    <input id="logo_file" name="logo_file" type="file" multiple="true" value="" />
+                                </div>
+                                <p>建议尺寸<{$CONFIG.attachs.shoplogo.thumb}></p>
+                            </div>
+                            <div class="left">
+                                <div class="tuanfabu_sjimg">
+                                    <img id="logo_img" width="80" height="80" src="<{$detail['photo']|get_remote_file_path=###}>">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--<div style="width: 300px;height: 100px; float: left;">
+                            <input type="hidden" name="data[logo]" value="" id="data_logo" />
+                            <input id="logo_file" name="logo_file" type="file" multiple="true" value="" />
+                        </div>
+                        <div style="width: 300px;height: 100px; float: left;">
+                            <img id="logo_img" width="80" height="80"  src="__ROOT__/attachs/<{$detail['logo']|default='default.jpg'}>" />
+                            建议尺寸:<{$CONFIG.attachs.shoplogo.thumb}>
+                        </div>-->
+                        <script>
+                            $("#logo_file").uploadify({
+                                'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
+                                'uploader': "<{:C('PICLIBUPLOAD_URL')}>",
+                                'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
+                                'buttonText': '上传店铺logo',
+                                'fileTypeExts': '*.gif;*.jpg;*.png',
+                                'queueSizeLimit': 1,
+                                'onUploadSuccess': function (file, data, response) {
+                                    data = eval("("+data+")");
+                                    $("#data_logo").val(data.data.Filedata.id);
+                                    $("#logo_img").attr('src', "<{:C('PICLIB_URL')}>/"+data.data.Filedata.path).show();
+
+                                    
+                                }
+                            });
+
+                        </script>
+                    </td>
+                </tr>
+               
+
+                <tr>
+                    <th><span class="color_r">*</span> 所在城市：</th>
+                    <td>
+                        <div class="rcleix">
+                            <span>
+                                <select name="data[region_0]"   style="float: left;" class="region_selects">
+                                  <volist name="privonce_region" id="vo">
+                                      <option value="<{$vo.areaid}>"><{$vo.areaname}></option>  
+                                  </volist>  
+                                </select>
+                            </span>
+                        <input type="hidden" name="data[region_id]" value="" />
+                        <script>
+                            $(document).on("change",".region_selects",function(){
+                                var _this = $(this);
+                                _this.nextAll().remove();
+                                var id = _this.val();
+                                var len = _this.parent().children().length;
+                                
+                                var name="data[region_"+len+"]";
+                                $("input[name='data[region_id]'").val(id);
+                                //加入下面的列表
+                                var str="";
+                                    _this.parent().children().each(function(i,n){
+                                       
+                                        str += $(n).find("option:selected").html();
+                                    })
+                                    $("input[name='data[addr]']").val(str); 
+                                    
+                                $.post("<{:U('app/Region/select_list')}>",{'area_id':id,'select_name':name,'class':'region_selects'},function(data){
+                                    _this.after(data);
+                                    
+                                });                            
+                            })
+                        </script>
+                        </div>
+                    </td>
+                    
+                </tr>
+               <tr>
+                    <th><span class="color_r">*</span>地址：</th>
+                    <td>
+                        <input type="text" name="data[addr]" id="suggestId"  class="but"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>地图：</th>
+                    <td>
+                        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7b92b3afff29988b6d4dbf9a00698ed8"></script>
+                        <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                        <div id="allmap" style="width: 600px; height:500px;"></div>
+                        <script type="text/javascript">
+
+                            // 百度地图API功能
+                            var map = new BMap.Map("allmap");
+                            var lng = "<{$CONFIG['site']['lng']}>";
+                            var lat = "<{$CONFIG['site']['lat']}>";
+                            if (!lng && !lat) {
+                                map.centerAndZoom("合肥");
+                                var point = new BMap.Point(117.260852, 31.825717);
+                            } else {
+                                map.centerAndZoom(new BMap.Point(lng, lat), 15);
+                                var point = new BMap.Point(lng, lat);
+                            }
+                            map.centerAndZoom(point, 15);
+                            var marker = new BMap.Marker(point);  // 创建标注
+                            map.clearOverlays();
+                            map.addOverlay(marker);              // 将标注添加到地图中
+                            marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                            function showPoint(e) {
+                                document.getElementById('lat').value = e.point.lat;
+                                document.getElementById('lng').value = e.point.lng;
+                                var p = new BMap.Point(e.point.lng, e.point.lat);
+                                var mk = new BMap.Marker(p);
+                                map.clearOverlays();
+                                map.addOverlay(mk);
+                                mk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                            }
+                            map.enableScrollWheelZoom(true);
+                            map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+                            map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}));  //右上角，仅包含平移和缩放按钮
+                            map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_LEFT, type: BMAP_NAVIGATION_CONTROL_PAN}));  //左下角，仅包含平移按钮
+                            map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));  //右下角，仅包含缩放按钮
+                            map.addEventListener("click", showPoint);
+                            function G(id) {
+                                return document.getElementById(id);
+                            }
+
+                            var ac = new BMap.Autocomplete(//建立一个自动完成的对象
+                                    {"input": "suggestId"
+                                        , "location": map
+                                    });
+
+                            ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+                                var str = "";
+                                var _value = e.fromitem.value;
+                                var value = "";
+                                if (e.fromitem.index > -1) {
+                                    value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                                }
+                                str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+                                value = "";
+                                if (e.toitem.index > -1) {
+                                    _value = e.toitem.value;
+                                    value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                                }
+                                str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+                                G("searchResultPanel").innerHTML = str;
+                            });
+
+                            var myValue;
+                            ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+                                var _value = e.item.value;
+                                myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+                                G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+                                setPlace();
+                            });
+
+
+                            function setPlace() {
+                                map.clearOverlays();    //清除地图上所有覆盖物
+                                function myFun() {
+                                    var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+                                    map.centerAndZoom(pp, 18);
+                                    map.addOverlay(new BMap.Marker(pp));    //添加标注
+                                }
+                                var local = new BMap.LocalSearch(map, {//智能搜索
+                                    onSearchComplete: myFun
+                                });
+                                local.search(myValue);
+                            }
+
+                        </script>
+                    </td>
+                </tr>
+                 <tr>
+                    <th ><span class="color_r">*</span>商家坐标：</th>
+                    <td>
+                        <span class="mr10"><input type="text" name="data[lng]" id="lng" value="<{$detail.lng|default=''}>" class="mapinputs w100" />经度</span>
+                        <span><input type="text" name="data[lat]" id="lat" value="<{$detail.lat|default=''}>" class="w100 mapinputs" />纬度</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="color_r">*</span>电话：</th>
+                    <td><input type="text" name="data[tel]" class="but"/></td>
+                </tr>
+                <tr>
+                    <th><span class="color_r">*</span>联系人：</th>
+                    <td><input type="text" name="data[contact]" class="but"/></td>
+                </tr>
+                <tr>
+                    <th><span class="color_r">*</span>营业时间：</th>
+                    <td width="859"><input type="text" name="data[business_time]"  class="but"  /><p>营业时间为商户经营时间设置，最多50个字符</p></td>
+                </tr>
+                <tr>
+                    <th><span class="color_r">*</span>商家描述：</th>
+                    <td>
+                        <textarea name="details" cols="100" rows="10" style="border:1px #dddddd solid;"></textarea>
+                        <p style="float: none;">商家描述信息，最多300个字符</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>验证码：</th>
+
+                    <td>
+                        <input type="text" name="yzm" class="yz" value="" />
+                        <span class="yzm_code" rel="apply_code"><img  id="apply_code" src="__ROOT__/index.php?g=app&m=verify&a=index&mt=<{:time()}>" /></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <input type="hidden" name="data[auth_id]" value="<{$Think.get.auth_id}>" />
+                        <input type="hidden" name="data[cate_id]" value="<{$Think.get.shop_cate_id}>" />
+                        <input type="hidden" name="data[shop_type]" value="<{$shop_type}>" />
+                        <div class="btn_box"><input type="submit" class="aniu" value="下一步"/></div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</div>
+<div class="cl"></div>
+<!--main end-->
+
+<include  file='public:footer'/>  

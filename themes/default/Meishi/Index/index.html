@@ -1,0 +1,867 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>好吉来-酒店</title>
+		<link rel="stylesheet" type="text/css" href="__TMPL__/css/base.css">
+		<link rel="stylesheet" type="text/css" href="__TMPL__/css/header.css">
+		<link rel="stylesheet" type="text/css" href="__TMPL__/css/footer.css">
+		<link rel="stylesheet" type="text/css" href="__TMPL__/css/deliciousFood.css">
+		<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="../js/hoverintent.min.js"></script>
+		<script type="text/javascript" src="../js/global.js"></script>
+
+	</head>
+
+	<body>
+		<!--wrapbox-->
+		<div class="wrapbox">
+			<!--header-->
+			<div class="header">
+				<!--top-->
+				<div class="head-topbox">
+					<div class="cont-box">
+						<div class="fl top-left">
+							<a href="#"><b class="head-icon-1"></b>收藏好吉来</a>
+							<span><b class="head-icon-2"></b><strong id="selectAddresContxt">绵阳</strong><a href="javascript:;" id="selectAddres">[更换]</a></span>
+						</div>
+						<div class="fr top-list-box">
+							<ul class="top-list">
+								<li><a href="#" class="color-red">好吉来首页</a></li>
+								<li>
+									<label>您好，欢迎来到好吉来！</label>
+									<a href="#" class="loglink">[登录]</a>
+									<a href="#" class="loglink">[免费注册]</a>
+								</li>
+								<li>
+									<a href="#">我的好吉来</a><i></i>
+									<div class="sb-menu">
+										<ul class="sb-menu-list">
+											<li><a href="#">已买到宝贝</a></li>
+											<li><a href="#">我的足迹</a></li>
+											<li><a href="#">我的上新</a></li>
+										</ul>
+									</div>
+								</li>
+								<li><a href="#">收藏夹</a><i></i></li>
+								<li><b class="head-icon-3"></b><a href="#">手机好吉来</a><i></i></li>
+								<li><span>客户服务</span><i></i></li>
+								<li><a href="#">下载PC客户端</a></li>
+								<li><a href="#">关注我们</a></li>
+							</ul>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<!--End top-->
+				<!--head-center-->
+				<div class="cont-box head-center">
+					<div class="fl logo">
+						<a href="#" title="好吉来网上商城"><img src="../images/logo.jpg" width="193" height="63" alt=""></a>
+					</div>
+					<div class="fl head-search">
+						<div class="hd-search-box">
+							<!--<span >
+     	<select ><option>商品</option><option>店铺</option></select>
+     </span>-->
+							<input type="text" class="fl search-tx" value="">
+							<input type="submit" class="fr search-submit" value="搜索">
+						</div>
+						<p>
+							<label>热门搜索：</label><a href="#" class="sohot">男装节</a><a href="#">9要抢爽</a><a href="#">家电促销</a><a href="#">飞亚达</a><a href="#">家装节</a><a href="#">魅族MX4</a><a href="#">文教满减</a></p>
+					</div>
+					<div class="fr head-car">
+						<a href="#" class="cart-head-link"><i></i>去购物车结算<strong>（0）</strong>&gt;</a>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<!--End head-center-->
+				<!--nav-->
+				<div class="nav">
+					<div class="cont-box">
+						<div class="fl nav-sblist-box menu-notshow menu-slideDown-bar">
+							<div class="shop-all-title">
+								<label>好吉来同城服务</label><b class="icon-menu-down"></b></div>
+							<div class="menu-all">
+								<div class="menu-all-cont">
+									<ul class="menu-all-list">
+										<li data-index="1">
+											<div>
+												<a href="#"><strong class="fl">美食会</strong></a>
+												<span class="fr">代金券  川湘菜</span>
+											</div>
+											<i>></i>
+										</li>
+										<li data-index="2">
+											<div>
+												<a href="#"><strong class="fl">购物</strong></a>
+												<span class="fr">服装 进口商品</span>
+											</div>
+											<i>></i>
+										</li>
+										<li data-index="3">
+											<div>
+												<a href="#"><strong class="fl">周边游/旅游</strong></a>
+												<span class="fr">农家乐  采摘</span>
+											</div>
+											<i>></i>
+										</li>
+										<li data-index="4">
+											<div>
+												<a href="#"><strong class="fl">酒店</strong></a>
+												<span class="fr">公寓式酒店</span>
+											</div>
+											<i>></i>
+										</li>
+										<li data-index="5">
+											<div>
+												<a href="#"><strong class="fl">休闲娱乐</strong></a>
+												<span class="fr">运动健身  电影</span>
+											</div>
+											<i>></i>
+										</li>
+										<li data-index="6">
+											<div>
+												<a href="#"><strong class="fl">生活服务</strong></a>
+												<span class="fr">家政服务</span>
+											</div>
+											<i>></i>
+										</li>
+										<li data-index="7" class="last">
+											<div>
+												<a href="#"><strong class="fl">好吉来团</strong></a>
+												<span class="fr">餐饮美食 火锅</span>
+											</div>
+											<i>></i>
+										</li>
+									</ul>
+								</div>
+								<!--menu-->
+								<div class="menu-dorpdown-layer">
+									<div class="menu-dorpdown-cont">
+										<div class="menu-item-1">
+											<dl>
+												<dt><a href="#">服装<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">男装/运动户外</a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|
+													<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">家电/办公用品<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">母婴用品/儿童<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">家纺布艺/家装建材<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">图书音像<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+										</div>
+										<div class="menu-item-2">
+											<dl>
+												<dt><a href="#">服装<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">男装/运动户外</a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|
+													<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">家电/办公用品<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">母婴用品/儿童<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">家纺布艺/家装建材<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">图书音像<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+										</div>
+										<div class="menu-item-3">
+											<dl>
+												<dt><a href="#">服装<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">男装/运动户外</a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|
+													<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">母婴用品/儿童<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">家纺布艺/家装建材<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">鞋靴/箱包<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+											<dl>
+												<dt><a href="#">图书音像<i>></i></a></dt>
+												<dd><a href="#" class="color-red">女装/内衣</a>|<a href="#">时尚女鞋 </a>|<a href="#">户外/野营/骑行</a>|<a href="#">球类/健身/器材</a></dd>
+											</dl>
+										</div>
+									</div>
+								</div>
+								<!--End menu-->
+							</div>
+						</div>
+						<ul class="fl nav-list">
+							<li><a href="#">首页</a></li>
+							<li><a href="#">美食会</a></li>
+							<li><a href="#">旅游</a></li>
+							<li class="current"><a href="#">酒店</a></li>
+							<li><a href="#">休闲娱乐</a></li>
+							<li><a href="#">同城生活服务</a></li>
+						</ul>
+						<div class="fr nav-tel"><img src="images/nav-tle.png" width="240" height="46" alt=""></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<!--End nav-->
+			</div>
+			<!--End header-->
+			<!--banner-->
+			<div class="hotel-banner">
+				<div class="hotel-banner-box">
+					<ul class="hotel-banner-list">
+						<li><a href="#"><img src="images/pic/dsgfg.jpg" width="1920" height="350"></a></li>
+					</ul>
+				</div>
+			</div>
+			<!--End banner-->
+			<!--contentBody-->
+			<div class="cont-box">
+				<div class="screen-box">
+					<div class="screen-title">
+						<label><a href="#" class="screen-link-all">全部</a><i>&gt;</i></label>
+						<label><a href="#" class="screen-link-one">美食会</a><i>&gt;</i></label>
+						<label class="screen-link-itme">
+							<a href="#">目的地：重庆<i>&times;</i></a>
+							<a href="#">商务酒店<i>&times;</i></a>
+							<a href="#">区域：大渡口区<i>&times;</i></a>
+						</label>
+					</div>
+					<div class="clear"></div>
+					<div style="margin-top: 5px;">
+						<dl class="screen-list">
+							<dt>类型：</dt>
+							<dd>
+								<a href="#" class="all">全部</a>
+								<a href="#">星级酒店</a>
+								<a href="#">主题酒店</a>
+								<a href="#" class="current">商务酒店</a>
+								<a href="#">经济酒店</a>
+								<a href="#">客栈民宿</a>
+								<a href="#">青年旅社</a>
+								<a href="#">日租公寓</a>
+							</dd>
+						</dl>
+						<dl class="screen-list">
+							<dt>类型：</dt>
+							<dd>
+								<a href="#" class="all">全部</a>
+								<a href="#">星级酒店</a>
+								<a href="#">主题酒店</a>
+								<a href="#" class="current">商务酒店</a>
+								<a href="#">经济酒店</a>
+								<a href="#">客栈民宿</a>
+								<a href="#">青年旅社</a>
+								<a href="#">日租公寓</a>
+								<a href="#" class="all">全部</a>
+								<a href="#">星级酒店</a>
+								<a href="#">主题酒店</a>
+								<a href="#" class="current">商务酒店</a>
+								<a href="#">经济酒店</a>
+								<a href="#">客栈民宿</a>
+								<a href="#">青年旅社</a>
+								<a href="#">日租公寓</a>
+							</dd>
+						</dl>
+						<dl class="screen-list">
+							<dt>类型：</dt>
+							<dd>
+								<a href="#" class="all">全部</a>
+								<a href="#">星级酒店</a>
+								<a href="#">主题酒店</a>
+								<a href="#" class="current">商务酒店</a>
+								<a href="#">经济酒店</a>
+								<a href="#">客栈民宿</a>
+								<a href="#">青年旅社</a>
+								<a href="#">日租公寓</a>
+								<a href="#" class="all">全部</a>
+								<a href="#">星级酒店</a>
+								<a href="#">主题酒店</a>
+								<a href="#" class="current">商务酒店</a>
+								<a href="#">经济酒店</a>
+								<a href="#">客栈民宿</a>
+								<a href="#">青年旅社</a>
+								<a href="#">日租公寓</a>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<!--每日特惠-->
+				<div class="auto-box">
+					<div class="daily-head"><span class="YaHei" style="font-size: 18px;">每日特惠</span><label><img src="images/jingcai-titl.jpg"></label><a href="#" class="refresh-link"><i><img src="images/shuaxin.jpg" width="16" height="16"></i>换一换</a></div>
+					<div class="daily-body">
+						<ul class="dailyTuijian-list">
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+				</div>
+			    <!--每日特惠结束-->
+			    <!--筛选列表-->
+			    <div class="auto-box">
+			    	<div class="sort-menu-item">
+			    		<ul class="sort-menu-list">
+			    			<li class="current"><a href="#">默认</a></li>
+			    			<li><a href="#">销量<i class="arrow-icons arrow-donw"></i></a></li>
+			    			<li><a href="#">价格<i class="arrow-icons arrow-up"></i></a></li>
+			    			<li><a href="#">好评<i class="arrow-icons arrow-donw"></i></a></li>
+			    			<li><a href="#">发布时间<i class="arrow-icons arrow-donw"></i></a></li>
+			    			<li><a href="#">价格区间<i class="arrow-icons arrow-donw"></i></a></li>
+			    		</ul>
+			    	</div>
+			    </div>
+			    <!--筛选列表结束-->
+			    <div class="daily-body">
+						<ul class="dailyTuijian-list">
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="pic"><a href="#"><img src="images/pic/dsgd.jpg"></a></div>
+								<div class="dailyTuijian-listSection">
+									<h4><a href="#">[江北区]</a>重庆国贸格兰维大酒店</h4>
+									<div class="YaHei">
+										<div class="fl">价格：<strong>￥<span>603</span>元</strong></div>
+										<div class="fr"><a href="#" class="dailyTuijian-juan-link">劵</a></div>
+									    <div class="clear"></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+			</div>
+			<!--End contentBody-->
+			<!--footer-->
+			<div class="footer">
+				<div class="cont-box">
+					<div class="foot-tpic"><img src="../images/foot-t-pic.jpg" width="1200" height="64"></div>
+					<div class="foot-menu">
+						<a href="#">关于我们</a>|
+						<a href="#">联系我们</a>|
+						<a href="#">人才招聘</a>|
+						<a href="#">商家入驻</a>|
+						<a href="#">友情链接</a>|
+						<a href="#">销售联盟</a>|
+						<a href="#">帮助</a>
+					</div>
+					<div class="foot-cpyInfo">
+						<p>版权所有<a href="#" title="四川好吉来电子商务有限公司">四川好吉来电子商务有限公司</a><a href="#" title="ICP">蜀ICP备00000000号</a>热线电话：400-0535-033</p>
+						<br>
+						<p>
+							<a href="#"><img src="../images/link_1.jpg" width="108" height="40" alt=""></a>
+							<a href="#"><img src="../images/link_2.jpg" width="108" height="40" alt=""></a>
+							<a href="#"><img src="../images/link_3.jpg" width="112" height="40" alt=""></a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<!--End footer-->
+		</div>
+
+		<!--地理位置弹层-->
+		<div class="address-layer-box radius_3" id="addressLayerInfo">
+			<i class="arrow-up-icon"></i>
+			<div class="addr-layer-head"><strong>请选择所在的收货地区</strong></div>
+			<div class="addr-layer-content">
+				<div class="addr-layer-provincial">
+					<ul class="addr-layer-contList">
+						<li><a href="javascript:;" data-uid="1" data-children="0">北京</a></li>
+						<li><a href="javascript:;" data-uid="2" data-children="0">成都</a></li>
+						<li><a href="javascript:;" data-children="1">黑龙江</a></li>
+						<li><a href="javascript:;" data-children="1">缅甸</a></li>
+						<li><a href="javascript:;" data-children="1">浙江</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;" data-uid="1">北京</a></li>
+						<li><a href="javascript:;" data-uid="2">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+					</ul>
+					<div class="clear"></div>
+				</div>
+				<div class="addr-layer-city">
+					<ul class="addr-layer-contList">
+						<li><a href="javascript:;" data-uid="1">北京</a></li>
+						<li><a href="javascript:;" data-uid="2">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+						<li><a href="javascript:;">北京</a></li>
+						<li><a href="javascript:;">成都</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="addr-layer-contFoot">
+				<div><input type="button" class="ctr-Btn btn-color-default disbd" id="addrLayerBack" disabled="disabled" value="返回"><input type="button" class="ctr-Btn btn-color-default" id="addrLayerClose" value="取消"><a href="地理位置.html" class="addr-layer-more">更多城市&gt;&gt;</a></div>
+			</div>
+		</div>
+		<!--End 地理位置弹层-->
+
+		<!--End wrapbox-->
+		<script type="text/javascript">
+		  $(function(){
+		  	/*选择地区js*/
+		  	var $selectAddres=$("#selectAddres"),$selectAddresContxt=$("#selectAddresContxt"),$addressLayerInfo=$("#addressLayerInfo"),cityItem="#addressLayerInfo .addr-layer-city li a";
+		  	$selectAddres.on("click",function(e){
+		  		$addressLayerInfo.css({"top":$(this).offset().top+$(this).outerHeight()});
+		  		$addressLayerInfo.find(".arrow-up-icon").css({"left":$(this).offset().left-$(this).closest(".cont-box").offset().left+10});
+		  		$addressLayerInfo.show();
+		  		$addressLayerInfo.after('<div class="warp-layer-box"></div>');
+				$(".warp-layer-box").css({
+					"position":"fixed",
+					"width":"100%",
+					"height":"100%",
+					"left":"0",
+					"top":"0",
+					"zIndex":"87",
+					"background":"#fff",
+					"opacity":0
+				});
+		  		e.stopPropagation();
+		  	});
+		  	$addressLayerInfo.find(".addr-layer-provincial li a").on("click",function(){
+		  		if($(this).attr("data-children")==0){
+		  			//直辖市，只有一级的情况下
+		  			$selectAddresContxt.html($(this).html());
+		  			addrClose();
+		  		}else if($(this).attr("data-children")==1){
+		  			//省级有下一级城市
+		  			addrOpen();
+		  			addrCityFn($(this).attr("data-uid"));
+		  			
+		  		}else{
+		  			$selectAddresContxt.html($(this).html());
+		  			addrClose();
+		  		}
+		  	});
+		  	$("#addrLayerBack").on("click",function(){
+		  		$addressLayerInfo.find(".addr-layer-provincial").stop().animate({"left":"0"},300);
+	  			$addressLayerInfo.find(".addr-layer-city").stop().animate({"left":"100%"},300);
+	  			$(this).addClass("disbd").attr("disabled","disabled");
+		  	});
+		  	$(document).on("click","#addrLayerClose,.warp-layer-box",addrClose);
+		  	$(document).on("click",cityItem,function(){
+		  		$selectAddresContxt.html($(this).html());
+		  		addrClose();
+		  	})
+		  	//打开下一级方法
+		  	function addrOpen(){
+		  		$addressLayerInfo.find(".addr-layer-provincial").stop().animate({"left":"-100%"},300);
+	  			$addressLayerInfo.find(".addr-layer-city").stop().animate({"left":"0"},300);
+	  			$("#addrLayerBack").removeClass("disbd").removeAttr("disabled");
+		  	}
+		  	//关闭方法
+		  	function addrClose(){
+		  		$addressLayerInfo.find(".addr-layer-provincial").stop().animate({"left":"0"},300);
+	  			$addressLayerInfo.find(".addr-layer-city").stop().animate({"left":"100%"},300);
+	  			$("#addrLayerBack").addClass("disbd").attr("disabled","disabled");
+	  			$addressLayerInfo.hide();
+	  			$(".warp-layer-box").remove();
+		  	}
+		  	//需要加载下一级
+		  	function addrCityFn(uid){
+		  		if(uid){
+		  			$.ajax({
+						url: "",
+						type:"get",
+						data:{"uid":uid},
+						dataType:"json",
+						success: function(data) {
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrown){
+							
+						}
+					});
+		  		}
+		  	}
+		  });
+
+		</script>
+	</body>
+
+</html>

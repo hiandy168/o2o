@@ -1,0 +1,174 @@
+<div class="topOne">
+    <div class="nr">
+        <if condition="empty($MEMBER)">
+            <div class="left"><span class="welcome">您好，欢迎访问<{$CONFIG.site.sitename}></span><a href="<{:U('pchome/passport/login')}>">登陆</a>|<a href="<{:U('passport/register')}>">注册</a>
+                <else/>
+                <div class="left">您好<b style="color:#e11719;font-size:14px;margin-left:2px;"><{$MEMBER.nickname}></b>，欢迎来到<{$CONFIG.site.sitename}>&nbsp;&nbsp; <a href="<{:U('member/index/index')}>" >个人中心</a>|<a href="<{:U('pchome/passport/logout')}>" >退出登录</a>
+                </if>
+                    <div class="topSm"> <span class="topSmt"><em>&nbsp;</em>手机CMS</span>
+                        <div class="topSmnr"><img src="__PUBLIC__/img/wx.png" width="100" height="100" />
+                            <p>扫描下载客户端</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">                    
+                    <ul>
+                        <li class="liOne"><a class="liOneB" href="<{:U('member/order/index')}>" >我的订单</a><em>&nbsp;</em></li>
+                        <li class="liOne"><a class="liOneA" href="javascript:void(0);">我的服务<em>&nbsp;</em></a>
+                            <div class="list">
+                                <ul>
+                                    <li><a href="<{:U('member/order/index')}>">我的订单</a></li>
+                                    <li><a href="<{:U('member/ele/index')}>">我的外卖</a></li>
+                                    <li><a href="<{:U('member/yuyue/index')}>">我的预约</a></li>
+                                    <li><a href="<{:U('member/dianping/index')}>">我的评价</a></li>
+                                    <li><a href="<{:U('member/favorites/index')}>">我的收藏</a></li>                                    
+                                    <li><a href="<{:U('member/myactivity/index')}>">我的活动</a></li>
+                                    <li><a href="<{:U('member/life/index')}>">会员服务</a></li>
+                                    <li><a href="<{:U('member/set/nickname')}>">帐号设置</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <span>|</span>
+                        <li class="liOne liOne_visit"><a class="liOneA" href="javascript:void(0);">最近浏览<em>&nbsp;</em></a>
+                            <div class="list liOne_visit_pull">
+                                <ul>
+                                    <?php
+                                        $views = unserialize(cookie('views'));
+                                        $views = array_reverse($views, TRUE);
+                                        if($views){
+                                        foreach($views as $v){
+                                    ?>
+                                    <li class="liOne_visit_pull_li">
+                                        <a href="<{:U('tuan/detail',array('tuan_id'=>$v['tuan_id']))}>"><img src="__ROOT__/attachs/<{$v.photo}>" width="80" height="80" /></a>
+                                        <h5><a href="<{:U('tuan/detail',array('tuan_id'=>$v['tuan_id']))}>"><{$v.title}></a></h5>
+                                        <div class="price_box"><a href="<{:U('tuan/detail',array('tuan_id'=>$v['tuan_id']))}>"><em class="price">￥<{$v.tuan_price}></em><span class="old_price">￥<{$v.price}></span></a></div>
+                                    </li>
+                                    <?php }?>
+                                </ul>
+                                <p class="empty"><a href="javascript:;" id="emptyhistory">清空最近浏览记录</a></p>
+                                <?php }else{?>
+                                <p class="empty">您还没有浏览记录</p>
+                                <?php } ?>
+                            </div>
+                        </li>
+                        <span>|</span>
+                        <li class="liOne"> <a class="liOneA" href="javascript:void(0);">我是商家<em>&nbsp;</em></a>
+                            <div class="list">
+                                <ul>
+                                    <li><a href="<{:U('shangjia/login/index')}>">商家登陆</a></li>
+                                    <li><a href="<{:U('shangjia/index/index')}>">微信营销</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <span>|</span>
+                        <li class="liOne"> <a class="liOneA" href="javascript:void(0);">快捷导航<em>&nbsp;</em></a>
+                            <div class="list">
+                                <ul>
+                                    <li><a href="<{:U('pchome/news/index')}>">新闻快报</a></li>
+                                    <li><a href="<{:U('pchome/shop/index')}>">商家列表</a></li>
+                                    <li><a href="<{:U('pchome/jifen/index')}>">积分商城</a></li>
+                                    <li><a href="<{:U('pchome/billboard/index')}>">商家榜单</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+<script>
+    $(document).ready(function(){
+        $("#emptyhistory").click(function(){
+            $.get("<{:U('tuan/emptyviews')}>",function(data){
+                if(data.status == 'success'){
+                    $(".liOne_visit_pull ul li").remove();
+                    $(".liOne_visit_pull p.empty").html("您还没有浏览记录");
+                }else{
+                    layer.msg(data.msg,{icon:2});
+                }
+            },'json')
+            //$.cookie('views', '', { expires: -1 }); 
+            //$(".liOne_visit_pull ul li").remove();
+            //$(".liOne_visit_pull p.empty").html("您还没有浏览记录");
+        })
+    });
+</script>    
+    <div class="topTwo">
+        <div class="left">
+            <if condition="!empty($CONFIG['site']['logo'])">
+                <h1><a href="<{:U('pchome/index/index')}>"><img width="214" height="53" src="__ROOT__/attachs/<{$CONFIG.site.logo}>" /></a></h1>
+                <else/>
+                <h1><a href="<{:U('pchome/index/index')}>"><img width="214" height="53" src="__PUBLIC__/img/logo_03.png" /></a></h1>
+            </if> 
+             <div class="changeCity"><a href="<{:U('pchome/city/index')}>" class="changeCity_name"><{$city_name}></a>
+        	
+        </div>
+        </div>
+        <div class="left center">
+            <div class="searchBox">
+                <script>
+                    $(document).ready(function () {
+                        $(".selectList li a").click(function () {
+                            $("#search_form").attr('action', $(this).attr('rel'));
+                            $("#selectBoxInput").html($(this).html());
+                            $('.selectList').hide();
+                        });
+                        $(".selectList a").each(function(){
+                            if($(this).attr("cur")){
+                                $("#search_form").attr('action', $(this).attr('rel'));
+                                $("#selectBoxInput").html($(this).html());                                
+                            }
+                        })
+                    });
+                </script>
+                <form id="search_form"  method="post" action="<{:U('pchome/shop/index')}>">
+                    <div class="selectBox">
+                        <span class="select" id="selectBoxInput">商家</span>
+                        <div  class="selectList">
+                            <ul>
+<li><a href="javascript:void(0);" <?php if($ctl == 'shop'){?> cur='true'<?php }?> rel="<{:U('pchome/shop/index')}>">商家</a></li><li><a href="javascript:void(0);" <?php if($ctl == 'shop'){?> cur='true'<?php }?> rel="<{:U('pchome/shop/index')}>">商家</a></li>
+<li><a href="javascript:void(0);" <?php if($ctl == 'tuan'){?> cur='true'<?php }?>rel="<{:U('pchome/tuan/index')}>">抢购</a></li>
+<li><a href="javascript:void(0);" <?php if($ctl == 'life'){?> cur='true'<?php }?>rel="<{:U('pchome/life/index')}>">生活</a></li>
+<li><a href="javascript:void(0);" <?php if($ctl == 'mall'){?> cur='true'<?php }?>rel="<{:U('pchome/mall/index')}>">商品</a></li>
+<li><a href="javascript:void(0);" <?php if($ctl == 'tieba'){?> cur='true'<?php }?>rel="<{:U('pchome/tieba/index')}>">贴吧</a></li>
+<li><a href="javascript:void(0);" <?php if($ctl == 'news'){?> cur='true'<?php }?>rel="<{:U('pchome/news/index')}>">旅游</a></li>
+<li><a href="javascript:void(0);" <?php if($ctl == 'community'){?> cur='true'<?php }?>rel="<{:U('pchome/community/index')}>">小区</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="text" class="text" <if condition="$ctl neq ding">name="keyword" value="<{$keyword|default='输入您要搜索的内容'}>"</if> onclick="if (value == defaultValue) {
+                                value = '';
+                                this.style.color = '#000'
+                            }"  onBlur="if (!value) {
+                                        value = defaultValue;
+                                        this.style.color = '#999'
+                                    }" />
+                    <input type="submit" class="submit" value="搜索" />
+                </form>
+            </div>
+            <div class="hotSearch">
+                <php>$a =1;</php>
+                <calldata mdl="Keyword" where="" limit="0,6" cache="43200" order="key_id desc">
+                    <if condition="$item['type'] eq 0 or $item['type'] eq 1">
+                        <a href="<{:U('pchome/shop/index',array('keyword'=>$item['keyword']))}>"><{$item.keyword}></a>
+                    <elseif condition="$item['type'] eq 2"/>
+                        <a href="<{:U('pchome/tuan/index',array('keyword'=>$item['keyword']))}>"><{$item.keyword}></a>
+                    <elseif condition="$item['type'] eq 3"/>
+                        <a href="<{:U('pchome/life/index',array('keyword'=>$item['keyword']))}>"><{$item.keyword}></a>
+                    <elseif condition="$item['type'] eq 4"/>
+                        <a href="<{:U('pchome/mall/index',array('keyword'=>$item['keyword']))}>"><{$item.keyword}></a>
+                        <elseif condition="$item['type'] eq 5"/>
+                        <a href="<{:U('pchome/tieba/index',array('keyword'=>$item['keyword']))}>"><{$item.keyword}></a>
+                        <elseif condition="$item['type'] eq 6"/>
+                        <a href="<{:U('pchome/news/index',array('keyword'=>$item['keyword']))}>"><{$item.keyword}></a>
+                    </if>
+                </calldata>
+            </div>
+        </div>
+        <div class="right topTwo_b">
+<!--			<div class="topTwo_tel">
+				服务热线：<big>055-456879852</big>
+			</div>
+-->			<div class="clear"></div>
+           <div class="rightss right"><a class="radius20" href="<{:U('mall/cart')}>">购物车<span id="num" class="radius100"><{$cartnum|default='0'}></span></a></div>
+        </div>
+    </div>

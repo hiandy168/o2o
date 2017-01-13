@@ -1,0 +1,53 @@
+@charset"utf-8";
+.fbMain{margin:0;}
+.fbMain .fbMain-one{padding:10px 0 0 25px;}
+.fbMain h3{border:0;color:#333;background:#ececec;font-size:15px;font-weight:700;padding:0 0 0 15px;}
+.fbMain table td input{width:13px;height:13px;margin:0 6px 0 0;}
+.fbMain table tr .radio{font-size:14px;color:#333;font-weight:600;}
+
+.fbMain td .btn_1{width:199px;height:28px;border:1px solid #d5d5d5;margin:0 0 0 20px;}
+.tuanfabu_nr{padding:10px 0 0 0;}
+.fbMain table tr th{width:135px;}
+.tuanfabu_sjimg{float:left;width:135px;height:auto;display:block;margin-left:20px;}
+.fbMain table td .btn_2{display:block;position:absolute;background-color:#f8f8f8;width:118px;height:30px;line-height:30px;border:1px solid #818181;border-radius:4px;font-size:12px;margin:5px  0 0 0;text-align:center;cursor:pointer;color:#333;}
+.fbMain table td .btn_indent{z-index:-1;top:140px;}
+.fbMain table td .uploading{display:block;width:118px;height:25px;line-height:25px;border:1px solid #818181;border-radius:4px;font-size:12px;margin:5px  0 0 0;text-align:center;cursor:pointer;}
+.fbMain table td .searchAddress{margin-left:20px;color:#222;font-weight:600;}
+.fbMain table td .coordinateBox{font-size:12px;}
+.fbMain table td .coordinate{width:138px;height:20px;border:1px solid #d5d5d5;background-color:#fff;line-height:20px;}
+.fbMain table td.searchAddressBox .Validform_checktip{position:relative;top:-40px;}
+.fbMain td .rcleix .Validform_checktip{position:relative;top:3px;left:15px;}
+.fbMain table th .tit_icon{position:relative;top:3px;right:3px;}
+#searchAddress{background-color:#fff;border:1px solid #d5d5d5;font-size:12px;}
+.register-left{height:185px;}
+.tuanfabu_scimg{padding:0;}
+.linkus{pdding:20px 0 0 0;}
+.register-line{width:72%;margin:20px 0 0 20px;border-top:1px dotted #d5d5d5;}
+.fbMain table tr td select{appearance:none;-moz-appearance:none;-webkit-appearance:none;margin:0 -10px 0 20px;}
+.fbMain table tr td .sanjiao{background:#fff url(../images/sanjiao.gif) no-repeat 95% center;}
+.fbMain table tr td .btn_4{width:408px;height:30px;border:1px solid #d5d5d5;margin:0 0 0 20px;}
+.fbMain table tr td .btn_5{width:198px;height:30px;border:1px solid #d5d5d5;margin:0 0 0 20px;}
+.fbMain table tr td .aniu{width:402px;background:#d20303;margin:0 0 0 155px;}
+.fbMain table tr td .btn_6{float:left;display:block;width:84px;height:30px;border:1px solid #d5d5d5;margin-left: 20px;border-radius:4px;background-image:linear-gradient(to bottom,#fff,#f6f6f6);cursor:pointer;color:#555;}
+.fbMain table tr td .btn_6:hover{color:#d20303;}
+.fbMain table tr td .btn_7{float:left;width:198px;height:30px;border:1px solid #d5d5d5;margin:0 0 0 20px;}
+.preview_1{float:left;margin:0 0 0 30px;}
+.preview-left{float:left;padding:10px 0 0 0;color:#333;}
+.preview-mid,
+.preview-right,
+.preview-right2{float:left;}
+.preview-right ol{height:90px;background:#f5f5f5;}
+.preview-right li,
+.preview-right2 li{font-size:12px;padding:10px 5px 0 10px;color:#666;}
+.preview-right2 ol{height:85px;background:#f5f5f5;}
+.footer{border:0;}
+.fbMain table tr td .btn_box{text-align:left;}
+.fbMain table tr td .yzm_code{margin:0 0 2px 0;}
+.code .selects{font-size:12px;color:#a1a1a1;text-indent:3px;}
+.code .selects option{padding-left:8px;font-size:12px;}
+.radio_openshop_checked{  background: url('../images/radio_checked.png');  background-size:16px 16px;  background-repeat: no-repeat;  min-height:18px;  float:left;  }
+.radio_openshop_none{  background: url('../images/radio_none.png');  background-size:16px 16px;  background-repeat: no-repeat;  min-height:18px;  float:left;  }
+.deal{position:relative;color:#d6171c;margin-left:167px;font-size:16px;margin-top:20px;}
+.deal input{margin-right:15px;position:relative;z-index: 0;opacity:0;cursor:pointer;}
+.deal span{display:block;position:absolute;left:-1px;top:2px;height:15px;width:15px;border:1px solid #999;cursor:pointer;}
+.deal i{display:block;position:absolute;left:-2px;top:-4px;color:#d6171c;font-size:24px;z-index:1;cursor:pointer;}

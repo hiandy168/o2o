@@ -1,0 +1,7 @@
+<notempty name="goods_list">
+    <volist name="goods_list" id="vo">
+        <tr><td><{$vo.goods_id}></td><td><img width="200px" height="200px" src="<{:__HOST__}>/attachs/<{$vo.photo}>" /></td><td><{$vo.title}></td><td><{$vo.num}></td><td><button data_id="<{$vo.goods_id}>" class="recommond">推荐</button></td></tr>
+    </volist>
+<else/>
+    <tr><td cospan="5">请选<a href="<{:U('shangjia/goods/create')}>">发布商品</a></td></tr>
+</notempty>

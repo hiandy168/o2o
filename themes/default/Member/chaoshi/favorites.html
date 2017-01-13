@@ -1,0 +1,27 @@
+<include file="public:header"/>
+<div class="content_right">  
+    <div class="tgdd">
+        <div class="tgdd_nr">
+            <table border="0" cellspacing="0" width="100%"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; text-align:center;">
+                <tr class="tgdd_nrt">
+                    <th>LOGO</th>
+                    <th>店铺名称</th>
+                    <th>操作</th>
+                </tr>
+                <volist name="list" id="item">
+                    <tr class="tgdd_nrt">
+                        <td><div class="favoriteImg"><a class="myInfor_sx" title="<{$chaoshis[$item['store_id']]['store_name']}>" target="_blank" href="<{:U('pchome/chaoshi/shop',array('store_id'=>$item['store_id']))}>"><img style="margin:10px auto 1px"  width="81" height="50" src="__ROOT__/attachs/<{$chaoshis[$item['store_id']]['logo']|default='default.jpg'}>" /></a></div></td>
+                        <td><a class="myInfor_sx" title="<{$chaoshis[$item['store_id']]['store_name']}>" target="_blank" href="<{:U('pchome/chaoshi/shop',array('store_id'=>$item['store_id']))}>"><{$chaoshis[$item['store_id']]['store_name']}></a></td>
+                        <td>
+                            <a class="myInfor_sx" mini='confirm' href="<{:U('chaoshi/delfavorites',array('favorites_id'=>$item['favorites_id']))}>">取消收藏</a>
+                        </td>
+                    </tr>
+                </volist>
+            </table>
+            <div class="x"><{$page}></div>
+        </div>
+    </div> 
+</div>
+</div>
+<include file="public:footer"/>
+

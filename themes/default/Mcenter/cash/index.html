@@ -1,0 +1,82 @@
+<include file='public:header'/> 
+<link rel="stylesheet" href="/static/default/wap/css/housekeeping.css"/>  
+	<link href="/static/default/wap/other/jquery-ui.css" rel="stylesheet" />
+	<script src="/static/default/wap/other/jquery-ui.js"></script> 
+	<header class="top-fixed bg-yellow bg-inverse">
+		<div class="top-back">
+			<a class="top-addr" href="<{:U('index/index')}>"><i class="icon-angle-left"></i></a>
+		</div>
+		<div class="top-title">
+			提现申请
+		</div>
+	</header>
+
+
+
+<!-- 筛选TAB -->
+<div class="line tab-bar">
+	<div class="button-toolbar">
+		<div class="button-group">
+			<a class="block button bg-dot active" href="<{:LinkTo('/mcenter/cash')}>">申请提现</a>
+			<a class="block button <eq name='aready' value='1'>bg-dot active</eq>" href="<{:LinkTo('/mcenter/cash/cashlog')}>">提现记录</a>
+		</div>
+	</div>
+</div>
+<!-- 可用余额 -->
+<div class="line tab-bar">
+	<div class="button-toolbar">
+		<div class="button-group">
+			<a class="block button">可提余额：<{$money}></a>
+		</div>
+	</div>
+</div>
+
+
+   	<div class="blank-20"></div> 
+    
+	<div class="send-form">
+		<form method="post" action="<{:U('/mcenter/cash')}>">
+        
+        
+        
+           <div class="row">
+				<span class="icon icon-map-marker"></span>
+				<input type="text" class="line-input" id="addr" name="money"   value="" size="30"  placeholder="请输入提现金额" />
+			</div>
+			
+			<div class="row">
+				<span class="icon icon-map-marker"></span>
+				<input type="text" class="line-input" id="addr" name="bank_name"  size="30"  placeholder="请输入开户银行" />
+			</div>
+			<div class="row">
+				<span class="icon icon-map-marker"></span>
+				<input type="text" class="line-input" id="name" name="bank_num" placeholder="请输入开户账号" />
+			</div>
+			<div class="row">
+				<span class="icon icon-map-marker"></span>
+				<input type="text" class="line-input" id="tel" name="bank_branch" placeholder="请输入具体支行" />
+			</div>
+			<div class="row">
+				<span class="icon icon-map-marker"></span>
+				<input type="text" class="line-input" id="contents" name="bank_realname" placeholder="请输入开户名" />
+			</div>
+			
+			<div class="blank-40"></div>
+			
+			<div class="container text-center">
+            
+             <eq name="money" value="0">
+             <button class="button button-block button-big bg-dot" type="submit" disabled="disabled" >余额不足</button>
+                                     
+            <else/>
+            <button class="button button-block button-big bg-dot" type="submit">确认申请</button>
+           </eq>   
+                                
+                                
+				
+			</div>
+		</form>
+	</div>
+	
+<include file='public:footer'/>  
+

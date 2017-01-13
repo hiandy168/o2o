@@ -1,0 +1,175 @@
+<include file='public:header'/>
+
+<link href="__PUBLIC__/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="__TMPL__statics/css/chaoshi/shequchaoshi.css" rel="stylesheet" type="text/css"/>
+<script src="__PUBLIC__/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/jquery-validation/messages_zh.min.js"></script>
+<script src="__TMPL__statics/js/chaoshi/validate.js"></script>
+<script src="__PUBLIC__/js/myLayer.js"></script>
+<style>
+    .paging{
+        width: 100%;
+        text-align: center;
+        background-color: #FFF;
+        margin: 10px auto;
+    }
+    .paging a{
+        font-size: 14px;
+        display: inline-block;
+        border: 1px solid #dbdbdb;
+        font-family: "微软雅黑";
+        line-height: 28px;
+        height: 28px;
+        padding: 0px 10px;
+        color: #545454;
+        text-align: center;
+        border-radius: 3px;
+        margin-right: 3px;
+        margin-left: 3px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .paging span{
+        font-size: 14px;
+        display: inline-block;
+        height:28px;
+        font-family: "微软雅黑";
+        line-height: 28px;
+        color: #545454;
+        margin-right: 4px;
+        margin-left: 4px;
+    }
+    .paging a:hover{
+        border: 1px solid #0099cc;
+        font-size: 14px;
+        display: inline-block;
+        font-family: "微软雅黑";
+        line-height: 28px;
+        height: 28px;
+        padding: 0px 10px;
+        color: white;
+        text-align: center;
+        border-radius: 3px;
+        margin-right: 3px;
+        margin-left: 3px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: #0099cc;
+    }
+</style>
+<div class="sjgl_lead">
+
+    <ul>
+
+        <li><a href="#">社区超市</a> > <a href="">商品管理</a> > <span id="name_id"><if condition="$act eq 'index' ">等待审核的商品 <elseif condition="$act eq 'outed'"/> 仓库中的商品<else/> 出售中的商品 </if></li>
+
+    </ul>
+
+</div>
+
+<div class="tuan_content" <if  condition="$chaoshi['status'] eq 1">style="background-image:url('__TMPL__/statics/images/shopClose.png');background-repeat:no-repeat;background-size:70%;background-position: 200px 180px;height: 1023px;"</if> >
+
+    <form method="post" action="<{:U('chaoshiproduct/index')}>" >
+
+        <div class="radius5 tuan_top">
+
+            <div class="tuan_top_t">
+
+                <div class="left tuan_topser_l">商品名称：<input type="text" class="radius3 tuan_topser" name="keyword" value="<{$keyword}>" />
+                    商品分类：<select class="radius3 tuan_topser" name="cate_id"><option value="">全部分类</option><foreach name="listt" item="vo"><option value="<{$vo.cate_id}>" <if condition="$cate_id eq $vo['cate_id']"  >selected</if>><{$vo.cate_name}></option></foreach></select>
+                    审核状态：<select class="radius3 tuan_topser" name="audit"><option value="3" <if condition="$examine eq 3"  >selected</if> >未通过</option><option value="1" <if condition="$examine eq 1">selected</if> >已通过</option><option value="0" <if condition="$examine eq 0">selected</if>>待审批</option></select>
+                    <input type="submit" style="margin-left:10px;" class="radius3 sjgl_an tuan_topbt" value="搜 索"/></div>
+
+                <div class="right tuan_topfb_r">
+                    <a class="radius3 sjgl_an tuan_topbt" target="main_frm" href="<{:U('chaoshiproduct/create')}>">添加商品+</a>
+                    <!--<a class="radius3 sjgl_an tuan_topbt" target="main_frm" href="#">商品导入</a>
+                    <a class="radius3 sjgl_an tuan_topbt" target="main_frm" href="#">商品导出</a>-->
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    <include file="chaoshiproduct:nav" />
+
+    <form action="<{:U('chaoshiproduct/shanchu')}>" method="post" id="form1" target="baocms_frm">
+        <table class="table table_product">
+            <tr class="active">
+                <td></td>
+                <td>商品编号</td>
+                <td style="width:211px;max-width: 211px;">商品名</td>
+                <td>分类</td>
+                <td>略缩图</td>
+                <td style="width:120px;max-width: 120px;">价格</td>
+                <td style="width:120px;max-width: 120px;">库存</td>
+
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+            <foreach name="list" item="var">
+                <tr>
+                    <td><input type="checkbox" class="checkBtn_1" name="product_id[]" value="<{$var.product_id}>"/></td>
+                    <td><{$var.product_num}></td>
+                    <td><{$var.product_name}></td>
+                    <td><{$cates[$var['cate_id']]['cate_name']}></td>
+                    <td><img src="<{$var.photo|get_remote_file_path=###}>" style="width:80px;height:50px;" /></td>
+                    <td><{$var['price']}></td>
+                    <td><{$var.inventory}></td>
+                    
+                    <td><eq name="var.audit" value="0">未审核<else/><eq name="var.audit" value="1">审核通过<else/>未通过</eq></eq></td>
+                    <td><a href="<{:U('chaoshiproduct/edit',array('product_id'=>$var['product_id']))}>">编辑</a>&nbsp;<a   mini='confirm'    href="<{:U('chaoshiproduct/delete',array('product_id'=>$var['product_id']))}>">删除</a></td>
+                </tr>
+            </foreach>
+
+        </table>
+                <{$page}>
+        <div style="margin-left:30px">
+            <input type="checkbox" class="checked_all_1" />全选 <a style="margin-left:20px;" class="btn btn-primary" id="shanchu">删除</a>
+        </div>
+    </form>
+    <script>
+        $(".checked_all_1").click(function(){
+            if(this.checked == true){
+                $("[class='checkBtn_1']").prop("checked",'true');
+            }
+            else{
+                $("[class='checkBtn_1']").removeProp("checked");
+            }
+        });
+    </script>
+</div>
+<script>
+ $('#shanchu').click(
+  function (){
+
+ $('#form1').submit();
+  }
+                    )
+</script>
+<script>
+$('#xiajia').click(
+ function() {
+ var path="<{:U('chaoshiproduct/xiajia')}>";
+     $('#form1').attr('action',path).submit();
+
+
+
+ }
+
+
+
+)
+
+
+
+
+</script>
+
+
+
+
+
+<include file='public:footer'/>

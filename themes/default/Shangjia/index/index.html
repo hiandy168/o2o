@@ -1,0 +1,383 @@
+<include file='public:header'/>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".leftMenu_a").click(function () {
+
+            $(".leftMenu_a").removeClass("on");
+
+            $(this).addClass("on");
+
+            $(".leftNav2").hide();
+
+            $(this).parent().find(".leftNav2").show();
+
+        });
+
+        $(".leftNav2 li").click(function () {
+
+            $(".leftNav2 li a").removeClass('on');
+
+            $(this).find('a').addClass('on');
+
+        });
+
+    });
+
+</script>
+
+<div class="sjgl_top">
+
+    <div class="left sjgl_toplogo">商家后台</div>
+
+    <div class="right sjgl_top_r">
+
+        <ul>
+
+            <li class="left sjgl_topli sjgl_toplixl"><a
+                    href="<{:U('shangjia/index/index')}>"><{$SHOP.shop_name}>，您好！</a>
+
+                <!--<div class="sjgl_topxl">-->
+
+                <!--<div class="sjgl_topcz">-->
+
+                <!--<div class="left"><p class="sjgl_topyet">帐户余额</p><p class="sjgl_topyet sjgl_topye"><big><{$MEMBER.gold}></big>金块</p></div>-->
+
+                <!--<div class="right"><a class="radius5 sjgl_topczA" target="main_frm" href="<{:U('gold/index')}>">立即充值</a></div>-->
+
+                <!--</div>-->
+
+                <!--<a class="sjgl_topA sjgl_topA1" target="main_frm" href="<{:U('shop/about')}>">去资料中心>></a>-->
+
+                <!--<a class="sjgl_topA" href="<{:U('login/logout')}>"><em>&nbsp;</em>退出</a>-->
+
+                <!--</div>-->
+
+            </li>
+            <li class="left sjgl_topli"><a href="<{:U('pchome/index/index')}>"><em class="toptc"><img
+                    src="__TMPL__statics/images/tc_03_white.png" width="21" height="22"/></em>返回前台</a></li>
+            <li class="left sjgl_topli"><a href="<{:U('login/logout')}>"><em class="toptc"><img
+                    src="__TMPL__statics/images/toptc_03.png"/></em>退出</a></li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<div class="sjglBox">
+
+    <div class="left sjgl_leftmenu">
+
+        <ul>
+
+            <li class="leftMenu_li"><a class="leftMenu_a on" style="background-image:none;" target="main_frm"
+                                       href="<{:U('index/main')}>"><em>&nbsp;</em>首页</a></li>
+
+            <li class="leftMenu_li">
+                <a class="leftMenu_a leftMenu_a2" style="background-image:none;" target="_blank"
+                   href="<{:U('pchome/openshop/step1')}>"><em>&nbsp;</em>开店</a>
+            </li>
+            <if condition="$waimai_list">
+                <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a19" target="main_frm" href="javascript:;">
+                    <em style="background:url(__TMPL__statics/images/takeout.png);background-size:22px 19px;background-repeat: no-repeat;background-position:1px 10px;">&nbsp;</em>外卖</a>
+                    <div class="leftNav2 fd fd_waimai">
+                        <ul class="waimai">
+                            <volist name="waimai_list" id="vo">
+                                <eq name="vo[level]" value="1">
+                                    <script>
+                                        window.waimai_person_audit = true;
+                                    </script>
+                                </eq>
+                                <li><a target="main_frm" class="Fold" id="my_<{$vo['store_id']}>"
+                                       href="javascript:void(0)"><em>&nbsp;</em><{$vo.store_name}></a></li>
+                                <div style="padding-left:20px;">
+                                    <ul id="my_<{$vo['store_id']}>All" style="display: none">
+                                        <li>
+                                            <eq name="vo.audit" value="1">
+                                            <a target="view_window" style="position:absolute;margin-left:-7px;margin-top:-29px;width:34px;background: url('__TMPL__statics/images/view.png');
+                                        background-size:25px 25px;background-repeat: no-repeat;" title="前往该店铺" href="<{:U('waimai/index/store',array(" store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"></a>
+                                        </eq>
+
+                                            <a target="main_frm" href="<{:U('pcsjcenter/waimai/set',array(" store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                            &nbsp;</em>店铺管理</a></li>
+                                        <li><a target="main_frm" href="<{:U('Pcsjcenter/waimaiorder/index',array("store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                            &nbsp;</em>订单管理</a></li>
+                                        <li><a target="main_frm" href="<{:U('Pcsjcenter/waimaigoodscate/index',array("
+                                               store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                            &nbsp;</em>商品分类</a></li>
+                                        <li><a class="on" target="main_frm"
+                                               href="<{:U('Pcsjcenter/waimaigoods/index',array(" store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                            &nbsp;</em>商品管理</a></li>
+                                    </ul>
+                                </div>
+                            </volist>
+                        </ul>
+                    </div>
+                </li>
+            </if>
+            <!--<if condition="$chaoshi_list">
+                <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a20" target="main_frm"
+                                           href="<{:U('chaoshi/edit')}>">
+                    <em style="background:url(__TMPL__statics/images/market.png);background-size:22px 19px;background-repeat: no-repeat;background-position:1px 10px;">
+                        &nbsp;</em>社区超市</a>
+
+                    <div class="leftNav2">
+                        <ul>
+                            <li><a target="main_frm" href="<{:U('chaoshi/edit')}>"><em>&nbsp;</em>店铺管理</a></li>
+                            <li><a target="main_frm" href="<{:U('chaoshiorder/index')}>"><em>&nbsp;</em>订单管理</a></li>
+                            <li><a target="main_frm" href="<{:U('chaoshiproductcate/index')}>"><em>&nbsp;</em>商品分类</a>
+                            </li>
+                            <li><a target="main_frm" href="<{:U('chaoshiproduct/index')}>"><em>&nbsp;</em>商品管理</a></li>
+                            <li><a target="main_frm" id="my_chaoshi" class="Fold" href="javascript:void(0)"><em>
+                                &nbsp;</em>我的分店</a></li>
+                            <div style="padding-left:20px;">
+                                <ul style="display: none" id="my_chaoshiAll">
+                                    <volist name="chaoshi_list" id="vo">
+                                        <li><a target="main_frm"
+                                               href="<{:U('shangjia/chaoshi/setdefault',array('store_id'=>$vo['store_id'],'shop_id'=>$vo['shop_id']))}>"><em>
+                                            &nbsp;</em><{$vo.store_name}></a></li>
+                                    </volist>
+                                </ul>
+                            </div>
+                        </ul>
+                    </div>
+                </li>
+            </if>-->
+
+            <if condition="$chaoshi_list">
+                <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a19" target="main_frm" href="javascript:;">
+                    <em style="background:url(__TMPL__statics/images/market.png);background-size:22px 19px;background-repeat: no-repeat;background-position:1px 10px;">&nbsp;</em>社区超市</a>
+                    <div class="leftNav2 fd fd_waimai">
+                        <ul class="waimai">
+                            <volist name="chaoshi_list" id="vo">
+                                <eq name="vo[level]" value="1">
+                                    <script>
+                                        window.chaoshi_person_audit = true;
+                                    </script>
+                                </eq>
+                                <li><a  target="main_frm" class="Fold" id="my_c<{$vo['store_id']}>"
+                                       href="javascript:void(0)"><em>&nbsp;</em><{$vo.store_name}></a></li>
+                                <div style="padding-left:20px;">
+                                    <ul id="my_c<{$vo['store_id']}>All" style="display: none">
+                                        <li>
+                                            <eq name="vo.audit" value="1"><a target="view_window" style="position:absolute;margin-left:-7px;margin-top:-29px;width:34px;background: url('__TMPL__statics/images/view.png');
+                                        background-size:25px 25px;background-repeat: no-repeat;" title="前往该店铺" href="<{:U('pchome/chaoshi/shop',array('store_id'=>$vo['store_id']))}>"></a></eq>
+
+                                            <a target="main_frm" href="<{:U('chaoshi/edit',array("store_id"=>$vo["store_id"]),'html',false)}>"><em>
+                                            &nbsp;</em>店铺管理</a></li>
+                                        <li><a target="main_frm" href="<{:U('chaoshiorder/index',array("store_id"=>$vo["store_id"]),'html',false)}>"><em>
+                                            &nbsp;</em>订单管理</a></li>
+                                        <li><a target="main_frm" href="<{:U('chaoshiproductcate/index',array("store_id"=>$vo["store_id"]),'html',false)}>"><em>
+                                            &nbsp;</em>商品分类</a></li>
+                                        <li><a class="on" target="main_frm"
+                                               href="<{:U('chaoshiproduct/index',array("store_id"=>$vo["store_id"]),'html',false)}>"><em>
+                                            &nbsp;</em>商品管理</a></li>
+                                    </ul>
+                                </div>
+                            </volist>
+                        </ul>
+                    </div>
+                </li>
+            </if>
+
+            <if condition="$meishi_list">
+                <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a18" target="main_frm"
+                                           href="javascript:;">
+                    <em style="background:url(__TMPL__statics/images/food.png);background-size:22px 19px;background-repeat: no-repeat;background-position:1px 10px;">
+                        &nbsp;</em>美食</a>
+                    <div class="leftNav2 fd fd_meishi">
+                        <ul class="meishi">
+                            <volist name="meishi_list" id="vo">
+                                <eq name="vo[level]" value="1">
+                                    <script>
+                                        window.meishi_person_audit = true;
+                                    </script>
+                                </eq>
+                                <li><a target="main_frm" class="Fold" id="my_<{$vo['store_id']}>"
+                                       href="javascript:void(0)"><em>&nbsp;</em><{$vo.store_name}></a></li>
+                                <div style="padding-left:20px;">
+                                    <ul id="my_<{$vo['store_id']}>All" style="display: none">
+                                        <li>
+                                            <eq name="vo.audit" value="1">
+                                                <a target="view_window" style="position:absolute;margin-left:-7px;margin-top:-29px;width:34px;background: url('__TMPL__statics/images/view.png');
+                                        background-size:25px 25px;background-repeat: no-repeat;" title="前往该店铺" href="<{:U('Hmeishi/store/index',array(" store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"></a>
+                                            </eq>
+                                            <a target="main_frm" href="<{:U('pcsjcenter/meishi/set',array("store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                            &nbsp;</em>店铺管理</a></li>
+                                        <li><a target="main_frm" href="<{:U('Pcsjcenter/meishiorder/index',array("store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                            &nbsp;</em>订单管理</a></li>
+                                      <!--  <li><a class="on" target="main_frm"
+                                               href="<{:U('Pcsjcenter/meishichild/index',array("store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                            &nbsp;</em>菜品管理</a></li>-->
+                                        <li><a class="on menu_group" target="main_frm"
+                                               href="<{:U('Pcsjcenter/meishigoods/index',array("store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                            &nbsp;</em>商品管理</a><a id="group_<{$vo['store_id']}>" class="menu_group meishi-group" href="javascript:void(0);" style="font-weight:bold;margin-left:105px;margin-top:-43px;cursor: pointer;" title="套餐单品管理">[+]</a>
+                                        </li>
+                                            <li style="display: none" id="group_<{$vo['store_id']}>All"><a  style="margin: 0px 0px 0px 20px;" class="on" target="main_frm"
+                                                   href="<{:U('Pcsjcenter/meishichild/index',array("store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                                &nbsp;</em>套餐包含的菜品</a></li>
+                                    </ul>
+                                </div>
+                            </volist>
+                        </ul>
+                    </div>
+                </li>
+            </if>
+            <if condition="$hotel_list">
+                <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a18" target="main_frm" href="javascript:;">
+                    <em style="background:url(__TMPL__statics/images/hotel.png);background-size:22px 19px;background-repeat: no-repeat;background-position:1px 10px;">&nbsp;</em>酒店</a>
+                    <div class="leftNav2 fd fd_hotel">
+                        <ul  class="hotel">
+                            <volist name="hotel_list" id="vo">
+                                <eq name="vo[level]" value="1">
+                                    <script>
+                                        window.hotel_person_audit = true;
+                                    </script>
+                                </eq>
+                                <li><a target="main_frm" class="Fold" id="myHotel_<{$vo['store_id']}>"
+                                       href="javascript:void(0)"><em>&nbsp;</em><{$vo.store_name}></a></li>
+                                <div style="padding-left:20px;">
+                                    <ul id="myHotel_<{$vo['store_id']}>All" style="display: none">
+                                        <li>
+                                            <eq name="vo.audit" value="1">
+                                                <a target="view_window" style="position:absolute;margin-left:-7px;margin-top:-29px;width:34px;background: url('__TMPL__statics/images/view.png');
+                                        background-size:25px 25px;background-repeat: no-repeat;" title="前往该店铺" href="<{:U('Jiudian/store/index',array(" hotel_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"></a>
+                                            </eq>
+
+                                            <a target="main_frm"
+                                               href="<{:U('pcsjcenter/hotel/set',array("store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                            &nbsp;</em>酒店管理</a></li>
+                                        <li><a target="main_frm"
+                                               href="<{:U('Pcsjcenter/hotelorder/index',array("store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                            &nbsp;</em>订单管理</a></li>
+                                        <li><a target="main_frm"
+                                               href="<{:U('Pcsjcenter/hotelproduct/index',array("store_id"=>$vo["store_id"]),'html',false,C('BASE_SITE'))}>"><em>
+                                            &nbsp;</em>客房管理</a></li>
+                                    </ul>
+                                </div>
+                            </volist>
+                        </ul>
+                    </div>
+                </li>
+            </if>
+            <if condition="$housestore_list">
+                <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a18" target="main_frm"
+                                           href="javascript:;">
+                    <em style="background:url(__TMPL__statics/images/house.png);background-size:22px 19px;background-repeat: no-repeat;background-position:1px 10px;">
+                        &nbsp;</em>房产</a>
+
+                    <div class="leftNav2">
+
+                        <ul class="house">                        	
+							<foreach name="housestore_list" item="val">
+                            <li><a target="main_frm" id="my_<{$val.store_id}>" class="Fold" href="javascript:void(0)"><em>&nbsp;</em><{$val.store_name}></a></li>
+                            <div style="padding-left:20px;">
+                                <ul style="display: none" id="my_<{$val.store_id}>All">                                    
+		                            <li><a target="main_frm" href="<{:U('pcsjcenter/house/set',array('store_id'=>$val['store_id']),'html',false,C('BASE_SITE'))}>"><em>&nbsp;</em>店铺管理</a></li>
+		                            <li><a target="main_frm" class="Fold" id="new_house_<{$key}>" href="javascript:void(0)"><em>&nbsp;</em>楼盘管理</a></li>
+                                    <div style="padding-left:20px;">
+                                        <ul style="display: none;" class="new_house_<{$key}>All">
+                                                <li><a target="main_frm"
+                                                       href="<{:U('pcsjcenter/Houseroom/index',array('store_id'=>$val['store_id']),'html',false,C('BASE_SITE'))}>"><em>
+                                                    &nbsp;</em>楼盘列表</a></li>
+                                            <li><a target="main_frm"
+                                                   href="<{:U('pcsjcenter/Housenew/index',array('store_id'=>$val['store_id']),'html',false,C('BASE_SITE'))}>"><em>
+                                                &nbsp;</em>最新开盘列表</a></li>
+                                            <li><a target="main_frm"
+                                                   href="<{:U('pcsjcenter/Houseactive/index',array('store_id'=>$val['store_id']),'html',false,C('BASE_SITE'))}>"><em>
+                                                &nbsp;</em>优惠活动管理</a></li>
+                                        </ul>
+                                    </div>
+		                            <li><a target="main_frm" href="<{:U('pcsjcenter/houseorder/index',array('store_id'=>$val['store_id']),'html',false,C('BASE_SITE'))}>"><em>&nbsp;</em>订单管理</a></li>
+		                            <li><a target="main_frm" href="<{:U('Pcsjcenter/Houserent/index',array('store_id'=>$val['store_id']),'html',false,C('BASE_SITE'))}>"><em>&nbsp;</em>租房管理</a></li>
+		                            <li><a target="main_frm" href="<{:U('Pcsjcenter/Housetwo/index',array('store_id'=>$val['store_id']),'html',false,C('BASE_SITE'))}>"><em>&nbsp;</em>二手房管理</a></li>                                 
+                                </ul>
+                            </div>
+							</foreach>
+                        </ul>
+                    </div>
+
+                </li>
+            </if>
+
+
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a13" target="main_frm"
+                                       href="javascript:;"><em>&nbsp;</em>资金结算</a>
+
+                <div class="leftNav2">
+
+                    <ul>
+
+                        <!--                          <li><a target="main_frm" href="<{:U('money/index')}>"><em>&nbsp;</em>资金记录</a></li> -->
+
+                        <li><a target="main_frm" href="<{:U('money/shopmoney')}>"><em>&nbsp;</em>商家资金日志</a></li>
+
+                        <li><a target="main_frm" href="<{:U('money/tixianlog')}>"><em>&nbsp;</em>提现申请</a></li>
+
+                    </ul>
+
+                </div>
+
+            </li>
+
+
+        </ul>
+
+        <script>
+            $(function () {
+                $('.meishi-group').click(function () {
+                    var display =  $('#' + $(this).attr('id') + 'All').css('display');
+                    if(display == 'none'){
+                        $(this).text('[ - ]');
+                    }
+                    if(display == 'block'){
+                        $(this).text('[+]');
+                    }
+                });
+                $('.Fold,.menu_group').click(function () {
+                    $('#' + $(this).attr('id') + 'All').slideToggle();
+                    $('.' + $(this).attr('id') + 'All').slideToggle();
+                });
+            });
+        </script>
+
+    </div>
+
+    <div id="sjgl_right" style="padding-left:200px; height:100%;">
+
+        <div class="sjgl_main" style="height:1023px;">
+
+            <iframe src="<{:U('index/main')}>" marginheight="0" marginwidth="0" frameborder="0" width="100%"
+                    height="100%" id="main_frm" name="main_frm"></iframe>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+    var url = {
+        'waimai' : "<{:U('pcsjcenter/waimai/presonl_audit_info','','html',false,C('BASE_SITE'))}>",
+        'meishi' : "<{:U('pcsjcenter/meishi/presonl_audit_info','','html',false,C('BASE_SITE'))}>",
+        'hotel' : "<{:U('pcsjcenter/hotel/presonl_audit_info','','html',false,C('BASE_SITE'))}>"
+    };
+    var waimei = $('.fd_waimai').children('ul');
+    var meishi = $('.fd_meishi').children('ul');
+    var hotel = $('.fd_hotel').children('ul');
+
+    if(window.waimai_person_audit){
+        var type =waimei.attr('class');
+        waimei.prepend('<li><a target="main_frm" href='+url[type]+'><em>&nbsp;</em>个人认证信息</a></li>');
+    }
+    if(window.meishi_person_audit){
+        var type =meishi.attr('class');
+        meishi.prepend('<li><a target="main_frm" href='+url[type]+'><em>&nbsp;</em>个人认证信息</a></li>');
+    }
+    if(window.hotel_person_audit){
+        var type =hotel.attr('class');
+        hotel.prepend('<li><a target="main_frm" href='+url[type]+'><em>&nbsp;</em>个人认证信息</a></li>');
+    }
+</script>
+<include file='public:footer'/>
