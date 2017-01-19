@@ -19,6 +19,14 @@
                     <div class="seleHidden" id="seleHidden">
                         <label >
                             <span>分类</span>
+                            <select name="parent_id" id="parent_id" class="selecttop">
+                                <option value="0">请选择...</option>
+                                <foreach name="cates" item="var">
+                                    <eq name="var.parent_id" value="0">
+                                        <option value="<{$var.cate_id}>"  <eq name="var.cate_id" value="$parent_id">selected="selected"</eq> ><{$var.cate_name}></option>
+                                    </eq>
+                                </foreach>
+                            </select>
                             <select id="cate_id" name="cate_id" class="selecttop">
                                 <option value="0">请选择...</option>
                                 <foreach name="cates" item="var">
@@ -40,14 +48,7 @@
                             </select>
                         </label>
                         <label>
-                        <select name="parent_id" id="parent_id" class="selecttop">
-                            <option value="0">请选择...</option>
-                            <foreach name="cates" item="var">
-                                <eq name="var.parent_id" value="0">
-                                <option value="<{$var.cate_id}>"  <eq name="var.cate_id" value="$parent_id">selected="selected"</eq> ><{$var.cate_name}></option>
-                                </eq>
-                            </foreach>
-                        </select>
+
                         <script>
                             $(document).ready(function (e) {
                                 $("#parent_id").change(function () {

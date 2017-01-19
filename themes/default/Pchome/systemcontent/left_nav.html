@@ -8,11 +8,7 @@
    <!--<span style="margin-left:68px;font-size:14px;font-weight:bold;font-family:'宋体';">帮助中心</span>-->
 <!--</div>-->
 <ul>
-    <li class="main-nav"><span class="nav_1"><a>关于我们</a></span></li>
-    <li class="main-nav"><span class="nav_2"><a>用户协议</a></span></li>
-    <li class="main-nav"><span class="nav_3"><a>新闻中心</a></span></li>
-    <li class="main-nav"><span class="nav_4"><a>加入我们 </a></span></li>
-    <li class="main-nav"><span class="nav_5"><a>法律声明</a></span></li>
-    <li class="main-nav"><span class="nav_5"><a>合作伙伴</a></span></li>
-    <li class="main-nav"><span class="nav_5"><a>联系我们</a></span></li>
+    <volist name="titles" id="title">
+        <li class="main-nav"><span class="nav_1"><a href="<{:U('Pchome/systemcontent/index', ['content_id' => $title['content_id']])}>"><{$title['title']}></a></span></li>
+    </volist>
 </ul>

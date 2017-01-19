@@ -74,7 +74,7 @@ class HouseorderAction extends CommonAction
         $show = $Page->show();   // 分页显示输出
 
         $list = $EleOrder
-            ->field('order_id,store_id,name,phone,price as pay_price,1 as num,pay_status,status,arbitrament_status')
+            ->field('order_id,use_time,create_time,store_id,name,phone,price as pay_price,1 as num,pay_status,status,arbitrament_status')
             ->where($map)
             ->order(array('order_id' => 'desc'))
             ->limit($Page->firstRow, $Page->listRows)

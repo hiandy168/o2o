@@ -918,6 +918,7 @@ class FangchanAction extends CommonAction
         $map = array();
 
         $map['a.closed'] = 0;
+        $map['a.audit'] = 0;
         if (IS_POST) {
             $store_name = I('post.store_name', 0);
             if ($store_name) {

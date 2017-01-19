@@ -110,7 +110,15 @@ class UsercashAction extends CommonAction
         $money = $detail['money'];
         $data = D('UsersCash')->where(array('cash_id' => $cash_id))->find();
         if ($status == 2) {
-            D('Users')->addMoney($data['user_id'], $money, '提现拒绝，退款');
+            if(M()->execute("update bao_shop  set money =money + {$money} where shop_id = {$data['user_id']}")){
+                D('Usermoneylogs')->add(array(
+                    'user_id'   => $data['user_id'],
+                    'money'  => $money,
+                    'intro'     => '提现拒绝，扣款',
+                    'create_time' => NOW_TIME,
+                    'create_ip' => get_client_ip()
+                ));
+            }
             D('Userscash')->save(array('cash_id' => $cash_id, 'status' => $status, 'reason' => $value));
             //微信通知
             //  $this->remainMoneyNotify($data['user_id'],$data['money']);

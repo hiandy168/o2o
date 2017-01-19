@@ -13,7 +13,16 @@ class  HelpcenterAction extends  CommonAction{
             ->where(['closed' => 0])
             ->order('orderby ASC')
             ->select();
-        $this->assign('helpCates', $getHelpCate);
+        $getHelpCates = [];
+        foreach ($getHelpCate as $getHelp){
+            if(($getHelp['parent_id'] != 0)){
+                $getHelpCates[] = $getHelp;
+            }elseif ($getHelp['cate_name'] == '系统信息'){
+                $getHelpCates[] = $getHelp;
+            }
+        }
+//        var_dump($getHelpCates);
+        $this->assign('helpCates', $getHelpCates);
 
         if(count($getArticles) == 1 || (count($getArticles) == 0 && $article_id != 0)){
             if(count($getArticles) == 1){

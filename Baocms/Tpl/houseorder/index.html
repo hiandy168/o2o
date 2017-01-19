@@ -73,7 +73,7 @@
                             <td><input class="child_product_id" type="checkbox" name="product_id[]" value="<{$var.product_id}>"/></td>
                             <td><{$var.order_id}></td>
                             <td><{$var.store_id}></td>
-                            <td><{$var.use_time|date="Y-m-d H:i",###}></td>
+                            <td><neq name="var.use_time" value="0"><{$var.use_time|date="Y-m-d H:i",###}></neq></td>
                             <td><{$var.phone}></td>
                             <td><{$var.pay_price}></td>
                             <td><{$var.num}></td>

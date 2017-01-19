@@ -5,9 +5,14 @@
     .right_ul li a{font-family:'宋体';}
 </style>
 <div style="padding:15px;background:#f5f5f5;">
-    关于我们
+    <{$content['title']}>
 </div>
-<!--<div style="padding:25px;font-weight:bold;font-size:14px;font-family:'宋体';">-->
-    <!--哈哈哈哈哈-->
-<!--</div>-->
-哈哈哈哈哈哈哈
+<div class="x12">
+    <div class="news-detail">
+        <div class="detail">
+            <h1><{$content.title}></h1>
+            <p class="text-center"><span>创建时间：<{$content.create_time|date='Y-m-d',###}></span></p>
+            <{$content['contents']}>
+        </div>
+    </div>
+</div>

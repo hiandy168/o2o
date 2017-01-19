@@ -461,6 +461,8 @@
                                 </eq>
                             </tr>
                         </thead>
+                        <?php $arr = explode(':',$detail['start_time']);$detail['start_time']=$arr[0].':'.$arr[1];?>
+                        <?php $arr = explode(':',$detail['end_time']);$detail['end_time']=$arr[0].':'.$arr[1];?>
                         <tbody>
                             <tr>
                                 <td class="opentime"><{$detail.start_time}>-<{$detail.end_time}></td>

@@ -18,7 +18,7 @@
             'db_type'  => 'mysql',
             'db_user'  => 'root',
             'db_pwd'   => '',
-            'db_host'  => '192.168.0.123',
+            'db_host'  => '192.168.0.254',
             'db_port'  => '3306',
             'db_name'  => 'piclibaray',
             'db_prefix'  => 'pic_',

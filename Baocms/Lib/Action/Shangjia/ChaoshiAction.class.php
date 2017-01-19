@@ -182,7 +182,6 @@ class ChaoshiAction extends CommonAction {
 		}else{
 			$this->com_audit_info();
 		}
-
 	}
 	public function presonl_audit_info(){
 		$this->detail = D('PresonalStoreOpenAuth')->find($this->shop['user_id']);

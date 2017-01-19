@@ -7,7 +7,8 @@ class  EmptyAction extends  CommonAction{
         $model = strtolower(MODULE_NAME);
         foreach($citys as $val){
             if($val['pinyin'] == $model){
-                cookie('city_id',$val['city_id'],86400*30); //保存一个月
+                cookie('city_id',$val['city_id'],86400*30);
+                cookie('CITY_NAME',$val['name'],86400*30);//保存一个月
                 $url = substr($_SERVER['QUERY_STRING'],4);
                 $url = $url?$url:U('index/index');
                 header('Location:'.$url);

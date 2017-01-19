@@ -225,4 +225,18 @@ class SettingAction extends CommonAction {
         }
     }
 
+    public function updateuserapp(){
+        if ($this->isPost()) {
+            $data = $this->_post('data', false);
+            $data['time'] = time();
+            $data = serialize($data);
+            D('Setting')->save(array('k' => 'updateuserapp', 'v' => $data));
+            D('Setting')->cleanCache();
+            $this->baoSuccess('设置成功', U('setting/updateuserapp'));
+        } else {
+            $this->assign('appHost', C('BASE_SITE'));
+            $this->display();
+        }
+    }
+
 }

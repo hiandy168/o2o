@@ -163,34 +163,50 @@ class MoneyAction extends CommonAction
         $this->display();
     }
 
+    public function fetch_sms()
+    {
+        dump($this->member);
+        /*$result = array(
+            'status' => 1,
+            'msg' => '发送成功'
+        );
+        if (isset($this->shop['tel'])) {
+            $code = rand(1000, 9999);
+            D('Sms')->sendSms('money_bank_sms', $this->shop['tel'], array(
+                'code' => $code
+            ));
+            session('shop_fetch_code', $code);
+        } else if (isset($this->member['mobile'])) {
+            $code = rand(1000, 9999);
+            D('Sms')->sendSms('money_bank_sms', $this->member['mobile'], array(
+                'code' => $code
+            ));
+            session('shop_fetch_code', $code);
+        } else {
+            $result = array(
+                'status' => 0,
+                'msg' => '没有设置手机号'
+            );
+        }
+        echo json_encode($result);*/
+    }
+
     public function tixian()
     {
         if (IS_POST) {
-            $money = I('money');
-            if ($money <= 0) {
-                $this->baoError('提现金额不合法');
+            if (md5(I('post.pin', 0)) != $this->member['pin']) {
+                $this->error('支付密码错误');
             }
-            if ($money > $this->member['money']
-                || $this->member['money'] == 0
-            ) {
-                $this->baoError('余额不足，无法提现');
+            $money = I('money', 0);
+            if (!$money) {
+                $this->error('金额错误');
             }
-            if (!$data['bank_name'] = htmlspecialchars($_POST['bank_name'])) {
-                $this->baoError('开户行不能为空');
+            $data = D('ShopFetchAccount')->where(array('shop_id' => $this->shop['shop_id']))
+                ->find();
+            if (!$data) {
+                $this->ror('请先绑定银行卡', U('Shangjia/money/bind'));
             }
-            if (!$data['bank_num'] = htmlspecialchars($_POST['bank_num'])) {
-                $this->baoError('银行账号不能为空');
-            }
-
-            if (!$data['bank_realname'] = htmlspecialchars(
-                $_POST['bank_realname']
-            )
-            ) {
-                $this->baoError('开户姓名不能为空');
-            }
-            $data['bank_branch'] = htmlspecialchars($_POST['bank_branch']);
             $data['user_id'] = $this->uid;
-
             $arr = array();
             $arr['user_id'] = $this->uid;
             $arr['money'] = $money;
@@ -200,9 +216,10 @@ class MoneyAction extends CommonAction
             $arr['bank_num'] = $data['bank_num'];
             $arr['bank_realname'] = $data['bank_realname'];
             $arr['bank_branch'] = $data['bank_branch'];
-            D("Userscash")->add($arr);
-            D('Usersex')->save($data);
-            D('Users')->addMoney($this->uid, -$money, '申请提现，扣款');
+            $arr['bank_telephone'] = $data['bank_telephone'];
+            $arr['create_time'] = time();
+            D("ShopCash")->add($arr);
+            M()->execute(" update bao_shop set money = money - {$money} where shop_id = {$this->shop["shop_id"]}");
             $userInfo = $this->member;
             D('Sms')->sendSms('money_back_want', $userInfo['mobile'], array(
                 'money' => $money
@@ -344,8 +361,66 @@ class MoneyAction extends CommonAction
         $this->display();
     }
 
-    public function bind(){
-        $this->display();
+    public function bind()
+    {
+        if (IS_AJAX) {
+            if (I('code', 0) != session('shop_fetch_code')) {
+                echo json_encode(array('status' => 0, 'msg' => '验证码错误'));
+            } else {
+                echo json_encode(array('status' => 1, 'msg' => '验证码正确'));
+            }
+        } else if (IS_POST) {
+            $data = I('post.');
+            $data['bank_telephone'] = $this->member['mobile'];
+            $have = D('ShopFetchAccount')->where(array('shop_id' => $this->shop['shop_id']))
+                ->find();
+            if (isset($have)) {
+                $result = D('ShopFetchAccount')->where(array('shop_id' => $this->shop['shop_id']))->save($data);
+            } else {
+                $data['shop_id'] = $this->shop['shop_id'];
+                $data['bank_telephone'] = $this->member['mobile'];
+                $result = D('ShopFetchAccount')->add($data);
+            }
+
+            if ($result) {
+                $this->success('修改成功');
+            } else {
+                $this->error('修改失败');
+            }
+        } else {
+            $bind_info = D('ShopFetchAccount')
+                ->where(array('shop_id' => $this->shop['shop_id']))
+                ->find();
+            $this->assign('info', $bind_info)->display();
+        }
+
+    }
+
+    public function bind_sms()
+    {
+        $result = array(
+            'status' => 1,
+            'msg' => '发送成功'
+        );
+        if (isset($this->shop['tel'])) {
+            $code = rand(1000, 9999);
+            D('Sms')->sendSms('money_bank_sms', $this->shop['tel'], array(
+                'code' => $code
+            ));
+            session('shop_fetch_code', $code);
+        } else if (isset($this->member['mobile'])) {
+            $code = rand(1000, 9999);
+            D('Sms')->sendSms('money_bank_sms', $this->member['mobile'], array(
+                'code' => $code
+            ));
+            session('shop_fetch_code', $code);
+        } else {
+            $result = array(
+                'status' => 0,
+                'msg' => '没有设置手机号'
+            );
+        }
+        echo json_encode($result);
     }
 
 }

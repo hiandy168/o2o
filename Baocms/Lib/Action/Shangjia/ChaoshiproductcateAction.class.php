@@ -46,7 +46,7 @@ class ChaoshiproductcateAction extends ChaoshiAction {
 	}
 
 	public function create() {
-		if ($this->isPost()) {
+		if (IS_POST) {
 			$data = $this->createCheck();
 			
 			$Sensitive_mod = D('SensitiveWords');
