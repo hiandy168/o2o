@@ -52,12 +52,29 @@
                           <input type="text" name="data[alipay_account]" value="<{$detail.setting.alipay_account}>"  class="scAddTextName w400" />
                     </td>
                 </tr>
-                
+                <tr>
+                    <td class="lfTdBt">PC支付私钥：</td>
+                     <td class="rgTdBt">
+                          <input type="text" name="data[alipay_private]" value="<{$detail.setting.alipay_private}>"  class="scAddTextName w400" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lfTdBt">PC支付公钥：</td>
+                     <td class="rgTdBt">
+                          <input type="text" name="data[alipay_public]" value="<{$detail.setting.alipay_public}>"  class="scAddTextName w400" />
+                    </td>
+                </tr>
                 
                 
                 <tr>
                     <td class="lfTdBt" style="text-align:left;" colspan="2">&nbsp;&nbsp;支付宝手机App配置</td>
                 </tr>
+                <tr>
+                    <td class="lfTdBt">APP_ID：</td>
+                     <td class="rgTdBt">
+                        <input type="text" name="data[alipay_app_id]" value="<{$detail.setting.alipay_app_id}>" class="scAddTextName w400" />
+                    </td>
+                </tr>  
                  <tr>
                     <td class="lfTdBt">合作者身份ID：</td>
                      <td class="rgTdBt">
@@ -71,22 +88,17 @@
                     </td>
                 </tr>  
                 <tr>
-                    <td class="lfTdBt">合作者私钥：</td>
+                    <td class="lfTdBt">APP支付私钥：</td>
                      <td class="rgTdBt">
                           <input type="text" name="data[alipay_app_private]" value="<{$detail.setting.alipay_app_private}>"  class="scAddTextName w400" />
                     </td>
                 </tr>
                 <tr>
-                    <td class="lfTdBt">支付宝公钥：</td>
+                    <td class="lfTdBt">APP支付公钥：</td>
                      <td class="rgTdBt">
                           <input type="text" name="data[alipay_app_public]" value="<{$detail.setting.alipay_app_public}>"  class="scAddTextName w400" />
                     </td>
                 </tr>
-
-
-
-
-
 
             </table>
         </div>

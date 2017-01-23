@@ -111,7 +111,7 @@ class HomestoreAction extends CommonAction {
         }
         if($type==1)
         {
-         $product_id=$store_model->query("select count(*) as product_id from bao_house where product_id  in (select product_id from bao_house_active where audit='1' and closed='0') and city_id = $city_id");
+         $product_id=$store_model->query("select count(*) as product_id from bao_house where product_id  in (select product_id from bao_house_active where audit='1' and closed='0'and is_out=0) and city_id = $city_id  and  closed=0");
          $count=$product_id['product_id'];
         }
         $Page = new Page($count, 10); // 实例化分页类 传入总记录数和每页显示的记录数

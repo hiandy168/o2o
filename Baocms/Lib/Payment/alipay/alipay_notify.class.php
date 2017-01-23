@@ -129,7 +129,7 @@ class AlipayNotify {
 
 		$isSgin = false;
 
-		$isSgin = rsaVerify($prestr, $this->alipay_config['alipay_app_public'], $sign);
+		$isSgin = rsaVerify($prestr, $this->alipay_config['alipay_public'], $sign);
 		
 		return $isSgin;
 	}

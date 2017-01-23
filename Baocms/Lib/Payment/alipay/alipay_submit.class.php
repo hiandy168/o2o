@@ -38,7 +38,7 @@ class AlipaySubmit {
 		
 		$mysign = "";
 
-		$mysign = rsaSign($prestr, $this->alipay_config['alipay_app_private']);
+		$mysign = rsaSign($prestr, $this->alipay_config['alipay_private']);
 		
 		return $mysign;
 	}

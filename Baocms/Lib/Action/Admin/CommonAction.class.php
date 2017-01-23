@@ -316,6 +316,24 @@ class CommonAction extends Action
 	}
 
 	/**
+	 * 返回城市一级的数据
+	 */
+	public function getCities(){
+		// 查找对应的区县
+		$findCity = M('City')
+			->field('city_id, name AS city_name')
+			->order(array('orderby' => 'ASC'))
+			->cache(true, '120', 'xcache')
+			->select();
+		if(!$findCity){
+			echo json_encode(array('msg' => '数据为空', 'error' => '400'));
+			exit;
+		}
+		echo json_encode(array('data' => $findCity, 'msg' => '找到区县信息', 'error' => '200'));
+		exit;
+	}
+
+	/**
 	 * 返回城市区县一级的数据
 	 */
 	public function cities(){

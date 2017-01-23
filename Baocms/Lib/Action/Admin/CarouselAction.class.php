@@ -52,7 +52,7 @@ class CarouselAction extends CommonAction {
                 $models = $this->_carousel_model->get_model_name();
                 $type = I('type');
                 //var_dump($type);die;
-                $store_id = I('store_id','0','intval');               
+                $store_id = I('store_id','0','intval');
                 $model_name = $models[$type];
                 $store = D($model_name)->find($store_id);
                 if (!$store) {
@@ -84,7 +84,8 @@ class CarouselAction extends CommonAction {
             $link_type = I('link_type','0','intval');
             if ($link_type != 1){
                 unset($data['type']);
-            } 
+            }
+            $data['link']=$_POST['store_id'];
             if ($this->_carousel_model->save($data)){
                 $this->baoSuccess('编辑成功',U('carousel/index'));
             }else {

@@ -52,6 +52,7 @@ class  TongjiAction extends CommonAction{
         $this->assign('bg_date',$bg_date);
         $this->assign('end_date',$end_date);
         $this->assign('money',D('Tuanorder')->money($bg_time,$end_time));
+        var_dump(D('Tuanorder')->money($bg_time,$end_time));
         $this->assign('money_yue',D('Tuanorder')->money_yue());
         $this->display();
     }
