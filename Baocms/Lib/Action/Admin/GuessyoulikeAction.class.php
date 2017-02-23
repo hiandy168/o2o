@@ -119,6 +119,7 @@ class GuessyoulikeAction extends CommonAction {
 
         $res = $this->guess_you_like_model->where(array('goods_id'=>$goods_id,'type'=>'hotel'))->find();
         $price=D('HotelProduct')->field('min(price) as price_min')->where(['store_id'=>$goods_id])->group('store_id')->select();
+        $price[0]['price_min']=$price[0]['price_min']?$price[0]['price_min']:0;
        // var_dump($price);
         if ($res) {
             $this->baoError("商品已存在");
@@ -141,7 +142,7 @@ class GuessyoulikeAction extends CommonAction {
         if ($this->guess_you_like_model->add($data)) {
             $this->baoSuccess('添加成功',U('guessyoulike/index',array('type'=>'hotel','city_id'=>$store['city_id'])));
         }else {
-
+//           print_r($this->guess_you_like_model->_sql()) ;
             $this->baoError('添加失败');
         }
     }

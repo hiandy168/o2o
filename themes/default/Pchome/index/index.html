@@ -141,17 +141,22 @@
             </calldata>
         </ul>
     </div>
-    <script>
-        $(function(){
-            $('.bg-images').each(function(index){
-                var img = new Image();
-                img.src = $(this).attr('rel');
-                var img_width = img.width;
-                $(this).css('background-size',img_width + 'px 402px')
-            })
-        })
+    <!--<script>-->
+        <!--$(function(){-->
+            <!--$('.bg-images').each(function(index){-->
+                <!--var img = new Image();-->
+                <!--img.src = $(this).attr('rel');-->
+                <!--var img_width = img.width;-->
+                <!--$(this).css('background-size',img_width + 'px 402px');-->
+            <!--});-->
+            <!--thisURL = document.URL + '?key=true';-->
+            <!--if(location.search.indexOf("?") == 'key=true'){-->
+                <!--location.replace(thisURL);-->
+            <!--}-->
 
-    </script>
+        <!--})-->
+
+    <!--</script>-->
     <div class="pagewd posit_lr_box">
         <div class="left posit_l">
           <include file="public:cate"/>

@@ -1274,4 +1274,32 @@ class FangchanAction extends CommonAction
             return $this->baoError('操作错误');
         }
     }
+
+    /**peace
+     * 展示房产图片
+     */
+    public function pictures($product_id = 0, $store_id = 0) {
+        $hotelProductModel = M('HouseProduct');
+
+        // 商品合法性验证
+        $findProduct = $hotelProductModel
+            ->where(array('product_id' => $product_id))
+            ->find();
+        if(!$findProduct){
+            $set = 1;
+            $this->assign('set', $set);
+            $this->display();   // 输出模板
+        } elseif($store_id != $findProduct['store_id']){
+            $set = 2;
+            $this->assign('set', $set);
+            $this->display();   // 输出模板
+        }else{
+            // 解析图片
+            $photos = explode(',', $findProduct['photo']);
+            $set = 3;
+            $this->assign('set', $set);
+            $this->assign('photos', $photos);   // 赋值数据集
+            $this->display();   // 输出模板
+        }
+    }
 }

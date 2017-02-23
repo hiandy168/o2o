@@ -1,0 +1,85 @@
+<include  file='public:header'/>
+<script src="__PUBLIC__/js/highcharts/highcharts.js"></script>
+<script src="__PUBLIC__/js/highcharts/modules/exporting.js"></script>
+<style>
+    .td{font-family:'微软雅黑';font-size:18px;color:white;float:left;text-align: center;line-height:48px;}
+    .td-1{width:380px;}
+    .td-2{width:300px;}
+    .td-3{width:345px;}
+    .td-4{width:350px;}
+    .td-5{width:237px;}
+    .tr{height:58px;border: 1px solid #dbdbdb;display: table;margin-top:-1px;}
+    .td-content{font-family:'微软雅黑';font-size:16px;text-align: center;vertical-align:middle;display:table-cell;}
+</style>
+<div class="mainBt">
+    <ul>
+        <li class="li1">营销分析</li>
+        <li class="li2">数据统计</li>
+        <li class="li2 li3">卖家会员交易统计</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+                <form method="get" action="">
+                    <div class="seleK">
+                        <label>
+                            <span>开始时间</span><input type="text" name="bg_date" value="<{$bg_date|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text w200 inputData" style="background-position: 187px -75px;" /></label>
+                        <label><span>结束时间</span><input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text w200 inputData" style="background-position: 187px -75px;" /></label>
+
+                        <input type="submit" value="   搜索"  class="inptButton" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="tableBox" style="margin-bottom:25px;">
+            <div style="font-family:'微软雅黑';font-size:30px;color:#0099cc;text-align: center;margin-top:65px;margin-bottom:40px;">
+                已交易总金额：<{$money_count.sum_money}> 元
+            </div>
+            <div style="font-family:'微软雅黑';font-size:20px;color:#0099cc;margin-bottom:30px;">
+                卖家交易统计：
+            </div>
+            <div style="height:48px;background: #0099cc;margin-bottom:10px;">
+                <div class="td-1 td">
+                    卖家名称
+                </div>
+                <div class="td-2 td">
+                    订单数量（笔）
+                </div>
+                <div class="td-3 td">
+                    已交易金额（元）
+                </div>
+                <div class="td-4 td">
+                    帐户余额（元）
+                </div>
+                <div class="td-5 td">
+                    操作
+                </div>
+            </div>
+            
+        <foreach name="shop_users" item="var">
+            <div class="tr">
+                <div class="td-1 td-content">
+                    <{$var.nickname}>
+                </div>
+                <div class="td-2 td-content">
+                   <{$var.order_count|default=0}>
+                </div>
+                <div class="td-3 td-content">
+                    <{$var.sum_money|default=0}>
+                </div>
+                <div class="td-4 td-content">
+                    <{$var.money|default=0}>
+                </div>
+                <div class="td-5 td-content">
+                    <a href="<{:U('tongji/shopdetail',array('shop_id'=>$var['shop_id']))}>" style="cursor:pointer;">查看明细</a>
+                </div>
+            </div>
+		</foreach>
+       
+        </div>
+    </div>
+    <{$Page}>
+</div>
+<include  file='public:footer'/>       

@@ -58,7 +58,7 @@
                             <td><{$var.product_name}></td>
                             <td><{$var.store_name}></td>
 
-                            <td><a mini="select" w="700" h="360" href="<{:U('hotelproduct/pictures', array('product_id' => $var['product_id'], 'store_id' => $var['store_id']))}>"><img src="<{$var['photo']|get_remote_file_path=###}>" class="w80" height="50px"/></a></td>
+                            <td><a mini="select" w="700" h="360" href="<{:U('fangchan/pictures', array('product_id' => $var['product_id'], 'store_id' => $var['store_id']))}>"><img src="<{$var['photo']|get_remote_file_path=###}>" class="w80" height="50px"/></a></td>
                             <td>
                                 <eq name="var.audit" value="0">待审查</eq>
                                 <eq name="var.audit" value="1">已审查</eq>

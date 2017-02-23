@@ -54,12 +54,6 @@ class StatisticsBusinessAction extends CommonAction
         $storeTypes = M('StoreClass')->field(['sc_id', 'sc_module'])->select();
         // 总店铺统计
         $count = 0;
-        foreach ($storeTypes as $storeType){
-            $count += M($storeType['sc_module'])->where($map)->count();
-        }
-        $this->assign('count', $count);
-
-        // 日趋势
         // 板块搜索
         $storeClass = [];
         $module = '';
@@ -77,7 +71,17 @@ class StatisticsBusinessAction extends CommonAction
                 }
             }
         }
+        if($type == false){
+            foreach ($storeTypes as $storeType){
+                $count += M($storeType['sc_module'])->where($map)->count();
+            }
+        }else{
+            $count = M($module)->where($map)->count();
+        }
+//        var_dump($count);
+        $this->assign('count', $count);
 
+        // 日趋势
         $beginSearchTime = strtotime(date('Y-m-d', $nowTime));
         $endSearchTime = strtotime(date('Y-m-d', $nowTime + 86400))-1;
         // 查询范围判断
@@ -158,7 +162,7 @@ class StatisticsBusinessAction extends CommonAction
         for($i = 0; $i < $searchMonths; ++ $i){
             $tempStores[$i] = [
                 'num' => '0',
-                'temp_date' => date('Y-m', strtotime(date('Y-m-d', $nowTime)) - 86400 * 10 - 86400 * 30 * $i)
+                'temp_date' => date('Y-m', strtotime("-$i month",$nowTime))
             ];
         }
         foreach ($getStoresMonths as $getStoresMonth){
@@ -180,14 +184,14 @@ class StatisticsBusinessAction extends CommonAction
 
         // 年趋势
         $searchYears = 12;
-        $beginSearchTime = strtotime(date('Y', $nowTime)) - 86400 * 365 * ($searchYears - 1);
+        $beginSearchTime = strtotime(date('Y', NOW_TIME)) - 86400 * 365 * ($searchYears - 1);
 //        var_dump(date('Y', $beginSearchTime));
         // 查询范围判断
         if($module == false){
             // sql拼接
             $sql = 'SELECT COUNT(*) AS num,from_unixtime(begin_time, "%Y") AS temp_date FROM (';
             foreach ($storeTypes as $storeType){
-                $sql .= 'SELECT begin_time FROM bao_'.strtolower($storeType['sc_module']).' WHERE `begin_time` >= '.$beginSearchTime.$map_sql.' UNION ';
+                $sql .= 'SELECT store_id,begin_time FROM bao_'.strtolower($storeType['sc_module']).' WHERE `begin_time` >= '.$beginSearchTime.$map_sql.' UNION ';
             }
             $sql = substr_replace($sql, '', -6);
             // 特殊表名替换, 若表含两个单词必须重新处理
@@ -200,10 +204,11 @@ class StatisticsBusinessAction extends CommonAction
                 ->field(['COUNT(*) AS num', 'from_unixtime(begin_time, "%Y") AS temp_date'])
                 ->where($map)
                 ->group('temp_date')
-                ->order('store_id DESC')
+                ->order('temp_date DESC')
                 ->limit($searchYears)
                 ->select();
         }
+//        var_dump($getStoresYears);
 
         // 数据处理
         $tempStores = [];

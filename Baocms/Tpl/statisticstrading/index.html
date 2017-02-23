@@ -1,0 +1,237 @@
+<include  file='public:header'/>
+<script src="__PUBLIC__/js/highcharts/highcharts.js"></script>
+<script src="__PUBLIC__/js/highcharts/modules/exporting.js"></script>
+<div class="mainBt">
+    <ul>
+        <li class="li1">运营</li>
+        <li class="li2">统计报表</li>
+        <li class="li2 li3">交易额统计</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+                <form method="post" action="<{:U('StatisticsTrading/index')}>">
+                    <div class="seleK">
+                        <label><span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text w200 inputData" style="background-position: 187px -75px;" />
+                        </label>
+                        <label><span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text w200 inputData" style="background-position: 187px -75px;" />
+                        </label>
+                        <label><span>市</span>
+                            <select name="city" id="city_id" class="text w150">
+                                <option value="0">请选择</option>
+                            </select>
+                        </label>
+                        <input type="hidden" id="city" value="<{$city|default='0'}>">
+                        <label><span>区县</span>
+                            <select name="area" id="area_id" class="text w150">
+                                <option value="0">请选择</option>
+                            </select>
+                        </label>
+                        <input type="hidden" id="area" value="<{$area|default='0'}>">
+                        <label><span>板块</span>
+                            <select name="type" id="type_id" class="text w100">
+                                <option value="0">请选择</option>
+                            </select>
+                        </label>
+                        <input type="hidden" id="type" value="<{$type|default='0'}>">
+                        <input type="submit" value="&ensp;&ensp;搜索"  class="inptButton" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="main-jsgl main-sc" style="height:81px;">
+            <p style="text-align: center;font-size:36px;padding-top:20px;">总交易金额：<{$totalMoney}>元</p>
+        </div>
+        <div class="tableBox">
+            <script>
+                        $(function () {
+                        $('#container').highcharts({
+                        title: {
+                        text: '交易金额（<{$store_day.money_begin}> - <{$store_day.money_end}>）日趋势',
+                                x: - 20 //center
+                        },
+                                xAxis: {
+                                categories: [ <{$store_day.day}> ]
+                                },
+                                yAxis: {
+                                title: {
+                                text: '单位元'
+                                },
+                                        plotLines: [{
+                                        value: 0,
+                                                width: 1,
+                                                color: '#808080'
+                                        }]
+                                },
+                                series: [{
+                                name: '交易金额',
+                                        data: [ <{$store_day.money}> ]
+                                }]
+                        });
+                        });</script>
+            <div id="container">
+            </div>
+        </div>
+
+        <div class="tableBox">  
+            <div class="cl"></div>
+            <script>
+                        $(function () {
+                        $('#container2').highcharts({
+                        title: {
+                        text: '交易金额月趋势',
+                                x: - 20 //center
+                        },
+                                xAxis: {
+                                categories: [ <{$store_month.month}> ]
+                                },
+                                yAxis: {
+                                title: {
+                                text: '单位元'
+                                },
+                                        plotLines: [{
+                                        value: 0,
+                                                width: 1,
+                                                color: '#808080'
+                                        }]
+                                },
+                                series: [{
+                                name: '交易金额',
+                                        data: [ <{$store_month.money}> ]
+                                }]
+                        });
+                        });
+
+            </script>
+            <div id="container2">
+            </div>
+        </div>
+
+        <div class="tableBox">
+            <div class="cl"></div>
+            <script>
+                $(function () {
+                    $('#container3').highcharts({
+                        title: {
+                            text: '交易金额年趋势',
+                            x: - 20 //center
+                        },
+                        xAxis: {
+                            categories: [ <{$store_year.year}> ]
+                },
+                    yAxis: {
+                        title: {
+                            text: '单位元'
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    series: [{
+                        name: '交易金额',
+                        data: [ <{$store_year.money}> ]
+                }]
+                });
+                });
+
+            </script>
+            <div id="container3">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="application/javascript">
+    $(function(){
+
+        // 加载市级
+        $.getJSON('<{:U("admin/ele/getCities")}>', {city_id:''}, function(_data){
+            if(_data.error == 400){
+                alert('数据为空');
+                $("#city_id").html('<option value="0">请选择...</option>');
+            }else{
+                var _city = $("#city").val();
+                $str_city = '<option value="0">请选择...</option>';
+                var _length = (_data.data).length;
+                for(var i = 0; i < _length; ++i){
+                    var _tempData = _data.data[i];
+//                    console.debug(_tempData);
+                    if(_tempData.city_id == _city){
+                        $str_city += '<option value="'+_tempData.city_id+'" selected="selected">'+ _tempData.city_name +'</option>';
+                    }else{
+                        $str_city += '<option value="'+_tempData.city_id+'">'+ _tempData.city_name +'</option>';
+                    }
+                }
+                $("#city_id").html($str_city);
+                if(_city != 0){
+                    cities(_city);
+                }
+            }
+        }, 'json');
+
+        // 加载板块
+        $.getJSON('<{:U("admin/statisticsBusiness/storeType")}>', {type:''}, function(_data){
+//            console.debug(_data);
+            if(_data.error == 400){
+                alert('数据为空');
+                $("#type_id").html('<option value="0">请选择...</option>');
+            }else{
+                var _type = $("#type").val();
+                $str_type = '<option value="0">请选择...</option>';
+                var _length = (_data.data).length;
+                for(var i = 0; i < _length; ++i){
+                    var _tempData = _data.data[i];
+                    if(_tempData.sc_id == _type){
+                        $str_type += '<option value="'+_tempData.sc_id+'" selected="selected">'+ _tempData.sc_name +'</option>';
+                    }else{
+                        $str_type += '<option value="'+_tempData.sc_id+'">'+ _tempData.sc_name +'</option>';
+                    }
+                }
+                $("#type_id").html($str_type);
+            }
+        }, 'json');
+
+        // 省市
+        $("#city_id").change(function(){
+            if(this.value == '0'){
+                $("#area_id").html('<option value="0">请选择...</option>');
+            }else{
+//                var _area_id = this.value;
+                cities(this.value);
+            }
+        });
+
+        // 城市区县加载
+        function cities(_value){
+            $.getJSON('<{:U("admin/ele/cities")}>', {city_id:_value}, function(_data){
+                if(_data.error == 404){
+                    alert('未找到城市');
+                    $("#area_id").html('<option value="0">请选择...</option>');
+                }else{
+                    var _area = $("#area").val();
+                    $str_area = '<option value="0">请选择...</option>';
+                    var _length = (_data.data).length;
+                    for(var i = 0; i < _length; ++i){
+                        var _tempData = _data.data[i];
+                        if(_tempData.area_id == _area){
+                            $str_area += '<option value="'+_tempData.area_id+'" selected="selected">'+ _tempData.area_name +'</option>';
+                        }else{
+                            $str_area += '<option value="'+_tempData.area_id+'">'+ _tempData.area_name +'</option>';
+                        }
+                    }
+                    $("#area_id").html($str_area);
+                }
+            }, 'json');
+        }
+
+    });
+</script>
+
+<include  file='public:footer'/>       

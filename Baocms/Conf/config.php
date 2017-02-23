@@ -115,7 +115,7 @@ $configs = array(
             'current' => 'mall'
         ),
         array(
-            'url' => "http://o2o.haojilai.cn/index.php/pchome/chaoshi/index.html",
+            'url' => "http://mobile.haojilai.cn/index.php/Chaoshi/chaoshi/index.html",
             'title' => '社区超市',
             'current' => 'chaoshi'
         ),

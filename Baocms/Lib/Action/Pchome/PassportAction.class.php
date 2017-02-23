@@ -1,6 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin:*"); 
+//header("Access-Control-Allow-Origin:*"); 
 
 class PassportAction extends CommonAction {
 
@@ -55,7 +55,7 @@ class PassportAction extends CommonAction {
         }
     }
    
-    public function sendsms() {
+/*     public function sendsms() {
         if (!$mobile = htmlspecialchars($_POST['mobile'])) {
             die('请输入正确的手机号码');
         }
@@ -72,12 +72,12 @@ class PassportAction extends CommonAction {
 
         D('Sms')->sendSms('sms_code', $mobile, array('code' => $randstring));
         die('1');
-    }
+    } */
 
     /**
      *发送手机验证码
      */
-     public function sendmobilesms(){
+/*      public function sendmobilesms(){
         if (!$mobile = htmlspecialchars($_POST['mobile'])) {
             die('请输入正确的手机号码');
         }
@@ -85,15 +85,15 @@ class PassportAction extends CommonAction {
             die('请输入正确的手机号码');
         }
         $randstring = D('Mobileverify')->getVerify($mobile);
-
+        
         D('Sms')->sendSms('sms_code', $mobile, array('code' => $randstring));
         die('1');
-     }
+     } */
 
     /**
      *发送手机验证码
      */
-     public function sendlinkmobilesms(){
+/*      public function sendlinkmobilesms(){
         if (!$mobile = htmlspecialchars($_POST['mobile'])) {
             die('请输入正确的联系人手机号码');
         }
@@ -101,10 +101,10 @@ class PassportAction extends CommonAction {
             die('请输入正确的联系人手机号码');
         }
         $randstring = D('Mobileverify')->getVerify($mobile);
-
+        
         D('Sms')->sendSms('sms_code', $mobile, array('code' => $randstring));
         die('1');
-     }
+     } */
 
     public function logout() {
 

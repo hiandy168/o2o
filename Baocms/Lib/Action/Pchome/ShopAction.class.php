@@ -7,9 +7,151 @@
  */
 class ShopAction extends CommonAction
 {
+    const SUSESS = 200;
+    const PAGE = 32;
 
+    public function index(){
+        import('ORG.Util.Page'); // 导入分页类
+        // 获取每个模块的名称
+//        var_dump($this->city);
+        $storeTypes = M('StoreClass')->field(['sc_id', 'sc_module'])->select();
+        $map = ['status' => 0, 'closed' => 0, 'is_open' => 1, 'audit' => 1, 'city_id' => $this->city['city_id']];   // 店铺正常，未删除，营业中，审查通过
+        $mapProduct = [
+            'closed' => 0,
+            'audit' => 1
+        ];   // 未删除，审查通过
 
-    public function index()
+        $page = I('get.p', 1, 'intval');
+        $cityId = I('post.cityId', 0);
+
+        if ($search = I('post.keyword', ' ')) {
+            if($search == '输入您要搜索的内容'){
+                $search = ' ';
+            }
+            $map['store_name'] = array('LIKE', '%' . $search . '%');
+            $this->assign('keyword', $search);
+        }
+        if($cityId){
+            $map['city_id'] = $cityId; // 店铺所在城市
+        }
+
+        // 排序
+        $orderDefault = 'update_time';
+
+//        $map = [];
+        if(trim($search)){
+            $map['store_name'] = ['LIKE', '%'.$search.'%'];
+        }
+        $sql = 'SELECT store_type,store_id,store_name,logo,month_num,sold_num,star_num,address,since_money,logistics,distribution,is_new,money_new,is_fan,full_money,discount_money,lng,lat,is_pay FROM (';
+        $count = 0;
+        foreach ($storeTypes as &$storeType){
+            if($storeType['sc_module'] == 'HouseStore'){
+                continue;
+            }
+            if($storeType['sc_module'] == 'Chaoshi'){
+                $sqlChaoshi = M($storeType['sc_module'])
+                    ->field(['1 AS store_type', 'store_id', 'store_name', 'logo', 'month_num', 'sold_num', 'star_num', 'since_money', 'logistics', 'distribution', 'is_new', 'new_money AS money_new', 'is_fan', 'full_money', 'discount_money', 'address','lng',  'lat', 'is_pay', 'update_time'])
+                    ->where($map)
+                    ->select(false);
+                $count += M($storeType['sc_module'])->field(['COUNT(*)'])->where($map)->count();
+                $sql .= $sqlChaoshi.' UNION ALL ';
+            }elseif($storeType['sc_module'] == 'Ele'){
+                $sqlEle = M($storeType['sc_module'])
+                    ->field(['2 AS store_type', 'store_id', 'store_name', 'logo', 'month_num', 'sold_num', 'star_num', 'since_money', 'logistics', 'distribution', 'is_new', 'new_money AS money_new', 'is_fan', 'full_money', 'discount_money', 'address', 'lng', 'lat', 'is_pay', 'update_time'])
+                    ->where($map)
+                    ->select(false);
+                $count += M($storeType['sc_module'])->field(['COUNT(*)'])->where($map)->count();
+                $sql .= $sqlEle.' UNION ALL ';
+            }elseif($storeType['sc_module'] == 'Meishi'){
+                $sqlMeishi = M($storeType['sc_module'])
+                    ->alias('m')
+                    ->field(['3 AS store_type', 'store_id', 'store_name', 'logo', 'month_num', 'sold_num', 'star_num', '0 AS since_money', '0 AS logistics', '0 AS distribution', '0 AS is_new', '0 AS money_new', '0 AS is_fan', '0 AS full_money', '0 As discount_money', 'address', 'lng', 'lat', '0 AS is_pay', 'update_time'])
+//                    ->join('LEFT JOIN bao_meishi_product mp ON m.store_id=mp.store_id')
+                    ->where($map)
+                    ->select(false);
+                $count += M($storeType['sc_module'])->field(['COUNT(*)'])->where($map)->count();
+                $sql .= $sqlMeishi.' UNION ALL ';
+            }elseif($storeType['sc_module'] == 'Hotel'){
+                $sqlHotel = M($storeType['sc_module'])
+                    ->field(['4 AS store_type', 'store_id', 'store_name', 'logo', 'month_num', 'sold_num', 'star_num', '0 AS since_money', '0 AS logistics', '0 AS distribution', '0 AS is_new', '0 AS money_new', '0 AS is_fan', '0 AS full_money', '0 AS discount_money',  'address', 'lng', 'lat', 'is_pay', 'update_time'])
+                    ->where($map)
+                    ->select(false);
+                $count += M($storeType['sc_module'])->field(['COUNT(*)'])->where($map)->count();
+                $sql .= $sqlHotel;
+            }
+        }
+        $sql .= ') temp_table ORDER BY '. $orderDefault .' DESC LIMIT '. self::PAGE * ($page - 1) .','. self::PAGE ;
+
+        $searchResults = M()->query($sql);
+        $Page = new Page($count, self::PAGE); // 实例化分页类 传入总记录数和每页显示的记录数
+        $show = $Page->show(); // 分页显示输出
+//        var_dump($searchResults);
+        $meishiIds = [];
+        $hotelIds = [];
+        foreach ($searchResults as &$searchResult){
+            $searchResult['logo'] = get_remote_file_path($searchResult['logo']);
+            $searchResult['min_price'] = '0.00';
+            // 美食和房产的店铺id集
+            if($searchResult['store_type'] == 3){
+                $meishiIds[] = $searchResult['store_id'];
+            }
+            if($searchResult['store_type'] == 4){
+                $hotelIds[] = $searchResult['store_id'];
+            }
+            // 生成跳转链接地址
+            if($searchResult['store_type'] == 1){
+                $searchResult['jump_url'] = C('HTTP_METHOD').C('BASE_SITE').'/index.php/chaoshi/chaoshi/shop/store_id/'.$searchResult['store_id'].'.html';
+            }elseif($searchResult['store_type'] == 2){
+                $searchResult['jump_url'] = C('HTTP_METHOD').C('BASE_SITE').'/index.php/waimai/index/store/store_id/'.$searchResult['store_id'].'.html';
+            }elseif($searchResult['store_type'] == 3){
+                $searchResult['jump_url'] = C('HTTP_METHOD').C('BASE_SITE').'/index.php/hmeishi/store/index/store_id/'.$searchResult['store_id'].'.html';
+            }elseif($searchResult['store_type'] == 4){
+                $searchResult['jump_url'] = C('HTTP_METHOD').C('BASE_SITE').'/index.php/jiudian/store/index/hotel_id/'.$searchResult['store_id'].'.html';
+            }
+        }
+        // 查询最低价
+        if(count($meishiIds) > 0){
+            $mapProduct = ['IN', $meishiIds];
+            $sql = M('MeishiProduct')
+                ->field(['store_id', 'MIN(privilege_price) AS min_price'])
+                ->where($mapProduct)
+                ->group('store_id')
+                ->select(false);
+            $minPriceMeishis = M()->query($sql);
+            foreach ($searchResults as &$searchResult){
+                foreach ($minPriceMeishis as &$minPriceMeishi){
+                    if($searchResult['store_type'] == 3 && $searchResult['store_id'] == $minPriceMeishi['store_id']){
+                        $searchResult['min_price'] = $minPriceMeishi['min_price'];
+                    }
+                }
+            }
+        }
+
+        if(count($hotelIds) > 0){
+            $mapProduct['store_id'] = ['IN', $hotelIds];
+            $sql = M('HotelProduct')
+                ->field(['store_id', 'MIN(price) AS min_price'])
+                ->where($mapProduct)
+                ->group('store_id')
+                ->select(false);
+            $minPriceHotels = M()->query($sql);
+            foreach ($searchResults as &$searchResult){
+                foreach ($minPriceHotels as &$minPriceHotel){
+                    if($searchResult['store_type'] == 4 && $searchResult['store_id'] == $minPriceHotel['store_id']){
+                        $searchResult['min_price'] = $minPriceHotel['min_price'];
+                    }
+                }
+            }
+        }
+
+        $this->assign('total_num', $count);
+        $this->assign('list', $searchResults); // 赋值数据集
+        $this->assign('page', $show); // 赋值分页输出
+        $this->display(); // 输出模板
+
+    }
+
+    public function index_before_version()
     {
 
         $Shop = D('Shop');
@@ -169,14 +311,14 @@ class ShopAction extends CommonAction
         foreach ($list as $k => $val) {
 
             $list[$k]['tuan'] = $tuan->order('tuan_id desc ')->find(array('where' => array(
-                    'shop_id' => $val['shop_id'],
-                    'city_id' => $this->city_id,
-                    'audit' => 1,
-                    'closed' => 0,
-                    'end_date' => array('EGT', TODAY))));
+                'shop_id' => $val['shop_id'],
+                'city_id' => $this->city_id,
+                'audit' => 1,
+                'closed' => 0,
+                'end_date' => array('EGT', TODAY))));
 
             $list[$k]['coupon'] = $coupon->order('coupon_id desc ')->find(array('where' =>
-                    array(
+                array(
                     'shop_id' => $val['shop_id'],
                     'city_id' => $this->city_id,
                     'audit' => 1,
@@ -184,7 +326,7 @@ class ShopAction extends CommonAction
                     'expire_date' => array('EGT', TODAY))));
 
             $list[$k]['huodong'] = $huodong->order('activity_id desc ')->find(array('where' =>
-                    array(
+                array(
                     'shop_id' => $val['shop_id'],
                     'city_id' => $this->city_id,
                     'audit' => 1,
@@ -193,13 +335,13 @@ class ShopAction extends CommonAction
                     'end_date' => array('EGT', TODAY))));
 
             $list[$k]['dianping'] = $dianping->order('show_date desc')->find(array('where' =>
-                    array(
+                array(
                     'shop_id' => $val['shop_id'],
                     'closed' => 0,
                     'show_date' => array('ELT', TODAY))));
 
             if (!$fav = D('Shopfavorites')->where(array('shop_id' => $val['shop_id'],
-                    'user_id' => $this->uid))->find()) {
+                'user_id' => $this->uid))->find()) {
 
                 $list[$k]['favorites'] = 0;
 
@@ -230,7 +372,6 @@ class ShopAction extends CommonAction
         $this->display(); // 输出模板
 
     }
-
 
     public function photo()
     {

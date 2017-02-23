@@ -84,7 +84,7 @@
                             <td><{$var.order_id}></td>
                             <td><{$var.store_id}></td>
                             <td><{$var.user_id}></td>
-                            <td><{$var.use_time|date="Y-m-d H:i",###}></td>
+                            <td><eq name="var.use_time" value="0"><else/><{$var.use_time|date="Y-m-d H:i",###}></eq></td>
                             <td><{$var.phone}></td>
                             <td><{$var.money}></td>
                             <td><{$var.num}></td>

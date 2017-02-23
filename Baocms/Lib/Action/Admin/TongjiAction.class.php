@@ -122,6 +122,109 @@ class  TongjiAction extends CommonAction{
         $this->assign('kmoney',D('Tongji')->kmoney($bg_date,$end_date));
         $this->display();
     }
-    
+
+    public function  customercount(){
+        $this->display();
+    }
+
+    public function  customerdetail(){
+        $this->display();
+    }
+
+    public function  shopcount(){       
+        $shop_model = M('Shop');
+        $money_log_model = M('StoreMoneyLogs');
+        
+        $count = $shop_model->count();
+        import('ORG.Util.Page'); // 导入分页类
+        $Page = new Page($count, 25);     
+        
+        $bg_date = I('bg_date');
+        $end_date = I('end_date');
+        
+        $join = 'LEFT JOIN bao_store_money_logs ON shop.shop_id = bao_store_money_logs.shop_id and bao_store_money_logs.order_id>0';
+        if (!empty($bg_date)){            
+            $bg_time = strtotime($bg_date);
+            $join .= ' and bao_store_money_logs.create_time >='.$bg_time;
+        }
+        if (!empty($end_date)){            
+            $end_time = strtotime($end_date)+86400;
+            $join .= ' and bao_store_money_logs.create_time <='.$end_time;
+        }        
+        
+        $shop_users = $shop_model
+        ->alias('shop')
+        ->field('shop.shop_id,shop.money,bao_users.nickname,sum(bao_store_money_logs.money) as sum_money,count(order_id) as order_count')    
+        ->join('LEFT JOIN bao_users ON shop.user_id = bao_users.user_id')
+        ->join($join)  //order_id>0 是为了只统计订单。不统计提现的金额
+        ->group('shop_id')
+        ->limit($Page->firstRow.','.$Page->listRows)
+        ->select();
+        
+        //卖家交易总额
+        $money_count  = $money_log_model
+        ->alias('log')
+        ->field('sum(log.money) as sum_money')
+        ->where(array('order_id'=>array('gt',0)))
+        ->find();
+        
+        $this->assign('Page',$Page->show())
+        ->assign('shop_users',$shop_users)
+        ->assign('money_count',$money_count)
+        ->assign('bg_date',$bg_date)
+        ->assign('end_date',$end_date);
+        $this->display();
+    }
+
+    public function  shopdetail(){
+        $shop_model = M('Shop');
+        $money_log_model = M('StoreMoneyLogs');
+        $shop_id = I('get.shop_id','0','intval');
+
+        $bg_date = I('bg_date');
+        $end_date = I('end_date');
+        
+        $join = 'LEFT JOIN bao_store_money_logs ON shop.shop_id = bao_store_money_logs.shop_id and bao_store_money_logs.order_id>0';
+        $where = array('shop_id'=>$shop_id);
+        
+        $count = $money_log_model
+        ->where($where)
+        ->count();
+        
+        import('ORG.Util.Page'); // 导入分页类
+        $Page = new Page($count, 25);
+        
+        if (!empty($bg_date)){
+            $bg_time = strtotime($bg_date);
+            $join .= ' and bao_store_money_logs.create_time >='.$bg_time;
+            array_push($where, array('create_time'=>array('egt',$bg_time)));
+        }
+        if (!empty($end_date)){
+            $end_time = strtotime($end_date)+86400;
+            $join .= ' and bao_store_money_logs.create_time <='.$end_time;
+            array_push($where, array('create_time'=>array('elt',$end_time)));
+        }
+        $shop_info = $shop_model
+        ->alias('shop')
+        ->where(array('shop.shop_id'=>$shop_id))
+        ->field('shop.money,bao_users.nickname,sum(bao_store_money_logs.money) as sum_money')
+        ->join('LEFT JOIN bao_users ON shop.user_id = bao_users.user_id')
+        ->join($join)
+        ->find();
+               
+        $logs = $money_log_model
+        ->field('money,create_time,order_id')
+        ->where($where)
+        ->limit($Page->firstRow.','.$Page->listRows)
+        ->select();
+// echo '<pre>';print_r($logs);exit();
+        $this->assign('Page',$Page->show())
+        ->assign('shop_info',$shop_info)
+        ->assign('logs',$logs)
+        ->assign('bg_date',$bg_date)
+        ->assign('end_date',$end_date)
+        ->assign('shop_id',$shop_id);
+        $this->display();
+    }
     
 }

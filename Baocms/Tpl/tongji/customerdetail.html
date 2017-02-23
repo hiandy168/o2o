@@ -1,0 +1,97 @@
+<include  file='public:header'/>
+<script src="__PUBLIC__/js/highcharts/highcharts.js"></script>
+<script src="__PUBLIC__/js/highcharts/modules/exporting.js"></script>
+<style>
+    .td{font-family:'微软雅黑';font-size:18px;color:white;float:left;text-align: center;line-height:48px;}
+    .td-1{width:380px;}
+    .td-2{width:820px;}
+    .td-3{width:430px;}
+    .tr{height:58px;border: 1px solid #dbdbdb;display: table;margin-top:-1px;}
+    .td-content{font-family:'微软雅黑';font-size:16px;text-align: center;vertical-align:middle;display:table-cell;}
+</style>
+<div class="mainBt">
+    <ul>
+        <li class="li1">营销分析</li>
+        <li class="li2">数据统计</li>
+        <li class="li2 li3">买家会员消费统计</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+                <form method="post" action="">
+                    <div class="seleK">
+                        <label>
+                            <span>开始时间</span><input type="text" name="bg_date" value="<{$bg_date|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text w200 inputData" style="background-position: 187px -75px;" /></label>
+                        <label><span>结束时间</span><input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text w200 inputData" style="background-position: 187px -75px;" /></label>
+
+                        <input type="submit" value="   搜索"  class="inptButton" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="tableBox" style="margin-bottom:25px;">
+            <div style="height:40px;;margin-top:70px;margin-bottom:50px;">
+                <div style="font-family:'微软雅黑';font-size:30px;color:#0099cc;text-align: center;font-weight: bold;float:left;">
+                    会员名称：张经理
+                </div>
+                <div style="font-family:'微软雅黑';font-size:30px;color:#0099cc;text-align: center;font-weight: bold;float:left;margin-left:150px;">
+                    消费总金额：6666666 元
+                </div>
+                <div style="font-family:'微软雅黑';font-size:30px;color:#0099cc;text-align: center;font-weight: bold;float:left;margin-left:150px;">
+                    帐户余额：66666 元
+                </div>
+            </div>
+
+            <div style="font-family:'微软雅黑';font-size:20px;color:#0099cc;margin-bottom:30px;">
+                会员消费明细：
+            </div>
+            <div style="height:48px;background: #0099cc;margin-bottom:10px;">
+                <div class="td-1 td">
+                    会员操作
+                </div>
+                <div class="td-2 td">
+                    时间
+                </div>
+                <div class="td-3 td">
+                    金额（元）
+                </div>
+            </div>
+            <div class="tr">
+                <div class="td-1 td-content">
+                    购物
+                </div>
+                <div class="td-2 td-content" style="color:#0099cc">
+                   2017-05-08
+                </div>
+                <div class="td-3 td-content">
+                    6666
+                </div>
+            </div>
+            <div class="tr">
+                <div class="td-1 td-content">
+                    充值
+                </div>
+                <div class="td-2 td-content" style="color:#0099cc">
+                    2017-05-08
+                </div>
+                <div class="td-3 td-content">
+                    6666
+                </div>
+            </div>
+            <div class="tr">
+                <div class="td-1 td-content">
+                    提现
+                </div>
+                <div class="td-2 td-content" style="color:#0099cc">
+                    2017-05-08
+                </div>
+                <div class="td-3 td-content">
+                    6666
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include  file='public:footer'/>       

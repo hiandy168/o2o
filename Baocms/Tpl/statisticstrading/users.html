@@ -1,0 +1,83 @@
+<include  file='public:header'/>
+<script src="__PUBLIC__/js/highcharts/highcharts.js"></script>
+<script src="__PUBLIC__/js/highcharts/modules/exporting.js"></script>
+<style>
+    .td{font-family:'微软雅黑';font-size:18px;color:white;float:left;text-align: center;line-height:48px;}
+    .td-1{width:23%;}
+    .td-2{width:18%;}
+    .td-3{width:21%;}
+    .td-4{width:21%;}
+    .td-5{width:16%;}
+    .tr{height:58px;border: 1px solid #dbdbdb;display: table;margin-top:-1px;width:100%;}
+    .td-content{font-family:'微软雅黑';font-size:16px;text-align: center;vertical-align:middle;display:table-cell;}
+</style>
+<div class="mainBt">
+    <ul>
+        <li class="li1">运营</li>
+        <li class="li2">统计报表</li>
+        <li class="li2 li3">会员消费统计</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <div class="jsglNr">
+        <div class="selectNr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+                <form method="post" action="<{:U('StatisticsTrading/users')}>">
+                    <div class="seleK">
+                        <label><span>会员昵称：</span>
+                            <input type="text" name="user_name" value="<{$userName}>"  class="text w150" style="background-position: 187px -75px;" />
+                        </label>
+                        <input type="submit" value="&ensp;&ensp;搜索"  class="inptButton" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="tableBox" style="margin-bottom:25px;">
+            <div style="font-family:'微软雅黑';font-size:25px;color:#0099cc;text-align: center;margin-top:65px;margin-bottom:40px;">
+                已消费总金额：<{$sumMoney}>元
+            </div>
+            <div style="font-family:'微软雅黑';font-size:20px;color:#0099cc;margin-bottom:30px;text-align: center">
+                会员消费统计
+            </div>
+            <div style="height:48px;background: #0099cc;margin-bottom:10px;">
+                <div class="td-1 td">
+                    会员名称
+                </div>
+                <div class="td-2 td">
+                    订单数量（笔）
+                </div>
+                <div class="td-3 td">
+                    已消费金额（元）
+                </div>
+                <div class="td-4 td">
+                    帐户余额（元）
+                </div>
+                <div class="td-5 td">
+                    操作
+                </div>
+            </div>
+            <foreach name="datas" item="data">
+                <div class="tr">
+                    <div class="td-1 td-content">
+                        <{$data['nickname']}>
+                    </div>
+                    <div class="td-2 td-content">
+                        <{$data['order_num']}>
+                    </div>
+                    <div class="td-3 td-content">
+                        <{$data['money']}>
+                    </div>
+                    <div class="td-4 td-content">
+                        <{$data['user_money']}>
+                    </div>
+                    <div class="td-5 td-content">
+                        <a href="<{:U('StatisticsTrading/userdetail', ['id' => $data['user_id']])}>" style="cursor:pointer;">查看明细</a>
+                    </div>
+                </div>
+            </foreach>
+        </div>
+        <{$page}>
+    </div>
+</div>
+<include  file='public:footer'/>       

@@ -15,8 +15,13 @@
                 <form method="post" action="<{:U('StatisticsUser/index')}>">
                     <div class="seleK">
                         <label>
-                            <span>开始时间</span><input type="text" name="bg_date" value="<{$bg_date|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text w200 inputData" style="background-position: 187px -75px;" /></label>
-                        <label><span>结束时间</span><input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text w200 inputData" style="background-position: 187px -75px;" /></label>
+                            <span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text w200 inputData" style="background-position: 187px -75px;" />
+                        </label>
+                        <label>
+                            <span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"  class="text w200 inputData" style="background-position: 187px -75px;" />
+                        </label>
                         <input type="submit" value="   搜索"  class="inptButton" />
                     </div>
                 </form>
