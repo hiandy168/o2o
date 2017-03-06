@@ -16,12 +16,10 @@ class FangchanAction extends CommonAction
     }
 
 
-    public function index()
-    {
+    public function index(){
         $HouseModel = D('HouseStore');
         import('ORG.Util.Page'); // 导入分页类
         $map = array('bao_house_store.closed' => 0, 'bao_house_store.level' => 2, 'bao_house_store.audit' => 1);
-
 
         // 根据提交方式判断，是否清除cookie相应信息
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -907,7 +905,8 @@ class FangchanAction extends CommonAction
      */
     public function initialApply($type)
     {
-        cookie(md5('HotelSearchApplyMessage'), NULL, 0);
+        cookie(md5('HouseRentSearchIndexMessage'), NULL, 0);
+        cookie(md5('HouseRentSearchIndexMessages'), NULL, 0);
         $this->baoSuccess('初始化成功', U("fangchan/$type"), 1000);
     }
 
@@ -919,20 +918,44 @@ class FangchanAction extends CommonAction
 
         $map['a.closed'] = 0;
         $map['a.audit'] = 0;
+
+        // 保存搜索信息到cookie中
+        if(cookie(md5('HouseRentSearchIndexMessage')) && !IS_POST){
+            $map = cookie(md5('HouseRentSearchIndexMessage'));
+            $maps = cookie(md5('HouseRentSearchIndexMessages'));
+            $map['product_name'] = ['like', '%'.$maps['product_name'].'%'];
+            $this->assign('store_id', $maps['a.store_id']);
+            $this->assign('store_name', $maps['a.store_name']);
+            $this->assign('keyword', $maps['product_name']);
+            $this->assign('audit_2', $maps['a.audit']);
+        }
+
         if (IS_POST) {
-            $store_name = I('post.store_name', 0);
-            if ($store_name) {
-                $map['store_name'] = array('like', "%$store_name%");
+            $store_id = I('post.store_id', 0);
+            if ($store_id) {
+                $map['a.store_id'] = $store_id;
+                $maps['a.store_id'] = $store_id;
+                $maps['a.store_name'] = I('post.store_name', '');
+                $this->assign('store_id', $store_id);
+                $this->assign('store_name', I('post.store_name', ''));
             }
-            $keyword = I('post.keyword', 0);
+            $keyword = I('post.keyword', '');
             if ($keyword) {
                 $map['product_name'] = array('like', "%$keyword%");
+                $maps['product_name'] = $keyword;
+                $this->assign('keyword', $keyword);
             }
             $audit = I('post.audit', '');
             if ($audit != '') {
                 $map['a.audit'] = $audit;
+                $maps['a.audit'] = $audit;
+                $this->assign('audit_2', $audit);
             }
         }
+        // 保存搜索信息到cookie中，有效时间15分钟
+        cookie(md5('HouseRentSearchIndexMessage'), $map, 900);
+        cookie(md5('HouseRentSearchIndexMessages'), $maps, 900);
+
         $count = D('HouseRent a')
             ->join(C('DB_PREFIX') . 'house_store b on a.store_id = b.store_id', 'left')
             ->join(C('DB_PREFIX') . 'shop c on b.shop_id = c.shop_id', 'left')
@@ -948,14 +971,6 @@ class FangchanAction extends CommonAction
             ->where($map)
             ->limit($Page->firstRow . ',' . $Page->listRows)
             ->select();
-
-        // 是否选中搜索栏名
-        $this->assign('city_id_2', $map['bao_house_store.city_id']);
-        $this->assign('area_id_2', $map['bao_house_store.area_id']);
-        $this->assign('business_id_2', $map['bao_house_store.business_id']);
-        $this->assign('cate_id_2', $map['bao_house_store.cate_id']);
-        $this->assign('brand_id_2', $map['bao_house_store.brand_id']);
-        $this->assign('level_2', $map['bao_house_store.level']);
         //
         $this->assign('list', $list); // 赋值数据集
         $this->assign('page', $show); // 赋值分页输出
@@ -975,6 +990,16 @@ class FangchanAction extends CommonAction
         $this->assign('detail', $info)->display();
     }
 
+    /**peace
+     * 初始化搜索引擎，审核列表
+     */
+    public function initialTwoApply($type)
+    {
+        cookie(md5('HouseTwoSearchIndexMessage'), NULL, 0);
+        cookie(md5('HouseTwoSearchIndexMessages'), NULL, 0);
+        $this->baoSuccess('初始化成功', U("fangchan/$type"), 1000);
+    }
+
     public function two_list()
     {
         import('ORG.Util.Page'); // 导入分页类
@@ -982,21 +1007,44 @@ class FangchanAction extends CommonAction
 
         $map['a.closed'] = 0;
         $map['a.audit'] = 0;
+
+        // 保存搜索信息到cookie中
+        if(cookie(md5('HouseTwoSearchIndexMessage')) && !IS_POST){
+            $map = cookie(md5('HouseTwoSearchIndexMessage'));
+            $maps = cookie(md5('HouseTwoSearchIndexMessages'));
+            $map['product_name'] = ['like', '%'.$maps['product_name'].'%'];
+            $this->assign('store_id', $maps['a.store_id']);
+            $this->assign('store_name', $maps['a.store_name']);
+            $this->assign('keyword', $maps['product_name']);
+            $this->assign('audit_2', $maps['a.audit']);
+        }
+
         if (IS_POST) {
-            $store_name = I('post.store_name', 0);
-            if ($store_name) {
-                $map['store_name'] = array('like', "%$store_name%");
+            $store_id = I('post.store_id', 0);
+            if ($store_id) {
+                $map['a.store_id'] = $store_id;
+                $maps['a.store_id'] = $store_id;
+                $maps['a.store_name'] = I('post.store_name', '');
+                $this->assign('store_id', $store_id);
+                $this->assign('store_name', I('post.store_name', ''));
             }
             $keyword = I('post.keyword', 0);
             if ($keyword) {
                 $map['product_name'] = array('like', "%$keyword%");
+                $maps['product_name'] = $keyword;
+                $this->assign('keyword', $keyword);
             }
             $audit = I('post.audit', '');
             if ($audit != '') {
                 $map['a.audit'] = $audit;
+                $maps['a.audit'] = $audit;
+                $this->assign('audit_2', $audit);
             }
-            $this->assign('audit_2',$audit);
         }
+        // 保存搜索信息到cookie中，有效时间15分钟
+        cookie(md5('HouseTwoSearchIndexMessage'), $map, 900);
+        cookie(md5('HouseTwoSearchIndexMessages'), $maps, 900);
+
         $count = D('HouseTwo a')
             ->join(C('DB_PREFIX') . 'house_store b on a.store_id = b.store_id', 'left')
             ->join(C('DB_PREFIX') . 'shop c on b.shop_id = c.shop_id', 'left')
@@ -1013,13 +1061,6 @@ class FangchanAction extends CommonAction
             ->limit($Page->firstRow . ',' . $Page->listRows)
             ->select();
 
-        // 是否选中搜索栏名
-        $this->assign('city_id_2', $map['bao_house_store.city_id']);
-        $this->assign('area_id_2', $map['bao_house_store.area_id']);
-        $this->assign('business_id_2', $map['bao_house_store.business_id']);
-        $this->assign('cate_id_2', $map['bao_house_store.cate_id']);
-        $this->assign('brand_id_2', $map['bao_house_store.brand_id']);
-        $this->assign('level_2', $map['bao_house_store.level']);
         //
         $this->assign('list', $list); // 赋值数据集
         $this->assign('page', $show); // 赋值分页输出
@@ -1278,28 +1319,31 @@ class FangchanAction extends CommonAction
     /**peace
      * 展示房产图片
      */
-    public function pictures($product_id = 0, $store_id = 0) {
-        $hotelProductModel = M('HouseProduct');
+    public function pictures($product_id = 0, $type = '') {
+        $model = M($type);
 
         // 商品合法性验证
-        $findProduct = $hotelProductModel
+        $findProduct = $model
             ->where(array('product_id' => $product_id))
             ->find();
         if(!$findProduct){
             $set = 1;
             $this->assign('set', $set);
             $this->display();   // 输出模板
-        } elseif($store_id != $findProduct['store_id']){
-            $set = 2;
-            $this->assign('set', $set);
-            $this->display();   // 输出模板
-        }else{
-            // 解析图片
-            $photos = explode(',', $findProduct['photo']);
-            $set = 3;
-            $this->assign('set', $set);
-            $this->assign('photos', $photos);   // 赋值数据集
-            $this->display();   // 输出模板
+            die();
         }
+        // 解析图片
+        $photos = [];
+        if($type === 'HouseTwo'){
+            $photos = M('HouseTwoPics')->field(['pic'])->where(['product_id' => $product_id])->select();
+        }elseif ($type === 'HouseRent'){
+            $photos = M('HousePicsRent')->field(['pic'])->where(['product_id' => $product_id])->select();
+        }
+
+        $set = 3;
+        $this->assign('set', $set);
+        $this->assign('photos', $photos);   // 赋值数据集
+        $this->display();   // 输出模板
     }
+
 }

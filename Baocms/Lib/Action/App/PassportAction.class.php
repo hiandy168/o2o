@@ -70,7 +70,7 @@ class PassportAction extends CommonAction{
         }
     }
 
-    public function sendsms() {
+/*     public function sendsms() {
         if (!$mobile = htmlspecialchars($_POST['mobile'])) {
             $data = array('status' => self::BAO_INPUT_ERROR,'msg' =>'请输入正确的手机号码' );
             $this->stringify($data);
@@ -94,7 +94,7 @@ class PassportAction extends CommonAction{
         D('Sms')->sendSms('sms_code', $mobile, array('code' => $randstring));
 		$data = array('status' => self::BAO_REQUEST_SUCCESS,'scode' =>$randstring );
 		$this->stringify($data);
-    }
+    } */
 
     public function third(){
         if (!$type = htmlspecialchars($_POST['type'])) {

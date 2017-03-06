@@ -60,45 +60,18 @@
 
                         <span>|</span>
 
-                        <li class="liOne liOne_visit"><a class="liOneA" href="javascript:void(0);">我的足迹<em>&nbsp;</em></a>
+                        <li class="liOne liOne_visit"><a class="liOneA" href="<{:U('Footprint/Footprint/index',"",'html',false,C('BASE_SITE'))}>">我的足迹<em>&nbsp;</em></a>
 
                             <div class="list liOne_visit_pull">
 
-                                <ul>
-
-                                    <?php
-
-                                        $views = unserialize(cookie('views'));
-
-                                        $views = array_reverse($views, TRUE);
-
-                                        if($views){
-
-                                        foreach($views as $v){
-
-                                    ?>
-
-                                    <li class="liOne_visit_pull_li">
-
-                                        <a href="<{:U('tuan/detail',array('tuan_id'=>$v['tuan_id']))}>"><img src="__ROOT__/attachs/<{$v.photo}>" width="80" height="80" /></a>
-
-                                        <h5><a href="<{:U('tuan/detail',array('tuan_id'=>$v['tuan_id']))}>"><{$v.title}></a></h5>
-
-                                        <div class="price_box"><a href="<{:U('tuan/detail',array('tuan_id'=>$v['tuan_id']))}>"><em class="price">￥<{$v.tuan_price}></em><span class="old_price">￥<{$v.price}></span></a></div>
-
+                                <ul class="liOne_visit_pull_li" id="aaa">
+                                    <li class="liOne_visit_pull_li" >
+                                        <p class="empty">您还没有浏览记录</p>
                                     </li>
-
-                                    <?php }?>
-
                                 </ul>
 
-                                <p class="empty"><a href="javascript:;" id="emptyhistory">清空最近浏览记录</a></p>
 
-                                <?php }else{?>
 
-                                <p class="empty">您还没有浏览记录</p>
-
-                                <?php } ?>
 
                             </div>
 
@@ -132,36 +105,73 @@
 
 <script>
 
-    $(document).ready(function(){
+//    $(document).ready(function(){
+//
+////        $("#emptyhistory").click(function(){
+////
+////            $.get("<{:U('tuan/emptyviews')}>",function(data){
+////
+////                if(data.status == 'success'){
+////
+////                    $(".liOne_visit_pull ul li").remove();
+////
+////                    $(".liOne_visit_pull p.empty").html("您还没有浏览记录");
+////
+////                }else{
+////
+////                    layer.msg(data.msg,{icon:2});
+////
+////                }
+////
+////            },'json')
+//
+//
+//
+//            //$.cookie('views', '', { expires: -1 });
+//
+//            //$(".liOne_visit_pull ul li").remove();
+//
+//            //$(".liOne_visit_pull p.empty").html("您还没有浏览记录");
+//
+//        })
+//
+//    });
 
-        $("#emptyhistory").click(function(){
+</script>
+<script>
+    $('.liOneA').mouseover(function(){
+        $.getJSON("<{:U('Footprint/Footprint/UsFootprint123','','html','',C('base_site'))}>?callback=?",{uid:"<{:getUid()}>"},
+                function(result){
+            var navigation_html ="";
+//            var dataObj=result;
 
-            $.get("<{:U('tuan/emptyviews')}>",function(data){
+                    for (var i = 0,url = '#'; i < result.length; i++,url = '#') {
+                        if(result[i].store_type == 1){
+                            url = "<{:U('Chaoshi/Chaoshi/shop','','html','',C('base_site'))}>?store_id=" + result[i].store_id;
+                        }else if(result[i].store_type == 2)
+                        {
+                            url = "<{:U('Waimai/Index/store','','html','',C('base_site'))}>?store_id=" + result[i].store_id;
+                        }else if(result[i].store_type == 3)
+                        {
+                            url = "<{:U('Hmeishi/Store/index','','html','',C('base_site'))}>?store_id=" + result[i].store_id;
+                        }else if(result[i].store_type == 4)
+                        {
+                            url = "<{:U('Jiudian/Store/index','','html','',C('base_site'))}>?hotel_id=" + result[i].store_id;
+                        }
+                        navigation_html+="<li><a href='"+ url +"'><p class='empty'>"+result[i].store_name+"</p></a></li>";
+                    }
 
-                if(data.status == 'success'){
 
-                    $(".liOne_visit_pull ul li").remove();
+            if(result.length!=0)
+            {
+                $('.liOne_visit_pull_li').html(navigation_html);
+            }
 
-                    $(".liOne_visit_pull p.empty").html("您还没有浏览记录");
 
-                }else{
-
-                    layer.msg(data.msg,{icon:2});
-
-                }
-
-            },'json')
+        });
 
 
 
-            //$.cookie('views', '', { expires: -1 }); 
-
-            //$(".liOne_visit_pull ul li").remove();
-
-            //$(".liOne_visit_pull p.empty").html("您还没有浏览记录");
-
-        })
 
     });
-
-</script>    
+</script>

@@ -84,12 +84,12 @@
                             <td><{$var.month_num}></td>
                             <td>
                                 <{:BA('meishi/detail',array("store_id"=>$var["store_id"], "level"=>$var["level"]),'查看','','remberBtn')}>
-                                <{:BA('meishi/delete',array("store_id"=>$var["store_id"]),'删除','act','remberBtn')}>
+                                <{:BA('meishi/delete',array("store_id"=>$var["store_id"], "p"=>$p),'删除','act','remberBtn')}>
                                 <eq name="var.status" value="0">
-                                    <{:BA('meishi/reorganize',array("store_id"=>$var["store_id"]),'设为整顿','act','remberBtn')}>
+                                    <{:BA('meishi/reorganize',array("store_id"=>$var["store_id"], "p"=>$p),'设为整顿','act','remberBtn')}>
                                 </eq>
                                 <eq name="var.status" value="1">
-                                    <{:BA('meishi/cancelReorganize',array("store_id"=>$var["store_id"]),'取消整顿','act','remberBtn')}>
+                                    <{:BA('meishi/cancelReorganize',array("store_id"=>$var["store_id"], "p"=>$p),'取消整顿','act','remberBtn')}>
                                 </eq>
                             </td>
                         </tr>

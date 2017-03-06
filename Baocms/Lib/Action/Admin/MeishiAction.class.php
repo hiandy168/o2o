@@ -80,7 +80,7 @@ class MeishiAction extends CommonAction {
 //        var_dump($map);
 
         $count = $Ele->where($map)->count();   // 查询满足要求的总记录数
-        $Page = new Page($count, 25);   // 实例化分页类 传入总记录数和每页显示的记录数
+        $Page = new Page($count, 16);   // 实例化分页类 传入总记录数和每页显示的记录数
         $show = $Page->show();   // 分页显示输出
         $list = $Ele
             ->field('bao_meishi.*, bao_city.name as city_name, bao_area.area_name, bao_meishi_cate.cate_name')
@@ -101,7 +101,9 @@ class MeishiAction extends CommonAction {
 //        $this->assign('keyword_2', $map['keyword']);
         //
         $this->assign('list', $list); // 赋值数据集
+//        var_dump($list[0]);
         $this->assign('page', $show); // 赋值分页输出
+        $this->assign('p', I('get.p', 1));   // 页码传递
         // 传递市区县数据
         $this->assign('cities', M('City')->select());
         if($map['bao_meishi.city_id']){
@@ -147,6 +149,8 @@ class MeishiAction extends CommonAction {
                 $detail['bulletin'] = htmlspecialchars_decode($detail['bulletin']);
                 $detail['exame_explain'] = htmlspecialchars_decode($detail['exame_explain']);
                 $this->assign('detail', $detail);
+//                echo 1;
+//                var_dump($detail);
                 $this->assign('shufflings', $shufflings);
                 $this->display();
 
@@ -165,6 +169,8 @@ class MeishiAction extends CommonAction {
 //                var_dump($detail['store_imgs']);
 
                 $this->assign('detail', $detail);
+//                echo 2;
+//                var_dump($detail);
                 $this->assign('pics', $pics);
                 $this->display();
 
@@ -211,12 +217,12 @@ class MeishiAction extends CommonAction {
 
     public function delete($store_id = 0) {
         // 调用私有方法
-        self::setDelete($store_id, 'meishi/index', 'Meishi', 'store_id');
+        self::setDelete($store_id, 'meishi/index', 'Meishi', 'store_id', I('get.p', 1));
     }
 
     public function shiftdelete($store_id = 0) {
         // 调用私有方法
-        self::setDelete($store_id, 'meishi/apply', 'Meishi', 'store_id');
+        self::setDelete($store_id, 'meishi/apply', 'Meishi', 'store_id', I('get.p', 1));
     }
 
     /**peace
@@ -560,9 +566,9 @@ class MeishiAction extends CommonAction {
     public function reorganize(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // 调用公共方法  I('store_id', '0', 'intval'), I('type'), 'Meishi'
-            $this->reorganizeStore(I('post.store_id'), 1, 'Meishi');
+            $this->reorganizeStore(I('post.store_id'), 1, 'Meishi', 0, I('post.p', 1));
         }else{
-            $this->reorganizeStore(I('get.store_id'), 1, 'Meishi');
+            $this->reorganizeStore(I('get.store_id'), 1, 'Meishi', 0, I('get.p', 1));
         }
     }
 
@@ -572,9 +578,9 @@ class MeishiAction extends CommonAction {
     public function cancelReorganize(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // 调用公共方法  I('store_id', '0', 'intval'), I('type'), 'Meishi'
-            $this->reorganizeStore(I('post.store_id'), 0, 'Meishi');
+            $this->reorganizeStore(I('post.store_id'), 0, 'Meishi', 0, I('post.p', 1));
         }else{
-            $this->reorganizeStore(I('get.store_id'), 0, 'Meishi');
+            $this->reorganizeStore(I('get.store_id'), 0, 'Meishi', 0, I('get.p', 1));
         }
     }
 
@@ -593,4 +599,5 @@ class MeishiAction extends CommonAction {
         cookie(md5('MeishiSearchApplyMessage'), NULL, 0);
         $this->baoSuccess('初始化成功', U('meishi/apply'), 1000);
     }
+
 }

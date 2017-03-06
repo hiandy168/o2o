@@ -23,6 +23,14 @@
                 <td class="rgTdBt"><{$detail.product_name}></td>
             </tr>
             <tr>
+                <td class="lfTdBt">商品类型：</td>
+                <td class="rgTdBt">
+                    <eq name="detail.product_type" value="1">单品</eq>
+                    <eq name="detail.product_type" value="2">套餐</eq>
+                    <eq name="detail.product_type" value="3">代金券</eq>
+                </td>
+            </tr>
+            <tr>
                 <td class="lfTdBt">店铺名：</td>
                 <td class="rgTdBt"><{$meishi.store_name}></td>
             </tr>
@@ -33,9 +41,13 @@
             <tr>
                 <td class="lfTdBt">缩略图：</td>
                 <td class="rgTdBt">
-                    <volist name="photos" id="photo">
-                        <img id="photo_img" height="80"  src="<{$photo|get_remote_file_path=###}>" />&ensp;
-                    </volist>
+                    <eq name="detail.product_type" value="3">
+                        <img src="<{$meishi['logo']|get_remote_file_path=###}>" class="w80" height="50px"/>
+                        <else/>
+                        <volist name="photos" id="photo">
+                            <img id="photo_img" height="80"  src="<{$photo|get_remote_file_path=###}>" />&ensp;
+                        </volist>
+                    </eq>
 
                 </td>
             </tr>

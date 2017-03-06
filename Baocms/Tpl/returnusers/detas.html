@@ -1,0 +1,67 @@
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">运营</li>
+        <li class="li2">用户反馈</li>
+        <li class="li2 li3">详情</li>
+    </ul>
+</div>
+<div class="mainScAdd ">
+    <div class="tableBox">
+        <!--<form target="baocms_frm" action="<{:U('chaoshi/edit',array('store_id'=>$detail['store_id']))}>" method="post">-->
+        <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            <tr>
+                <td class="lfTdBt">ID：</td>
+                <td  class="rgTdBt"><{$list.id}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">内型：</td>
+                <td  class="rgTdBt"><if condition="$list.type eq 1">用户<else/>商家</if> </td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">手机号：</td>
+                <td  class="rgTdBt"><{$list.mobile}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">邮箱：</td>
+                <td class="rgTdBt"><{$list.email}></td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">内容：</td>
+                <td class="rgTdBt">
+                    <textarea readonly="readonly" style="width:300px;height:100px" name="data[intro]"><{$list.content}></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="lfTdBt">反馈图：</td>
+
+                <td class="rgTdBt">
+                    <foreach name="imgs" item="var">
+                        <img height="216" src="<{$var|get_remote_file_path=###}>" />
+                    </foreach>
+                </td>
+            </tr>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('td.rgTdBt a').fancyZoom({scaleImg: true, closeOnClick: false,width:800, height:600});
+                });
+            </script>
+            <tr>
+                <td class="lfTdBt">留言时间：</td>
+                <td  class="rgTdBt">
+                    <eq name="detail.valid_time" value="0">永久有效<else /><{$list|date='Y-m-d',###}></eq>
+                </td>
+            </tr>
+        </table>
+        <div class="smtQr"><input type="button" value="返回" class="smtQrIpt" /></div>
+        <!--</form>-->
+    </div>
+</div>
+<include  file='public:footer'/>
+
+<script>
+    $('.smtQrIpt').click(
+            function(){   location.href = "<{:U('admin/ReturnUsers/returnsms')}>";}
+    )
+</script>

@@ -50,34 +50,54 @@ class PassportAction extends CommonAction {
                 $this->baoSuccess('恭喜您，注册成功！', U('pcucenter/index/index','','html',false,C('BASE_SITE')));
             }
             $this->baoError(D('Passport')->getError(), 3000, true);
-        } else {    
+        } else {
+            SESSION('user_register_refresh_page', NOW_TIME, 360);
+            SESSION('user_register_send_sms', false, 360);
             $this->display();
         }
     }
    
-/*     public function sendsms() {
+     public function sendsms() {
+         // 验证码发送合法性验证
+         if(!isset($_SESSION['user_register_refresh_page'])){
+             die('过期的注册页面');
+         }
+
         if (!$mobile = htmlspecialchars($_POST['mobile'])) {
             die('请输入正确的手机号码');
         }
         if (!isMobile($mobile)) {
             die('请输入正确的手机号码');
         }
-        if ($user = D('Users')->getUserByAccount($mobile)) {
-            die('手机号码已经存在！');
-        }
-		if ($user = D('Users')->getUserByMobile($mobile)) {
-            die('手机号码已经存在！');
-        }
+
+         if ($user = D('Users')->getUserByAccount($mobile)) {
+             die('手机号码已经存在！');
+         }
+         if ($user = D('Users')->getUserByMobile($mobile)) {
+             die('手机号码已经存在！');
+         }
+
+         if(isset($_SESSION['user_register_refresh_page']) && (NOW_TIME - SESSION('user_register_refresh_page')) < 5){
+             die('短信发送失败，请重新再试！');
+         }
+
+         if(NOW_TIME - SESSION('user_register_send_sms') < 60){
+             die('短信发送过频繁，请稍后再试！');
+         }
+
+        // 短信发送时间
+         SESSION('user_register_send_sms', NOW_TIME, 360);
+
         $randstring = D('Mobileverify')->getVerify($mobile);
 
         D('Sms')->sendSms('sms_code', $mobile, array('code' => $randstring));
         die('1');
-    } */
+    }
 
     /**
      *发送手机验证码
      */
-/*      public function sendmobilesms(){
+/*       public function sendmobilesms(){
         if (!$mobile = htmlspecialchars($_POST['mobile'])) {
             die('请输入正确的手机号码');
         }
@@ -93,7 +113,7 @@ class PassportAction extends CommonAction {
     /**
      *发送手机验证码
      */
-/*      public function sendlinkmobilesms(){
+/*       public function sendlinkmobilesms(){
         if (!$mobile = htmlspecialchars($_POST['mobile'])) {
             die('请输入正确的联系人手机号码');
         }
@@ -139,6 +159,7 @@ class PassportAction extends CommonAction {
             }
             $backurl = $this->_post('backurl', 'htmlspecialchars_decode');
             //$backurl = htmlspecialchars_decode($backurl);
+//            $this->baoError($password, 2000, true);
             if (empty($backurl))
                 $backurl = U('pcucenter/index/index','','html',false,C('BASE_SITE'));
             if (true == D('Passport')->login($account, $password)) {
@@ -146,7 +167,7 @@ class PassportAction extends CommonAction {
             }
             $this->baoError(D('Passport')->getError(), 3000, true);
         } else {
-            
+
             if($_GET['ref_url']){
 
                 $backurl = I('ref_url');
@@ -232,6 +253,7 @@ class PassportAction extends CommonAction {
 
         $this->display();
     }
+
 	public function ajaxloging1() {
 
         $this->display();
@@ -240,7 +262,6 @@ class PassportAction extends CommonAction {
     public function asyn_login(){
         $this->display();
     }
-
 
     private function createCheck() {
         $data = $this->checkFields($this->_post('data', false), $this->create_fields);
@@ -270,7 +291,8 @@ class PassportAction extends CommonAction {
 
     //两种找回密码的方式 1个是通过邮件 //填写了2个就改密码相对来说是不太合理，但是毕竟逻辑和操作相对简单一些！
     public function forget() {
-
+        SESSION('user_forget_refresh_page', NOW_TIME, 360);
+        SESSION('user_forget_send_sms', false, 360);
         $this->display();
     }
 
@@ -301,6 +323,11 @@ class PassportAction extends CommonAction {
     }
     
     public function send_sms_verify() {
+        // 验证码发送合法性验证
+        if(!isset($_SESSION['user_forget_refresh_page'])){
+            $this->ajaxReturn(['code' => 'error' ,'msg' => '过期的页面！']);
+        }
+
         if (!$mobile = htmlspecialchars($_POST['phone'])) {
             $data = array('code' => 'error' ,'msg' =>'请输入正确的手机号码');
             $this->ajaxReturn($data);
@@ -309,7 +336,26 @@ class PassportAction extends CommonAction {
             $data = array('code' => 'error' ,'msg' =>'请输入正确的手机号码');
             $this->ajaxReturn($data);
         }
-        $randstring = rand_string(4, 1);;
+
+        if (!$user = D('Users')->getUserByAccount($mobile)) {
+            $this->ajaxReturn(['code' => 'error', 'msg' => '手机号码不存在！']);
+        }
+        if (!$user = D('Users')->getUserByMobile($mobile)) {
+            $this->ajaxReturn(['code' => 'error', 'msg' => '手机号码不存在！']);
+        }
+
+        if(isset($_SESSION['user_forget_refresh_page']) && (NOW_TIME - SESSION('user_forget_refresh_page')) < 3){
+            $this->ajaxReturn(['code' => 'error', 'msg' => '短信发送失败，请重新再试！']);
+        }
+
+        if(NOW_TIME - SESSION('user_forget_send_sms') < 60){
+            $this->ajaxReturn(['code' => 'error', 'msg' => '短信发送过频繁，请稍后再试！']);
+        }
+
+        // 短信发送时间
+        SESSION('user_forget_send_sms', NOW_TIME, 360);
+
+        $randstring = rand_string(6, 1);
         session('reset_password_sms_verify',$randstring);
         
         D('Sms')->sendSms('sms_code', $mobile, array('code' => $randstring));

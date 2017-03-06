@@ -28,17 +28,17 @@
                                 <option value="0">待审查</option>
                                 <option value="3"
                                 <eq name="audit_2" value="3">selected="selected"</eq>
-                                <eq name="audit" value="3">selected="selected"</eq>
                                 >未通过</option>
+                                <option value="1"
+                                <eq name="audit_2" value="1">selected="selected"</eq>
+                                >已通过</option>
                             </select>
                         </label>
                         <label>
                             <span>关键字：</span>
-                            <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText"
-                                   placeholder="请输入房产名"/>
+                            <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" placeholder="请输入房产名" />
                             <input type="submit" class="inptButton" value="  搜索"/>
-                            <a href="<{:U('fangchan/initialApply',array('type'=>'rent_list'))}>" mini="act"
-                               style="padding-top:5px;padding-bottom:5px;margin-top:0;" class="remberBtn">重置搜索</a>
+                            <a href="<{:U('fangchan/initialApply',array('type'=>'rent_list'))}>" mini="act" style="padding-top:5px;padding-bottom:5px;margin-top:0;" class="remberBtn">重置搜索</a>
                         </label>
                     </div>
                 </form>
@@ -66,8 +66,7 @@
                             <td><{$var.store_name}></td>
 
                             <td><a mini="select" w="700" h="360"
-                                   href="<{:U('hotelproduct/pictures', array('product_id' => $var['product_id'], 'store_id' => $var['store_id']))}>"><img
-                                    src="<{$var['photo']|get_remote_file_path=###}>" class="w80" height="50px"/></a>
+                                   href="<{:U('fangchan/pictures', array('product_id' => $var['product_id'], 'type' => 'HouseRent'))}>"><img src="<{$var['photo']|get_remote_file_path=###}>" class="w80" height="50px"/></a>
                             </td>
                             <td>
                                 <eq name="var.audit" value="0">待审查</eq>
@@ -77,10 +76,14 @@
                             <td>
                                 <a href="<{:U('Fangchan/rent_info',array('product_id' => $var['product_id']))}>"
                                    class="remberBtn ">更多详情</a>
-                                <{:BA('fangchan/audit', array('type'=>'rent',"product_id" =>
-                                $var["product_id"]),'通过审核','act','remberBtn')}>
-                                <{:BA('fangchan/unAudit', array('type'=>'rent',"product_id" =>
-                                $var["product_id"]),'未通过审核','act','remberBtn')}>
+                                <neq name="audit_2" value="1">
+                                    <{:BA('fangchan/audit', array('type'=>'rent',"product_id" =>
+                                    $var["product_id"]),'通过审核','act','remberBtn')}>
+                                    <neq name="audit_2" value="3">
+                                        <{:BA('fangchan/unAudit', array('type'=>'rent',"product_id" =>
+                                        $var["product_id"]),'未通过审核','act','remberBtn')}>
+                                    </neq>
+                                </neq>
                                 <{:BA('fangchan/info_delete', array('type'=>'rent',"product_id" =>
                                 $var["product_id"]),'删除','act','remberBtn')}>
                             </td>

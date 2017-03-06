@@ -36,6 +36,7 @@
                         <td class="w50"><input type="checkbox" class="checkAll" rel="product_id" /></td>
                         <td class="w50">ID</td>
                         <td>菜名</td>
+                        <td>商品类型</td>
                         <td>店铺</td>
                         <td>图片</td>
                         <td>原价</td>
@@ -50,6 +51,11 @@
                             <td><input class="child_product_id" type="checkbox" name="product_id[]" value="<{$var.product_id}>" /></td>
                             <td><{$var.product_id}></td>
                             <td><{$var.product_name}></td>
+                            <td>
+                                <eq name="var.product_type" value="1">单品</eq>
+                                <eq name="var.product_type" value="2">套餐</eq>
+                                <eq name="var.product_type" value="3">代金券</eq>
+                            </td>
                             <td><{$var.store_name}></td>
                             <?php $photos = explode(',', $var['photo']); ?>
                             <td>

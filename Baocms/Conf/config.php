@@ -39,9 +39,10 @@ $configs = array(
 
     //图片库ＵＲＬ
     //'PICLIB_URL'=>"http://img1.haojilai.co/",
-    'PICLIB_URL' => "http://picturelib.haojilai.com/",
+//     'PICLIB_URL' => "http://picturelib.haojilai.com/",
+    'PICLIB_URL'=>"http://picturelib.lt/",
     'PICLIBUPLOAD_URL' => "http://picturelib.haojilai.com/index.php?s=home/file/upload.html",
-    //'PICLIBUPLOAD_URL'=>"http://img1.haojilai.co/index.php?s=home/file/upload.html",
+    'WATER_PICLIBUPLOAD_URL'=>"http://picturelib.lt/index.php?s=home/file/upload_water.html",
 
     //默认系统变量
 
@@ -61,6 +62,7 @@ $configs = array(
         '__JS__' => BASE_SITE_URL . '/Public/' . MODULE_NAME . '/' . C('DEFAULT_THEME') . '/js',
         '__PICURL__' => "http://picturelib.haojilai.com/",
         '__PICUPLOADURL__' => "http://picturelib.haojilai.com/index.php?s=home/file/upload.html",
+        '__WATERPICUPLOADURL__' => "http://picturelib.haojilai.com/index.php?s=home/file/upload_water.html",
 
     ),
 
@@ -90,7 +92,9 @@ $configs = array(
 
     'TOKEN_NAME' => 'token',// 令牌验证的表单隐藏字段名称
 
-    'TOKEN_TYPE' => 'md5',//令牌验证哈希规则
+    'TOKEN_TYPE' => 'md5',// 令牌验证哈希规则
+
+    'TOKEN_RESET' => true,// 令牌验证出错后是否重置令牌 默认为true
     //首页频道分类
     'pchome_channel_list' => array(
         array(

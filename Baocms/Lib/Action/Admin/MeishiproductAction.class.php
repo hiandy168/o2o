@@ -77,16 +77,14 @@ class MeishiproductAction extends CommonAction {
         $list = $Meishiproduct
             ->field('bao_meishi_product.*, bao_meishi.store_name, bao_meishi.logo')
             ->join('LEFT JOIN bao_meishi ON bao_meishi_product.store_id=bao_meishi.store_id')
-//            ->join('LEFT JOIN bao_meishi_product_cate ON bao_meishi_product.cate_id=bao_meishi_product_cate.cate_id')
             ->where($map)
             ->order(array('bao_meishi_product.update_time' => 'desc'))   // 根据更新时间降序
             ->limit($Page->firstRow . ',' . $Page->listRows)
             ->select();
-//        var_dump($photos = explode(',', substr($list[0]['photo'], 1, -1)));
 
         $this->assign('list', $list); // 赋值数据集
-        $this->assign('page', $show); // 赋值分页输出
 //        var_dump($list[0]);
+        $this->assign('page', $show); // 赋值分页输出
         $this->display(); // 输出模板
     }
 
@@ -242,9 +240,9 @@ class MeishiproductAction extends CommonAction {
             }
 
             $meishi = D('Meishi')->where(array('store_id'=>$detail['store_id']))->find();
-//            var_dump($detail);
-            $photos = explode(',', substr($detail['photo'], 1, -1));
+            $photos = explode(',', $detail['photo']);
             $this->assign('photos', $photos);
+//            var_dump($photos);
             $this->assign('meishi',$meishi);
             $this->assign('detail', $detail);
             $this->display();

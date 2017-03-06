@@ -212,13 +212,13 @@
             <div class="form-group">
                 <label class="col-sm-1 control-label">配送开始时间：</label>
                 <div class="col-sm-2">
-                    <input type="text" style="width:232px;background-color:#fff;" onfocus="WdatePicker({dateFmt:'HH:mm',realTimeFmt: 'HH:mm',readOnly:true});" name="data[start_time]" value="<{$detail['start_time']}>" class="form-control" >
+                    <input type="text" style="width:232px;background-color:#fff;" id="start" onfocus="WdatePicker({dateFmt:'HH:mm',realTimeFmt: 'HH:mm',readOnly:true,minDate:'00:00:00',maxDate:'#F{$dp.$D(\'end\')}'});" name="data[start_time]" value="<{$detail['start_time']}>" class="form-control" >
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-1 control-label">配送结束时间：</label>
                 <div class="col-sm-2">
-                    <input type="text" style="width:232px;background-color:#fff;" onfocus="WdatePicker({dateFmt:'HH:mm',realTimeFmt: 'HH:mm',readOnly:true});"  name="data[end_time]" value="<{$detail['end_time']}>" class="form-control"  >
+                    <input type="text" style="width:232px;background-color:#fff;" id="end" onfocus="WdatePicker({dateFmt:'HH:mm',realTimeFmt: 'HH:mm',readOnly:true,minDate:'#F{$dp.$D(\'start\')}',maxDate:'23:59:59'});"  name="data[end_time]" value="<{$detail['end_time']}>" class="form-control"  >
                 </div>
             </div>
             <div class="form-group">

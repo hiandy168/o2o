@@ -139,15 +139,15 @@ class EleAction extends CommonAction {
                 // 个人用户申请的店铺
                 // 查询个人店铺的身份证照片
                 $pics = M('Ele')
-                    ->join('LEFT JOIN bao_shop ON bao_chaoshi.shop_id=bao_shop.shop_id')
-                    ->join('LEFT JOIN bao_users ON bao_shop.user_id=bao_users.user_id')
-                    ->join('LEFT JOIN bao_presonal_store_open_auth ON bao_presonal_store_open_auth.uid=bao_users.user_id')
+                    ->join('LEFT JOIN bao_shop ON bao_ele.shop_id=bao_shop.shop_id')
+                    ->join('LEFT JOIN bao_presonal_store_open_auth ON bao_presonal_store_open_auth.uid=bao_shop.user_id')
                     ->field('bao_presonal_store_open_auth.id_face, bao_presonal_store_open_auth.id_back')
                     ->where(array('store_id' => $store_id))
                     ->find();
                 $detail['id_face'] = $pics['id_face'];
                 $detail['id_back'] = $pics['id_back'];
 
+//                var_dump($pics);
                 $this->assign('detail', $detail);
                 $this->display();
 

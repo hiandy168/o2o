@@ -38,7 +38,7 @@ class PassportAction extends CommonAction {
         }
     }
 
-    public function sendsms() {
+/*     public function sendsms() {
         if (!$mobile = htmlspecialchars($_POST['mobile'])) {
             die('请输入正确的手机号码');
         }
@@ -56,7 +56,7 @@ class PassportAction extends CommonAction {
         //die(session('scode'));
         D('Sms')->sendSms('sms_code', $mobile, array('code' => $randstring));
         die('1');
-    }
+    } */
 
     public function bind() {
         $this->display();

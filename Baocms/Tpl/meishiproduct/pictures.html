@@ -19,7 +19,7 @@
                 <tr style="height: 21px;font-size: 18px;text-align: center">
                     <td>
                         <volist name="photos" id="photo">
-                            <img src="<{$photo|get_remote_file_path=###}>" height="80px"/>&ensp;
+                            <img src="<{$photo|get_remote_file_path=###}>" style="cursor: pointer" onclick="viewImage(this.src)" height="80px"/>&ensp;
                         </volist>
                     </td>
                 </tr>
@@ -27,6 +27,11 @@
         </table>
     </div>
 </div>
+<script>
+    function viewImage(src){
+        parent.viewImg(src);
+    }
+</script>
 <include  file='public:footer'/>  
 
 

@@ -3,50 +3,49 @@
     <ul>
         <li class="li1">频道</li>
         <li class="li2">生活服务</li>
-        <li class="li2 li3">信息列表</li>
+        <li class="li2 li3">店铺列表</li>
     </ul>
 </div>
 <div class="main-jsgl main-sc">
     <p class="attention"><span>注意：</span>不需要启用的字段就不需要填写</p>
     <div class="jsglNr">
         <div class="selectNr" style="margin-top: 0px; border-top: none;">
-            <div class="left">
-                <{:BA('life/create','','添加内容')}>  
-            </div>
             <div class="right">
-                <form method="post" action="<{:U('life/index')}>">
+                <form method="post" action="<{:U('lifeService/index')}>">
                     <div class="seleHidden" id="seleHidden">
-                        <div class="seleK">
-                            <label>
-                                <span>分类</span>
-                                <select id="cate_id" name="cate_id" class="select manageSelect">
-                                    <foreach name="channelmeans" item="item" key="key">
-                                        <option value=""><{$item}></option>
-                                        <foreach name="cates" item="it" key="k">
-                                            <eq name="it.channel_id" value="$key">
-                                            <option <eq name="cate_id" value="$it.cate_id">selected="selected"</eq> value="<{$it.cate_id}>">&nbsp;&nbsp;-<{$it.cate_name}></option>
-                                            </eq>
-                                        </foreach>
-                                    </foreach>
-                                </select>
-                            </label>
-                            <label>
-                                <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>" />
-                                <input type="text" name="nickname" id="nickname"  value="<{$nickname}>"   class="text" />
-                                <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择用户</a>
-                            </label>
-                            <label>
-                                <span>  区域：</span>   <select name="area_id" id="area_id" class="select manageSelect">
-                                    <option value="0">请选择...</option>
-                                    <foreach name="areas" item="var">
-                                        <option value="<{$var.area_id}>"  <eq name="var.area_id" value="$area_id">selected="selected"</eq> ><{$var.area_name}></option>
-                                    </foreach>   
-                                </select>
-                            </label>
-                            <label>
-                                <span>  关键字：</span>   <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" /><input type="submit" class="inptButton" value="   搜索" />
-                            </label>
-                        </div>
+                        <span>  店铺类型：</span>
+                        <select name="level" id="level" class="select manageSelect" style="width: 100px">
+                            <option value="2" <eq name="level" value="2">selected="selected"</eq> >企业店铺</option>
+                            <option value="1" <eq name="level" value="1">selected="selected"</eq> >个人店铺</option>
+                        </select>
+                        <span>市级：</span>
+                        <input type="hidden" id="city" value="<{$city_id|default='0'}>">
+                        <select name="city_id" id="city_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="cities" item="city">
+                                <option value="<{$city.city_id}>" <eq name="city.city_id" value="$city_id_2">selected="selected"</eq> <eq name="city.city_id" value="$city_id">selected="selected"</eq> ><{$city.name}></option>
+                            </foreach>
+                        </select>
+                        <span>区县：</span>
+                        <input type="hidden" id="area" value="<{$area_id|default='0'}>">
+                        <select name="area_id" id="area_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="areas" item="area">
+                                <option value="<{$area.area_id}>" <eq name="area.area_id" value="$area_id_2">selected="selected"</eq> <eq name="area.area_id" value="$area_id">selected="selected"</eq> ><{$area.area_name}></option>
+                            </foreach>
+                        </select>
+                        <span>商圈：</span>
+                        <input type="hidden" id="business" value="<{$business_id|default='0'}>">
+                        <select name="business_id" id="business_id" class="select manageSelect" style="width: 100px">
+                            <option value="0">请选择...</option>
+                            <foreach name="businesses" item="business">
+                                <option value="<{$business.business_id}>" <eq name="business.business_id" value="$business_id_2">selected="selected"</eq> <eq name="business.business_id" value="$business_id">selected="selected"</eq> ><{$business.business_name}></option>
+                            </foreach>
+                        </select>
+                        <span>  关键字(商家名称)：</span>
+                        <input type="text" name="keyword" value="<{$keyword|default=''}>" class="inptText" />
+                        <input type="submit" class="inptButton" value="  搜索" />
+                        <a href="<{:U('lifeService/initialIndex')}>" mini="act" style="padding-top:5px;padding-bottom:5px;margin-top:0;" class="remberBtn">重置搜索</a>
                     </div>
                 </form>
                 <div class="clear"></div>
@@ -58,40 +57,29 @@
                     <tr>
                         <td class="w50"><input type="checkbox" class="checkAll" rel="life_id" /></td>
                         <td class="w50">ID</td>
-                        <td>标题</td>
+                        <td>店铺名</td>
+                        <td>店铺LOGO</td>
                         <td>分类</td>
                         <td>地区</td>
-                        <td>商圈</td>
-                        <td>用户</td>
-                        <td>联系人</td>
                         <td>电话</td>
-                        <td>QQ</td>
-                        <td>联系地址</td>
-                        <td>创建时间</td>
-                        <td>创建IP</td>
+                        <td>更新时间</td>
                         <td>操作</td>
                     </tr>
                     <foreach name="list" item="var">
                         <tr>
-                            <td><input class="child_life_id" type="checkbox" name="life_id[]" value="<{$var.life_id}>" /></td>
-                            <td><{$var.life_id}></td>
-                            <td><{$var.cate_name}></td>
-                            <td><{$cates[$var['cate_id']]['cate_name']}></td>
-                            <td><{$areas[$var['area_id']]['area_name']}></td>
-                            <td><{$business[$var['business_id']]['business_name']}></td>
-                            <td><{$users[$var['user_id']]['account']}></td>
-                            <td><{$var.contact}></td>
-                            <td><{$var.mobile}></td>
-                            <td><{$var.qq}></td>
-                            <td><{$var.addr}></td>
-                            <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
-                            <td><{$var.create_ip}></td>
-
+                            <td><input class="child_life_id" type="checkbox" name="store_id[]" value="<{$var.store_id}>" /></td>
+                            <td><{$var.store_id}></td>
+                            <td><{$var.store_name}></td>
+                            <td><img height="50" src="<{$var.logo|get_remote_file_path=###}>"></td>
                             <td>
-                                <{:BA('life/edit',array("life_id"=>$var["life_id"]),'编辑','','remberBtn')}>
-                                <{:BA('life/delete',array("life_id"=>$var["life_id"]),'删除','act','remberBtn')}>
-                                <eq name="var.audit" value="0"> <{:BA('life/audit',array("life_id"=>$var["life_id"]),'审核','act','remberBtn')}> </eq>
-
+                                <{$var.cate_name}>
+                            </td>
+                            <td><{$var['city_name']}>&ensp;<{$var['area_name']}></td>
+                            <td><{$var.phone}></td>
+                            <td><{$var.update_time|date='Y-m-d',###}></td>
+                            <td>
+                                <{:BA('lifeService/detail',array("store_id"=>$var["store_id"],"level"=>$var["level"]),'详情','','remberBtn')}>
+                                <{:BA('lifeService/delete',array("store_id"=>$var["store_id"]),'删除','act','remberBtn')}>
                             </td>
                         </tr>
                     </foreach>
@@ -100,11 +88,112 @@
             </div>
             <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
                 <div class="left">
-                    <{:BA('life/delete','','批量删除','list','a2')}>
-                    <{:BA('life/audit','','批量审核','list','remberBtn')}>
+                    <{:BA('lifeService/delete','','批量删除','list','remberBtn')}>
+                    <!--<{:BA('life/audit','','批量审核','list','remberBtn')}>-->
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+<script type="application/javascript">
+    $(function(){
+
+        // 加载市级
+        $.getJSON('<{:U("admin/ele/getCities")}>', {city_id:''}, function(_data){
+            if(_data.error == 400){
+                alert('数据为空');
+                $("#city_id").html('<option value="0">请选择...</option>');
+            }else{
+                var _city = $("#city").val();
+                $str_city = '<option value="0">请选择...</option>';
+                var _length = (_data.data).length;
+                for(var i = 0; i < _length; ++i){
+                    var _tempData = _data.data[i];
+//                    console.debug(_tempData);
+                    if(_tempData.city_id == _city){
+                        $str_city += '<option value="'+_tempData.city_id+'" selected="selected">'+ _tempData.city_name +'</option>';
+                    }else{
+                        $str_city += '<option value="'+_tempData.city_id+'">'+ _tempData.city_name +'</option>';
+                    }
+                }
+                $("#city_id").html($str_city);
+                if(_city != 0){
+                    cities(_city);
+                }
+            }
+        }, 'json');
+
+        // 省市
+        $("#city_id").change(function(){
+            if(this.value == '0'){
+                $("#area_id").html('<option value="0">请选择...</option>');
+            }else{
+//                var _area_id = this.value;
+                cities(this.value);
+            }
+        });
+
+        // 城市区县加载
+        function cities(_value){
+            $.getJSON('<{:U("admin/ele/cities")}>', {city_id:_value}, function(_data){
+                if(_data.error == 404){
+                    alert('未找到城市');
+                    $("#area_id").html('<option value="0">请选择...</option>');
+                }else{
+                    var _area = $("#area").val();
+                    $str_area = '<option value="0">请选择...</option>';
+                    var _length = (_data.data).length;
+                    for(var i = 0; i < _length; ++i){
+                        var _tempData = _data.data[i];
+                        if(_tempData.area_id == _area){
+                            $str_area += '<option value="'+_tempData.area_id+'" selected="selected">'+ _tempData.area_name +'</option>';
+                        }else{
+                            $str_area += '<option value="'+_tempData.area_id+'">'+ _tempData.area_name +'</option>';
+                        }
+                    }
+                    $("#area_id").html($str_area);
+                    if(_area != 0){
+                        areas(_area);
+                    }
+                }
+            }, 'json');
+        }
+
+        // 省市
+        $("#area_id").change(function(){
+            if(this.value == '0'){
+                $("#business_id").html('<option value="0">请选择...</option>');
+            }else{
+//                var _area_id = this.value;
+                areas(this.value);
+            }
+        });
+
+        // 城市区县加载
+        function areas(_value){
+            $.getJSON('<{:U("admin/ele/areas")}>', {area_id:_value}, function(_data){
+                if(_data.error == 404){
+                    alert(_data.msg);
+                    $("#business_id").html('<option value="0">请选择...</option>');
+                }else{
+                    var _area = $("#business").val();
+                    $str_area = '<option value="0">请选择...</option>';
+                    var _length = (_data.data).length;
+                    for(var i = 0; i < _length; ++i){
+                        var _tempData = _data.data[i];
+                        if(_tempData.business_id == _area){
+                            $str_area += '<option value="'+_tempData.business_id+'" selected="selected">'+ _tempData.business_name +'</option>';
+                        }else{
+                            $str_area += '<option value="'+_tempData.business_id+'">'+ _tempData.business_name +'</option>';
+                        }
+                    }
+                    $("#business_id").html($str_area);
+                }
+            }, 'json');
+        }
+
+    });
+</script>
+
 <include  file='public:footer'/>       

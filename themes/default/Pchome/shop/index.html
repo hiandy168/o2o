@@ -42,7 +42,6 @@
             <div class="shopsList" style="width:1200px;margin:0 auto;padding-top:20px;">
                 <ul class="clearfix shopsList-ul">
                     <foreach name="list" item="li">
-
                         <if condition="$li.store_type eq 1">
                             <li class="li-one pr" style="width:290px;height:310px;">
                                 <div class="li-one-top ffs">
@@ -157,6 +156,11 @@
 <script>
     $('.nearbuy_sxkLi').click(function(){
         $(this).addClass('on').siblings().removeClass('on');
+    });
+    $('.shopsList-ul li').each(function(index){
+        if((index + 1) % 4 == 0){
+            $(this).css('margin-right','0');
+        }
     });
 </script>
 <include file="public:footer"/>

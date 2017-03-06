@@ -233,7 +233,7 @@ class CommonAction extends Action
 	/**peace
 	 * 设置与取消设置整顿的公共方法
 	 */
-	protected function reorganizeStore($store_id, $is_reorganize, $store_type,$url=0){
+	protected function reorganizeStore($store_id, $is_reorganize, $store_type,$url=0, $page=1){
 		$obj = M($store_type);
 		// 批量删除
 		if(is_array($store_id)){
@@ -244,7 +244,7 @@ class CommonAction extends Action
 				$url = $store_type.'/index';
 			}
 
-			return $this->baoSuccess('操作成功！', U($url));
+			return $this->baoSuccess('操作成功！', U($url, ['p' => $page]));
 		}
 
 		// 单个删除
@@ -253,7 +253,7 @@ class CommonAction extends Action
 		if(!$url){
 			$url = $store_type.'/index';
 		}
-		return $this->baoSuccess('操作成功！', U($url));
+		return $this->baoSuccess('操作成功！', U($url, ['p' => $page]));
 	}
 
 	/**
@@ -289,7 +289,7 @@ class CommonAction extends Action
 	 * @param $table
 	 * @param $store_id_w
 	 */
-	protected function setDelete($ids, $url, $table, $store_id_w) {
+	protected function setDelete($ids, $url, $table, $store_id_w, $page=1) {
 		$obj = D($table);
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			// _post的chaoshi_id是html页面对应的name属性
@@ -298,19 +298,19 @@ class CommonAction extends Action
 				foreach ($ids as $id) {
 //					$this->baoError(12);
 					if (!$obj->where(array($store_id_w => $id))->save(array('closed' => 1))) {
-						$this->baoError('删除失败！', U($url));
+						$this->baoError('删除失败！', U($url, ['p' => $page]));
 					}
 				}
-				$this->baoSuccess('删除成功！', U($url));
+				$this->baoSuccess('删除成功！', U($url, ['p' => $page]));
 			}
 			$this->baoError('请选择要删除的商家');
 		}
 		if (is_numeric($ids) && ($ids == (int) $ids)) {
 			// deleteAll自封装方法
 			if ($obj->where(array($store_id_w => $ids))->save(array('closed' => 1))) {
-				$this->baoSuccess('删除成功！', U($url));
+				$this->baoSuccess('删除成功！', U($url, ['p' => $page]));
 			}
-			$this->baoError('删除失败！', U($url));
+			$this->baoError('删除失败！', U($url, ['p' => $page]));
 		}
 		$this->baoError('请选择要删除的商家');
 	}

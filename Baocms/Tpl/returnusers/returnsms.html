@@ -1,0 +1,82 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">APP用户反馈信息</li>
+        <li class="li2"> 反馈信息</li>
+
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"></p>
+    <div class="jsglNr">
+        <div class="selectNr" style="margin-top: 0px; border-top:none;">
+            <!--<div class="left">-->
+                <!--<{:BA('carousel/create',array('site_id'=>$site_id),'添加内容')}>-->
+            <!--</div>-->
+            <div class="right">
+                <form class="" method="post"  action="<{:U('ReturnUsers/returnsms')}>">
+
+                    <div class="seleHidden" id="seleHidden">
+                        <!--<span>城市：</span>-->
+                        <!--<select name="city_id" id="city_id" class="select manageSelect" >-->
+                            <!--<option value="0">请选择...</option>-->
+                            <!--<option value="-1">通用</option>-->
+                            <!--<foreach name="citys" item="city">-->
+                                <!--<option value="<{$city.city_id}>" <eq name="city.city_id" value="$city_id_2">selected="selected"</eq> <eq name="city.city_id" value="$city_id">selected="selected"</eq> ><{$city.name}></option>-->
+                            <!--</foreach>-->
+                        <!--</select>-->
+                        <span>标题</span>
+                        <input type="text"  class="inptText" name="keyword" placeholder="用户反馈手机号" value="<{$keyword}>"  />
+
+                        <input type="submit" value=" 搜索"  class="inptButton" />
+                    </div>
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td><input type="checkbox" class="checkAll" rel="ad_id" /></td>
+                        <td>ID</td>
+                        <td>用户类型</td>
+                        <td>手机号</td>
+                        <td>电子邮箱</td>
+                        <td>意见内容</td>
+                        <td>图片</td> 
+                        <td>反馈时间</td>
+                        <td>详情</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_ad_id" type="checkbox" name="id[]" value="<{$var.id}>" /> </td>
+                            <td><{$var.id}></td>
+                            <td> <if condition="$var.type eq 1">用户<else/>商家</if>     </td>
+                            <td><{$var['mobile']}></td>
+                            <td><{$var.email}></td>
+                            <td><{$var.content}></td>
+                            <td><img   height="216"      src="<{$var['imgs'][0]|get_remote_file_path=###}>"></td>
+                            <td><{$var.create_time|date='Y-m-d',###}></td>
+                            <td><a href="<{:U('ReturnUsers/detas',array('id'=>$var['id']))}>">查看详情</a></td>
+                        </tr>
+                        <!--<?php         print_r($var['imgs']);        ?>-->
+                    </foreach>
+                    <tr>
+                        <td colspan="20">
+
+                            <{:BA('ReturnUsers/delete','','批量删除','list',' piliangcaozuo')}>
+
+                        </td>
+                    </tr>
+                </table>
+                <{$page}>
+
+            </div>
+
+
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>

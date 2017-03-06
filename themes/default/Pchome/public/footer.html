@@ -4,7 +4,8 @@
     <div class="cont-box">
 				<div class="foot-service-box">
 					<volist  name="helpCates" id="helpCate">
-                        <dl class="fl foot-service-list">
+						<?php if($key == 1 || $key == 3){continue;}?>
+                        <dl class="fl foot-service-list" <?php if($key != 5){echo 'style="margin-right:145px;"';}?>>
                             <dt class="YaHei"><i class="<{$helpCate['icon']}>"></i><{$helpCate['cate_name']}></dt>
                             <volist  name="helpCate['son']" id="helpCa">
                                 <dd><a href="<{:U('Pchome/helpcenter/index',['cate_id'=>$helpCa['cate_id']])}>"><b>&bull;</b><{$helpCa['cate_name']}></a></dd>

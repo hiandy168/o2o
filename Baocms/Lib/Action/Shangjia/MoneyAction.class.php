@@ -193,22 +193,22 @@ class MoneyAction extends CommonAction
 
     public function tixian()
     {
+        $data = D('ShopFetchAccount')->where(array('shop_id' => $this->shop['shop_id']))
+        ->find();
+        if (!$data) {
+            $this->error('请先绑定银行卡', U('Shangjia/money/bind'));
+        }
         if (IS_POST) {
-            if (md5(I('post.pin', 0)) != $this->member['pin']) {
+            if (I('post.pin', 0) != $this->member['pin']) {
                 $this->error('支付密码错误');
             }
-            $money = I('money', 0);
-            if (!$money) {
+            $money = I('money', 0 ,'floatval');
+            if ($money < 1 || $money > $this->shop['money']) {
                 $this->error('金额错误');
-            }
-            $data = D('ShopFetchAccount')->where(array('shop_id' => $this->shop['shop_id']))
-                ->find();
-            if (!$data) {
-                $this->ror('请先绑定银行卡', U('Shangjia/money/bind'));
             }
             $data['user_id'] = $this->uid;
             $arr = array();
-            $arr['user_id'] = $this->uid;
+            $arr['shop_id'] = $this->shop_id;
             $arr['money'] = $money;
             $arr['addtime'] = NOW_TIME;
             $arr['account'] = $this->member['account'];
@@ -224,22 +224,23 @@ class MoneyAction extends CommonAction
             D('Sms')->sendSms('money_back_want', $userInfo['mobile'], array(
                 'money' => $money
             ));
-            $this->baoSuccess('申请成功', U('money/tixianlog'));
+            $this->Success('申请成功', U('money/tixianlog'));
         } else {
-            $this->assign('info', D('Usersex')->getUserex($this->uid));
+            $this->assign('info', D('Usersex')->getUserex($this->uid))
+            ->assign('data',$data);
             $this->display();
         }
     }
 
     public function tixianlog()
     {
-        $map = array('user_id' => $this->uid);
+        $map = array('shop_id' => $this->shop_id);
         if (($bg_date = $this->_param('bg_date', 'htmlspecialchars'))
             && ($end_date = $this->_param('end_date', 'htmlspecialchars'))
         ) {
             $bg_time = strtotime($bg_date);
-            $end_time = strtotime($end_date);
-            $map['create_time'] = array(array('ELT', $end_time),
+            $end_time = strtotime($end_date) + 86400;
+            $map['addtime'] = array(array('ELT', $end_time),
                 array('EGT', $bg_time));
             $this->assign('bg_date', $bg_date);
             $this->assign('end_date', $end_date);
@@ -247,20 +248,20 @@ class MoneyAction extends CommonAction
             if ($bg_date = $this->_param('bg_date', 'htmlspecialchars')) {
                 $bg_time = strtotime($bg_date);
                 $this->assign('bg_date', $bg_date);
-                $map['create_time'] = array('EGT', $bg_time);
+                $map['addtime'] = array('EGT', $bg_time);
             }
             if ($end_date = $this->_param('end_date', 'htmlspecialchars')) {
                 $end_time = strtotime($end_date);
                 $this->assign('end_date', $end_date);
-                $map['create_time'] = array('ELT', $end_time);
+                $map['addtime'] = array('ELT', $end_time);
             }
         }
-        $Userscash = D('Userscash');
+        $Shopcash = D('ShopCash');
         import('ORG.Util.Page'); // 导入分页类
-        $count = $Userscash->where($map)->count(); // 查询满足要求的总记录数
+        $count = $Shopcash->where($map)->count(); // 查询满足要求的总记录数
         $Page = new Page($count, 16); // 实例化分页类 传入总记录数和每页显示的记录数
         $show = $Page->show(); // 分页显示输出
-        $list = $Userscash->where($map)->order(array('cash_id' => 'desc'))
+        $list = $Shopcash->where($map)->order(array('cash_id' => 'desc'))
             ->limit($Page->firstRow . ',' . $Page->listRows)->select();
         $this->assign('list', $list); // 赋值数据集
         $this->assign('page', $show); // 赋值分页输出
@@ -409,7 +410,7 @@ class MoneyAction extends CommonAction
             ));
             session('shop_fetch_code', $code);
         } else if (isset($this->member['mobile'])) {
-            $code = rand(1000, 9999);
+            $code = rand(100000, 999999);
             D('Sms')->sendSms('money_bank_sms', $this->member['mobile'], array(
                 'code' => $code
             ));

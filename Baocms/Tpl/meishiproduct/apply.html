@@ -114,6 +114,34 @@
         </form>
     </div>
 </div>
+<div id="viewPicture" style="display: none">
+    <img id="newImg" />
+</div>
+<script>
+    function viewImg(src) {
+        var img = new Image();
+        img.src = src;
+        var percent = img.height / img.width;
+        var new_width = 480;
+        var new_height = new_width * percent;
+        if(new_height > 776){
+            new_height = 776;
+        }
+        $('#newImg').attr('src', src);
+        $('#newImg').attr('width', new_width);
+        $('#newImg').attr('height', new_height);
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 1,
+            area: [new_width + 'px'],
+            skin: 'layui-layer-nobg', //没有背景色
+            shadeClose: true,
+            scrollbar: false,
+            content: $('#viewPicture')
+        });
+    }
+</script>
 <include  file='public:footer'/>
 
 
